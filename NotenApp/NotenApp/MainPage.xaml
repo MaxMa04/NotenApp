@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NotenApp.MainPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid BackgroundColor="#252621">
+
+        <!--Griddefinition-->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200" />
+            <RowDefinition Height="*" />
+            <!--<RowDefinition Height="125"/>-->
+            <RowDefinition Height="70" />
+
+        </Grid.RowDefinitions>
+
+        <!--aktueller Schnitt-->
+
+        <Frame HeightRequest="150" WidthRequest="150" CornerRadius="75" HorizontalOptions="Center" VerticalOptions="Center" Margin="0" Padding="0" BackgroundColor="#7A96A2" Grid.ColumnSpan="5">
+            <Label Text="15" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="65" />
+        </Frame>
+
+        <!--Ziele-->
+
+        <ScrollView Grid.Row="1" Grid.ColumnSpan="5">
+            <StackLayout Margin="10" Grid.Row="1" Grid.ColumnSpan="5">
+                <Label Text="Ziele" HorizontalOptions="Center" FontSize="20" TextColor="White"/>
+                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                    <Label Text="Example" HorizontalOptions="Center"/>
+                </Frame>
+                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                    <Label Text="Example" HorizontalOptions="Center"/>
+                </Frame>
+                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                    <Label Text="Example" HorizontalOptions="Center"/>
+                </Frame>
+                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                    <Label Text="Example" HorizontalOptions="Center"/>
+                </Frame>
+                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                    <Label Text="Example" HorizontalOptions="Center"/>
+                </Frame>
+                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                    <Label Text="Example" HorizontalOptions="Center"/>
+                </Frame>
+                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                    <Label Text="Example" HorizontalOptions="Center"/>
+                </Frame>
+                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                    <Label Text="Example" HorizontalOptions="Center"/>
+                </Frame>
+
+            </StackLayout>
+        </ScrollView>
+
+        <!--Abischnitt aktuell-->
+
+        <!--<Frame BackgroundColor="#1167D9" Grid.Row="2" Grid.ColumnSpan="3" Margin="15,20,0,20">
+            <Label Text="Abischnitt aktuell:" FontSize="20"  VerticalOptions="CenterAndExpand" BackgroundColor="Black"/>
+        </Frame>
+
+        <Frame  Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HeightRequest="100" WidthRequest="100" CornerRadius="75" HorizontalOptions="Center" VerticalOptions="Center" Margin="0" Padding="0" BackgroundColor="#1EC096">
+            <Label Text="Example" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Frame>-->
+
+
+        <!--Halbjahresübersicht-->
+        <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#7A96A2" HorizontalOptions="Fill"
+            Text="Halbjahresübersicht"  CornerRadius="10" Margin="15,0,15,0" Clicked="Button_Clicked"/>
+        <ImageButton Grid.Row="2" 
+                     Grid.Column="4" 
+                     BackgroundColor="#EDA2B6" 
+                     CornerRadius="10" 
+                     Padding="8" 
+                     Source="Settings.png"
+                     Margin="-15,0,15,0"
+                     Clicked="Button_Clicked1"/>
+
+    </Grid>
+
+</ContentPage>

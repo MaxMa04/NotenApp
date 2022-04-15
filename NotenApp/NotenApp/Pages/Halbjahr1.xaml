@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
+             x:Class="NotenApp.Pages.Halbjahr1"
+             x:Name="hj1">
+    <ContentPage.BindingContext>
+        <ViewModels:Halbjahr1ViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid BackgroundColor="#232122">
+
+            <!--Griddefinition-->
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250" />
+                <RowDefinition Height="*" />
+
+
+
+            </Grid.RowDefinitions>
+
+            <!--aktueller Schnitt-->
+            <StackLayout Padding="10" Grid.Row="0">
+                <Frame HeightRequest="120" WidthRequest="120" CornerRadius="60" HorizontalOptions="Center" VerticalOptions="Center" Margin="20" Padding="0" BackgroundColor="#7BA4A8" >
+                    <Label Text="15" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
+                </Frame>
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
+                    <Label Text="Halbjahr 1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
+                    <ImageButton Source="Plus1.png" BackgroundColor="White" CornerRadius="20" HeightRequest="40" WidthRequest="40" Margin="10" VerticalOptions="Center" HorizontalOptions="Center" Clicked="FachHinzufuegen">
+                    </ImageButton>
+                </StackLayout>
+                
+                
+            </StackLayout>
+            <!--Ziele-->
+
+            <CollectionView ItemsSource="{Binding Facher}" Grid.Row="1" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Details" BackgroundColor="Green" Invoked="SwipeItem_Invoked_1" />
+                                    <SwipeItem Text="Delete" BackgroundColor="Red"   Command="{Binding Source={x:Reference hj1}, Path=BindingContext.RemoveCommand}"
+                                          CommandParameter="{Binding .}"/>
+                                   
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="220"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label  Grid.Row="0" Grid.RowSpan="2" Text="{Binding Name}" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Label  Grid.Column="1" Text="{Binding Note1}" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Label  Grid.Column="1" Grid.Row="1" Text="{Binding Note2}" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Frame Grid.Column="2" Grid.RowSpan="2" CornerRadius="25">
+                                    <Label Text="15" FontSize="Medium" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                </Frame>
+
+
+
+                            </Grid>
+                        </SwipeView>
+                        
+
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

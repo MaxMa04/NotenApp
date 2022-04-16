@@ -37,7 +37,7 @@
                 <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
                     <Label Text="Example" HorizontalOptions="Center"/>
                 </Frame>
-                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                <Frame BackgroundColor="LightYellow" CornerRadius="10" HeightRequest="20" Margin="5">
                     <Label Text="Example" HorizontalOptions="Center"/>
                 </Frame>
                 <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">

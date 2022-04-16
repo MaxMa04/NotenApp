@@ -34,7 +34,7 @@
         <ScrollView Grid.Row="1" Grid.ColumnSpan="5">
             <StackLayout Margin="10" Grid.Row="1" Grid.ColumnSpan="5">
                 <Label Text="Ziele" HorizontalOptions="Center" FontSize="20" TextColor="White"/>
-                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                <Frame BackgroundColor="Blue" CornerRadius="10" HeightRequest="20" Margin="5">
                     <Label Text="Example" HorizontalOptions="Center"/>
                 </Frame>
                 <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">

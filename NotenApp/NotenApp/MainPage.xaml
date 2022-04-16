@@ -63,8 +63,7 @@
         </ScrollView>
 
         <!--Abischnitt aktuell-->
-
-        <!--<Frame BackgroundColor="#1167D9" Grid.Row="2" Grid.ColumnSpan="3" Margin="15,20,0,20">
+            <!--<Frame BackgroundColor="#1167D9" Grid.Row="2" Grid.ColumnSpan="3" Margin="15,20,0,20">
             <Label Text="Abischnitt aktuell:" FontSize="20"  VerticalOptions="CenterAndExpand" BackgroundColor="Black"/>
         </Frame>
 
@@ -74,16 +73,16 @@
 
 
         <!--Halbjahresübersicht-->
-        <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#7A96A2" HorizontalOptions="Fill"
-            Text="Halbjahresübersicht"  CornerRadius="10" Margin="15,0,15,0" Clicked="Button_Clicked"/>
-        <ImageButton Grid.Row="2" 
-                     Grid.Column="4" 
-                     BackgroundColor="#EDA2B6" 
-                     CornerRadius="10" 
-                     Padding="8" 
-                     Source="Settings.png"
-                     Margin="-15,0,15,0"
-                     Clicked="Button_Clicked1"/>
+        <Button Grid.Column ="0" Grid.Row ="2" Grid.ColumnSpan="4" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#7A96A2" HorizontalOptions="Fill"
+            Text = "Halbjahresübersicht"  CornerRadius="10" Margin="15,0,15,0" Clicked="Button_Clicked"/>
+        <ImageButton Grid.Row = "2" 
+                     Grid.Column = "4" 
+                     BackgroundColor = "#EDA2B6" 
+                     CornerRadius = "10" 
+                     Padding = "8" 
+                     Source = "Settings.png"
+                     Margin = "-15,0,15,0"
+                     Clicked = "Button_Clicked1"/>
 
     </Grid>
 

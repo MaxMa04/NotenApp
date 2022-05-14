@@ -44,7 +44,7 @@
                                     <SwipeItem Text="Details" BackgroundColor="Green" Invoked="SwipeItem_Invoked_1" />
                                     <SwipeItem Text="Delete" BackgroundColor="Red"   Command="{Binding Source={x:Reference hj1}, Path=BindingContext.RemoveCommand}"
                                           CommandParameter="{Binding .}"/>
-                                   
+
                                 </SwipeItems>
                             </SwipeView.RightItems>
 
@@ -71,14 +71,9 @@
 
                             </Grid>
                         </SwipeView>
-                        
-
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

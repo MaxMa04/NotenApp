@@ -32,13 +32,20 @@ namespace NotenApp.Pages
 
             if(_entscheidung == 1)
             {
-                await viewModel.AddNote(_fach, note);
+                await viewModel.AddNote(_fach, note, 1);
 
                 Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
 
                 await Navigation.PopAsync();
             }
+            else
+            {
+                await viewModel.AddNote(_fach, note, 2);
 
+                Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+
+                await Navigation.PopAsync();
+            }
         }
     }
 }

@@ -21,9 +21,9 @@ namespace NotenApp.ViewModels
             RemoveCommand = new AsyncCommand<Fach>(Remove);
 
         }
-        public async Task AddNote(Fach fach, int note)
+        public async Task AddNote(Fach fach, int note, int zahl)
         {
-            await FachService.AddNote(fach, note);
+            await FachService.AddNote(fach, note, zahl);
             await Refresh();
         }
         public async Task Remove(Fach fach)

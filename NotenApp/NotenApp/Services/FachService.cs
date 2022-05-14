@@ -24,18 +24,53 @@ namespace NotenApp.Services
             await db.CreateTableAsync<Fach>();
 
         }
-        public static async Task AddNote(Fach fach, int note)
+        public static async Task AddNote(Fach fach, int note, int zahl)
         {
             await Init();
             await RemoveFach(fach.Id);
-            if (fach.Note1 == null)
+            if (fach.Note1 == null && zahl == 1)
             {
                 fach.Note1 = note;
                 await db.InsertAsync(fach);
             }
-            else if(fach.Note2 == null)
+            else if(fach.Note2 == null && zahl == 1)
             {
                 fach.Note2 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note3 == null && zahl == 1)
+            {
+                fach.Note3 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note4 == null && zahl == 1)
+            {
+                fach.Note4 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note5 == null && zahl == 1)
+            {
+                fach.Note5 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note6 == null && zahl == 1)
+            {
+                fach.Note6 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note7 == null && zahl == 1)
+            {
+                fach.Note7 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.KlausurNote1 == null && zahl == 2)
+            {
+                fach.KlausurNote1 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.KlausurNote2 == null && zahl == 2)
+            {
+                fach.KlausurNote2 = note;
                 await db.InsertAsync(fach);
             }
             else

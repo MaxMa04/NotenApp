@@ -1,12 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NotenApp.Pages.Halbjahr2">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
+             x:Class="NotenApp.Pages.Halbjahr2"
+             x:Name="hj2">
+    <ContentPage.BindingContext>
+        <ViewModels:Halbjahr2ViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="#232122">
+
+            <!--Griddefinition-->
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250" />
+                <RowDefinition Height="*" />
+
+
+
+            </Grid.RowDefinitions>
+
+            <!--aktueller Schnitt-->
+            <StackLayout Padding="10" Grid.Row="0">
+                <Frame HeightRequest="120" WidthRequest="120" CornerRadius="60" HorizontalOptions="Center" VerticalOptions="Center" Margin="20" Padding="0" BackgroundColor="#7BA4A8" >
+                    <Label Text="15" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
+                </Frame>
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
+                    <Label Text="Halbjahr 2" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
+                </StackLayout>
+
+
+            </StackLayout>
+            <!--Übersicht der Noten und Fächer-->
+
+            <CollectionView ItemsSource="{Binding FaecherHJ2}" Grid.Row="1" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Details" BackgroundColor="Green" Invoked="SwipeItem_Invoked_1" />
+                                    <SwipeItem Text="Delete" BackgroundColor="Red"   Command="{Binding Source={x:Reference hj2}, Path=BindingContext.RemoveCommand}"
+                                          CommandParameter="{Binding .}"/>
+
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="130"></ColumnDefinition>
+                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label  Grid.Row="0" Grid.RowSpan="2" Text="{Binding Name}" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Label  Grid.Column="1" Grid.Row="1" Text="{Binding Note1}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Label  Grid.Column="2" Grid.Row="1" Text="{Binding Note2}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Label  Grid.Column="3" Grid.Row="1" Text="{Binding Note3}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Label  Grid.Column="4" Grid.Row="1" Text="{Binding Note4}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Label  Grid.Column="5" Grid.Row="1" Text="{Binding Note5}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Label  Grid.Column="1" Grid.Row="0" Text="{Binding KlausurNote1}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Label  Grid.Column="2" Grid.Row="0" Text="{Binding KlausurNote2}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Frame Grid.Column="6" Grid.RowSpan="2" CornerRadius="25">
+                                    <Label Text="15" FontSize="Medium" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                </Frame>
+
+
+
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

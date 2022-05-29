@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NotenApp.Models
 {
-    public class Fach
+    public class Halbjahr1Model
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -30,7 +30,7 @@ namespace NotenApp.Models
         public List<int> KlausurNoten { get ; set; }
 
 
-        public Fach()
+        public Halbjahr1Model()
         {
             LKNoten = new List<int>();
             KlausurNoten = new List<int>();

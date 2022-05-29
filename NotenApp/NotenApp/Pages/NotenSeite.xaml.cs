@@ -14,10 +14,10 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotenSeite : ContentPage
     {
-        private Fach _fach;
+        private Halbjahr1Model _fach;
         private int _entscheidung;
         Halbjahr1ViewModel viewModel;
-        public NotenSeite(Fach fach, int entscheidung)
+        public NotenSeite(Halbjahr1Model fach, int entscheidung)
         {
             InitializeComponent();
             _fach = fach;

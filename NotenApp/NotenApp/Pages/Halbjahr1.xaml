@@ -35,7 +35,7 @@
             </StackLayout>
             <!--Übersicht der Noten und Fächer-->
 
-            <CollectionView ItemsSource="{Binding Facher}" Grid.Row="1" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+            <CollectionView ItemsSource="{Binding FaecherHJ1}" Grid.Row="1" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>

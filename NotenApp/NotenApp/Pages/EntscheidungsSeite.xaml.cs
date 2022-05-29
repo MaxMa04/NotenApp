@@ -13,9 +13,9 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EntscheidungsSeite : ContentPage
     {
-        private Fach _fach;
+        private Halbjahr1Model _fach;
         private int _zahl;
-        public EntscheidungsSeite(Fach fach)
+        public EntscheidungsSeite(Halbjahr1Model fach)
         {
             InitializeComponent();
             _fach = fach;

@@ -15,16 +15,16 @@ namespace NotenApp.Services
         static SQLiteAsyncConnection db;
         static async Task Init()
         {
-            if(db != null) return;
             
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
 
             db = new SQLiteAsyncConnection(databasePath);
 
-            await db.CreateTableAsync<Fach>();
+            await db.CreateTableAsync<Halbjahr1Model>();
+            await db.CreateTableAsync<Halbjahr2Model>();
 
         }
-        public static async Task AddNote(Fach fach, int note, int zahl)
+        public static async Task AddNote(Halbjahr1Model fach, int note, int zahl)
         {
             await Init();
             await RemoveFach(fach.Id);
@@ -79,30 +79,44 @@ namespace NotenApp.Services
             }
             
         }
-        public static async Task AddFach(string name)
+        public static async Task<IEnumerable<Halbjahr1Model>> GetFaecherHJ1()
         {
             await Init();
-            Fach fach = new Fach
+            var facher = await db.Table<Halbjahr1Model>().ToListAsync();
+            return facher;
+        }
+        public static async Task<IEnumerable<Halbjahr2Model>> GetFaecherHJ2()
+        {
+            await Init();
+            var facher = await db.Table<Halbjahr2Model>().ToListAsync();
+            return facher;
+        }
+        //nutzbar für alle
+        public static async Task AddFach(string name) 
+        {
+            await Init();
+            Halbjahr1Model fach = new Halbjahr1Model
+            {
+                Name = name
+            };
+            Halbjahr2Model fach2 = new Halbjahr2Model
             {
                 Name = name
             };
             await db.InsertAsync(fach);
+            await db.InsertAsync(fach2);
         }
 
-
+        //mit Anpassungen nutzbar für alle (in der Form nicht)
         public static async Task RemoveFach(int id)
         {
             await Init();
             
-            await db.DeleteAsync<Fach>(id);
+            await db.DeleteAsync<Halbjahr1Model>(id);
+            await db.DeleteAsync<Halbjahr2Model>(id);
             return;
         }
 
-        public static async Task<IEnumerable<Fach>> GetFacher()
-        {
-            await Init();
-            var facher = await db.Table<Fach>().ToListAsync();
-            return facher;
-        }
+
     }
 }

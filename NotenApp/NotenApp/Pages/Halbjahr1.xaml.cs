@@ -40,13 +40,7 @@ namespace NotenApp.Pages
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var fach = e.CurrentSelection.FirstOrDefault() as Fach;
-            
-            
-            string name = fach.Name;
-            Console.WriteLine(name);
-           
-            
+            var fach = e.CurrentSelection.FirstOrDefault() as Halbjahr1Model;
             await Navigation.PushAsync(new EntscheidungsSeite(fach));
         }
 

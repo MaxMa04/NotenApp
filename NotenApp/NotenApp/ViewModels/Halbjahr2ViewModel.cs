@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace NotenApp.ViewModels
 {
-    public class Halbjahr1ViewModel
+    public class Halbjahr2ViewModel
     {
-        public ObservableRangeCollection<Halbjahr1Model> FaecherHJ1 { get; set; }
-        public AsyncCommand<Halbjahr1Model> RemoveCommand { get; }
+        public ObservableRangeCollection<Halbjahr2Model> FaecherHJ2 { get; set; }
+        public AsyncCommand<Halbjahr2Model> RemoveCommand { get; }
         public AsyncCommand RefreshCommand { get; }
-        public Halbjahr1ViewModel()
+        public Halbjahr2ViewModel()
         {
-            FaecherHJ1 = new ObservableRangeCollection<Halbjahr1Model>();
+            FaecherHJ2 = new ObservableRangeCollection<Halbjahr2Model>();
             RefreshCommand = new AsyncCommand(Refresh);
-            RemoveCommand = new AsyncCommand<Halbjahr1Model>(Remove);
+            RemoveCommand = new AsyncCommand<Halbjahr2Model>(Remove);
 
         }
         public async Task AddNote(Halbjahr1Model fach, int note, int zahl)
@@ -26,7 +26,7 @@ namespace NotenApp.ViewModels
             await FachService.AddNote(fach, note, zahl);
             await Refresh();
         }
-        public async Task Remove(Halbjahr1Model fach)
+        public async Task Remove(Halbjahr2Model fach)
         {
             await FachService.RemoveFach(fach.Id);
             await Refresh();
@@ -34,13 +34,11 @@ namespace NotenApp.ViewModels
 
         public async Task Refresh()
         {
-            
-            FaecherHJ1.Clear();
-            var facher = await FachService.GetFaecherHJ1();
 
-            FaecherHJ1.AddRange(facher);
+            FaecherHJ2.Clear();
+            var facher = await FachService.GetFaecherHJ2();
+
+            FaecherHJ2.AddRange(facher);
         }
-
-
     }
 }

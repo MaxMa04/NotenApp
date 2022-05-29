@@ -23,7 +23,7 @@
             <!--aktueller Schnitt-->
             <StackLayout Padding="10" Grid.Row="0">
                 <Frame HeightRequest="120" WidthRequest="120" CornerRadius="60" HorizontalOptions="Center" VerticalOptions="Center" Margin="20" Padding="0" BackgroundColor="#7BA4A8" >
-                    <Label Text="15" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
+                    <Label Text="{Binding Text}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
                 </Frame>
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
                     <Label Text="Halbjahr 1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
@@ -72,8 +72,8 @@
                                 <Label  Grid.Column="5" Grid.Row="1" Text="{Binding Note5}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label  Grid.Column="1" Grid.Row="0" Text="{Binding KlausurNote1}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label  Grid.Column="2" Grid.Row="0" Text="{Binding KlausurNote2}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Frame Grid.Column="6" Grid.RowSpan="2" CornerRadius="25">
-                                    <Label Text="15" FontSize="Medium" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                <Frame Grid.Column="6" Grid.RowSpan="2" CornerRadius="25" >
+                                    <Label Text="{Binding Durchschnitt}" FontSize="Medium" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                                 </Frame>
 
 

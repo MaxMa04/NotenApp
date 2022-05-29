@@ -14,12 +14,14 @@ namespace NotenApp.ViewModels
         public ObservableRangeCollection<Halbjahr1Model> FaecherHJ1 { get; set; }
         public AsyncCommand<Halbjahr1Model> RemoveCommand { get; }
         public AsyncCommand RefreshCommand { get; }
+        public string Text { get;}
+
         public Halbjahr1ViewModel()
         {
             FaecherHJ1 = new ObservableRangeCollection<Halbjahr1Model>();
             RefreshCommand = new AsyncCommand(Refresh);
             RemoveCommand = new AsyncCommand<Halbjahr1Model>(Remove);
-
+            Text = "10";
         }
         public async Task AddNote(Halbjahr1Model fach, int note, int zahl)
         {

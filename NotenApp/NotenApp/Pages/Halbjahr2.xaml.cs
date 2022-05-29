@@ -28,14 +28,10 @@ namespace NotenApp.Pages
 
         }
 
-
-
-
-
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var fach = e.CurrentSelection.FirstOrDefault() as Halbjahr2Model;
-            //await Navigation.PushAsync(new EntscheidungsSeite(fach));
+            await Navigation.PushAsync(new EntscheidungsSeite(fach));
         }
 
 

@@ -24,7 +24,7 @@ namespace NotenApp.Services
             await db.CreateTableAsync<Halbjahr2Model>();
 
         }
-        public static async Task AddNote(Halbjahr1Model fach, int note, int zahl)
+        public static async Task AddNote1(Halbjahr1Model fach, int note, int zahl)
         {
             await Init();
             await RemoveFach(fach.Id);
@@ -78,6 +78,61 @@ namespace NotenApp.Services
                 await db.InsertAsync(fach);
             }
             
+        }
+        public static async Task AddNote2(Halbjahr2Model fach, int note, int zahl)
+        {
+            await Init();
+            await RemoveFach(fach.Id);
+            if (fach.Note1 == null && zahl == 1)
+            {
+                fach.Note1 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note2 == null && zahl == 1)
+            {
+                fach.Note2 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note3 == null && zahl == 1)
+            {
+                fach.Note3 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note4 == null && zahl == 1)
+            {
+                fach.Note4 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note5 == null && zahl == 1)
+            {
+                fach.Note5 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note6 == null && zahl == 1)
+            {
+                fach.Note6 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.Note7 == null && zahl == 1)
+            {
+                fach.Note7 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.KlausurNote1 == null && zahl == 2)
+            {
+                fach.KlausurNote1 = note;
+                await db.InsertAsync(fach);
+            }
+            else if (fach.KlausurNote2 == null && zahl == 2)
+            {
+                fach.KlausurNote2 = note;
+                await db.InsertAsync(fach);
+            }
+            else
+            {
+                await db.InsertAsync(fach);
+            }
+
         }
         public static async Task<IEnumerable<Halbjahr1Model>> GetFaecherHJ1()
         {

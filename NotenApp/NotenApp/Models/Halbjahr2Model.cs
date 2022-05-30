@@ -25,15 +25,15 @@ namespace NotenApp.Models
         public int? KlausurNote1 { get; set; }
         public int? KlausurNote2 { get; set; }
         [Ignore]
-        public List<int> LKNoten { get; set; }
+        public List<int?> LKNoten { get; set; }
         [Ignore]
-        public List<int> KlausurNoten { get; set; }
+        public List<int?> KlausurNoten { get; set; }
 
 
         public Halbjahr2Model()
         {
-            LKNoten = new List<int>();
-            KlausurNoten = new List<int>();
+            LKNoten = new List<int?>();
+            KlausurNoten = new List<int?>();
 
         }
     }

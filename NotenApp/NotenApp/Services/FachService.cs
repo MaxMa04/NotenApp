@@ -87,11 +87,13 @@ namespace NotenApp.Services
             {
                 fach.Note1 = note;
                 await db.InsertAsync(fach);
+                
             }
             else if (fach.Note2 == null && zahl == 1)
             {
                 fach.Note2 = note;
                 await db.InsertAsync(fach);
+
             }
             else if (fach.Note3 == null && zahl == 1)
             {

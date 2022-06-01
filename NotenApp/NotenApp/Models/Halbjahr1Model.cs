@@ -34,8 +34,8 @@ namespace NotenApp.Models
 
         public Halbjahr1Model()
         {
-            LKNoten = new List<int?>();
-            KlausurNoten = new List<int?>();
+            LKNoten = new List<int?>() { Note1, Note2, Note3, Note4, Note5, Note6, Note7, Note8, Note9, Note10, Note11, Note12 };
+            KlausurNoten = new List<int?>() { KlausurNote1, KlausurNote2 };
 
         }
 

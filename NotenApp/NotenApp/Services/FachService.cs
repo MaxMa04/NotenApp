@@ -86,25 +86,30 @@ namespace NotenApp.Services
             if (fach.Note1 == null && zahl == 1)
             {
                 fach.Note1 = note;
+                fach.LKNoten.Add(note);
                 await db.InsertAsync(fach);
                 
             }
             else if (fach.Note2 == null && zahl == 1)
             {
                 fach.Note2 = note;
+                fach.LKNoten.Add(note);
                 await db.InsertAsync(fach);
 
             }
             else if (fach.Note3 == null && zahl == 1)
             {
                 fach.Note3 = note;
-                fach.Durchschnitt = GetDurchschnitt(fach,2);
+                fach.LKNoten.Add(note);
+                fach.Durchschnitt = GetDurchschnitt(fach,3);
+
                 await db.InsertAsync(fach);
             }
             else if (fach.Note4 == null && zahl == 1)
             {
                 fach.Note4 = note;
-                fach.Durchschnitt = GetDurchschnitt(fach, 1);
+                fach.LKNoten.Add(note);
+                fach.Durchschnitt = GetDurchschnitt(fach, 4);
                 await db.InsertAsync(fach);
             }
             else if (fach.Note5 == null && zahl == 1)
@@ -175,19 +180,27 @@ namespace NotenApp.Services
             await db.DeleteAsync<Halbjahr2Model>(id);
             return;
         }
-        public static int GetDurchschnitt(Halbjahr2Model fach, int suii)
+        public static float GetDurchschnitt(Halbjahr2Model fach, int notenNr)
         {
-            int lol;
-            if(suii == 2)
+            float durchschnitt;
+            float count = 0;
+            for (int i = 0; i < fach.LKNoten.Count; i++)
             {
-                lol = 1;
+                if (fach.LKNoten[i] != null)
+                {
+                    count += (float)fach.LKNoten[i];
+                }
+                
+
             }
-            else
-            {
-                lol = 2;
-            }
-            return lol;
+            durchschnitt = count / notenNr;
+           
+
+            
+            return durchschnitt;
         }
+
+
 
     }
 }

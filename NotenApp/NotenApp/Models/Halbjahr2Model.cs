@@ -33,9 +33,8 @@ namespace NotenApp.Models
 
         public Halbjahr2Model()
         {
-            LKNoten = new List<int?>();
+            LKNoten = new List<int?>() ;
             KlausurNoten = new List<int?>();
-
         }
     }
 }

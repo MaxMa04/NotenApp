@@ -86,45 +86,45 @@ namespace NotenApp.Services
             if (fach.Note1 == null && zahl == 1)
             {
                 fach.Note1 = note;
-                fach.LKNoten.Add(note);
+                fach.Durchschnitt = GetDurchschnitt(fach, 1);
                 await db.InsertAsync(fach);
                 
             }
             else if (fach.Note2 == null && zahl == 1)
             {
                 fach.Note2 = note;
-                fach.LKNoten.Add(note);
+                fach.Durchschnitt = GetDurchschnitt(fach, 2);
                 await db.InsertAsync(fach);
 
             }
             else if (fach.Note3 == null && zahl == 1)
             {
                 fach.Note3 = note;
-                fach.LKNoten.Add(note);
                 fach.Durchschnitt = GetDurchschnitt(fach,3);
-
                 await db.InsertAsync(fach);
             }
             else if (fach.Note4 == null && zahl == 1)
             {
                 fach.Note4 = note;
-                fach.LKNoten.Add(note);
                 fach.Durchschnitt = GetDurchschnitt(fach, 4);
                 await db.InsertAsync(fach);
             }
             else if (fach.Note5 == null && zahl == 1)
             {
                 fach.Note5 = note;
+                fach.Durchschnitt = GetDurchschnitt(fach, 5);
                 await db.InsertAsync(fach);
             }
             else if (fach.Note6 == null && zahl == 1)
             {
                 fach.Note6 = note;
+                fach.Durchschnitt = GetDurchschnitt(fach, 6);
                 await db.InsertAsync(fach);
             }
             else if (fach.Note7 == null && zahl == 1)
             {
                 fach.Note7 = note;
+                fach.Durchschnitt = GetDurchschnitt(fach, 7);
                 await db.InsertAsync(fach);
             }
             else if (fach.KlausurNote1 == null && zahl == 2)
@@ -182,22 +182,37 @@ namespace NotenApp.Services
         }
         public static float GetDurchschnitt(Halbjahr2Model fach, int notenNr)
         {
+            fach.LKNoten.Add(fach.Note1);
+            fach.LKNoten.Add(fach.Note2);
+            fach.LKNoten.Add(fach.Note3);
+            fach.LKNoten.Add(fach.Note4);
+            fach.LKNoten.Add(fach.Note5);
+            fach.LKNoten.Add(fach.Note6);
+            fach.LKNoten.Add(fach.Note7);
+            fach.LKNoten.Add(fach.Note8);
+            fach.LKNoten.Add(fach.Note9);
+            fach.LKNoten.Add(fach.Note10);
+            fach.LKNoten.Add(fach.Note11);
+            fach.LKNoten.Add(fach.Note12);
+
             float durchschnitt;
             float count = 0;
-            for (int i = 0; i < fach.LKNoten.Count; i++)
+            for (int i = 0; i < notenNr; i++)
             {
                 if (fach.LKNoten[i] != null)
                 {
                     count += (float)fach.LKNoten[i];
                 }
-                
+
 
             }
             durchschnitt = count / notenNr;
-           
 
-            
+
+
             return durchschnitt;
+            
+
         }
 
 

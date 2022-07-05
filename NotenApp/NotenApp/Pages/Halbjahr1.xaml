@@ -35,11 +35,11 @@
             </StackLayout>
             <!--Übersicht der Noten und Fächer-->
 
-            <CollectionView ItemsSource="{Binding FaecherHJ1}" Grid.Row="1" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
-                <CollectionView.ItemTemplate>
+            <CollectionView ItemsSource="{Binding FaecherHJ1}" Grid.Row="1" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged" >
+                <CollectionView.ItemTemplate >
                     <DataTemplate>
-                        <SwipeView>
-                            <SwipeView.RightItems>
+                        <SwipeView HeightRequest="75">
+                            <SwipeView.RightItems >
                                 <SwipeItems>
                                     <SwipeItem Text="Details" BackgroundColor="Green" Invoked="SwipeItem_Invoked_1" />
                                     <SwipeItem Text="Delete" BackgroundColor="Red"   Command="{Binding Source={x:Reference hj1}, Path=BindingContext.RemoveCommand}"

@@ -5,11 +5,12 @@ using System.Text;
 
 namespace NotenApp.Models
 {
-    public class Halbjahr1Model
+    public class FachModel
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Halbjahr { get; set; }
         public int? Note1 { get; set; }
         public int? Note2 { get; set; }
         public int? Note3 { get; set; }
@@ -24,23 +25,17 @@ namespace NotenApp.Models
         public int? Note12 { get; set; }
         public int? KlausurNote1 { get; set; }
         public int? KlausurNote2 { get; set; }
-        [Ignore]
         public float? Durchschnitt { get; set; }
         [Ignore]
         public List<int?> LKNoten { get; set; }
         [Ignore]
-        public List<int?> KlausurNoten { get ; set; }
+        public List<int?> KlausurNoten { get; set; }
 
 
-        public Halbjahr1Model()
+        public FachModel()
         {
-            LKNoten = new List<int?>() { Note1, Note2, Note3, Note4, Note5, Note6, Note7, Note8, Note9, Note10, Note11, Note12 };
-            KlausurNoten = new List<int?>() { KlausurNote1, KlausurNote2 };
-
+            LKNoten = new List<int?>() ;
+            KlausurNoten = new List<int?>();
         }
-
-
-
-
     }
 }

@@ -20,66 +20,11 @@ namespace NotenApp.Services
 
             db = new SQLiteAsyncConnection(databasePath);
 
-            await db.CreateTableAsync<Halbjahr1Model>();
-            await db.CreateTableAsync<Halbjahr2Model>();
+            await db.CreateTableAsync<FachModel>();
 
         }
-        public static async Task AddNote1(Halbjahr1Model fach, int note, int zahl)
-        {
-            await Init();
-            await RemoveFach(fach.Id);
-            if (fach.Note1 == null && zahl == 1)
-            {
-                fach.Note1 = note;
-                await db.InsertAsync(fach);
-            }
-            else if(fach.Note2 == null && zahl == 1)
-            {
-                fach.Note2 = note;
-                await db.InsertAsync(fach);
-            }
-            else if (fach.Note3 == null && zahl == 1)
-            {
-                fach.Note3 = note;
-                await db.InsertAsync(fach);
-            }
-            else if (fach.Note4 == null && zahl == 1)
-            {
-                fach.Note4 = note;
-                await db.InsertAsync(fach);
-            }
-            else if (fach.Note5 == null && zahl == 1)
-            {
-                fach.Note5 = note;
-                await db.InsertAsync(fach);
-            }
-            else if (fach.Note6 == null && zahl == 1)
-            {
-                fach.Note6 = note;
-                await db.InsertAsync(fach);
-            }
-            else if (fach.Note7 == null && zahl == 1)
-            {
-                fach.Note7 = note;
-                await db.InsertAsync(fach);
-            }
-            else if (fach.KlausurNote1 == null && zahl == 2)
-            {
-                fach.KlausurNote1 = note;
-                await db.InsertAsync(fach);
-            }
-            else if (fach.KlausurNote2 == null && zahl == 2)
-            {
-                fach.KlausurNote2 = note;
-                await db.InsertAsync(fach);
-            }
-            else
-            {
-                await db.InsertAsync(fach);
-            }
-            
-        }
-        public static async Task AddNote2(Halbjahr2Model fach, int note, int zahl)
+
+        public static async Task AddNote2(FachModel fach, int note, int zahl)
         {
             await Init();
             await RemoveFach(fach.Id);
@@ -143,32 +88,33 @@ namespace NotenApp.Services
             }
 
         }
-        public static async Task<IEnumerable<Halbjahr1Model>> GetFaecherHJ1()
+
+        public static async Task<IEnumerable<FachModel>> GetFacher(int halbjahr)
         {
             await Init();
-            var facher = await db.Table<Halbjahr1Model>().ToListAsync();
-            return facher;
-        }
-        public static async Task<IEnumerable<Halbjahr2Model>> GetFaecherHJ2()
-        {
-            await Init();
-            var facher = await db.Table<Halbjahr2Model>().ToListAsync();
+            var Gesamtfacher = await db.Table<FachModel>().ToListAsync();
+            List<FachModel> facher = new List<FachModel>();
+            foreach (var fach in Gesamtfacher)
+            {
+                if(fach.Halbjahr == halbjahr)
+                {
+                    facher.Add(fach);
+                }
+            }
             return facher;
         }
         //nutzbar für alle
-        public static async Task AddFach(string name) 
+        public static async Task AddFach(string name, int halbjahr) 
         {
             await Init();
-            Halbjahr1Model fach = new Halbjahr1Model
+
+            FachModel fach = new FachModel
             {
-                Name = name
+                Name = name,
+                Halbjahr = halbjahr
             };
-            Halbjahr2Model fach2 = new Halbjahr2Model
-            {
-                Name = name
-            };
+
             await db.InsertAsync(fach);
-            await db.InsertAsync(fach2);
         }
 
         //mit Anpassungen nutzbar für alle (in der Form nicht)
@@ -176,11 +122,24 @@ namespace NotenApp.Services
         {
             await Init();
             
-            await db.DeleteAsync<Halbjahr1Model>(id);
-            await db.DeleteAsync<Halbjahr2Model>(id);
+            await db.DeleteAsync<FachModel>(id);
             return;
         }
-        public static float GetDurchschnitt(Halbjahr2Model fach, int notenNr)
+        public static async Task RemoveFach(FachModel fach)
+        {
+            await Init();
+            List<FachModel> list = await db.Table<FachModel>().ToListAsync();
+            foreach (var item in list)
+            {
+                if(item.Name == fach.Name)
+                {
+                    await db.DeleteAsync<FachModel>(item.Id);
+                }
+            }
+            await db.DeleteAsync<FachModel>(fach.Id);
+            return;
+        }
+        public static float GetDurchschnitt(FachModel fach, int notenNr)
         {
             fach.LKNoten.Add(fach.Note1);
             fach.LKNoten.Add(fach.Note2);

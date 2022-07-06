@@ -5,7 +5,7 @@
              x:Class="NotenApp.Pages.Halbjahr2"
              x:Name="hj2">
     <ContentPage.BindingContext>
-        <ViewModels:Halbjahr2ViewModel/>
+        <ViewModels:HalbjahrViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid BackgroundColor="#232122">

@@ -21,9 +21,12 @@ namespace NotenApp.Pages
 
         private async void myListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var fach = e.SelectedItem as Halbjahr1Model;
+            var fach = e.SelectedItem as FachModel;
 
-            await FachService.AddFach(fach.Name);
+            await FachService.AddFach(fach.Name, 1);
+            await FachService.AddFach(fach.Name, 2);
+            await FachService.AddFach(fach.Name, 3);
+            await FachService.AddFach(fach.Name, 4);
             await DisplayAlert(fach.Name, "wurde hinzugefügt", "Schließen");
             await Navigation.PopAsync();
         }

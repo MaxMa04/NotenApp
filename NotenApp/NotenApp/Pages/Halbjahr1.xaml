@@ -5,7 +5,7 @@
              x:Class="NotenApp.Pages.Halbjahr1"
              x:Name="hj1">
     <ContentPage.BindingContext>
-        <ViewModels:Halbjahr1ViewModel/>
+        <ViewModels:HalbjahrViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid BackgroundColor="#232122">
@@ -30,8 +30,8 @@
                     <ImageButton Source="Plus1.png" BackgroundColor="White" CornerRadius="20" HeightRequest="40" WidthRequest="40" Margin="10" VerticalOptions="Center" HorizontalOptions="Center" Clicked="FachHinzufuegen">
                     </ImageButton>
                 </StackLayout>
-                
-                
+
+
             </StackLayout>
             <!--Übersicht der Noten und Fächer-->
 

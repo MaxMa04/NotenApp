@@ -17,12 +17,12 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Halbjahr1 : ContentPage
     {
-        Halbjahr1ViewModel _model;
+        HalbjahrViewModel _model;
         public Halbjahr1()
         {
             
             InitializeComponent();
-            _model = BindingContext as Halbjahr1ViewModel;
+            _model = BindingContext as HalbjahrViewModel;
         }
         protected async override void OnAppearing()
         {
@@ -40,7 +40,7 @@ namespace NotenApp.Pages
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var fach = e.CurrentSelection.FirstOrDefault() as Halbjahr1Model;
+            var fach = e.CurrentSelection.FirstOrDefault() as FachModel;
             await Navigation.PushAsync(new EntscheidungsSeite(fach));
         }
 

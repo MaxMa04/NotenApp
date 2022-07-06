@@ -14,7 +14,7 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Halbjahr2 : ContentPage
     {
-        Halbjahr2ViewModel _model;
+        HalbjahrViewModel _model;
         public List<float?> durchschnitte = new List<float?>();
         public float? count= 0;
         public float? gesamtDurchschnitt;
@@ -22,14 +22,14 @@ namespace NotenApp.Pages
         {
 
             InitializeComponent();
-            _model = BindingContext as Halbjahr2ViewModel;
+            _model = BindingContext as HalbjahrViewModel;
             
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
             await _model.Refresh();
-            foreach (Halbjahr2Model fach in _model.FaecherHJ2)
+            foreach (FachModel fach in _model.FaecherHJ2)
             {
                 durchschnitte.Add(fach.Durchschnitt);
             }
@@ -44,7 +44,7 @@ namespace NotenApp.Pages
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var fach = e.CurrentSelection.FirstOrDefault() as Halbjahr2Model;
+            var fach = e.CurrentSelection.FirstOrDefault() as FachModel;
             await Navigation.PushAsync(new EntscheidungsSeite(fach));
         }
 

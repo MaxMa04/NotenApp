@@ -72,7 +72,7 @@
                                 <Label  Grid.Column="1" Grid.Row="0" Text="{Binding KlausurNote1}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label  Grid.Column="2" Grid.Row="0" Text="{Binding KlausurNote2}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Frame Grid.Column="6" Grid.RowSpan="2" CornerRadius="25" >
-                                    <Label Text="{Binding Durchschnitt}" FontSize="Medium" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding GesamtDurchschnitt}" FontSize="Medium" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                                 </Frame>
 
 

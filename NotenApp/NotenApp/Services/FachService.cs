@@ -31,55 +31,67 @@ namespace NotenApp.Services
             if (fach.Note1 == null && zahl == 1)
             {
                 fach.Note1 = note;
-                fach.Durchschnitt = GetDurchschnitt(fach, 1);
+                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 1);
+                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
                 await db.InsertAsync(fach);
+                
                 
             }
             else if (fach.Note2 == null && zahl == 1)
             {
                 fach.Note2 = note;
-                fach.Durchschnitt = GetDurchschnitt(fach, 2);
+                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 2);
+                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
                 await db.InsertAsync(fach);
 
             }
             else if (fach.Note3 == null && zahl == 1)
             {
                 fach.Note3 = note;
-                fach.Durchschnitt = GetDurchschnitt(fach,3);
+                fach.LkDurchschnitt = GetLkDurchschnitt(fach,3);
+                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
                 await db.InsertAsync(fach);
             }
             else if (fach.Note4 == null && zahl == 1)
             {
                 fach.Note4 = note;
-                fach.Durchschnitt = GetDurchschnitt(fach, 4);
+                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 4);
+                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
                 await db.InsertAsync(fach);
             }
             else if (fach.Note5 == null && zahl == 1)
             {
                 fach.Note5 = note;
-                fach.Durchschnitt = GetDurchschnitt(fach, 5);
+                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 5);
+                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
                 await db.InsertAsync(fach);
             }
             else if (fach.Note6 == null && zahl == 1)
             {
                 fach.Note6 = note;
-                fach.Durchschnitt = GetDurchschnitt(fach, 6);
+                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 6);
+                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
                 await db.InsertAsync(fach);
             }
             else if (fach.Note7 == null && zahl == 1)
             {
                 fach.Note7 = note;
-                fach.Durchschnitt = GetDurchschnitt(fach, 7);
+                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 7);
+                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
                 await db.InsertAsync(fach);
             }
             else if (fach.KlausurNote1 == null && zahl == 2)
             {
                 fach.KlausurNote1 = note;
+                fach.KlausurDurchschnitt = GetKlausurDurchschnitt(fach, 1);
+                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
                 await db.InsertAsync(fach);
             }
             else if (fach.KlausurNote2 == null && zahl == 2)
             {
                 fach.KlausurNote2 = note;
+                fach.KlausurDurchschnitt = GetKlausurDurchschnitt(fach, 2);
+                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
                 await db.InsertAsync(fach);
             }
             else
@@ -139,7 +151,7 @@ namespace NotenApp.Services
             await db.DeleteAsync<FachModel>(fach.Id);
             return;
         }
-        public static float GetDurchschnitt(FachModel fach, int notenNr)
+        public static float? GetLkDurchschnitt(FachModel fach, int notenNr)
         {
             fach.LKNoten.Add(fach.Note1);
             fach.LKNoten.Add(fach.Note2);
@@ -153,27 +165,51 @@ namespace NotenApp.Services
             fach.LKNoten.Add(fach.Note10);
             fach.LKNoten.Add(fach.Note11);
             fach.LKNoten.Add(fach.Note12);
-
-            float durchschnitt;
-            float count = 0;
+            float? durchschnittLk;
+            float? countLk = 0;
             for (int i = 0; i < notenNr; i++)
             {
                 if (fach.LKNoten[i] != null)
                 {
-                    count += (float)fach.LKNoten[i];
+                    countLk += (float?)fach.LKNoten[i];
                 }
-
-
             }
-            durchschnitt = count / notenNr;
-
-
-
-            return durchschnitt;
+            durchschnittLk = countLk / notenNr;
+            return durchschnittLk;
+        }
+        public static float? GetKlausurDurchschnitt(FachModel fach, int notenNr)
+        {
+            fach.KlausurNoten.Add(fach.KlausurNote1);
+            fach.KlausurNoten.Add(fach.KlausurNote2);
+            float? durchschnittKlausur;
+            if (notenNr == 1)
+            {
+                return (float?)fach.KlausurNote1;
+            }
+            else
+            {
+                durchschnittKlausur = (float?)fach.KlausurNote1 + (float?)fach.KlausurNote2;
+                return durchschnittKlausur / 2;
+            }
             
+        }
+        public static float? GetFachDurchschnitt(FachModel fach)
+        {
+            if(fach.LkDurchschnitt != null && fach.KlausurDurchschnitt != null)
+            {
+                float? x = (float?)fach.LkDurchschnitt + (float?)fach.KlausurDurchschnitt;
+                return x / 2;
+            }
+            else if(fach.LkDurchschnitt == null)
+            {
+                return fach.KlausurDurchschnitt;
+            }
+            else
+            {
+                return fach.LkDurchschnitt;
+            }
 
         }
-
 
 
     }

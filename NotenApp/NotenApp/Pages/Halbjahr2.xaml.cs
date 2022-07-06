@@ -29,17 +29,7 @@ namespace NotenApp.Pages
         {
             base.OnAppearing();
             await _model.Refresh();
-            foreach (FachModel fach in _model.FaecherHJ2)
-            {
-                durchschnitte.Add(fach.Durchschnitt);
-            }
-            for (int i = 0; i < durchschnitte.Count; i++)
-            {
-                count += durchschnitte[i];
-            }
-            gesamtDurchschnitt = count / durchschnitte.Count;
-            h.Text = gesamtDurchschnitt.ToString();
-            count = 0;
+
         }
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

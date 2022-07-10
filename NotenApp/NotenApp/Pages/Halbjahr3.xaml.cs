@@ -23,7 +23,7 @@ namespace NotenApp.Pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await _model.Refresh();
+            await _model.Refresh(3);
 
         }
 

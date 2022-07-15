@@ -129,7 +129,7 @@ namespace NotenApp.Services
             await db.InsertAsync(fach);
         }
 
-        //mit Anpassungen nutzbar für alle (in der Form nicht)
+        //muss drinnen bleiben
         public static async Task RemoveFach(int id)
         {
             await Init();
@@ -210,7 +210,27 @@ namespace NotenApp.Services
             }
 
         }
-
+        public static async Task<float> GetHJGesamtDurchschnitt(int halbjahr)
+        {
+            var Gesamtfacher = await db.Table<FachModel>().ToListAsync();
+            float gesamtDurchschnitt;
+            float count = 0;
+            float count2 = 0;
+                            
+            foreach (var item in Gesamtfacher)
+            {
+                if(item.Halbjahr == halbjahr && item.GesamtDurchschnitt != null)
+                {
+                    count += (float)item.GesamtDurchschnitt;
+                    count2++;
+                }
+                
+            }
+            gesamtDurchschnitt = count / count2;
+            return gesamtDurchschnitt;
+                    
+            
+        }
 
     }
 }

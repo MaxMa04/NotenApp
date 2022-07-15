@@ -1,4 +1,5 @@
 ﻿using NotenApp.Models;
+using NotenApp.Services;
 using NotenApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,6 @@ namespace NotenApp.Pages
     public partial class Halbjahr2 : ContentPage
     {
         HalbjahrViewModel _model;
-        public List<float?> durchschnitte = new List<float?>();
-        public float? count= 0;
-        public float? gesamtDurchschnitt;
         public Halbjahr2()
         {
 
@@ -29,6 +27,8 @@ namespace NotenApp.Pages
         {
             base.OnAppearing();
             await _model.Refresh(2);
+            _model.GesamtDurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
+
 
         }
 

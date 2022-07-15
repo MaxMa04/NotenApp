@@ -1,4 +1,5 @@
 ﻿using NotenApp.Models;
+using NotenApp.Services;
 using NotenApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace NotenApp.Pages
         {
             base.OnAppearing();
             await _model.Refresh(4);
+            _model.GesamtDurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
 
         }
 

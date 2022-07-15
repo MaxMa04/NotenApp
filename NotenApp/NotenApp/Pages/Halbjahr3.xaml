@@ -23,7 +23,7 @@
             <!--aktueller Schnitt-->
             <StackLayout Padding="10" Grid.Row="0">
                 <Frame HeightRequest="120" WidthRequest="120" CornerRadius="60" HorizontalOptions="Center" VerticalOptions="Center" Margin="20" Padding="0" BackgroundColor="#7BA4A8" >
-                    <Label Text="{Binding Text}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
+                    <Label Text="{Binding GesamtDurchschnittHJ3}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
                 </Frame>
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
                     <Label Text="Halbjahr 3" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />

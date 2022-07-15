@@ -4,12 +4,13 @@ using NotenApp.Models;
 using NotenApp.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NotenApp.ViewModels
 {
-    public class HalbjahrViewModel
+    public class HalbjahrViewModel : INotifyPropertyChanged
     {
         public ObservableRangeCollection<FachModel> FaecherHJ1{ get; set; }
         public ObservableRangeCollection<FachModel> FaecherHJ2 { get; set; }
@@ -17,6 +18,46 @@ namespace NotenApp.ViewModels
         public ObservableRangeCollection<FachModel> FaecherHJ4 { get; set; }
         public AsyncCommand<FachModel> RemoveCommand { get; }
         public AsyncCommand<int> RefreshCommand { get; }
+        private float gesamtDurchschnittHJ1;
+        public float GesamtDurchschnittHJ1
+        {
+            get => gesamtDurchschnittHJ1;
+            set
+            {                   
+                gesamtDurchschnittHJ1 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GesamtDurchschnittHJ1)));
+            }
+        }
+        private float gesamtDurchschnittHJ2;
+        public float GesamtDurchschnittHJ2
+        {
+            get => gesamtDurchschnittHJ2;
+            set
+            {
+                gesamtDurchschnittHJ2 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GesamtDurchschnittHJ2)));
+            }
+        }
+        private float gesamtDurchschnittHJ3;
+        public float GesamtDurchschnittHJ3
+        {
+            get => gesamtDurchschnittHJ3;
+            set
+            {
+                gesamtDurchschnittHJ3 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GesamtDurchschnittHJ3)));
+            }
+        }
+        private float gesamtDurchschnittHJ4;
+        public float GesamtDurchschnittHJ4
+        {
+            get => gesamtDurchschnittHJ4;
+            set
+            {
+                gesamtDurchschnittHJ4 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GesamtDurchschnittHJ4)));
+            }
+        }
         public HalbjahrViewModel()
         {
             FaecherHJ1 = new ObservableRangeCollection<FachModel>();
@@ -25,17 +66,23 @@ namespace NotenApp.ViewModels
             FaecherHJ4 = new ObservableRangeCollection<FachModel>();
             RefreshCommand = new AsyncCommand<int>(Refresh);
             RemoveCommand = new AsyncCommand<FachModel>(Remove);
-
+            gesamtDurchschnittHJ1 = 10;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
         public async Task AddNote(FachModel fach, int note, int zahl)
         {
             await FachService.AddNote2(fach, note, zahl);
             await Refresh(fach.Halbjahr);
+            
         }
         public async Task Remove(FachModel fach)
         {
             await FachService.RemoveFach(fach);
             await Refresh(fach.Halbjahr);
+
         }
 
         public async Task Refresh(int halbjahr)

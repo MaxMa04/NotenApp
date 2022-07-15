@@ -23,12 +23,13 @@
             <!--aktueller Schnitt-->
             <StackLayout Padding="10" Grid.Row="0">
                 <Frame HeightRequest="120" WidthRequest="120" CornerRadius="60" HorizontalOptions="Center" VerticalOptions="Center" Margin="20" Padding="0" BackgroundColor="#7BA4A8" >
-                    <Label Text="{Binding Text}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
+                    <Label Text="{Binding GesamtDurchschnittHJ1}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
                 </Frame>
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
                     <Label Text="Halbjahr 1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
                     <ImageButton Source="Plus1.png" BackgroundColor="White" CornerRadius="20" HeightRequest="40" WidthRequest="40" Margin="10" VerticalOptions="Center" HorizontalOptions="Center" Clicked="FachHinzufuegen">
                     </ImageButton>
+                    <Button Text="su" Clicked="Button_Clicked"></Button>
                 </StackLayout>
 
 

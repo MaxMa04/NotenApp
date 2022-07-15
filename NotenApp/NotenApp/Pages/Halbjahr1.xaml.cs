@@ -8,7 +8,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,17 +17,20 @@ namespace NotenApp.Pages
     public partial class Halbjahr1 : ContentPage
     {
         HalbjahrViewModel _model;
+ 
         public Halbjahr1()
         {
             
             InitializeComponent();
             _model = BindingContext as HalbjahrViewModel;
             
+            
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
             await _model.Refresh(1);
+            _model.GesamtDurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1); 
 
         }
 
@@ -50,6 +52,11 @@ namespace NotenApp.Pages
         private async void SwipeItem_Invoked_1(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new FachNotenSeite());
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            _model.GesamtDurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
         }
     }
 }

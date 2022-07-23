@@ -198,7 +198,8 @@ namespace NotenApp.Services
             if(fach.LkDurchschnitt != null && fach.KlausurDurchschnitt != null)
             {
                 float? x = (float?)fach.LkDurchschnitt + (float?)fach.KlausurDurchschnitt;
-                return x / 2;
+                double y= (double)x / 2;
+                return (float?)Math.Round(y, 2);
             }
             else if(fach.LkDurchschnitt == null)
             {
@@ -206,7 +207,8 @@ namespace NotenApp.Services
             }
             else
             {
-                return fach.LkDurchschnitt;
+                double j = (double)fach.LkDurchschnitt;
+                return (float?)Math.Round(j,2);
             }
 
         }
@@ -227,7 +229,7 @@ namespace NotenApp.Services
                 
             }
             gesamtDurchschnitt = count / count2;
-            return gesamtDurchschnitt;
+            return (float)Math.Round(gesamtDurchschnitt,2);
                     
             
         }

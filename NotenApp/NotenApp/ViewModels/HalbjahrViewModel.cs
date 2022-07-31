@@ -74,7 +74,7 @@ namespace NotenApp.ViewModels
 
         public async Task AddNote(FachModel fach, int note, int zahl)
         {
-            await FachService.AddNote2(fach, note, zahl);
+            await FachService.AddNote(fach, note, zahl);
             await Refresh(fach.Halbjahr);
             
         }

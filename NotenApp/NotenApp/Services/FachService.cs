@@ -15,90 +15,34 @@ namespace NotenApp.Services
         static SQLiteAsyncConnection db;
         static async Task Init()
         {
-            
+
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
 
             db = new SQLiteAsyncConnection(databasePath);
 
             await db.CreateTableAsync<FachModel>();
+            await db.CreateTableAsync<NotenModel>();
 
         }
 
-        public static async Task AddNote2(FachModel fach, int note, int zahl)
+        public static async Task AddNote(FachModel fach, int note, int type)
         {
             await Init();
-            await RemoveFach(fach.Id);
-            if (fach.Note1 == null && zahl == 1)
-            {
-                fach.Note1 = note;
-                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 1);
-                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
-                await db.InsertAsync(fach);
-                
-                
-            }
-            else if (fach.Note2 == null && zahl == 1)
-            {
-                fach.Note2 = note;
-                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 2);
-                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
-                await db.InsertAsync(fach);
 
-            }
-            else if (fach.Note3 == null && zahl == 1)
+            NotenModel newNote = new NotenModel
             {
-                fach.Note3 = note;
-                fach.LkDurchschnitt = GetLkDurchschnitt(fach,3);
-                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
-                await db.InsertAsync(fach);
-            }
-            else if (fach.Note4 == null && zahl == 1)
-            {
-                fach.Note4 = note;
-                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 4);
-                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
-                await db.InsertAsync(fach);
-            }
-            else if (fach.Note5 == null && zahl == 1)
-            {
-                fach.Note5 = note;
-                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 5);
-                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
-                await db.InsertAsync(fach);
-            }
-            else if (fach.Note6 == null && zahl == 1)
-            {
-                fach.Note6 = note;
-                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 6);
-                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
-                await db.InsertAsync(fach);
-            }
-            else if (fach.Note7 == null && zahl == 1)
-            {
-                fach.Note7 = note;
-                fach.LkDurchschnitt = GetLkDurchschnitt(fach, 7);
-                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
-                await db.InsertAsync(fach);
-            }
-            else if (fach.KlausurNote1 == null && zahl == 2)
-            {
-                fach.KlausurNote1 = note;
-                fach.KlausurDurchschnitt = GetKlausurDurchschnitt(fach, 1);
-                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
-                await db.InsertAsync(fach);
-            }
-            else if (fach.KlausurNote2 == null && zahl == 2)
-            {
-                fach.KlausurNote2 = note;
-                fach.KlausurDurchschnitt = GetKlausurDurchschnitt(fach, 2);
-                fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
-                await db.InsertAsync(fach);
-            }
-            else
-            {
-                await db.InsertAsync(fach);
-            }
+                Note = note,
+                Type = type,
+                Fach = fach.Name,
+                Halbjahr = fach.Halbjahr
+            };
+            await db.InsertAsync(newNote);
 
+            fach.LkDurchschnitt = await GetLkDurchschnitt(fach);
+            fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
+            Console.WriteLine(fach.GesamtDurchschnitt);
+            await db.UpdateAsync(fach);
+          
         }
 
         public static async Task<IEnumerable<FachModel>> GetFacher(int halbjahr)
@@ -130,11 +74,11 @@ namespace NotenApp.Services
         }
 
         //muss drinnen bleiben
-        public static async Task RemoveFach(int id)
+        public static async Task RemoveNote(int id)
         {
             await Init();
             
-            await db.DeleteAsync<FachModel>(id);
+            await db.DeleteAsync<NotenModel>(id);
             return;
         }
         public static async Task RemoveFach(FachModel fach)
@@ -148,49 +92,49 @@ namespace NotenApp.Services
                     await db.DeleteAsync<FachModel>(item.Id);
                 }
             }
+            await RemoveNote(fach);
             await db.DeleteAsync<FachModel>(fach.Id);
             return;
         }
-        public static float? GetLkDurchschnitt(FachModel fach, int notenNr)
+        public static async Task RemoveNote(FachModel fach)
         {
-            fach.LKNoten.Add(fach.Note1);
-            fach.LKNoten.Add(fach.Note2);
-            fach.LKNoten.Add(fach.Note3);
-            fach.LKNoten.Add(fach.Note4);
-            fach.LKNoten.Add(fach.Note5);
-            fach.LKNoten.Add(fach.Note6);
-            fach.LKNoten.Add(fach.Note7);
-            fach.LKNoten.Add(fach.Note8);
-            fach.LKNoten.Add(fach.Note9);
-            fach.LKNoten.Add(fach.Note10);
-            fach.LKNoten.Add(fach.Note11);
-            fach.LKNoten.Add(fach.Note12);
+            await Init();
+            List<NotenModel> list = await db.Table<NotenModel>().ToListAsync();
+            foreach (var item in list)
+            {
+                if (item.Fach == fach.Name)
+                {
+                    await db.DeleteAsync<NotenModel>(item.Id);
+                }
+            }
+            return;
+        }
+        public static async Task<float?> GetLkDurchschnitt(FachModel fach)
+        {
             float? durchschnittLk;
             float? countLk = 0;
-            for (int i = 0; i < notenNr; i++)
+            List<NotenModel> gesamtNoten = await db.Table<NotenModel>().ToListAsync();
+            foreach (var item in gesamtNoten)
+            {
+                if(item.Type == 1 && item.Fach == fach.Name && item.Halbjahr == fach.Halbjahr)
+                {
+                    fach.LKNoten.Add(item.Note);
+                }
+            }
+            for (int i = 0; i < fach.LKNoten.Count; i++)
             {
                 if (fach.LKNoten[i] != null)
                 {
                     countLk += (float?)fach.LKNoten[i];
                 }
             }
-            durchschnittLk = countLk / notenNr;
+            durchschnittLk = countLk / fach.LKNoten.Count;
             return durchschnittLk;
         }
-        public static float? GetKlausurDurchschnitt(FachModel fach, int notenNr)
+        public static float? GetKlausurDurchschnitt(FachModel fach)
         {
-            fach.KlausurNoten.Add(fach.KlausurNote1);
-            fach.KlausurNoten.Add(fach.KlausurNote2);
-            float? durchschnittKlausur;
-            if (notenNr == 1)
-            {
-                return (float?)fach.KlausurNote1;
-            }
-            else
-            {
-                durchschnittKlausur = (float?)fach.KlausurNote1 + (float?)fach.KlausurNote2;
-                return durchschnittKlausur / 2;
-            }
+
+            return null;
             
         }
         public static float? GetFachDurchschnitt(FachModel fach)

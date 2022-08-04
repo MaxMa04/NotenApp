@@ -29,7 +29,6 @@
                     <Label Text="Halbjahr 1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
                     <ImageButton Source="Plus1.png" BackgroundColor="White" CornerRadius="20" HeightRequest="40" WidthRequest="40" Margin="10" VerticalOptions="Center" HorizontalOptions="Center" Clicked="FachHinzufuegen">
                     </ImageButton>
-                    <Button Text="su" Clicked="Button_Clicked"></Button>
                 </StackLayout>
 
 

@@ -53,10 +53,5 @@ namespace NotenApp.Pages
         {
             await Navigation.PushAsync(new FachNotenSeite());
         }
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            _model.GesamtDurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
-        }
     }
 }

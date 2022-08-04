@@ -107,35 +107,6 @@ namespace NotenApp.Services
             }
             return;
         }
-        public static async Task<float?> GetLkDurchschnitt(FachModel fach)
-        {
-            float? durchschnittLk;
-            float? countLk = 0;
-            List<NotenModel> gesamtNoten = await db.Table<NotenModel>().ToListAsync();
-            foreach (var item in gesamtNoten)
-            {
-                if(item.Type == 1 && item.Fach == fach.Name && item.Halbjahr == fach.Halbjahr)
-                {
-                    fach.LKNoten.Add(item.Note);
-                }
-            }
-            for (int i = 0; i < fach.LKNoten.Count; i++)
-            {
-                if (fach.LKNoten[i] != null)
-                {
-                    countLk += (float?)fach.LKNoten[i];
-                }
-            }
-            durchschnittLk = countLk / fach.LKNoten.Count;
-            return durchschnittLk;
-        }
-        //public static async Task<float?> GetKlausurDurchschnitt(FachModel fach)
-        //{
-        //
-        //
-        //    return 10f;
-        //
-        //}
         public static async Task<float?> GetFachDurchschnitt(FachModel fach)
         {
             float? durchschnitt;
@@ -186,7 +157,7 @@ namespace NotenApp.Services
 
             if(hasKlausur == false)
             {
-                return durchschnittLk;
+                return (float?)Math.Round((decimal)durchschnittLk,2);
             }
             else if(hasLk == false)
             {
@@ -196,7 +167,7 @@ namespace NotenApp.Services
             {
                 var y = durchschnittLk + durchschnittKlausur;
                 durchschnitt = y / 2;
-                return durchschnitt;
+                return (float?)Math.Round((decimal)durchschnitt,2);
             }
             
 

@@ -64,7 +64,7 @@
 
                                 <Label  Grid.Row="0" Grid.RowSpan="2" Text="{Binding Name}" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Center"/>
                                 <Frame Grid.Column="6" Grid.RowSpan="2" CornerRadius="25">
-                                    <Label Text="{Binding GesamtDurchschnitt}" FontSize="Medium" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" Margin="-40"/>
+                                    <Label Text="{Binding Durchschnitt}" FontSize="Medium" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" Margin="-40"/>
                                 </Frame>
 
 

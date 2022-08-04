@@ -27,7 +27,6 @@ namespace NotenApp.Pages
             await FachService.AddFach(fach.Name, 2);
             await FachService.AddFach(fach.Name, 3);
             await FachService.AddFach(fach.Name, 4);
-            await DisplayAlert(fach.Name, "wurde hinzugefügt", "Schließen");
             
             await Navigation.PopAsync();
         }

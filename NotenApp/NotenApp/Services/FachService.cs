@@ -37,12 +37,10 @@ namespace NotenApp.Services
                 Halbjahr = fach.Halbjahr
             };
             await db.InsertAsync(newNote);
-
-            fach.LkDurchschnitt = await GetLkDurchschnitt(fach);
-            fach.GesamtDurchschnitt = GetFachDurchschnitt(fach);
-            Console.WriteLine(fach.GesamtDurchschnitt);
+            fach.Durchschnitt = await GetFachDurchschnitt(fach);
             await db.UpdateAsync(fach);
-          
+
+
         }
 
         public static async Task<IEnumerable<FachModel>> GetFacher(int halbjahr)
@@ -131,29 +129,76 @@ namespace NotenApp.Services
             durchschnittLk = countLk / fach.LKNoten.Count;
             return durchschnittLk;
         }
-        public static float? GetKlausurDurchschnitt(FachModel fach)
+        //public static async Task<float?> GetKlausurDurchschnitt(FachModel fach)
+        //{
+        //
+        //
+        //    return 10f;
+        //
+        //}
+        public static async Task<float?> GetFachDurchschnitt(FachModel fach)
         {
-
-            return null;
-            
-        }
-        public static float? GetFachDurchschnitt(FachModel fach)
-        {
-            if(fach.LkDurchschnitt != null && fach.KlausurDurchschnitt != null)
+            float? durchschnitt;
+            float? durchschnittLk;
+            float? countLk = 0;
+            float? durchschnittKlausur;
+            float? countKlausur = 0;
+            bool hasLk = false;
+            bool hasKlausur = false;
+            List<NotenModel> gesamtNoten = await db.Table<NotenModel>().ToListAsync();
+            foreach (var item in gesamtNoten)
             {
-                float? x = (float?)fach.LkDurchschnitt + (float?)fach.KlausurDurchschnitt;
-                double y= (double)x / 2;
-                return (float?)Math.Round(y, 2);
+                switch (item.Type)
+                {
+                    case 1:
+                        if(item.Fach == fach.Name && item.Halbjahr == fach.Halbjahr)
+                        {
+                            fach.LKNoten.Add(item.Note);
+                        }
+                        break;
+                    case 2:
+                        if (item.Fach == fach.Name && item.Halbjahr == fach.Halbjahr)
+                        {
+                            fach.KlausurNoten.Add(item.Note);
+                        }
+                        break;
+                }
+                
             }
-            else if(fach.LkDurchschnitt == null)
+            for (int i = 0; i < fach.LKNoten.Count; i++)
             {
-                return fach.KlausurDurchschnitt;
+                if (fach.LKNoten[i] != null)
+                {
+                    countLk += (float?)fach.LKNoten[i];
+                    hasLk = true;
+                }
+            }
+            durchschnittLk = countLk / fach.LKNoten.Count;
+            for (int i = 0; i < fach.KlausurNoten.Count; i++)
+            {
+                if (fach.KlausurNoten[i] != null)
+                {
+                    countKlausur += (float?)fach.KlausurNoten[i];
+                    hasKlausur = true;
+                }
+            }
+            durchschnittKlausur = countKlausur / fach.KlausurNoten.Count;
+
+            if(hasKlausur == false)
+            {
+                return durchschnittLk;
+            }
+            else if(hasLk == false)
+            {
+                return durchschnittKlausur;
             }
             else
             {
-                double j = (double)fach.LkDurchschnitt;
-                return (float?)Math.Round(j,2);
+                var y = durchschnittLk + durchschnittKlausur;
+                durchschnitt = y / 2;
+                return durchschnitt;
             }
+            
 
         }
         public static async Task<float> GetHJGesamtDurchschnitt(int halbjahr)
@@ -165,9 +210,9 @@ namespace NotenApp.Services
                             
             foreach (var item in Gesamtfacher)
             {
-                if(item.Halbjahr == halbjahr && item.GesamtDurchschnitt != null)
+                if(item.Halbjahr == halbjahr && item.Durchschnitt != null)
                 {
-                    count += (float)item.GesamtDurchschnitt;
+                    count += (float)item.Durchschnitt;
                     count2++;
                 }
                 

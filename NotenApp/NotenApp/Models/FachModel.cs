@@ -5,15 +5,13 @@ using System.Text;
 
 namespace NotenApp.Models
 {
-    public class FachModel
+    public class FachModel 
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Name { get; set; }
         public int Halbjahr { get; set; }
-        public float? LkDurchschnitt { get; set; }
-        public float? KlausurDurchschnitt { get; set; }
-        public float? GesamtDurchschnitt { get; set; }
+        public float? Durchschnitt { get; set; }
         [Ignore]
         public List<int?> LKNoten { get; set; }
         [Ignore]
@@ -25,5 +23,7 @@ namespace NotenApp.Models
             LKNoten = new List<int?>();
             KlausurNoten = new List<int?>();
         }
+
+        
     }
 }

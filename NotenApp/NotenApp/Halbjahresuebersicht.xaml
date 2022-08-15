@@ -5,10 +5,9 @@
             xmlns:local="clr-namespace:NotenApp.Pages"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
             android:TabbedPage.ToolbarPlacement="Bottom"
-            android:TabbedPage.BarItemColor="#7BA4A8"
-            android:TabbedPage.BarSelectedItemColor="#A5C05B"
-            android:TabbedPage.IsSwipePagingEnabled="False"
-            BarBackgroundColor="#2E2E2E"
+            android:TabbedPage.BarItemColor="Black"
+            android:TabbedPage.BarSelectedItemColor="#eed73f"        
+            BarBackgroundColor="#f0f0f0"
             NavigationPage.HasNavigationBar="False">
 
 

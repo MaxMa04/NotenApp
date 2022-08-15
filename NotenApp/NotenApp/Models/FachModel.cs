@@ -13,15 +13,15 @@ namespace NotenApp.Models
         public int Halbjahr { get; set; }
         public float? Durchschnitt { get; set; }
         [Ignore]
-        public List<int?> LKNoten { get; set; }
+        public List<NotenModel> LKNoten { get; set; }
         [Ignore]
-        public List<int?> KlausurNoten { get; set; }
+        public List<NotenModel> KlausurNoten { get; set; }
 
 
         public FachModel()
         {
-            LKNoten = new List<int?>();
-            KlausurNoten = new List<int?>();
+            LKNoten = new List<NotenModel>();
+            KlausurNoten = new List<NotenModel>();
         }
 
         

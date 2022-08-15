@@ -54,19 +54,50 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="140"></ColumnDefinition>
-                                    <ColumnDefinition Width="30"></ColumnDefinition>
-                                    <ColumnDefinition Width="30"></ColumnDefinition>
-                                    <ColumnDefinition Width="30"></ColumnDefinition>
-                                    <ColumnDefinition Width="30"></ColumnDefinition>
-                                    <ColumnDefinition Width="30"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="65"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <Label  Grid.Row="0" Grid.RowSpan="2" Text="{Binding Name}" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Center"/>
-                                <Frame Grid.Column="6" Grid.RowSpan="2" CornerRadius="25">
-                                    <Label Text="{Binding Durchschnitt}" FontSize="Medium" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" Margin="-40"/>
+                                <!--Fachname-->
+                                <Label  Grid.Row="0" Text="{Binding Name}" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Center"/>
+
+                                <!--Durchschnitt-->
+                                <Frame Grid.Column="2" Grid.RowSpan="2" CornerRadius="35" >
+                                    <Label Text="{Binding Durchschnitt}" FontSize="Medium" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="-40"/>
                                 </Frame>
 
+                                <!--Notenübersicht-->
+                                <!--Klausuren-->
+                                <CollectionView Grid.Column="1" Grid.Row="0" ItemsSource="{Binding KlausurNoten}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout
+                                            Orientation="Horizontal"
+                                            ItemSpacing="5"
+                                            />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Note}" FontSize="Medium"></Label>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+
+                                </CollectionView>
+
+                                <!--LKs-->
+                                <CollectionView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding LKNoten}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout
+                                            Orientation="Horizontal"
+                                            ItemSpacing="5"
+                                            />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Note}" FontSize="Medium"></Label>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+
+                                </CollectionView>
 
 
                             </Grid>

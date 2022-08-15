@@ -57,6 +57,20 @@ namespace NotenApp.Services
             }
             return facher;
         }
+        public static async Task<IEnumerable<NotenModel>> GetNoten(int halbjahr)
+        {
+            await Init();
+            var noten = await db.Table<NotenModel>().ToListAsync();
+            List<NotenModel> Noten = new List<NotenModel>();
+            foreach (var note in noten)
+            {
+                if (note.Halbjahr == halbjahr)
+                {
+                    Noten.Add(note);
+                }
+            }
+            return Noten;
+        }
         //nutzbar für alle
         public static async Task AddFach(string name, int halbjahr) 
         {
@@ -114,6 +128,8 @@ namespace NotenApp.Services
             float? countLk = 0;
             float? durchschnittKlausur;
             float? countKlausur = 0;
+            List<float?> LKNoten = new List<float?>();
+            List<float?> KlausurNoten = new List<float?>();
             bool hasLk = false;
             bool hasKlausur = false;
             List<NotenModel> gesamtNoten = await db.Table<NotenModel>().ToListAsync();
@@ -124,36 +140,36 @@ namespace NotenApp.Services
                     case 1:
                         if(item.Fach == fach.Name && item.Halbjahr == fach.Halbjahr)
                         {
-                            fach.LKNoten.Add(item.Note);
+                            LKNoten.Add(item.Note);
                         }
                         break;
                     case 2:
                         if (item.Fach == fach.Name && item.Halbjahr == fach.Halbjahr)
                         {
-                            fach.KlausurNoten.Add(item.Note);
+                            KlausurNoten.Add(item.Note);
                         }
                         break;
                 }
                 
             }
-            for (int i = 0; i < fach.LKNoten.Count; i++)
+            for (int i = 0; i < LKNoten.Count; i++)
             {
-                if (fach.LKNoten[i] != null)
+                if (LKNoten[i] != null)
                 {
-                    countLk += (float?)fach.LKNoten[i];
+                    countLk += LKNoten[i];
                     hasLk = true;
                 }
             }
-            durchschnittLk = countLk / fach.LKNoten.Count;
-            for (int i = 0; i < fach.KlausurNoten.Count; i++)
+            durchschnittLk = countLk / LKNoten.Count;
+            for (int i = 0; i < KlausurNoten.Count; i++)
             {
-                if (fach.KlausurNoten[i] != null)
+                if (KlausurNoten[i] != null)
                 {
-                    countKlausur += (float?)fach.KlausurNoten[i];
+                    countKlausur += KlausurNoten[i];
                     hasKlausur = true;
                 }
             }
-            durchschnittKlausur = countKlausur / fach.KlausurNoten.Count;
+            durchschnittKlausur = countKlausur / KlausurNoten.Count;
 
             if(hasKlausur == false)
             {

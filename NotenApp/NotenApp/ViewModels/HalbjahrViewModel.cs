@@ -92,25 +92,86 @@ namespace NotenApp.ViewModels
                 case 1:
                     FaecherHJ1.Clear();
                     var facher1 = await FachService.GetFacher(1);
+                    var noten = await FachService.GetNoten(1);
                     FaecherHJ1.AddRange(facher1);
+                    foreach (var fach in FaecherHJ1)
+                    {
+                        foreach (var note in noten)
+                        {
+                            if(note.Fach == fach.Name && note.Type == 1)
+                            {
+                                fach.LKNoten.Add(note);
+                            }
+                            if(note.Type == 2 && note.Fach == fach.Name)
+                            {
+                                fach.KlausurNoten.Add(note);
+                            }
+                        }
+                    }
+
                     break;
                 case 2:
                     FaecherHJ2.Clear();
                     var facher2 = await FachService.GetFacher(2);
-
+                    var noten2 = await FachService.GetNoten(2);
                     FaecherHJ2.AddRange(facher2);
+                    foreach (var fach in FaecherHJ2)
+                    {
+                        foreach (var note in noten2)
+                        {
+                            if (note.Fach == fach.Name && note.Type == 1)
+                            {
+                                fach.LKNoten.Add(note);
+                            }
+                            if (note.Type == 2 && note.Fach == fach.Name)
+                            {
+                                fach.KlausurNoten.Add(note);
+                            }
+                        }
+                    }
+                    
                     break;
                 case 3:
                     FaecherHJ3.Clear();
                     var facher3 = await FachService.GetFacher(3);
 
                     FaecherHJ3.AddRange(facher3);
+                    var noten3 = await FachService.GetNoten(3);
+                    foreach (var fach in FaecherHJ3)
+                    {
+                        foreach (var note in noten3)
+                        {
+                            if (note.Fach == fach.Name && note.Type == 1)
+                            {
+                                fach.LKNoten.Add(note);
+                            }
+                            if (note.Type == 2 && note.Fach == fach.Name)
+                            {
+                                fach.KlausurNoten.Add(note);
+                            }
+                        }
+                    }
                     break;
                 case 4:
                     FaecherHJ4.Clear();
                     var facher4 = await FachService.GetFacher(4);
 
                     FaecherHJ4.AddRange(facher4);
+                    var noten4 = await FachService.GetNoten(4);
+                    foreach (var fach in FaecherHJ4)
+                    {
+                        foreach (var note in noten4)
+                        {
+                            if (note.Fach == fach.Name && note.Type == 1)
+                            {
+                                fach.LKNoten.Add(note);
+                            }
+                            if (note.Type == 2 && note.Fach == fach.Name)
+                            {
+                                fach.KlausurNoten.Add(note);
+                            }
+                        }
+                    }
                     break;
             }
         }

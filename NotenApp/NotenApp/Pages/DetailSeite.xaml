@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NotenApp.Pages.DetailSeite">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#303030">
+
+            <!--Griddefinition-->
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
+
+
+
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" >
+                <Frame HeightRequest="140" WidthRequest="140" CornerRadius="70" HorizontalOptions="Center" VerticalOptions="Center" Margin="20" Padding="0" BackgroundColor="#7BA4A8" >
+                    <Label Text="10" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
+                </Frame>
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
+                    <Label Text="FachName" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
+                </StackLayout>
+
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

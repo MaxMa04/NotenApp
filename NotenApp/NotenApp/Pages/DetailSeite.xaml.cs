@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace NotenApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FachNotenSeite : ContentPage
+    public partial class DetailSeite : ContentPage
     {
-        public FachNotenSeite()
+        public DetailSeite()
         {
             InitializeComponent();
         }

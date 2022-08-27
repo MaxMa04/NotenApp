@@ -1,6 +1,7 @@
 ﻿using MvvmHelpers;
 using NotenApp.Models;
 using NotenApp.Services;
+using NotenApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,26 +16,23 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetailSeite : ContentPage
     {
-        public ObservableRangeCollection<NotenModel> LkNoten { get; set; }
-        public ObservableRangeCollection<NotenModel> KlausurNoten { get; set; }
-        public FachModel Fach { get; set; }
-        public DetailSeite()
-        {
-            InitializeComponent();
-            BindingContext = this;
-            LkNoten = new ObservableRangeCollection<NotenModel>();
-            KlausurNoten = new ObservableRangeCollection<NotenModel>();
-        }
+        public FachModel fach;
+        DetailViewModel model;
         public DetailSeite(FachModel fach)
         {
-            this.Fach = fach;
+            InitializeComponent();
+            this.fach = fach;
+            model = BindingContext as DetailViewModel;
         }
-
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            LkNoten = (ObservableRangeCollection<NotenModel>)await FachService.GetNoten(Fach.Halbjahr);
-            KlausurNoten = (ObservableRangeCollection<NotenModel>)await FachService.GetNoten(Fach.Halbjahr);
+            await model.Initialize(fach);
+            
+
         }
+
+
+
     }
 }

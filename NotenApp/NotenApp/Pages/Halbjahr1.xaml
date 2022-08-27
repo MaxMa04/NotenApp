@@ -63,7 +63,7 @@
                                 </Grid.ColumnDefinitions>
                                 
                                 <!--Fachname-->
-                                <Label  Grid.Row="0" Text="{Binding Name}" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Label  Grid.Row="0" Text="{Binding Name}" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="Center"/>
                                 
                                 <!--Durchschnitt-->
                                 <Frame Grid.Column="2" Grid.RowSpan="2" CornerRadius="35" >

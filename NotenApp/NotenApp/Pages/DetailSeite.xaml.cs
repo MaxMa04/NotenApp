@@ -28,6 +28,8 @@ namespace NotenApp.Pages
         {
             base.OnAppearing();
             await model.Initialize(fach);
+            model.FachDurchschnitt = (float)fach.Durchschnitt;
+            model.FachName = fach.Name;
             
 
         }

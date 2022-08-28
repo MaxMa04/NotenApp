@@ -12,6 +12,8 @@ namespace NotenApp.ViewModels
     {
         public ObservableRangeCollection<NotenModel> LKNoten { get; set; }
         public ObservableRangeCollection<NotenModel> KlausurNoten { get; set; }
+        public string FachName { get; set; }
+        public float FachDurchschnitt { get; set; }
         public DetailViewModel()
         {
             LKNoten = new ObservableRangeCollection<NotenModel>();
@@ -19,6 +21,7 @@ namespace NotenApp.ViewModels
         }
         public async Task Initialize(FachModel fach)
         {
+            
             List<NotenModel> gesamtNoten = (List<NotenModel>)await FachService.GetNoten(fach.Halbjahr);
             List<NotenModel> Lk = new List<NotenModel>();
             List<NotenModel> Kla = new List<NotenModel>();

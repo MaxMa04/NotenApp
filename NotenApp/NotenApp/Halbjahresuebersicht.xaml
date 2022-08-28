@@ -8,7 +8,7 @@
             android:TabbedPage.BarItemColor="Black"
             android:TabbedPage.BarSelectedItemColor="#eed73f"        
             BarBackgroundColor="#f0f0f0"
-            NavigationPage.HasNavigationBar="False">
+            NavigationPage.HasNavigationBar="True">
 
 
 

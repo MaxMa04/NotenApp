@@ -23,13 +23,14 @@ namespace NotenApp.Pages
             InitializeComponent();
             this.fach = fach;
             model = BindingContext as DetailViewModel;
+            Label.Text = fach.Name;
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
             await model.Initialize(fach);
-            model.FachDurchschnitt = (float)fach.Durchschnitt;
-            model.FachName = fach.Name;
+            model.FachDurchschnitt = (float)await FachService.GetFachDurchschnitt(fach);
+            
             
 
         }

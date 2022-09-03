@@ -7,8 +7,9 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             android:TabbedPage.BarItemColor="Black"
             android:TabbedPage.BarSelectedItemColor="#eed73f"        
-            BarBackgroundColor="#f0f0f0"
-            NavigationPage.HasNavigationBar="True">
+            BarBackgroundColor="White"
+            NavigationPage.HasNavigationBar="True"
+            >
 
 
 

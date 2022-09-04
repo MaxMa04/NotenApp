@@ -16,7 +16,7 @@
                 <RowDefinition Height="200" />
                 <RowDefinition Height="80" />
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -38,15 +38,10 @@
             <Button Grid.Row="1" Grid.Column="2" Text="Rausstreichen"/>
 
             <!--LK Noten Übersicht-->
-            <Frame BackgroundColor="Red" Grid.Row="2" Grid.ColumnSpan="3" Margin="10,10,10,-16">
+            <Frame BackgroundColor="Red" Grid.Row="4" Grid.ColumnSpan="3" Margin="10,10,10,-16">
                 <Label Text="LK-Noten"/>
             </Frame>
-            <CollectionView Margin="10" BackgroundColor="Aqua" Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding LKNoten}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout
-                        Orientation="Horizontal"
-                        ItemSpacing="20"/>
-                </CollectionView.ItemsLayout>
+            <CollectionView ItemsLayout="VerticalGrid, 6" Margin="10" BackgroundColor="Aqua" Grid.Row="5" Grid.ColumnSpan="3" ItemsSource="{Binding LKNoten}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Label Text="{Binding Note}" FontSize="Medium"></Label>
@@ -54,10 +49,10 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <!--Klausur Noten Übersicht-->
-            <Frame BackgroundColor="Red" Grid.Row="4" Grid.ColumnSpan="3" Margin="10,0,10,-6">
+            <Frame BackgroundColor="Red" Grid.Row="2" Grid.ColumnSpan="3" Margin="10,0,10,-6">
                 <Label Text="Klausur-Noten"/>
             </Frame>
-            <CollectionView Background="LightGreen" Margin="10,0,10,10" BackgroundColor="White" Grid.Row="5" Grid.ColumnSpan="3" ItemsSource="{Binding KlausurNoten}">
+            <CollectionView Background="LightGreen" Margin="10,0,10,-15" BackgroundColor="White" Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding KlausurNoten}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout
                         Orientation="Horizontal"

@@ -40,7 +40,9 @@ namespace NotenApp.Pages
 
         private async void SwipeItem_Invoked_1(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new DetailSeite());
+            SwipeItem swipeItem = sender as SwipeItem;
+            var selectedItem = swipeItem.BindingContext as FachModel;
+            await Navigation.PushAsync(new DetailSeite(selectedItem));
         }
     }
 }

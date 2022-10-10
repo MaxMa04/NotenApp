@@ -66,7 +66,9 @@
                 </Frame.GestureRecognizers>
                 <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" Text="{Binding GesamtDurchschnittHJ4}"></Label>
             </Frame>
-            
+            <Frame CornerRadius="20" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+                <Label Text="Block 2" HorizontalTextAlignment="Center"></Label>
+            </Frame>
             <Frame Grid.Row="4" Grid.ColumnSpan="4" BackgroundColor="Purple"></Frame>
         </Grid>
     </ContentPage.Content>

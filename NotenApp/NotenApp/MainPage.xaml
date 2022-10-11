@@ -13,25 +13,40 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            
             <RowDefinition Height="200" />
+            <RowDefinition Height="90"/>
             <RowDefinition Height="*" />
-            <!--<RowDefinition Height="125"/>-->
             <RowDefinition Height="70" />
 
         </Grid.RowDefinitions>
 
         <!--aktueller Schnitt-->
 
-        <Frame HeightRequest="150" WidthRequest="150" CornerRadius="75" HorizontalOptions="Center" VerticalOptions="Center" Margin="0" Padding="0" BackgroundColor="#7A96A2" Grid.ColumnSpan="5">
-            <Label Text="15" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="65" />
-        </Frame>
+        <StackLayout Grid.ColumnSpan="4">
+            <Label FontAttributes="Bold" Text="Abiturschnitt" TextColor="White" FontSize="30" HorizontalTextAlignment="Center"></Label>
+            <Frame HeightRequest="110" WidthRequest="110" CornerRadius="75" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#7A96A2" >
+                <Label Text="1,4" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="65" />
+            </Frame>
+        </StackLayout>
 
+        <Frame CornerRadius="20" Margin="20,10,5,10" Grid.Row="1" Grid.ColumnSpan="2" Padding="0">
+            <StackLayout HorizontalOptions="CenterAndExpand">
+                <Label HorizontalOptions="Center" Text="Block 1" FontSize="Large"></Label>
+                <Label Text="14" HorizontalOptions="Center" FontSize="Large"></Label>
+            </StackLayout>
+        </Frame>
+        <Frame CornerRadius="20" Margin="5,10,20,10" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="0">
+            <StackLayout HorizontalOptions="CenterAndExpand">
+                <Label HorizontalOptions="Center" Text="Block 2" FontSize="Large"></Label>
+                <Label Text="14" HorizontalOptions="Center" FontSize="Large"></Label>
+            </StackLayout>
+        </Frame>
         <!--Ziele-->
 
-        <ScrollView Grid.Row="1" Grid.ColumnSpan="5">
+        <ScrollView Grid.Row="2" Grid.ColumnSpan="4">
             <StackLayout Margin="10" Grid.Row="1" Grid.ColumnSpan="5">
                 <Label Text="Ziele" HorizontalOptions="Center" FontSize="20" TextColor="White"/>
                 <Frame BackgroundColor="Red" CornerRadius="10" HeightRequest="20" Margin="5">
@@ -73,10 +88,10 @@
 
 
         <!--Halbjahresübersicht-->
-        <Button Grid.Column ="0" Grid.Row ="2" Grid.ColumnSpan="4" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#7A96A2" HorizontalOptions="Fill"
+        <Button Grid.Column ="0" Grid.Row ="3" Grid.ColumnSpan="3" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#7A96A2" HorizontalOptions="Fill"
             Text = "Halbjahresübersicht"  CornerRadius="10" Margin="15,0,15,0" Clicked="Button_Clicked"/>
-        <ImageButton Grid.Row = "2" 
-                     Grid.Column = "4" 
+        <ImageButton Grid.Row = "3" 
+                     Grid.Column="3"
                      BackgroundColor = "#EDA2B6" 
                      CornerRadius = "10" 
                      Padding = "8" 

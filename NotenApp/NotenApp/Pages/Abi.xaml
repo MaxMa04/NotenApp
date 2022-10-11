@@ -19,57 +19,66 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="200" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="250"/>
-              
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
             <!--Abischnitt-->
-            <StackLayout Grid.Row="0" Grid.ColumnSpan="4" >
+            <StackLayout Grid.Row="0">
                 <Label Text="Abiturschnitt" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
                 <Frame HeightRequest="130" WidthRequest="130" CornerRadius="100" HorizontalOptions="Center" VerticalOptions="Center" Margin="10" Padding="0" BackgroundColor="#7BA4A8" >
                     <Label Text="1,4" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
                 </Frame>
             </StackLayout>
+            <ScrollView Grid.Row="1" Background="Red">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="65" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Frame CornerRadius="20" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+                        <Label Text="Block 1" HorizontalTextAlignment="Center"></Label>
+                    </Frame>
 
-            <Frame CornerRadius="20" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-                <Label Text="Block 1" HorizontalTextAlignment="Center"></Label>
-            </Frame>
-        
-            <Frame CornerRadius="20" Grid.Row="2" Grid.Column="0" BackgroundColor="Yellow">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Tapped1" NumberOfTapsRequired="1" />
-                </Frame.GestureRecognizers>
-                <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" Text="{Binding GesamtDurchschnittHJ1}"></Label>
-            </Frame>
-            <Frame CornerRadius="20" Grid.Row="2" Grid.Column="1" BackgroundColor="Yellow">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Tapped2" NumberOfTapsRequired="1" />
-                </Frame.GestureRecognizers>
-                <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" Text="{Binding GesamtDurchschnittHJ2}"></Label>
-            </Frame>
-            <Frame CornerRadius="20" Grid.Row="2" Grid.Column="2" BackgroundColor="Yellow">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Tapped3" NumberOfTapsRequired="1" />
-                </Frame.GestureRecognizers>
-                <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" Text="{Binding GesamtDurchschnittHJ3}"></Label>
-            </Frame>
-            <Frame CornerRadius="20" Grid.Row="2" Grid.Column="3" BackgroundColor="Yellow">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Tapped4" NumberOfTapsRequired="1" />
-                </Frame.GestureRecognizers>
-                <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" Text="{Binding GesamtDurchschnittHJ4}"></Label>
-            </Frame>
-            <Frame CornerRadius="20" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
-                <Label Text="Block 2" HorizontalTextAlignment="Center"></Label>
-            </Frame>
-            <Frame Grid.Row="4" Grid.ColumnSpan="4" BackgroundColor="Purple"></Frame>
+                    <Frame CornerRadius="20" Grid.Row="1" Grid.Column="0" BackgroundColor="Yellow">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tapped1" NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" Text="{Binding GesamtDurchschnittHJ1}"></Label>
+                    </Frame>
+                    <Frame CornerRadius="20" Grid.Row="1" Grid.Column="1" BackgroundColor="Yellow">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tapped2" NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" Text="{Binding GesamtDurchschnittHJ2}"></Label>
+                    </Frame>
+                    <Frame CornerRadius="20" Grid.Row="1" Grid.Column="2" BackgroundColor="Yellow">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tapped3" NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" Text="{Binding GesamtDurchschnittHJ3}"></Label>
+                    </Frame>
+                    <Frame CornerRadius="20" Grid.Row="1" Grid.Column="3" BackgroundColor="Yellow">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tapped4" NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" Text="{Binding GesamtDurchschnittHJ4}"></Label>
+                    </Frame>
+                    <Frame CornerRadius="20" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                        <Label Text="Block 2" HorizontalTextAlignment="Center"></Label>
+                    </Frame>
+                    <Frame Grid.Row="3" Grid.ColumnSpan="4" BackgroundColor="Purple"></Frame>
+
+
+                </Grid>
+            </ScrollView>
+
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

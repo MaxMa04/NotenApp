@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NotenApp.MainPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="True">
 
     <Grid BackgroundColor="#252621">
 
@@ -16,29 +16,42 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             
-            <RowDefinition Height="200" />
+            <RowDefinition Height="115" />
             <RowDefinition Height="90"/>
             <RowDefinition Height="*" />
-            <RowDefinition Height="70" />
+            <RowDefinition Height="80" />
 
         </Grid.RowDefinitions>
 
         <!--aktueller Schnitt-->
-
-        <StackLayout Grid.ColumnSpan="4">
-            <Label FontAttributes="Bold" Text="Abiturschnitt" TextColor="White" FontSize="30" HorizontalTextAlignment="Center"></Label>
-            <Frame HeightRequest="110" WidthRequest="110" CornerRadius="75" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#7A96A2" >
-                <Label Text="1,4" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="65" />
-            </Frame>
-        </StackLayout>
-
-        <Frame CornerRadius="20" Margin="20,10,5,10" Grid.Row="1" Grid.ColumnSpan="2" Padding="0">
+        <Frame CornerRadius="20" Margin="20,10,20,10" Grid.Row="0" Grid.ColumnSpan="4" Padding="-5">
             <StackLayout HorizontalOptions="CenterAndExpand">
-                <Label HorizontalOptions="Center" Text="Block 1" FontSize="Large"></Label>
-                <Label Text="14" HorizontalOptions="Center" FontSize="Large"></Label>
+                <Label Margin="0,0,0,-5" HorizontalTextAlignment="Center" Text="Block 1" FontSize="Large"></Label>
+                <StackLayout WidthRequest="250" Orientation="Horizontal" BackgroundColor="red">
+                    <Frame WidthRequest="11" Margin="0" HeightRequest="18">
+                        <Label Margin="-5" FontSize="Medium" Text="6"></Label>
+                    </Frame>
+                    <Frame WidthRequest="11" Margin="10,0,0,0" HeightRequest="18">
+                        <Label Margin="-5" HorizontalTextAlignment="Center"  FontSize="Medium" Text="6"></Label>
+                    </Frame>
+                    <Frame WidthRequest="11" Margin="10,0,0,0" HeightRequest="18">
+                        <Label Margin="-5" FontSize="Medium" Text="6"></Label>
+                    </Frame>
+                    <Frame WidthRequest="11" Margin="10,0,0,0" HeightRequest="18">
+                        <Label Margin="-5" FontSize="Medium" Text="6"></Label>
+                    </Frame>
+                </StackLayout>
             </StackLayout>
         </Frame>
-        <Frame CornerRadius="20" Margin="5,10,20,10" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="0">
+        
+        <Frame CornerRadius="20" Margin="20,0,0,10" Grid.Row="1" Grid.ColumnSpan="2" Padding="0">
+            <StackLayout HorizontalOptions="CenterAndExpand">
+                <Label HorizontalOptions="Center" Text="Abischnitt" FontSize="Large"></Label>
+                <Label Text="1,4" HorizontalOptions="Center" FontSize="Large"></Label>
+            </StackLayout>
+        </Frame>
+
+        <Frame CornerRadius="20" Margin="5,0,20,10" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="0">
             <StackLayout HorizontalOptions="CenterAndExpand">
                 <Label HorizontalOptions="Center" Text="Block 2" FontSize="Large"></Label>
                 <Label Text="14" HorizontalOptions="Center" FontSize="Large"></Label>

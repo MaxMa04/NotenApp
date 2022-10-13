@@ -190,6 +190,7 @@ namespace NotenApp.Services
         }
         public static async Task<float> GetHJGesamtDurchschnitt(int halbjahr)
         {
+            await Init();
             var Gesamtfacher = await db.Table<FachModel>().ToListAsync();
             float gesamtDurchschnitt;
             float count = 0;

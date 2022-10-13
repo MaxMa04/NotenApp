@@ -1,109 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
              x:Class="NotenApp.MainPage"
-             NavigationPage.HasNavigationBar="True">
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <ViewModels:HalbjahrViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid BackgroundColor="#252621">
 
-    <Grid BackgroundColor="#252621">
+            <!--Griddefinition-->
 
-        <!--Griddefinition-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            
-            <RowDefinition Height="115" />
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="80" />
+                <RowDefinition Height="130" />
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="75"/>
 
-        </Grid.RowDefinitions>
+            </Grid.RowDefinitions>
 
-        <!--aktueller Schnitt-->
-        <Frame CornerRadius="20" Margin="20,10,20,10" Grid.Row="0" Grid.ColumnSpan="4" Padding="-5">
-            <StackLayout HorizontalOptions="CenterAndExpand">
-                <Label Margin="0,0,0,-5" HorizontalTextAlignment="Center" Text="Block 1" FontSize="Large"></Label>
-                <StackLayout WidthRequest="250" Orientation="Horizontal" BackgroundColor="red">
-                    <Frame WidthRequest="11" Margin="0" HeightRequest="18">
-                        <Label Margin="-5" FontSize="Medium" Text="6"></Label>
-                    </Frame>
-                    <Frame WidthRequest="11" Margin="10,0,0,0" HeightRequest="18">
-                        <Label Margin="-5" HorizontalTextAlignment="Center"  FontSize="Medium" Text="6"></Label>
-                    </Frame>
-                    <Frame WidthRequest="11" Margin="10,0,0,0" HeightRequest="18">
-                        <Label Margin="-5" FontSize="Medium" Text="6"></Label>
-                    </Frame>
-                    <Frame WidthRequest="11" Margin="10,0,0,0" HeightRequest="18">
-                        <Label Margin="-5" FontSize="Medium" Text="6"></Label>
-                    </Frame>
+            <!--aktueller Schnitt Block 1-->
+            <Frame CornerRadius="20" Margin="20,20,20,10" Grid.Row="0" Grid.ColumnSpan="4" Padding="-5">
+                <StackLayout HorizontalOptions="CenterAndExpand">
+                    <Label Margin="0,7,0,-5" HorizontalTextAlignment="Center" Text="Block 1" FontSize="Large"></Label>
+                    <StackLayout WidthRequest="280" Orientation="Horizontal">
+                        <Frame CornerRadius="15" WidthRequest="18" Margin="0" HeightRequest="18">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Tapped1" NumberOfTapsRequired="1" />
+                            </Frame.GestureRecognizers>
+                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ1}"></Label>
+                        </Frame>
+                        <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Tapped2" NumberOfTapsRequired="1" />
+                            </Frame.GestureRecognizers>
+                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  FontSize="Medium" Text="{Binding GesamtDurchschnittHJ2}"></Label>
+                        </Frame>
+                        <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Tapped3" NumberOfTapsRequired="1" />
+                            </Frame.GestureRecognizers>
+                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ3}"></Label>
+                        </Frame>
+                        <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Tapped4" NumberOfTapsRequired="1" />
+                            </Frame.GestureRecognizers>
+                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ4}"></Label>
+                        </Frame>
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
-        </Frame>
-        
-        <Frame CornerRadius="20" Margin="20,0,0,10" Grid.Row="1" Grid.ColumnSpan="2" Padding="0">
-            <StackLayout HorizontalOptions="CenterAndExpand">
-                <Label HorizontalOptions="Center" Text="Abischnitt" FontSize="Large"></Label>
-                <Label Text="1,4" HorizontalOptions="Center" FontSize="Large"></Label>
-            </StackLayout>
-        </Frame>
+            </Frame>
+            <!--aktueller Schnitt Block 2-->
+            <Frame CornerRadius="20" Margin="20,0,0,10" Grid.Row="1" Grid.ColumnSpan="2" Padding="0">
+                <StackLayout HorizontalOptions="CenterAndExpand">
+                    <Label Margin="0,7,0,0" HorizontalOptions="Center" Text="Block 2" FontSize="Large"></Label>
+                    <Label Text="14" HorizontalOptions="Center" FontSize="Large"></Label>
+                </StackLayout>
+            </Frame>
+            <!--aktueller Abiturschnitt-->
+            <Frame CornerRadius="20" Margin="5,0,20,10" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="0">
+                <StackLayout HorizontalOptions="CenterAndExpand">
+                    <Label  Margin="0,7,0,0" HorizontalOptions="Center" Text="Abischnitt" FontSize="Large"></Label>
+                    <Label Text="1,4" HorizontalOptions="Center" FontSize="Large"></Label>
+                </StackLayout>
+            </Frame>
 
-        <Frame CornerRadius="20" Margin="5,0,20,10" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="0">
-            <StackLayout HorizontalOptions="CenterAndExpand">
-                <Label HorizontalOptions="Center" Text="Block 2" FontSize="Large"></Label>
-                <Label Text="14" HorizontalOptions="Center" FontSize="Large"></Label>
-            </StackLayout>
-        </Frame>
-        <!--Ziele-->
+            <!--Ziele-->
 
-        <ScrollView Grid.Row="2" Grid.ColumnSpan="4">
-            <StackLayout Margin="10" Grid.Row="1" Grid.ColumnSpan="5">
-                <Label Text="Ziele" HorizontalOptions="Center" FontSize="20" TextColor="White"/>
-                <Frame BackgroundColor="Red" CornerRadius="10" HeightRequest="20" Margin="5">
-                    <Label Text="Example" HorizontalOptions="Center"/>
-                </Frame>
-                <Frame BackgroundColor="LightYellow" CornerRadius="10" HeightRequest="20" Margin="5">
-                    <Label Text="Example" HorizontalOptions="Center"/>
-                </Frame>
-                <Frame BackgroundColor="Green" CornerRadius="10" HeightRequest="20" Margin="5">
-                    <Label Text="Example" HorizontalOptions="Center"/>
-                </Frame>
-                <Frame BackgroundColor="Blue" CornerRadius="10" HeightRequest="20" Margin="5">
-                    <Label Text="Example" HorizontalOptions="Center"/>
-                </Frame>
-                <Frame BackgroundColor="DarkGreen" CornerRadius="10" HeightRequest="20" Margin="5">
-                    <Label Text="Example" HorizontalOptions="Center"/>
-                </Frame>
-                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
-                    <Label Text="Example" HorizontalOptions="Center"/>
-                </Frame>
-                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
-                    <Label Text="Example" HorizontalOptions="Center"/>
-                </Frame>
-                <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
-                    <Label Text="Example" HorizontalOptions="Center"/>
-                </Frame>
+            <ScrollView Grid.Row="2" Grid.ColumnSpan="4">
+                <StackLayout Margin="10" Grid.Row="1" Grid.ColumnSpan="5">
+                    <Label Text="Ziele" HorizontalOptions="Center" FontSize="20" TextColor="White"/>
+                    <Frame BackgroundColor="Red" CornerRadius="10" HeightRequest="20" Margin="5">
+                        <Label Text="Example" HorizontalOptions="Center"/>
+                    </Frame>
+                    <Frame BackgroundColor="LightYellow" CornerRadius="10" HeightRequest="20" Margin="5">
+                        <Label Text="Example" HorizontalOptions="Center"/>
+                    </Frame>
+                    <Frame BackgroundColor="Green" CornerRadius="10" HeightRequest="20" Margin="5">
+                        <Label Text="Example" HorizontalOptions="Center"/>
+                    </Frame>
+                    <Frame BackgroundColor="Blue" CornerRadius="10" HeightRequest="20" Margin="5">
+                        <Label Text="Example" HorizontalOptions="Center"/>
+                    </Frame>
+                    <Frame BackgroundColor="DarkGreen" CornerRadius="10" HeightRequest="20" Margin="5">
+                        <Label Text="Example" HorizontalOptions="Center"/>
+                    </Frame>
+                    <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                        <Label Text="Example" HorizontalOptions="Center"/>
+                    </Frame>
+                    <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                        <Label Text="Example" HorizontalOptions="Center"/>
+                    </Frame>
+                    <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
+                        <Label Text="Example" HorizontalOptions="Center"/>
+                    </Frame>
 
-            </StackLayout>
-        </ScrollView>
+                </StackLayout>
+            </ScrollView>
 
-        <!--Abischnitt aktuell-->
-            <!--<Frame BackgroundColor="#1167D9" Grid.Row="2" Grid.ColumnSpan="3" Margin="15,20,0,20">
-            <Label Text="Abischnitt aktuell:" FontSize="20"  VerticalOptions="CenterAndExpand" BackgroundColor="Black"/>
-        </Frame>
-
-        <Frame  Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HeightRequest="100" WidthRequest="100" CornerRadius="75" HorizontalOptions="Center" VerticalOptions="Center" Margin="0" Padding="0" BackgroundColor="#1EC096">
-            <Label Text="Example" HorizontalOptions="Center" VerticalOptions="Center"/>
-        </Frame>-->
-
-
-        <!--Halbjahresübersicht-->
-        <Button Grid.Column ="0" Grid.Row ="3" Grid.ColumnSpan="3" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#7A96A2" HorizontalOptions="Fill"
+            <!--Halbjahresübersicht-->
+            <Button Grid.Column ="0" Grid.Row ="3" Grid.ColumnSpan="3" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#7A96A2" HorizontalOptions="Fill"
             Text = "Halbjahresübersicht"  CornerRadius="10" Margin="15,0,15,0" Clicked="Button_Clicked"/>
-        <ImageButton Grid.Row = "3" 
+            <ImageButton Grid.Row = "3" 
                      Grid.Column="3"
                      BackgroundColor = "#EDA2B6" 
                      CornerRadius = "10" 
@@ -112,6 +119,6 @@
                      Margin = "-15,0,15,0"
                      Clicked = "Button_Clicked1"/>
 
-    </Grid>
-
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

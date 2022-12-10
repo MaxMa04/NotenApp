@@ -18,7 +18,7 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="*" />
+                <RowDefinition x:Name="rdcv" Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -41,7 +41,7 @@
             <Frame BackgroundColor="Red" Grid.Row="4" Grid.ColumnSpan="3" Margin="10,10,10,-16">
                 <Label Text="LK-Noten"/>
             </Frame>
-            <CollectionView ItemsLayout="VerticalGrid, 6" Margin="10" BackgroundColor="Aqua" Grid.Row="5" Grid.ColumnSpan="3" ItemsSource="{Binding LKNoten}">
+            <CollectionView x:Name="cv"  ItemsLayout="VerticalGrid, 6" Margin="10" BackgroundColor="Aqua" Grid.Row="5" Grid.ColumnSpan="3" ItemsSource="{Binding LKNoten}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Label Text="{Binding Note}" FontSize="Medium"></Label>

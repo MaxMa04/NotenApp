@@ -18,20 +18,34 @@ namespace NotenApp.Pages
     {
         public FachModel fach;
         DetailViewModel model;
+        public float heightCollView;
         public DetailSeite(FachModel fach)
         {
             InitializeComponent();
             this.fach = fach;
-            model = BindingContext as DetailViewModel;
             Label.Text = fach.Name;
+            model = BindingContext as DetailViewModel;
+
+
+           
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
             await model.Initialize(fach);
             model.FachDurchschnitt = (float)await FachService.GetFachDurchschnitt(fach);
+            //Sizing Collection View for LK Noten
+            if (model.LKNoten.Count < 7)
+            {
+                cv.HeightRequest = 70;
+            }
+            else
+            {
+                heightCollView = model.LKNoten.Count / 6;
+                cv.HeightRequest = 70 + 70 * (int)heightCollView;
+            }
             
-            
+            rdcv.Height = cv.HeightRequest;
 
         }
 

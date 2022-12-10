@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NotenApp.App">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="SlateGray" />
+                <Setter Property="BarTextColor" Value="ForestGreen" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

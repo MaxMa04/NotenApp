@@ -41,7 +41,14 @@
             <Frame BackgroundColor="Red" Grid.Row="4" Grid.ColumnSpan="3" Margin="10,10,10,-16">
                 <Label Text="LK-Noten"/>
             </Frame>
-            <CollectionView x:Name="cv" ItemsLayout="VerticalGrid, 5" Margin="10" BackgroundColor="Aqua" Grid.Row="5" Grid.ColumnSpan="3" ItemsSource="{Binding LKNoten}">
+            <CollectionView x:Name="cv" Margin="10" BackgroundColor="Aqua" Grid.Row="5" Grid.ColumnSpan="3" ItemsSource="{Binding LKNoten}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        Orientation="Vertical"
+                        Span="6"
+                        VerticalItemSpacing="2"
+                        HorizontalItemSpacing="2"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Margin="5" CornerRadius="20" HeightRequest="12">
@@ -59,6 +66,7 @@
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout
                         Orientation="Horizontal"
+                    
                         ItemSpacing="5"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>

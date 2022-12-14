@@ -19,15 +19,13 @@ namespace NotenApp.Pages
         public FachModel fach;
         DetailViewModel model;
         public float heightCollView;
+        public const float heightNote = 80; //Höhe der einzelnen Noten in der Übersicht
         public DetailSeite(FachModel fach)
         {
             InitializeComponent();
             this.fach = fach;
             Label.Text = fach.Name;
             model = BindingContext as DetailViewModel;
-
-
-           
         }
         protected async override void OnAppearing()
         {
@@ -35,15 +33,21 @@ namespace NotenApp.Pages
             await model.Initialize(fach);
             model.FachDurchschnitt = (float)await FachService.GetFachDurchschnitt(fach);
             //Sizing Collection View for LK Noten
-            if (model.LKNoten.Count < 7)
+
+            if(model.LKNoten.Count == 0)
             {
-                cv.HeightRequest = 70;
+                cv.HeightRequest = 1;
+            }
+            else if (model.LKNoten.Count < 7 && model.LKNoten.Count > 0)
+            {
+                cv.HeightRequest = heightNote;
             }
             else
             {
                 heightCollView = model.LKNoten.Count / 6;
-                cv.HeightRequest = 70 + 70 * (int)heightCollView;
+                cv.HeightRequest = heightNote + heightNote * (int)heightCollView;
             }
+            
             
             rdcv.Height = cv.HeightRequest;
 

@@ -37,17 +37,17 @@ namespace NotenApp.ViewModels
             List<NotenModel> gesamtNoten = (List<NotenModel>)await FachService.GetNoten(fach.Halbjahr);
             List<NotenModel> Lk = new List<NotenModel>();
             List<NotenModel> Kla = new List<NotenModel>();
-            foreach (var item in gesamtNoten)
+            foreach (var note in gesamtNoten)
             {
-                if(item.Fach == fach.Name)
+                if(note.Fach == fach.Name)
                 {
-                    switch (item.Type)
+                    switch (note.Type)
                     {
                         case 1:
-                            Lk.Add(item);
+                            Lk.Add(note);
                             break;
                         case 2:
-                            Kla.Add(item);
+                            Kla.Add(note);
                             break;
                     }
                 }

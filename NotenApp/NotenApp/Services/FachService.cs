@@ -150,7 +150,7 @@ namespace NotenApp.Services
                         }
                         break;
                 }
-                
+   
             }
             for (int i = 0; i < LKNoten.Count; i++)
             {
@@ -170,7 +170,10 @@ namespace NotenApp.Services
                 }
             }
             durchschnittKlausur = countKlausur / KlausurNoten.Count;
-
+            if(hasKlausur == false && hasLk == false)
+            {
+                return 1;
+            }
             if(hasKlausur == false)
             {
                 return (float?)Math.Round((decimal)durchschnittLk,2);

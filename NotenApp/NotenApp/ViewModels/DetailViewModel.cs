@@ -39,16 +39,18 @@ namespace NotenApp.ViewModels
             List<NotenModel> Kla = new List<NotenModel>();
             foreach (var item in gesamtNoten)
             {
-                switch (item.Type)
+                if(item.Fach == fach.Name)
                 {
-                    case 1:
-                        Lk.Add(item);
-                        break;
-                    case 2:
-                        Kla.Add(item);
-                        break;
+                    switch (item.Type)
+                    {
+                        case 1:
+                            Lk.Add(item);
+                            break;
+                        case 2:
+                            Kla.Add(item);
+                            break;
+                    }
                 }
-
             }
             LKNoten.AddRange(Lk);
             KlausurNoten.AddRange(Kla);

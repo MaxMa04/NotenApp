@@ -33,7 +33,8 @@ namespace NotenApp.ViewModels
         
         public async Task Initialize(FachModel fach)
         {
-            
+            LKNoten.Clear();
+            KlausurNoten.Clear();
             List<NotenModel> gesamtNoten = (List<NotenModel>)await FachService.GetNoten(fach.Halbjahr);
             List<NotenModel> Lk = new List<NotenModel>();
             List<NotenModel> Kla = new List<NotenModel>();

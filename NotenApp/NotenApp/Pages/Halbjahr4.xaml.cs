@@ -25,7 +25,6 @@ namespace NotenApp.Pages
         {
             base.OnAppearing();
             await _model.Refresh(4);
-            _model.GesamtDurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
 
         }
 

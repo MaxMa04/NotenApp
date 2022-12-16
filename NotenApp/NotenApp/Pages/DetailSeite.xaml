@@ -36,28 +36,7 @@
             <Button Grid.Row="1" Grid.Column="0" Text="Runden"/>
             <Button Grid.Row="1" Grid.Column="1" Text="Ziel"/>
             <Button Grid.Row="1" Grid.Column="2" Text="Rausstreichen"/>
-
-            <!--LK Noten Übersicht-->
-            <Frame BackgroundColor="Red" Grid.Row="4" Grid.ColumnSpan="3" Margin="10,10,10,-16">
-                <Label Text="LK-Noten"/>
-            </Frame>
-            <CollectionView x:Name="cv" Margin="10" BackgroundColor="Aqua" Grid.Row="5" Grid.ColumnSpan="3" ItemsSource="{Binding LKNoten}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        Orientation="Vertical"
-                        Span="6"
-                        VerticalItemSpacing="5"
-                        HorizontalItemSpacing="3"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Margin="5" CornerRadius="20" HeightRequest="9">
-                            <Label Margin="-10" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Note}" FontSize="Medium"></Label>
-                        </Frame>
-                        
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            
             <!--Klausur Noten Übersicht-->
             <Frame BackgroundColor="Red" Grid.Row="2" Grid.ColumnSpan="3" Margin="10,0,10,-6">
                 <Label Text="Klausur-Noten"/>
@@ -74,10 +53,33 @@
                         <Frame CornerRadius="20" WidthRequest="25">
                             <Label Text="{Binding Note}" FontSize="Medium"></Label>
                         </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <!--LK Noten Übersicht-->
+            <Frame BackgroundColor="Red" Grid.Row="4" Grid.ColumnSpan="3" Margin="10,10,10,-16">
+                <Label Text="LK-Noten"/>
+            </Frame>
+            <CollectionView x:Name="cv" Margin="10" SelectionMode="Single" SelectionChanged="cv_SelectionChanged" BackgroundColor="Aqua" Grid.Row="5" Grid.ColumnSpan="3" ItemsSource="{Binding LKNoten}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        Orientation="Vertical"
+                        Span="6"
+                        VerticalItemSpacing="5"
+                        HorizontalItemSpacing="3"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="5" CornerRadius="20" HeightRequest="9">
+                            <Label Margin="-10" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Note}" FontSize="Medium"></Label>
+                        </Frame>
                         
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -86,12 +86,21 @@ namespace NotenApp.Services
         }
 
         //muss drinnen bleiben
-        public static async Task RemoveNote(int id)
+        public static async Task RemoveNote(NotenModel note)
         {
             await Init();
             
-            await db.DeleteAsync<NotenModel>(id);
-            return;
+            await db.DeleteAsync<NotenModel>(note.Id);
+            var Gesamtfacher = await db.Table<FachModel>().ToListAsync();
+            foreach (var item in Gesamtfacher)
+            {
+                if(item.Halbjahr == note.Halbjahr && item.Name == note.Fach)
+                {
+                    item.Durchschnitt = await GetFachDurchschnitt(item);
+                    await db.UpdateAsync(item);
+                }
+            }
+            
         }
         public static async Task RemoveFach(FachModel fach)
         {

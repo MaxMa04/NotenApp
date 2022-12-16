@@ -82,6 +82,7 @@ namespace NotenApp.ViewModels
         {
             await FachService.RemoveFach(fach);
             await Refresh(fach.Halbjahr);
+            
 
         }
 
@@ -108,7 +109,7 @@ namespace NotenApp.ViewModels
                             }
                         }
                     }
-
+                    GesamtDurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
                     break;
                 case 2:
                     FaecherHJ2.Clear();
@@ -129,7 +130,8 @@ namespace NotenApp.ViewModels
                             }
                         }
                     }
-                    
+                    GesamtDurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
+
                     break;
                 case 3:
                     FaecherHJ3.Clear();
@@ -151,6 +153,7 @@ namespace NotenApp.ViewModels
                             }
                         }
                     }
+                    GesamtDurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
                     break;
                 case 4:
                     FaecherHJ4.Clear();
@@ -172,6 +175,7 @@ namespace NotenApp.ViewModels
                             }
                         }
                     }
+                    GesamtDurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
                     break;
             }
         }

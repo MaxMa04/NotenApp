@@ -56,7 +56,12 @@ namespace NotenApp.Pages
 
         }
 
-
-
+        private async void cv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var note = e.CurrentSelection.FirstOrDefault() as NotenModel;
+            await FachService.RemoveNote(note);
+            await model.Initialize(fach);
+            model.FachDurchschnitt = (float)await FachService.GetFachDurchschnitt(fach);
+        }
     }
 }

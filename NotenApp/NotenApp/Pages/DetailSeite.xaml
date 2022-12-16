@@ -46,13 +46,13 @@
                     <GridItemsLayout
                         Orientation="Vertical"
                         Span="6"
-                        VerticalItemSpacing="2"
-                        HorizontalItemSpacing="2"/>
+                        VerticalItemSpacing="5"
+                        HorizontalItemSpacing="3"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Margin="5" CornerRadius="20" HeightRequest="12">
-                            <Label HorizontalOptions="Center" Text="{Binding Note}" FontSize="Medium"></Label>
+                        <Frame Margin="5" CornerRadius="20" HeightRequest="9">
+                            <Label Margin="-10" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Note}" FontSize="Medium"></Label>
                         </Frame>
                         
                     </DataTemplate>

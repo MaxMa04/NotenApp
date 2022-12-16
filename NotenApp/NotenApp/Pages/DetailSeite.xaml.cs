@@ -18,7 +18,7 @@ namespace NotenApp.Pages
     {
         public FachModel fach;
         DetailViewModel model;
-        public float heightCollView;
+        public decimal heightCollView;
         public const float heightNote = 80; //Höhe der einzelnen Noten in der Übersicht
         public DetailSeite(FachModel fach)
         {
@@ -38,16 +38,19 @@ namespace NotenApp.Pages
             {
                 cv.HeightRequest = 1;
             }
-            else if (model.LKNoten.Count < 7 && model.LKNoten.Count > 0)
+            else if (model.LKNoten.Count < 7)
             {
                 cv.HeightRequest = heightNote;
             }
-            else
+            else if (model.LKNoten.Count < 25)
             {
                 heightCollView = model.LKNoten.Count / 6;
-                cv.HeightRequest = heightNote + heightNote * (int)heightCollView;
+                cv.HeightRequest = heightNote + heightNote * (int)heightCollView - 15 * (int)heightCollView;
             }
-            
+            else
+            {
+                cv.HeightRequest = heightNote * 4 - 12 * 4;
+            }
             
             rdcv.Height = cv.HeightRequest;
 

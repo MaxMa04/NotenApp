@@ -23,7 +23,7 @@
             <!--aktueller Schnitt-->
             <StackLayout Grid.Row="0">
                 <Frame HeightRequest="140" WidthRequest="140" CornerRadius="70" HorizontalOptions="Center" VerticalOptions="Center" Margin="20" Padding="0" BackgroundColor="#7BA4A8" >
-                    <Label Text="{Binding GesamtDurchschnittHJ4}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
+                    <Label Text="{Binding GesamtDurchschnittHJ4, TargetNullValue='-'}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
                 </Frame>
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
                     <Label Text="Halbjahr 4" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
@@ -64,7 +64,7 @@
 
                                 <!--Durchschnitt-->
                                 <Frame Grid.Column="2" Grid.RowSpan="2" CornerRadius="35" >
-                                    <Label Text="{Binding Durchschnitt}" FontSize="Medium" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="-40"/>
+                                    <Label Text="{Binding Durchschnitt, TargetNullValue='-'}" FontSize="Medium" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="-40"/>
                                 </Frame>
 
                                 <!--Notenübersicht-->

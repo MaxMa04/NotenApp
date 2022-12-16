@@ -181,7 +181,7 @@ namespace NotenApp.Services
             durchschnittKlausur = countKlausur / KlausurNoten.Count;
             if(hasKlausur == false && hasLk == false)
             {
-                return 1;
+                return null;
             }
             if(hasKlausur == false)
             {
@@ -200,7 +200,7 @@ namespace NotenApp.Services
             
 
         }
-        public static async Task<float> GetHJGesamtDurchschnitt(int halbjahr)
+        public static async Task<float?> GetHJGesamtDurchschnitt(int halbjahr)
         {
             await Init();
             var Gesamtfacher = await db.Table<FachModel>().ToListAsync();
@@ -217,8 +217,16 @@ namespace NotenApp.Services
                 }
                 
             }
-            gesamtDurchschnitt = count / count2;
-            return (float)Math.Round(gesamtDurchschnitt,2);
+            if(count2 == 0)
+            {
+                return null;
+            }
+            else
+            {
+                gesamtDurchschnitt = count / count2;
+                return (float)Math.Round(gesamtDurchschnitt, 2);
+            }
+            
                     
             
         }

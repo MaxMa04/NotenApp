@@ -18,8 +18,8 @@ namespace NotenApp.ViewModels
         public ObservableRangeCollection<FachModel> FaecherHJ4 { get; set; }
         public AsyncCommand<FachModel> RemoveCommand { get; }
         public AsyncCommand<int> RefreshCommand { get; }
-        private float gesamtDurchschnittHJ1;
-        public float GesamtDurchschnittHJ1
+        private float? gesamtDurchschnittHJ1;
+        public float? GesamtDurchschnittHJ1
         {
             get => gesamtDurchschnittHJ1;
             set
@@ -28,8 +28,8 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GesamtDurchschnittHJ1)));
             }
         }
-        private float gesamtDurchschnittHJ2;
-        public float GesamtDurchschnittHJ2
+        private float? gesamtDurchschnittHJ2;
+        public float? GesamtDurchschnittHJ2
         {
             get => gesamtDurchschnittHJ2;
             set
@@ -38,8 +38,8 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GesamtDurchschnittHJ2)));
             }
         }
-        private float gesamtDurchschnittHJ3;
-        public float GesamtDurchschnittHJ3
+        private float? gesamtDurchschnittHJ3;
+        public float? GesamtDurchschnittHJ3
         {
             get => gesamtDurchschnittHJ3;
             set
@@ -48,8 +48,8 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GesamtDurchschnittHJ3)));
             }
         }
-        private float gesamtDurchschnittHJ4;
-        public float GesamtDurchschnittHJ4
+        private float? gesamtDurchschnittHJ4;
+        public float? GesamtDurchschnittHJ4
         {
             get => gesamtDurchschnittHJ4;
             set
@@ -66,7 +66,6 @@ namespace NotenApp.ViewModels
             FaecherHJ4 = new ObservableRangeCollection<FachModel>();
             RefreshCommand = new AsyncCommand<int>(Refresh);
             RemoveCommand = new AsyncCommand<FachModel>(Remove);
-            gesamtDurchschnittHJ1 = 10;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

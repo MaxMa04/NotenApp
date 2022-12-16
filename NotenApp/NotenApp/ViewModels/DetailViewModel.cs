@@ -14,8 +14,8 @@ namespace NotenApp.ViewModels
         public ObservableRangeCollection<NotenModel> LKNoten { get; set; }
         public ObservableRangeCollection<NotenModel> KlausurNoten { get; set; }
         public string FachName { get; set; }
-        private float fachDurchschnitt;
-        public float FachDurchschnitt
+        private float? fachDurchschnitt;
+        public float? FachDurchschnitt
         {
             get => fachDurchschnitt;
             set

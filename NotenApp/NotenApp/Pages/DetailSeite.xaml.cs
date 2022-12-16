@@ -31,7 +31,7 @@ namespace NotenApp.Pages
         {
             base.OnAppearing();
             await model.Initialize(fach);
-            model.FachDurchschnitt = (float)await FachService.GetFachDurchschnitt(fach);
+            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);    
             //Sizing Collection View for LK Noten
 
             if(model.LKNoten.Count == 0)
@@ -61,7 +61,7 @@ namespace NotenApp.Pages
             var note = e.CurrentSelection.FirstOrDefault() as NotenModel;
             await FachService.RemoveNote(note);
             await model.Initialize(fach);
-            model.FachDurchschnitt = (float)await FachService.GetFachDurchschnitt(fach);
+            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
         }
     }
 }

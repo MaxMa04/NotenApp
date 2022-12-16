@@ -77,25 +77,25 @@
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Tapped1" NumberOfTapsRequired="1" />
                             </Frame.GestureRecognizers>
-                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ1}"></Label>
+                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ1, TargetNullValue='-'}"></Label>
                         </Frame>
                         <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Tapped2" NumberOfTapsRequired="1" />
                             </Frame.GestureRecognizers>
-                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  FontSize="Medium" Text="{Binding GesamtDurchschnittHJ2}"></Label>
+                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  FontSize="Medium" Text="{Binding GesamtDurchschnittHJ2, TargetNullValue='-'}"></Label>
                         </Frame>
                         <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Tapped3" NumberOfTapsRequired="1" />
                             </Frame.GestureRecognizers>
-                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ3}"></Label>
+                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ3, TargetNullValue='-'}"></Label>
                         </Frame>
                         <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Tapped4" NumberOfTapsRequired="1" />
                             </Frame.GestureRecognizers>
-                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ4}"></Label>
+                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ4, TargetNullValue='-'}"></Label>
                         </Frame>
                     </StackLayout>
                 </StackLayout>

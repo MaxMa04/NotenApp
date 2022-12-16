@@ -71,31 +71,31 @@
                     <TapGestureRecognizer Tapped="Button_Clicked" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
                 <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Label Margin="0,7,0,-5" HorizontalTextAlignment="Center" Text="Block 1" FontSize="Large"></Label>
+                    <Label TextColor="Black" Margin="0,7,0,-5" HorizontalTextAlignment="Center" Text="Block 1" FontSize="Large"></Label>
                     <StackLayout WidthRequest="280" Orientation="Horizontal">
                         <Frame CornerRadius="15" WidthRequest="18" Margin="0" HeightRequest="18">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Tapped1" NumberOfTapsRequired="1" />
                             </Frame.GestureRecognizers>
-                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ1, TargetNullValue='-'}"></Label>
+                            <Label TextColor="Black" Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ1, TargetNullValue='-'}"></Label>
                         </Frame>
                         <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Tapped2" NumberOfTapsRequired="1" />
                             </Frame.GestureRecognizers>
-                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  FontSize="Medium" Text="{Binding GesamtDurchschnittHJ2, TargetNullValue='-'}"></Label>
+                            <Label TextColor="Black" Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  FontSize="Medium" Text="{Binding GesamtDurchschnittHJ2, TargetNullValue='-'}"></Label>
                         </Frame>
                         <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Tapped3" NumberOfTapsRequired="1" />
                             </Frame.GestureRecognizers>
-                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ3, TargetNullValue='-'}"></Label>
+                            <Label TextColor="Black" Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ3, TargetNullValue='-'}"></Label>
                         </Frame>
                         <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Tapped4" NumberOfTapsRequired="1" />
                             </Frame.GestureRecognizers>
-                            <Label Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ4, TargetNullValue='-'}"></Label>
+                            <Label TextColor="Black" Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding GesamtDurchschnittHJ4, TargetNullValue='-'}"></Label>
                         </Frame>
                     </StackLayout>
                 </StackLayout>
@@ -103,15 +103,15 @@
             <!--aktueller Schnitt Block 2-->
             <Frame CornerRadius="20" Margin="20,0,0,10" Grid.Row="2" Grid.ColumnSpan="2" Padding="0">
                 <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Label Margin="0,7,0,0" HorizontalOptions="Center" Text="Block 2" FontSize="Large"></Label>
-                    <Label Text="14" HorizontalOptions="Center" FontSize="Large"></Label>
+                    <Label TextColor="Black" Margin="0,7,0,0" HorizontalOptions="Center" Text="Block 2" FontSize="Large"></Label>
+                    <Label TextColor="Black" Margin="0,-5,0,0" Text="14" HorizontalOptions="Center" FontSize="Large"></Label>
                 </StackLayout>
             </Frame>
             <!--aktueller Abiturschnitt-->
             <Frame CornerRadius="20" Margin="5,0,20,10" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Padding="0">
                 <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Label  Margin="0,7,0,0" HorizontalOptions="Center" Text="Abischnitt" FontSize="Large"></Label>
-                    <Label Text="1,4" HorizontalOptions="Center" FontSize="Large"></Label>
+                    <Label  TextColor="Black" Margin="0,7,0,0" HorizontalOptions="Center" Text="Abischnitt" FontSize="Large"></Label>
+                    <Label TextColor="Black" Margin="0,-5,0,0" Text="1,4" HorizontalOptions="Center" FontSize="Large"></Label>
                 </StackLayout>
             </Frame>
 

@@ -16,7 +16,7 @@
                 <RowDefinition Height="200" />
                 <RowDefinition Height="80" />
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="45" />
                 <RowDefinition Height="50"/>
                 <RowDefinition x:Name="rdcv" Height="Auto" />
             </Grid.RowDefinitions>
@@ -39,30 +39,12 @@
             
             <!--Klausur Noten Übersicht-->
             <Frame BackgroundColor="Red" Grid.Row="2" Grid.ColumnSpan="3" Margin="10,0,10,-6">
-                <Label Text="Klausur-Noten"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Margin="0,-10" Text="Klausur-Noten" FontSize="Medium" VerticalOptions="Center"/>
+                    <ImageButton VerticalOptions="Center" Margin="0,-10" Source="Plus1.png" Clicked="AddKlausurNote"></ImageButton>
+                </StackLayout>
             </Frame>
-            <CollectionView Background="LightGreen" Margin="10,0,10,-15" BackgroundColor="White" Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding KlausurNoten}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout
-                        Orientation="Horizontal"
-                    
-                        ItemSpacing="5"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame CornerRadius="20" WidthRequest="25">
-                            <Label Text="{Binding Note}" FontSize="Medium"></Label>
-                        </Frame>
-
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            
-            <!--LK Noten Übersicht-->
-            <Frame BackgroundColor="Red" Grid.Row="4" Grid.ColumnSpan="3" Margin="10,10,10,-16">
-                <Label Text="LK-Noten"/>
-            </Frame>
-            <CollectionView x:Name="cv" Margin="10" SelectionMode="Single" SelectionChanged="cv_SelectionChanged" BackgroundColor="Aqua" Grid.Row="5" Grid.ColumnSpan="3" ItemsSource="{Binding LKNoten}">
+            <CollectionView SelectionMode="Single" SelectionChanged="DeleteNote" Background="LightGreen" Margin="10,0,10,-15" BackgroundColor="White" Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding KlausurNoten}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         Orientation="Vertical"
@@ -73,7 +55,32 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Margin="5" CornerRadius="20" HeightRequest="9">
-                            <Label Margin="-10" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Note}" FontSize="Medium"></Label>
+                            <Label TextColor="Black" Margin="-10" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Note}" FontSize="Medium"></Label>
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <!--LK Noten Übersicht-->
+            <Frame BackgroundColor="Red" Grid.Row="4" Grid.ColumnSpan="3" Margin="10,10,10,-16">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="LK-Noten" Margin="0,-10" FontSize="Medium" VerticalOptions="Center"/>
+                    <ImageButton VerticalOptions="Center" Margin="0,-10" Source="Plus1.png" Clicked="AddLKNote"></ImageButton>
+                </StackLayout>
+            </Frame>
+            <CollectionView x:Name="cv" Margin="10" SelectionMode="Single" SelectionChanged="DeleteNote" BackgroundColor="Aqua" Grid.Row="5" Grid.ColumnSpan="3" ItemsSource="{Binding LKNoten}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        Orientation="Vertical"
+                        Span="6"
+                        VerticalItemSpacing="5"
+                        HorizontalItemSpacing="3"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="5" CornerRadius="20" HeightRequest="9">
+                            <Label TextColor="Black" Margin="-10" VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Note}" FontSize="Medium"></Label>
                         </Frame>
                         
                     </DataTemplate>

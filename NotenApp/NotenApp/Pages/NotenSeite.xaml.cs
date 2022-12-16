@@ -18,15 +18,16 @@ namespace NotenApp.Pages
         private FachModel _fach2;
         private int _entscheidung;
         HalbjahrViewModel viewModel2;
+        private int seitenZurück;
 
 
-        public NotenSeite(FachModel fach, int entscheidung)
+        public NotenSeite(FachModel fach, int entscheidung, int seitenZurück)
         {
             InitializeComponent();
             _fach2 = fach;
             _entscheidung = entscheidung;
             viewModel2 = new HalbjahrViewModel();
-
+            this.seitenZurück = seitenZurück;
         }
 
         private async void Button_Clicked1(object sender, EventArgs e)
@@ -36,18 +37,32 @@ namespace NotenApp.Pages
             if (_entscheidung == 1)
             {
                 await viewModel2.AddNote(_fach2, note, 1);
+                if(seitenZurück == 2)
+                {
+                    Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
 
-                Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-
-                await Navigation.PopAsync();
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    await Navigation.PopAsync();
+                }
             }
             else
             {
                 await viewModel2.AddNote(_fach2, note, 2);
 
-                Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+                if (seitenZurück == 2)
+                {
+                    Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
 
-                await Navigation.PopAsync();
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    await Navigation.PopAsync();
+                }
+
             }
 
 

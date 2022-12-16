@@ -56,12 +56,21 @@ namespace NotenApp.Pages
 
         }
 
-        private async void cv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void DeleteNote(object sender, SelectionChangedEventArgs e)
         {
             var note = e.CurrentSelection.FirstOrDefault() as NotenModel;
             await FachService.RemoveNote(note);
             await model.Initialize(fach);
             model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
+        }
+
+        private async void AddKlausurNote(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NotenSeite(fach, 2,1));
+        }
+        private async void AddLKNote(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NotenSeite(fach, 1,1));
         }
     }
 }

@@ -60,7 +60,11 @@
             <Frame Grid.Row="2" BackgroundColor="Aqua">
                 <Label Margin="-10" Text="1" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
             </Frame>
-            <Frame Grid.Row="2" Grid.Column="1" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="2" Grid.Column="1" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+            </Frame>
             <Frame Grid.Row="2" Grid.Column="2" BackgroundColor="Aqua"></Frame>
             <Frame Grid.Row="2" Grid.Column="3" BackgroundColor="Aqua"></Frame>
             <!--P2-->

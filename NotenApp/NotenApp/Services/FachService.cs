@@ -43,7 +43,7 @@ namespace NotenApp.Services
 
         }
 
-        public static async Task<IEnumerable<FachModel>> GetFacher(int halbjahr)
+        public static async Task<List<FachModel>> GetFacher(int halbjahr)
         {
             await Init();
             var Gesamtfacher = await db.Table<FachModel>().ToListAsync();
@@ -72,6 +72,19 @@ namespace NotenApp.Services
             return Noten;
         }
         //nutzbar für alle
+        public static async Task AddPrFach(string name, int? prNummer)
+        {
+            await Init();
+
+            FachModel fach = new FachModel
+            {
+                Name = name,
+                PrNummer= prNummer
+            };
+
+            await db.InsertAsync(fach);
+        }
+
         public static async Task AddFach(string name, int halbjahr) 
         {
             await Init();

@@ -67,7 +67,7 @@
             <Frame Grid.Row="3" BackgroundColor="Aqua">
                 <Label Margin="-10" Text="2" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
             </Frame>
-            <Frame Grid.Row="3" Grid.Column="1" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="3" Grid.Column="1" BackgroundColor="Red"></Frame>
             <Frame Grid.Row="3" Grid.Column="2" BackgroundColor="Aqua"></Frame>
             <Frame Grid.Row="3" Grid.Column="3" BackgroundColor="Aqua"></Frame>
             <!--P3-->

@@ -4,9 +4,9 @@
               x:Class="NotenApp.Halbjahresuebersicht"
             xmlns:local="clr-namespace:NotenApp.Pages"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
-            android:TabbedPage.ToolbarPlacement="Bottom"
-            android:TabbedPage.BarItemColor="Black"
-            android:TabbedPage.BarSelectedItemColor="#eed73f"        
+            SelectedTabColor="Black"
+            UnselectedTabColor="Blue"
+            android:TabbedPage.ToolbarPlacement="Bottom"    
             BarBackgroundColor="White"
             NavigationPage.HasNavigationBar="True">
 
@@ -17,6 +17,5 @@
     <local:Halbjahr2 Title="HJ2"/>
     <local:Halbjahr3 Title="HJ3"/>
     <local:Halbjahr4 Title="HJ4"/>
-    <local:Abi Title="Abi"/>
 
 </TabbedPage>

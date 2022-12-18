@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NotenApp.Pages.Block2Page">
+    <ContentPage.Content>
+        <Grid Padding="10" BackgroundColor="DarkGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+               
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--Abgrenzungen-->
+            <Frame Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="Red">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.ColumnSpan="2" Text="Block 2" FontSize="35" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                    <Frame Margin="20,0,0,0" CornerRadius="40" Grid.Row="1" BackgroundColor="Aqua">
+                        <Label Margin="-10" Text="12,4" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                    </Frame>
+                    <Frame Margin="0,0,20,0" CornerRadius="40" Grid.Row="1" Grid.Column="1" BackgroundColor="Aqua">
+                        <Label Margin="-10" Text="230/300" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                    </Frame>
+                </Grid>
+            </Frame>
+            <Frame Grid.Row="7" Grid.ColumnSpan="4" BackgroundColor="Red"/>
+            <!--Block2-->
+            <!--Erklärung-->
+            <Frame Grid.Row="1" BackgroundColor="Aqua">
+                <Label Margin="-10" Text="Nr." FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="Aqua">
+                <Label Margin="-10" Text="Fach" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="1" Grid.Column="2" BackgroundColor="Aqua">
+                <Image Margin="-5" Source="schriftlich.png"></Image>
+            </Frame>
+            <Frame Grid.Row="1" Grid.Column="3" BackgroundColor="Aqua">
+                <Image Margin="-10" Source="muendlich.png"></Image>
+            </Frame>
+            <!--P1-->
+            <Frame Grid.Row="2" BackgroundColor="Aqua">
+                <Label Margin="-10" Text="1" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="2" Grid.Column="1" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="2" Grid.Column="2" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="2" Grid.Column="3" BackgroundColor="Aqua"></Frame>
+            <!--P2-->
+            <Frame Grid.Row="3" BackgroundColor="Aqua">
+                <Label Margin="-10" Text="2" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="3" Grid.Column="1" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="3" Grid.Column="2" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="3" Grid.Column="3" BackgroundColor="Aqua"></Frame>
+            <!--P3-->
+            <Frame Grid.Row="4" BackgroundColor="Aqua">
+                <Label Margin="-10" Text="3" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="4" Grid.Column="1" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="4" Grid.Column="2" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="4" Grid.Column="3" BackgroundColor="Aqua"></Frame>
+            <!--P4-->
+            <Frame Grid.Row="5" BackgroundColor="Aqua">
+                <Label Margin="-10" Text="4" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="5" Grid.Column="1" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="5" Grid.Column="3" BackgroundColor="Aqua"></Frame>
+            <!--P5-->
+            <Frame Grid.Row="6" BackgroundColor="Aqua">
+                <Label Margin="-10" Text="5" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="6" Grid.Column="1" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="6" Grid.Column="3" BackgroundColor="Aqua"></Frame>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

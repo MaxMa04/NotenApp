@@ -43,13 +43,18 @@ namespace NotenApp
         {
             await Navigation.PushAsync(new Halbjahr4());
         }
-        private async void Button_Clicked(object sender, EventArgs e)
+        private async void OpenBlock1(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Halbjahresuebersicht());
         }
-        private async void Button_Clicked1(object sender, EventArgs e)
+        private async void OpenSettings(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Einstellungen());
+        }
+
+        private async void OpenBlock2(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Block2Page());
         }
     }
 }

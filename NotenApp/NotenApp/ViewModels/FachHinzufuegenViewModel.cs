@@ -7,23 +7,23 @@ namespace NotenApp.ViewModels
 {
     public class FachHinzufuegenViewModel
     {
-        public List<FachModel> Faecher { get; set; }
+        public List<HjFach> Faecher { get; set; }
         public FachHinzufuegenViewModel()
         {
-            Faecher = new List<FachModel>();
+            Faecher = new List<HjFach>();
 
-            Faecher.Add(new FachModel { Name = "Mathe" });
-            Faecher.Add(new FachModel { Name = "Deutsch" });
-            Faecher.Add(new FachModel { Name = "Englisch" });
-            Faecher.Add(new FachModel { Name = "Informatik" });
-            Faecher.Add(new FachModel { Name = "Biologie" });
-            Faecher.Add(new FachModel { Name = "Geografie" });
-            Faecher.Add(new FachModel { Name = "Sport" });
-            Faecher.Add(new FachModel { Name = "Musik" });
-            Faecher.Add(new FachModel { Name = "Kunst" });
-            Faecher.Add(new FachModel { Name = "Französich" });
-            Faecher.Add(new FachModel { Name = "Geschichte" });
-            Faecher.Add(new FachModel { Name = "Spanisch" });
+            Faecher.Add(new HjFach { Name = "Mathe" });
+            Faecher.Add(new HjFach { Name = "Deutsch" });
+            Faecher.Add(new HjFach { Name = "Englisch" });
+            Faecher.Add(new HjFach { Name = "Informatik" });
+            Faecher.Add(new HjFach { Name = "Biologie" });
+            Faecher.Add(new HjFach { Name = "Geografie" });
+            Faecher.Add(new HjFach { Name = "Sport" });
+            Faecher.Add(new HjFach { Name = "Musik" });
+            Faecher.Add(new HjFach { Name = "Kunst" });
+            Faecher.Add(new HjFach { Name = "Französich" });
+            Faecher.Add(new HjFach { Name = "Geschichte" });
+            Faecher.Add(new HjFach { Name = "Spanisch" });
 
 
         }

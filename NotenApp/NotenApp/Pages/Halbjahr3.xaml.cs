@@ -31,7 +31,7 @@ namespace NotenApp.Pages
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var fach = e.CurrentSelection.FirstOrDefault() as FachModel;
+            var fach = e.CurrentSelection.FirstOrDefault() as HjFach;
             await Navigation.PushAsync(new EntscheidungsSeite(fach));
         }
 
@@ -40,7 +40,7 @@ namespace NotenApp.Pages
         private async void SwipeItem_Invoked_1(object sender, EventArgs e)
         {
             SwipeItem swipeItem = sender as SwipeItem;
-            var selectedItem = swipeItem.BindingContext as FachModel;
+            var selectedItem = swipeItem.BindingContext as HjFach;
             await Navigation.PushAsync(new DetailSeite(selectedItem));
         }
     }

@@ -12,11 +12,11 @@ namespace NotenApp.ViewModels
 {
     public class HalbjahrViewModel : INotifyPropertyChanged
     {
-        public ObservableRangeCollection<FachModel> FaecherHJ1{ get; set; }
-        public ObservableRangeCollection<FachModel> FaecherHJ2 { get; set; }
-        public ObservableRangeCollection<FachModel> FaecherHJ3 { get; set; }
-        public ObservableRangeCollection<FachModel> FaecherHJ4 { get; set; }
-        public AsyncCommand<FachModel> RemoveCommand { get; }
+        public ObservableRangeCollection<HjFach> FaecherHJ1{ get; set; }
+        public ObservableRangeCollection<HjFach> FaecherHJ2 { get; set; }
+        public ObservableRangeCollection<HjFach> FaecherHJ3 { get; set; }
+        public ObservableRangeCollection<HjFach> FaecherHJ4 { get; set; }
+        public AsyncCommand<HjFach> RemoveCommand { get; }
         public AsyncCommand<int> RefreshCommand { get; }
         private float? gesamtDurchschnittHJ1;
         public float? GesamtDurchschnittHJ1
@@ -60,24 +60,24 @@ namespace NotenApp.ViewModels
         }
         public HalbjahrViewModel()
         {
-            FaecherHJ1 = new ObservableRangeCollection<FachModel>();
-            FaecherHJ2 = new ObservableRangeCollection<FachModel>();
-            FaecherHJ3 = new ObservableRangeCollection<FachModel>();
-            FaecherHJ4 = new ObservableRangeCollection<FachModel>();
+            FaecherHJ1 = new ObservableRangeCollection<HjFach>();
+            FaecherHJ2 = new ObservableRangeCollection<HjFach>();
+            FaecherHJ3 = new ObservableRangeCollection<HjFach>();
+            FaecherHJ4 = new ObservableRangeCollection<HjFach>();
             RefreshCommand = new AsyncCommand<int>(Refresh);
-            RemoveCommand = new AsyncCommand<FachModel>(Remove);
+            RemoveCommand = new AsyncCommand<HjFach>(Remove);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public async Task AddNote(FachModel fach, int note, int zahl)
+        public async Task AddNote(HjFach fach, int note, NotenTyp notenTyp)
         {
-            await FachService.AddNote(fach, note, zahl);
+            await FachService.AddNote(fach, note, notenTyp);
             await Refresh(fach.Halbjahr);
             
         }
-        public async Task Remove(FachModel fach)
+        public async Task Remove(HjFach fach)
         {
             await FachService.RemoveFach(fach);
             await Refresh(fach.Halbjahr);
@@ -91,7 +91,7 @@ namespace NotenApp.ViewModels
             {
                 case 1:
                     FaecherHJ1.Clear();
-                    var facher1 = await FachService.GetFacher(1);
+                    var facher1 = await FachService.GetFaecher(1);
                     var noten = await FachService.GetNoten(1);
                     FaecherHJ1.AddRange(facher1);
                     foreach (var fach in FaecherHJ1)
@@ -112,7 +112,7 @@ namespace NotenApp.ViewModels
                     break;
                 case 2:
                     FaecherHJ2.Clear();
-                    var facher2 = await FachService.GetFacher(2);
+                    var facher2 = await FachService.GetFaecher(2);
                     var noten2 = await FachService.GetNoten(2);
                     FaecherHJ2.AddRange(facher2);
                     foreach (var fach in FaecherHJ2)
@@ -134,7 +134,7 @@ namespace NotenApp.ViewModels
                     break;
                 case 3:
                     FaecherHJ3.Clear();
-                    var facher3 = await FachService.GetFacher(3);
+                    var facher3 = await FachService.GetFaecher(3);
 
                     FaecherHJ3.AddRange(facher3);
                     var noten3 = await FachService.GetNoten(3);
@@ -156,7 +156,7 @@ namespace NotenApp.ViewModels
                     break;
                 case 4:
                     FaecherHJ4.Clear();
-                    var facher4 = await FachService.GetFacher(4);
+                    var facher4 = await FachService.GetFaecher(4);
 
                     FaecherHJ4.AddRange(facher4);
                     var noten4 = await FachService.GetNoten(4);

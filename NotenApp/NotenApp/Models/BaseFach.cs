@@ -5,14 +5,11 @@ using System.Text;
 
 namespace NotenApp.Models
 {
-    public class NotenModel
+    public class BaseFach
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public int Note { get; set; }
-        public string Fach { get; set; }
-        public int Halbjahr { get; set; }
-        public int Type { get; set; }
-
+        public string Name { get; set; }
+        public float? Durchschnitt { get; set; }
     }
 }

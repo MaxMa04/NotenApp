@@ -11,8 +11,8 @@ namespace NotenApp.ViewModels
 {
     public  class DetailViewModel : INotifyPropertyChanged
     {
-        public ObservableRangeCollection<NotenModel> LKNoten { get; set; }
-        public ObservableRangeCollection<NotenModel> KlausurNoten { get; set; }
+        public ObservableRangeCollection<HjNote> LKNoten { get; set; }
+        public ObservableRangeCollection<HjNote> KlausurNoten { get; set; }
         public string FachName { get; set; }
         private float? fachDurchschnitt;
         public float? FachDurchschnitt
@@ -27,17 +27,17 @@ namespace NotenApp.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public DetailViewModel()
         {
-            LKNoten = new ObservableRangeCollection<NotenModel>();
-            KlausurNoten = new ObservableRangeCollection<NotenModel>();
+            LKNoten = new ObservableRangeCollection<HjNote>();
+            KlausurNoten = new ObservableRangeCollection<HjNote>();
         }
         
-        public async Task Initialize(FachModel fach)
+        public async Task Initialize(HjFach fach)
         {
             LKNoten.Clear();
             KlausurNoten.Clear();
-            List<NotenModel> gesamtNoten = (List<NotenModel>)await FachService.GetNoten(fach.Halbjahr);
-            List<NotenModel> Lk = new List<NotenModel>();
-            List<NotenModel> Kla = new List<NotenModel>();
+            List<HjNote> gesamtNoten = (List<HjNote>)await FachService.GetNoten(fach.Halbjahr);
+            List<HjNote> Lk = new List<HjNote>();
+            List<HjNote> Kla = new List<HjNote>();
             foreach (var note in gesamtNoten)
             {
                 if(note.Fach == fach.Name)

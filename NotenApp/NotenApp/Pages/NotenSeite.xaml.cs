@@ -14,14 +14,12 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotenSeite : ContentPage
     {
-        //private Halbjahr1Model _fach;
-        private FachModel _fach2;
+        private HjFach _fach2;
         private int _entscheidung;
         HalbjahrViewModel viewModel2;
         private int seitenZurück;
 
-
-        public NotenSeite(FachModel fach, int entscheidung, int seitenZurück)
+        public NotenSeite(HjFach fach, int entscheidung, int seitenZurück)
         {
             InitializeComponent();
             _fach2 = fach;
@@ -36,7 +34,7 @@ namespace NotenApp.Pages
             int note = Convert.ToInt32(button.Text);
             if (_entscheidung == 1)
             {
-                await viewModel2.AddNote(_fach2, note, 1);
+                await viewModel2.AddNote(_fach2, note, NotenTyp.LK);
                 if(seitenZurück == 2)
                 {
                     Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
@@ -50,7 +48,7 @@ namespace NotenApp.Pages
             }
             else
             {
-                await viewModel2.AddNote(_fach2, note, 2);
+                await viewModel2.AddNote(_fach2, note, NotenTyp.Klausur);
 
                 if (seitenZurück == 2)
                 {
@@ -62,12 +60,7 @@ namespace NotenApp.Pages
                 {
                     await Navigation.PopAsync();
                 }
-
             }
-
-
-
-
         }
     }
 }

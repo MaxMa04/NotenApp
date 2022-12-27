@@ -27,7 +27,8 @@ namespace NotenApp.Pages
 
         private async void myListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var fach = e.SelectedItem as FachModel;
+
+            var fach = e.SelectedItem as HjFach;
 
                 await FachService.AddFach(fach.Name, 1);
                 await FachService.AddFach(fach.Name, 2);

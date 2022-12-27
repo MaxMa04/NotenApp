@@ -16,11 +16,11 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetailSeite : ContentPage
     {
-        public FachModel fach;
+        public HjFach fach;
         DetailViewModel model;
         public decimal heightCollView;
         public const float heightNote = 80; //Höhe der einzelnen Noten in der Übersicht
-        public DetailSeite(FachModel fach)
+        public DetailSeite(HjFach fach)
         {
             InitializeComponent();
             this.fach = fach;
@@ -58,8 +58,8 @@ namespace NotenApp.Pages
 
         private async void DeleteNote(object sender, SelectionChangedEventArgs e)
         {
-            var note = e.CurrentSelection.FirstOrDefault() as NotenModel;
-            await FachService.RemoveNote(note);
+            var note = e.CurrentSelection.FirstOrDefault() as HjNote;
+            await FachService.RemoveSingleNote(note);
             await model.Initialize(fach);
             model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
         }

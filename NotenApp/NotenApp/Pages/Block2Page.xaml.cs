@@ -1,4 +1,5 @@
-﻿using NotenApp.Services;
+﻿using NotenApp.Models;
+using NotenApp.Services;
 using NotenApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,11 @@ namespace NotenApp.Pages
 		}
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-			Navigation.PushAsync(new FachHinzufuegenSeite(1));
+			model.P1 = new PrFach()
+			{
+                Name = "Spanisch"
+			};
+			
         }
     }
 }

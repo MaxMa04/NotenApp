@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NotenApp.Pages.Block2Page">
+             x:Class="NotenApp.Pages.Block2Page"
+             xmlns:ViewModels="clr-namespace:NotenApp.ViewModels">
+    <ContentPage.BindingContext>
+        <ViewModels:Block2ViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid Padding="10" BackgroundColor="DarkGray">
             <Grid.RowDefinitions>
@@ -64,6 +68,7 @@
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
+                <Label Text="{Binding P1.Name}"></Label>
             </Frame>
             <Frame Grid.Row="2" Grid.Column="2" BackgroundColor="Aqua"></Frame>
             <Frame Grid.Row="2" Grid.Column="3" BackgroundColor="Aqua"></Frame>

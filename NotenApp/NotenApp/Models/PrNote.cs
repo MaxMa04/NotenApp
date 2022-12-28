@@ -5,7 +5,7 @@ using System.Text;
 namespace NotenApp.Models
 {
     //Prüfungsnoten
-    public class PrNote
+    public class PrNote : BaseNote
     {
         public int PrNummer { get; set; }
     }

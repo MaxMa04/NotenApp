@@ -42,7 +42,7 @@ namespace NotenApp.ViewModels
             {
                 if(note.Fach == fach.Name)
                 {
-                    switch (note.Type)
+                    switch (note.Typ)
                     {
                         case 1:
                             Lk.Add(note);

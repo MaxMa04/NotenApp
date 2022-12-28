@@ -14,15 +14,9 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FachHinzufuegenSeite : ContentPage
     {
-        int? prFachNummer;
         public FachHinzufuegenSeite()
         {
             InitializeComponent();
-        }
-        public FachHinzufuegenSeite(int i)
-        {
-            InitializeComponent();
-            prFachNummer = i;
         }
 
         private async void myListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -30,10 +24,10 @@ namespace NotenApp.Pages
 
             var fach = e.SelectedItem as HjFach;
 
-                await FachService.AddFach(fach.Name, 1);
-                await FachService.AddFach(fach.Name, 2);
-                await FachService.AddFach(fach.Name, 3);
-                await FachService.AddFach(fach.Name, 4);
+            await FachService.AddFach(fach.Name, 1);
+            await FachService.AddFach(fach.Name, 2);
+            await FachService.AddFach(fach.Name, 3);
+            await FachService.AddFach(fach.Name, 4);
             
             await Navigation.PopAsync();
         }

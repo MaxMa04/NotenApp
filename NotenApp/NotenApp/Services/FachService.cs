@@ -15,7 +15,7 @@ namespace NotenApp.Services
         static SQLiteAsyncConnection db;
         static async Task Init()
         {
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
+            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data");
 
             db = new SQLiteAsyncConnection(databasePath);
 
@@ -33,7 +33,7 @@ namespace NotenApp.Services
             HjNote newNote = new HjNote
             {
                 Note = note,
-                Type = (int)notenTyp,
+                Typ = (int)notenTyp,
                 Fach = fach.Name,
                 Halbjahr = fach.Halbjahr
             };
@@ -139,7 +139,7 @@ namespace NotenApp.Services
             List<HjNote> gesamtNoten = await db.Table<HjNote>().ToListAsync();
             foreach (var item in gesamtNoten)
             {
-                switch (item.Type)
+                switch (item.Typ)
                 {
                     case 1:
                         if(item.Fach == fach.Name && item.Halbjahr == fach.Halbjahr)
@@ -220,6 +220,43 @@ namespace NotenApp.Services
                 gesamtDurchschnitt = count / count2;
                 return (float)Math.Round(gesamtDurchschnitt, 1);
             }
+        }
+        //Prüfungen/Block2
+        public static async Task AddPrFach(string name, int prNummer)
+        {
+            await Init();
+        
+            PrFach fach = new PrFach()
+            {
+                Name = name,
+                PrNummer = prNummer
+            };
+        
+            await db.InsertAsync(fach);
+        }
+        public static async Task AddPrNote(string fach, int prNummer)
+        {
+            await Init();
+        
+            PrNote note = new PrNote()
+            {
+                Fach = fach,
+                PrNummer = prNummer
+            };
+        
+            await db.InsertAsync(note);
+        }
+        public static async Task<List<PrFach>> GetPrFaecher()
+        {
+            await Init();
+            List<PrFach> PrFaecher = await db.Table<PrFach>().ToListAsync();
+            return PrFaecher;
+        }
+        public static async Task<List<PrNote>> GetPrNoten()
+        {
+            await Init();
+            List<PrNote> PrNoten = await db.Table<PrNote>().ToListAsync();
+            return PrNoten;
         }
     }
 }

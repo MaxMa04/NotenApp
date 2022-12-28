@@ -8,7 +8,6 @@ namespace NotenApp.Models
     public class HjNote : BaseNote
     {
         public int Halbjahr { get; set; }
-        public int Type { get; set; }
 
     }
 }

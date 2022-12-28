@@ -98,11 +98,11 @@ namespace NotenApp.ViewModels
                     {
                         foreach (var note in noten)
                         {
-                            if(note.Fach == fach.Name && note.Type == 1)
+                            if(note.Fach == fach.Name && note.Typ == 1)
                             {
                                 fach.LKNoten.Add(note);
                             }
-                            if(note.Type == 2 && note.Fach == fach.Name)
+                            if(note.Typ == 2 && note.Fach == fach.Name)
                             {
                                 fach.KlausurNoten.Add(note);
                             }
@@ -119,11 +119,11 @@ namespace NotenApp.ViewModels
                     {
                         foreach (var note in noten2)
                         {
-                            if (note.Fach == fach.Name && note.Type == 1)
+                            if (note.Fach == fach.Name && note.Typ == 1)
                             {
                                 fach.LKNoten.Add(note);
                             }
-                            if (note.Type == 2 && note.Fach == fach.Name)
+                            if (note.Typ == 2 && note.Fach == fach.Name)
                             {
                                 fach.KlausurNoten.Add(note);
                             }
@@ -142,11 +142,11 @@ namespace NotenApp.ViewModels
                     {
                         foreach (var note in noten3)
                         {
-                            if (note.Fach == fach.Name && note.Type == 1)
+                            if (note.Fach == fach.Name && note.Typ == 1)
                             {
                                 fach.LKNoten.Add(note);
                             }
-                            if (note.Type == 2 && note.Fach == fach.Name)
+                            if (note.Typ == 2 && note.Fach == fach.Name)
                             {
                                 fach.KlausurNoten.Add(note);
                             }
@@ -164,11 +164,11 @@ namespace NotenApp.ViewModels
                     {
                         foreach (var note in noten4)
                         {
-                            if (note.Fach == fach.Name && note.Type == 1)
+                            if (note.Fach == fach.Name && note.Typ == 1)
                             {
                                 fach.LKNoten.Add(note);
                             }
-                            if (note.Type == 2 && note.Fach == fach.Name)
+                            if (note.Typ == 2 && note.Fach == fach.Name)
                             {
                                 fach.KlausurNoten.Add(note);
                             }

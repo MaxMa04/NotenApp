@@ -66,11 +66,11 @@ namespace NotenApp.Pages
 
         private async void AddKlausurNote(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NotenSeite(fach, 2,1));
+            await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.Klausur,1));
         }
         private async void AddLKNote(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NotenSeite(fach, 1,1));
+            await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.LK,1));
         }
     }
 }

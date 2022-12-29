@@ -234,29 +234,89 @@ namespace NotenApp.Services
         
             await db.InsertAsync(fach);
         }
-        public static async Task AddPrNote(string fach, int prNummer)
+        public static async Task AddPrNote(int prNummer, int note)
         {
             await Init();
         
-            PrNote note = new PrNote()
+            PrNote prnote = new PrNote()
             {
-                Fach = fach,
+                Note = note,
                 PrNummer = prNummer
             };
         
-            await db.InsertAsync(note);
+            await db.InsertAsync(prnote);
         }
-        public static async Task<List<PrFach>> GetPrFaecher()
+        public static async Task UpdateName(string name, int prNummer)
         {
             await Init();
             List<PrFach> PrFaecher = await db.Table<PrFach>().ToListAsync();
-            return PrFaecher;
+            foreach (var item in PrFaecher)
+            {
+                if(item.PrNummer == prNummer)
+                {
+                    item.Name = name;
+                    await db.UpdateAsync(item);
+                }
+            }
         }
-        public static async Task<List<PrNote>> GetPrNoten()
+        public static async Task UpdateNote(int note, int prNummer, NotenTyp notenTyp)
+        {
+            await Init();
+            List<PrFach> PrFaecher = await db.Table<PrFach>().ToListAsync();
+            foreach (var item in PrFaecher)
+            {
+                if (item.PrNummer == prNummer)
+                {
+                    switch (notenTyp)
+                    {
+                        case NotenTyp.Schriftlich:
+                            item.NoteSchriftlich = note;
+                            break;
+                        case NotenTyp.Mündlich:
+                            item.NoteMündlich = note;
+                            break;
+                    }
+                    await db.UpdateAsync(item);
+                }
+            }
+
+        }
+        public static async Task<PrFach> GetPrFach(int prNummer)
+        {
+            await Init();
+            List<PrFach> PrFaecher = await db.Table<PrFach>().ToListAsync();
+            PrFach prfach = new PrFach();
+            foreach (var fach in PrFaecher)
+            {
+                if (fach.PrNummer == prNummer)
+                {
+                    prfach = fach;
+                }
+            }
+
+            if(prfach.Name == null)
+            {
+                return null;
+            }
+            else
+            {
+                return prfach;
+            }
+           
+            
+        }
+        public static async Task<List<PrNote>> GetPrNoten(int prNummer)
         {
             await Init();
             List<PrNote> PrNoten = await db.Table<PrNote>().ToListAsync();
+            
             return PrNoten;
+        }
+        public static async Task Delete()
+        {
+            await Init();
+            await db.DeleteAllAsync<PrFach>();
+            await db.DeleteAllAsync<PrNote>();
         }
     }
 }

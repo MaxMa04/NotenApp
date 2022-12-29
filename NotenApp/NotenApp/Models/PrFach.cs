@@ -8,5 +8,7 @@ namespace NotenApp.Models
     public class PrFach : BaseFach
     {
         public int PrNummer { get; set; }
+        public int? NoteMündlich { get; set; }
+        public int? NoteSchriftlich { get; set; }
     }
 }

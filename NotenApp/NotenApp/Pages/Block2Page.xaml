@@ -48,7 +48,10 @@
             <Frame Grid.Row="7" Grid.ColumnSpan="4" BackgroundColor="Red"/>
             <!--Block2-->
             <!--Erklärung-->
-            <Frame Grid.Row="1" BackgroundColor="Aqua">
+            <Frame Grid.Row="1" BackgroundColor="Black">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Delete" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
                 <Label Margin="-10" Text="Nr." FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
             </Frame>
             <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="Aqua">
@@ -66,38 +69,98 @@
             </Frame>
             <Frame Grid.Row="2" Grid.Column="1" BackgroundColor="Aqua">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer Tapped="SetPrFach1" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
                 <Label Text="{Binding P1.Name}"></Label>
             </Frame>
-            <Frame Grid.Row="2" Grid.Column="2" BackgroundColor="Aqua"></Frame>
-            <Frame Grid.Row="2" Grid.Column="3" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="2" Grid.Column="2" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="UpdateNoteSchriftlich1" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P1.NoteSchriftlich}"></Label>
+            </Frame>
+            <Frame Grid.Row="2" Grid.Column="3" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="UpdateNoteMündlich1" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P1.NoteMündlich}"></Label>
+            </Frame>
             <!--P2-->
             <Frame Grid.Row="3" BackgroundColor="Aqua">
                 <Label Margin="-10" Text="2" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
             </Frame>
-            <Frame Grid.Row="3" Grid.Column="1" BackgroundColor="Green"></Frame>
-            <Frame Grid.Row="3" Grid.Column="2" BackgroundColor="Aqua"></Frame>
-            <Frame Grid.Row="3" Grid.Column="3" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="3" Grid.Column="1" BackgroundColor="Green">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SetPrFach2" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P2.Name}"></Label>
+            </Frame>
+            <Frame Grid.Row="3" Grid.Column="2" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="UpdateNoteSchriftlich2" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P2.NoteSchriftlich}"></Label>
+            </Frame>
+            <Frame Grid.Row="3" Grid.Column="3" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="UpdateNoteMündlich2" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P2.NoteMündlich}"></Label>
+            </Frame>
             <!--P3-->
             <Frame Grid.Row="4" BackgroundColor="Aqua">
                 <Label Margin="-10" Text="3" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
             </Frame>
-            <Frame Grid.Row="4" Grid.Column="1" BackgroundColor="Aqua"></Frame>
-            <Frame Grid.Row="4" Grid.Column="2" BackgroundColor="Aqua"></Frame>
-            <Frame Grid.Row="4" Grid.Column="3" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="4" Grid.Column="1" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SetPrFach3" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P3.Name}"></Label>
+            </Frame>
+            <Frame Grid.Row="4" Grid.Column="2" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="UpdateNoteSchriftlich3" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P3.NoteSchriftlich}"></Label>
+            </Frame>
+            <Frame Grid.Row="4" Grid.Column="3" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="UpdateNoteMündlich3" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P3.NoteMündlich}"></Label>
+            </Frame>
             <!--P4-->
             <Frame Grid.Row="5" BackgroundColor="Aqua">
                 <Label Margin="-10" Text="4" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
             </Frame>
-            <Frame Grid.Row="5" Grid.Column="1" BackgroundColor="Aqua"></Frame>
-            <Frame Grid.Row="5" Grid.Column="3" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="5" Grid.Column="1" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SetPrFach4" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P4.Name}"></Label>
+            </Frame>
+            <Frame Grid.Row="5" Grid.Column="3" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="UpdateNoteMündlich4" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P4.NoteMündlich}"></Label>
+            </Frame>
             <!--P5-->
             <Frame Grid.Row="6" BackgroundColor="Aqua">
                 <Label Margin="-10" Text="5" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
             </Frame>
-            <Frame Grid.Row="6" Grid.Column="1" BackgroundColor="Aqua"></Frame>
-            <Frame Grid.Row="6" Grid.Column="3" BackgroundColor="Aqua"></Frame>
+            <Frame Grid.Row="6" Grid.Column="1" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SetPrFach5" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P5.Name}"></Label>
+            </Frame>
+            <Frame Grid.Row="6" Grid.Column="3" BackgroundColor="Aqua">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="UpdateNoteMündlich5" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P5.NoteMündlich}"></Label>
+            </Frame>
 
         </Grid>
     </ContentPage.Content>

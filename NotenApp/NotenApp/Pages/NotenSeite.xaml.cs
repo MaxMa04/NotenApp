@@ -1,4 +1,5 @@
 ﻿using NotenApp.Models;
+using NotenApp.Services;
 using NotenApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,51 +16,68 @@ namespace NotenApp.Pages
     public partial class NotenSeite : ContentPage
     {
         private HjFach _fach2;
-        private int _entscheidung;
+        NotenTyp notenTyp;
         HalbjahrViewModel viewModel2;
         private int seitenZurück;
+        bool isHalbjahr;
+        int prNummer;
 
-        public NotenSeite(HjFach fach, int entscheidung, int seitenZurück)
+        public NotenSeite(HjFach fach, NotenTyp notenTyp, int seitenZurück)
         {
             InitializeComponent();
             _fach2 = fach;
-            _entscheidung = entscheidung;
+            this.notenTyp = notenTyp;
             viewModel2 = new HalbjahrViewModel();
             this.seitenZurück = seitenZurück;
+            isHalbjahr = true;
         }
-
+        public NotenSeite(NotenTyp notenTyp, int prNummer)
+        {
+            InitializeComponent();
+            this.notenTyp = notenTyp;  
+            this.prNummer = prNummer;
+            isHalbjahr = false;
+        }
         private async void Button_Clicked1(object sender, EventArgs e)
         {
             var button = (Button)sender;
             int note = Convert.ToInt32(button.Text);
-            if (_entscheidung == 1)
+            if(isHalbjahr == true)
             {
-                await viewModel2.AddNote(_fach2, note, NotenTyp.LK);
-                if(seitenZurück == 2)
+                if (notenTyp == NotenTyp.LK)
                 {
-                    Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+                    await viewModel2.AddNote(_fach2, note, NotenTyp.LK);
+                    if (seitenZurück == 2)
+                    {
+                        Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
 
-                    await Navigation.PopAsync();
+                        await Navigation.PopAsync();
+                    }
+                    else
+                    {
+                        await Navigation.PopAsync();
+                    }
                 }
                 else
                 {
-                    await Navigation.PopAsync();
+                    await viewModel2.AddNote(_fach2, note, NotenTyp.Klausur);
+
+                    if (seitenZurück == 2)
+                    {
+                        Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+
+                        await Navigation.PopAsync();
+                    }
+                    else
+                    {
+                        await Navigation.PopAsync();
+                    }
                 }
             }
             else
             {
-                await viewModel2.AddNote(_fach2, note, NotenTyp.Klausur);
-
-                if (seitenZurück == 2)
-                {
-                    Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-
-                    await Navigation.PopAsync();
-                }
-                else
-                {
-                    await Navigation.PopAsync();
-                }
+                await FachService.UpdateNote(note, prNummer, notenTyp);
+                await Navigation.PopAsync();
             }
         }
     }

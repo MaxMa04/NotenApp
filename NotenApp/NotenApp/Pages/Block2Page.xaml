@@ -38,10 +38,10 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.ColumnSpan="2" Text="Block 2" FontSize="35" VerticalOptions="Center" HorizontalOptions="Center"></Label>
                     <Frame Margin="20,0,0,0" CornerRadius="40" Grid.Row="1" BackgroundColor="Aqua">
-                        <Label Margin="-10" Text="12,4" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                        <Label Margin="-10" Text="{Binding DurchschnittBlock2, TargetNullValue='-'}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
                     </Frame>
                     <Frame Margin="0,0,20,0" CornerRadius="40" Grid.Row="1" Grid.Column="1" BackgroundColor="Aqua">
-                        <Label Margin="-10" Text="230/300" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                        <Label Margin="-10" Text="{Binding PunktzahlBlock2}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
                     </Frame>
                 </Grid>
             </Frame>

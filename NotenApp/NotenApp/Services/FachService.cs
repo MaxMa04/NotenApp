@@ -276,7 +276,24 @@ namespace NotenApp.Services
                             item.NoteMündlich = note;
                             break;
                     }
+                    if(item.NoteSchriftlich != null && item.NoteMündlich != null)
+                    {
+                        item.Durchschnitt = (item.NoteSchriftlich + item.NoteMündlich) / 2;
+                    }
+                    else if(item.NoteSchriftlich == null && item.NoteMündlich == null)
+                    {
+                        item.Durchschnitt = null;
+                    }
+                    else if(item.NoteSchriftlich == null && item.NoteMündlich != null)
+                    {
+                        item.Durchschnitt = item.NoteMündlich;
+                    }
+                    else
+                    {
+                        item.Durchschnitt = item.NoteSchriftlich;
+                    }
                     await db.UpdateAsync(item);
+                    
                 }
             }
 
@@ -293,7 +310,6 @@ namespace NotenApp.Services
                     prfach = fach;
                 }
             }
-
             if(prfach.Name == null)
             {
                 return null;
@@ -302,15 +318,45 @@ namespace NotenApp.Services
             {
                 return prfach;
             }
-           
-            
         }
-        public static async Task<List<PrNote>> GetPrNoten(int prNummer)
+        public static async Task<float?> GetDurchschnittBlock2()
         {
             await Init();
-            List<PrNote> PrNoten = await db.Table<PrNote>().ToListAsync();
-            
-            return PrNoten;
+            List<PrFach> prFaecher = await db.Table<PrFach>().ToListAsync();
+            int anzahlFaecher = 0;
+            float? durchschnittsSumme = 0;
+            float? durchschnittBlock2;
+            foreach (var fach in prFaecher)
+            {
+                if(fach.Durchschnitt != null)
+                {
+                    anzahlFaecher++;
+                    durchschnittsSumme += fach.Durchschnitt;
+                }
+            }
+            if(anzahlFaecher == 0)
+            {
+                return null;
+            }
+            durchschnittBlock2 = durchschnittsSumme / anzahlFaecher;
+            return durchschnittBlock2;
+        }
+        public static async Task<string> GetPunktzahlBlock2()
+        {
+            await Init();
+            float? durchschnitt = await GetDurchschnittBlock2();
+            float? iPunktzahl =  durchschnitt * 20;
+            if(iPunktzahl > 0)
+            {
+                string punktzahl = (int?)iPunktzahl + "/300";
+
+                return punktzahl;
+            }
+            else
+            {
+                return "-";
+            }
+
         }
         public static async Task Delete()
         {

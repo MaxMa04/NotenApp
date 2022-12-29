@@ -61,11 +61,25 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(P5)));
             }
         }
-        public Block2ViewModel() 
-        { 
-            
+        private float? durchschnittBlock2;
+        public float? DurchschnittBlock2
+        {
+            get => durchschnittBlock2;
+            set
+            {
+                durchschnittBlock2 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DurchschnittBlock2)));
+            }
         }
-
-
+        private string punktzahlBlock2;
+        public string PunktzahlBlock2
+        {
+            get => punktzahlBlock2;
+            set
+            {
+                punktzahlBlock2 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PunktzahlBlock2)));
+            }
+        }
     }
 }

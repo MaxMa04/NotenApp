@@ -30,6 +30,8 @@ namespace NotenApp.Pages
             model.P3 = await FachService.GetPrFach(3);
             model.P4 = await FachService.GetPrFach(4);
             model.P5 = await FachService.GetPrFach(5);
+            model.DurchschnittBlock2 = await FachService.GetDurchschnittBlock2();
+            model.PunktzahlBlock2 = await FachService.GetPunktzahlBlock2();
         }
         //FachName
         private async void SetPrFach1(object sender, EventArgs e)

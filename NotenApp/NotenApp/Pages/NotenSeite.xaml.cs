@@ -30,6 +30,7 @@ namespace NotenApp.Pages
             viewModel2 = new HalbjahrViewModel();
             this.seitenZurück = seitenZurück;
             isHalbjahr = true;
+            btn.Text = "Zurück";
         }
         public NotenSeite(NotenTyp notenTyp, int prNummer)
         {
@@ -37,6 +38,7 @@ namespace NotenApp.Pages
             this.notenTyp = notenTyp;  
             this.prNummer = prNummer;
             isHalbjahr = false;
+            btn.Text = "Keine Note";
         }
         private async void Button_Clicked1(object sender, EventArgs e)
         {
@@ -77,6 +79,21 @@ namespace NotenApp.Pages
             else
             {
                 await FachService.UpdateNote(note, prNummer, notenTyp);
+                await Navigation.PopAsync();
+            }
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            if(isHalbjahr == true)
+            {
+                
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                
+                await FachService.UpdateNote(null, prNummer, notenTyp);
                 await Navigation.PopAsync();
             }
         }

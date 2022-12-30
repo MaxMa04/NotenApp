@@ -259,7 +259,7 @@ namespace NotenApp.Services
                 }
             }
         }
-        public static async Task UpdateNote(int note, int prNummer, NotenTyp notenTyp)
+        public static async Task UpdateNote(int? note, int prNummer, NotenTyp notenTyp)
         {
             await Init();
             List<PrFach> PrFaecher = await db.Table<PrFach>().ToListAsync();

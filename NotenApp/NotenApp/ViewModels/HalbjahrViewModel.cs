@@ -1,5 +1,6 @@
 ﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
+using NotenApp.Logic;
 using NotenApp.Models;
 using NotenApp.Services;
 using System;
@@ -189,6 +190,100 @@ namespace NotenApp.ViewModels
             }
         }
 
+        public async Task<int?> GetPunktzahlBlock1()
+        {
+            
+            List<HjFach> gesamtFaecher = await FachService.GetFaecher();
+            List<HjFach> eingebrachteFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die im Endeffekt eingebracht werden 
+            List<HjFach> pflichtFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die eingebracht werden müssen
+            List<HjFach> uebrigeFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die eingebracht werden könnten
+            //Zuweisung der einzelnen FächerHalbjahre in Pflichtfächer und Übrige Fächer
+            if (gesamtFaecher.Count == 0)
+            {
+                return 1;
+            }
+            for (int j = 0; j < gesamtFaecher.Count; j++)
+            {
 
+                if (pflichtFaecher.Exists(t => t.Name == gesamtFaecher[j].Name) != true)
+                {
+                    List<HjFach> faecher = new List<HjFach>(); //Fächer mit gleichem Fachnamen aus verschiedenem Halbjahr
+                    faecher.Add(gesamtFaecher[j]);
+                    int anzahlDurchschnitte = 0;
+                    float summeDurchschnitte = 0;
+                    for (int i = 0; i < gesamtFaecher.Count; i++)
+                    {
+                        if (gesamtFaecher[j].Name == gesamtFaecher[i].Name)
+                        {
+                            faecher.Add(gesamtFaecher[i]);
+                        }
+                    }
+                    foreach (var fachh in faecher)
+                    {
+                        if (fachh.Durchschnitt != null)
+                        {
+                            anzahlDurchschnitte++;
+                            summeDurchschnitte += (float)fachh.Durchschnitt;
+                        }
+                    }
+                    foreach (var fachhh in faecher)
+                    {
+                        if (fachhh.Durchschnitt == null)
+                        {
+                            fachhh.Durchschnitt = summeDurchschnitte / anzahlDurchschnitte;
+                        }
+                    }
+
+                    faecher = Controller.SortList(faecher);
+                    switch (gesamtFaecher[j].EingebrachteHalbjahre)
+                    {
+                        case 1:
+                            pflichtFaecher.Add(faecher[0]);
+                            uebrigeFaecher.Add(faecher[1]);
+                            uebrigeFaecher.Add(faecher[2]);
+                            uebrigeFaecher.Add(faecher[3]);
+                            break;
+                        case 2:
+                            pflichtFaecher.Add(faecher[0]);
+                            pflichtFaecher.Add(faecher[1]);
+                            uebrigeFaecher.Add(faecher[2]);
+                            uebrigeFaecher.Add(faecher[3]);
+                            break;
+                        case 4:
+                            pflichtFaecher.Add(faecher[0]);
+                            pflichtFaecher.Add(faecher[1]);
+                            pflichtFaecher.Add(faecher[2]);
+                            pflichtFaecher.Add(faecher[3]);
+                            break;
+
+                    }
+                    faecher.Clear();
+                }
+            }
+            //Auffüllung der Eingebrachten Fächer Liste mit den besten übrigen Fächern
+            eingebrachteFaecher.AddRange(pflichtFaecher);
+            int nochaufzufuellen = 40 - eingebrachteFaecher.Count;
+            uebrigeFaecher = Controller.SortList(uebrigeFaecher);
+            for (int i = 0; i < nochaufzufuellen; i++)
+            {
+                eingebrachteFaecher.Add(uebrigeFaecher[i]);
+            }
+            //Eigentliche Berechnung der Punktzahl von Block 1
+            double summeDurchschnitteAllerHalbjahre = 0;
+            double punktzahlBlock1 = 0;
+            foreach (var fach in eingebrachteFaecher)
+            {
+                if (fach.IsLK == true)
+                {
+                    summeDurchschnitteAllerHalbjahre += (int)Math.Round((float)fach.Durchschnitt,0) * 2;
+                }
+                else
+                {
+                    summeDurchschnitteAllerHalbjahre += (int)Math.Round((float)fach.Durchschnitt, 0);
+                }
+            }
+            punktzahlBlock1 = (summeDurchschnitteAllerHalbjahre / 48) * 40;
+            return (int)Math.Round(punktzahlBlock1,0);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using NotenApp.Logic;
 using NotenApp.Models;
 using NotenApp.Services;
 using NotenApp.ViewModels;
@@ -25,7 +26,7 @@ namespace NotenApp.Pages
             InitializeComponent();
             this.fach = fach;
             Label.Text = fach.Name;
-            Label1.Text = fach.MinHalbjahre.ToString();
+            Label1.Text = fach.EingebrachteHalbjahre.ToString();
             model = BindingContext as DetailViewModel;
         }
         protected async override void OnAppearing()

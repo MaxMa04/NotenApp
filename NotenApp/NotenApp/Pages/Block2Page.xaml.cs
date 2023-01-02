@@ -1,4 +1,4 @@
-﻿using NotenApp.Models;
+﻿using NotenApp.Logic;
 using NotenApp.Services;
 using NotenApp.ViewModels;
 using System;
@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 
 namespace NotenApp.Pages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Block2Page : ContentPage
 	{
         Block2ViewModel model;

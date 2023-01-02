@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace NotenApp.Models
+namespace NotenApp.Logic
 {
     public enum NotenTyp
     {
@@ -12,5 +12,13 @@ namespace NotenApp.Models
         //Block2
         Schriftlich = 3,
         Mündlich = 4
+    };
+    public enum FachAufgabenfeld
+    {
+        Sprachlich = 1,
+        Gesellschaftlich = 2,
+        Naturwissenschaftlich = 3,
+        Kein = 4
+
     };
 }

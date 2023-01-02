@@ -1,4 +1,5 @@
-﻿using NotenApp.Models;
+﻿using NotenApp.Logic;
+using NotenApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

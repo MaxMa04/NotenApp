@@ -10,6 +10,9 @@ namespace NotenApp.Models
     {
         public int Halbjahr { get; set; }
         public int MinHalbjahre { get; set; } //Mindestanzahl an Halbjahren, die eingebracht werden müssen
+        public int EingebrachteHalbjahre { get; set; } //Anzahl, die eingebracht wird
+        public int Aufgabenfeld { get; set; } 
+        public bool IsLK { get; set; } //Ist das Fach dein Leistungskurs?
         [Ignore]
         public List<HjNote> LKNoten { get; set; }
         [Ignore]

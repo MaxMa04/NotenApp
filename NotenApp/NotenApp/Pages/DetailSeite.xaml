@@ -30,6 +30,7 @@
                 <Frame HeightRequest="120" WidthRequest="120" CornerRadius="80" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,20,0,0" Padding="0" BackgroundColor="#7BA4A8" >
                     <Label Text="{Binding FachDurchschnitt ,TargetNullValue='-'}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50" />
                 </Frame>
+                <Label x:Name="Label1"  Text="" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
                 <Label x:Name="Label"  Text="" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
             </StackLayout>
             <!--Facheinstellungen-->

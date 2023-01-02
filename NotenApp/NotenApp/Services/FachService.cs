@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace NotenApp.Services
 {
@@ -72,14 +73,16 @@ namespace NotenApp.Services
             }
             return Noten;
         }
-        public static async Task AddFach(string name, int halbjahr) 
+        public static async Task AddFach(string name, int halbjahr, int minHalbjahre) 
         {
             await Init();
 
             HjFach fach = new HjFach
             {
                 Name = name,
-                Halbjahr = halbjahr
+                Halbjahr = halbjahr,
+                MinHalbjahre = minHalbjahre
+                
             };
 
             await db.InsertAsync(fach);
@@ -363,6 +366,106 @@ namespace NotenApp.Services
             await Init();
             await db.DeleteAllAsync<PrFach>();
             await db.DeleteAllAsync<PrNote>();
+        }
+        //Abitur
+        public static async Task<float?> GetAbiturNote()
+        {
+            await Init();
+            return 1f;
+        }
+        public static async Task<int?> GetBlock1Punktzahl()
+        {
+            await Init();
+            List<HjFach> gesamtFaecher = await db.Table<HjFach>().ToListAsync();
+            List<HjFach> eingebrachteFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die im Endeffekt eingebracht werden 
+            List<HjFach> pflichtFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die eingebracht werden müssen
+            List<HjFach> uebrigeFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die eingebracht werden könnten
+
+            for (int j = 0; j < gesamtFaecher.Count; j++)
+            {
+                
+                if (pflichtFaecher.Exists(t => t.Name == gesamtFaecher[j].Name) != true)
+                {
+                    List<HjFach> faecher = new List<HjFach>(); //Fächer mit gleichem Fachnamen aus verschiedenem Halbjahr
+                    faecher.Add(gesamtFaecher[j]);
+                    int anzahlDurchschnitte = 0;
+                    float summeDurchschnitte = 0;
+                    for (int i = 0; i < gesamtFaecher.Count; i++)
+                    {
+                        if (gesamtFaecher[j].Name == gesamtFaecher[i].Name)
+                        {
+                            faecher.Add(gesamtFaecher[i]);
+
+                        }
+                    }
+                    foreach (var fachh in faecher)
+                    {
+                        if (fachh.Durchschnitt != null)
+                        {
+                            anzahlDurchschnitte++;
+                            summeDurchschnitte += (float)fachh.Durchschnitt;
+                        }
+                    }
+                    foreach (var fachhh in faecher)
+                    {
+                        if (fachhh.Durchschnitt == null)
+                        {
+                            fachhh.Durchschnitt = summeDurchschnitte / anzahlDurchschnitte;
+                        }
+                    }
+
+                    faecher = SelectionSort(faecher);
+                    switch (gesamtFaecher[j].MinHalbjahre)
+                    {
+                        case 1:
+                            pflichtFaecher.Add(faecher[0]);
+                            uebrigeFaecher.Add(faecher[1]);
+                            uebrigeFaecher.Add(faecher[2]);
+                            uebrigeFaecher.Add(faecher[3]);
+                            break;
+                        case 2:
+                            pflichtFaecher.Add(faecher[0]);
+                            pflichtFaecher.Add(faecher[1]);
+                            uebrigeFaecher.Add(faecher[2]);
+                            uebrigeFaecher.Add(faecher[3]);
+                            break;
+                        case 4:
+                            pflichtFaecher.Add(faecher[0]);
+                            pflichtFaecher.Add(faecher[1]);
+                            pflichtFaecher.Add(faecher[2]);
+                            pflichtFaecher.Add(faecher[3]);
+                            break;
+
+                    }
+                    faecher.Clear();
+                }
+                
+            }
+
+
+
+            return pflichtFaecher.Count;
+        }
+        public static List<HjFach> SelectionSort(List<HjFach> list)
+        {
+            for (int i = 0; i < list.Count - 1; i++)
+            {
+                int maxIndex = i;
+                for (int j = i + 1; j < list.Count; j++)
+                {
+                    if (list[j].Durchschnitt > list[maxIndex].Durchschnitt)
+                    {
+                        maxIndex = j;
+                    }
+                }
+                (list[maxIndex], list[i]) = (list[i], list[maxIndex]);
+            }
+            return list;
+        }
+        public static async Task<int?> GetAbiturPunktzahl()
+        {
+            await Init();
+            return 1;
         }
     }
 }

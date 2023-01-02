@@ -71,7 +71,7 @@
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SetPrFach1" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P1.Name}"></Label>
+                <Label Text="{Binding P1.Name, TargetNullValue='1. Leistungskurs'}"></Label>
             </Frame>
             <Frame Grid.Row="2" Grid.Column="2" BackgroundColor="Aqua">
                 <Frame.GestureRecognizers>
@@ -93,7 +93,7 @@
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SetPrFach2" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P2.Name}"></Label>
+                <Label Text="{Binding P2.Name,TargetNullValue='2. Leistungskurs'}"></Label>
             </Frame>
             <Frame Grid.Row="3" Grid.Column="2" BackgroundColor="Aqua">
                 <Frame.GestureRecognizers>

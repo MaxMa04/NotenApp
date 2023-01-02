@@ -24,10 +24,10 @@ namespace NotenApp.Pages
 
             var fach = e.SelectedItem as HjFach;
 
-            await FachService.AddFach(fach.Name, 1);
-            await FachService.AddFach(fach.Name, 2);
-            await FachService.AddFach(fach.Name, 3);
-            await FachService.AddFach(fach.Name, 4);
+            await FachService.AddFach(fach.Name, 1, fach.MinHalbjahre);
+            await FachService.AddFach(fach.Name, 2, fach.MinHalbjahre);
+            await FachService.AddFach(fach.Name, 3, fach.MinHalbjahre);
+            await FachService.AddFach(fach.Name, 4, fach.MinHalbjahre);
             
             await Navigation.PopAsync();
         }

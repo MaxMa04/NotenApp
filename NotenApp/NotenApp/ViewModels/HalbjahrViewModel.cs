@@ -18,6 +18,16 @@ namespace NotenApp.ViewModels
         public ObservableRangeCollection<HjFach> FaecherHJ4 { get; set; }
         public AsyncCommand<HjFach> RemoveCommand { get; }
         public AsyncCommand<int> RefreshCommand { get; }
+        private float? bitte;
+        public float? Bitte
+        {
+            get => bitte;
+            set
+            {
+                bitte = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Bitte)));
+            }
+        }
         private float? gesamtDurchschnittHJ1;
         public float? GesamtDurchschnittHJ1
         {
@@ -178,5 +188,7 @@ namespace NotenApp.ViewModels
                     break;
             }
         }
+
+
     }
 }

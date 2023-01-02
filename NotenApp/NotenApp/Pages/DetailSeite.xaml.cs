@@ -25,6 +25,7 @@ namespace NotenApp.Pages
             InitializeComponent();
             this.fach = fach;
             Label.Text = fach.Name;
+            Label1.Text = fach.MinHalbjahre.ToString();
             model = BindingContext as DetailViewModel;
         }
         protected async override void OnAppearing()

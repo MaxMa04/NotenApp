@@ -71,7 +71,7 @@
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SetPrFach1" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P1.Name, TargetNullValue='1. Leistungskurs'}"></Label>
+                <Label Text="{Binding P1.Name, FallbackValue='Leistungskurs'}"></Label>
             </Frame>
             <Frame Grid.Row="2" Grid.Column="2" BackgroundColor="Aqua">
                 <Frame.GestureRecognizers>
@@ -93,7 +93,7 @@
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SetPrFach2" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P2.Name,TargetNullValue='2. Leistungskurs'}"></Label>
+                <Label Text="{Binding P2.Name, FallbackValue='Leistungskurs'}"></Label>
             </Frame>
             <Frame Grid.Row="3" Grid.Column="2" BackgroundColor="Aqua">
                 <Frame.GestureRecognizers>
@@ -115,7 +115,7 @@
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SetPrFach3" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P3.Name}"></Label>
+                <Label Text="{Binding P3.Name, FallbackValue='Grundkurs'}"></Label>
             </Frame>
             <Frame Grid.Row="4" Grid.Column="2" BackgroundColor="Aqua">
                 <Frame.GestureRecognizers>
@@ -137,7 +137,7 @@
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SetPrFach4" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P4.Name}"></Label>
+                <Label Text="{Binding P4.Name, FallbackValue='Grundkurs'}"></Label>
             </Frame>
             <Frame Grid.Row="5" Grid.Column="3" BackgroundColor="Aqua">
                 <Frame.GestureRecognizers>
@@ -153,7 +153,7 @@
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SetPrFach5" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P5.Name}"></Label>
+                <Label Text="{Binding P5.Name, FallbackValue='Grundkurs'}"></Label>
             </Frame>
             <Frame Grid.Row="6" Grid.Column="3" BackgroundColor="Aqua">
                 <Frame.GestureRecognizers>

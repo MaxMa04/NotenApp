@@ -4,6 +4,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -80,7 +81,7 @@ namespace NotenApp.Services
             }
             return Noten;
         }
-        public static async Task AddFach(string name, int aufgabenfeld, int halbjahr, int minHalbjahre, bool isLK) 
+        public static async Task AddFach(string name, int aufgabenfeld, int halbjahr, int minHalbjahre, bool isLK, bool isPrFach) 
         {
             await Init();
 
@@ -91,7 +92,8 @@ namespace NotenApp.Services
                 Halbjahr = halbjahr,
                 MinHalbjahre = minHalbjahre,
                 EingebrachteHalbjahre = minHalbjahre,
-                IsLK = isLK
+                IsLK = isLK,
+                IsPrFach= isPrFach
                 
             };
 
@@ -243,8 +245,20 @@ namespace NotenApp.Services
             {
                 if (item.Name == name)
                 {
-                    item.EingebrachteHalbjahre = 4;
-                    await db.UpdateAsync(item);
+                    if(prNummer == 1 || prNummer == 2)
+                    {
+                        item.EingebrachteHalbjahre = 4;
+                        item.IsPrFach = true;
+                        item.IsLK = true;
+                        await db.UpdateAsync(item);
+                    }
+                    else
+                    {
+                        item.EingebrachteHalbjahre = 4;
+                        item.IsPrFach = true;
+                        await db.UpdateAsync(item);
+                    }
+                    
                 }
             }
             PrFach fach = new PrFach()
@@ -280,7 +294,10 @@ namespace NotenApp.Services
                     if(hjFach.Name == fach.Name && fach.PrNummer == prNummer)
                     {
                         hjFach.EingebrachteHalbjahre = hjFach.MinHalbjahre;
+                        hjFach.IsPrFach = false;
+                        hjFach.IsLK = false;
                         await db.UpdateAsync(hjFach);
+
                     }
                 }
             }
@@ -295,8 +312,21 @@ namespace NotenApp.Services
                     {
                         if(hjFach.Name == name)
                         {
-                            hjFach.EingebrachteHalbjahre = 4;
-                            await db.UpdateAsync(hjFach);
+                            if(prNummer == 1 || prNummer == 2)
+                            {
+                                hjFach.EingebrachteHalbjahre = 4;
+                                hjFach.IsPrFach = true;
+                                hjFach.IsLK=true;
+
+                                await db.UpdateAsync(hjFach);
+                            }
+                            else
+                            {
+                                hjFach.EingebrachteHalbjahre = 4;
+                                hjFach.IsPrFach = true;
+                                await db.UpdateAsync(hjFach);
+                            }
+                            
                         } 
                     }
                     
@@ -420,6 +450,273 @@ namespace NotenApp.Services
         {
             await Init();
             return 1;
+        }
+        public static async Task EntscheideBioInfoPhysikChemie()
+        {
+            await Init();
+            List<HjFach> Faecher = await GetFaecher();
+            double sumCh = 0;
+            double anzCh = 0;
+            double sumPh = 0;
+            double anzPh = 0;
+            double sumIn = 0;
+            double anzIn = 0;
+            double sumBi = 0;
+            double anzBi = 0;
+            int anzprfaecher = 0;
+            foreach (var item in Faecher)
+            {
+                switch (item.Name)
+                {
+                    case "Chemie":
+                        if(item.Durchschnitt != null)
+                        {
+                            sumCh += (double)item.Durchschnitt;
+                            anzCh++;
+                        }
+                        if (item.IsPrFach == true)
+                        {
+                            sumCh = 0;
+                            anzprfaecher++;
+                        }
+                        else
+                        {
+                            item.EingebrachteHalbjahre = item.MinHalbjahre;
+                            await db.UpdateAsync(item);
+                        }
+                        break;
+                    case "Biologie":
+                        if (item.Durchschnitt != null)
+                        {
+                            sumBi += (double)item.Durchschnitt;
+                            anzBi++;
+                        }
+                        if (item.IsPrFach == true)
+                        {
+                            sumBi = 0; 
+                            anzprfaecher++;
+                        }
+                        else
+                        {
+                            item.EingebrachteHalbjahre = item.MinHalbjahre;
+                            await db.UpdateAsync(item);
+                        }
+                        break;
+                    case "Physik":
+                        if (item.Durchschnitt != null)
+                        {
+                            sumPh += (double)item.Durchschnitt;
+                            anzPh++;
+                        }
+                        if (item.IsPrFach == true)
+                        {
+                            sumPh = 0;
+                            anzprfaecher++;
+                        }
+                        else
+                        {
+                            item.EingebrachteHalbjahre = item.MinHalbjahre;
+                            await db.UpdateAsync(item);
+                        }
+                        break;
+                    case "Informatik":
+                        if (item.Durchschnitt != null)
+                        {
+                            sumIn += (double)item.Durchschnitt;
+                            anzIn++;
+                        }
+                        if (item.IsPrFach == true)
+                        {
+                            sumIn = 0;
+                            anzprfaecher++;
+                        }
+                        else
+                        {
+                            item.EingebrachteHalbjahre = item.MinHalbjahre;
+                            await db.UpdateAsync(item);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            if(anzprfaecher >= 8)
+            {
+                return;
+            }
+            if(anzprfaecher == 4)
+            {
+                double duIn = sumIn / anzIn;
+                double duPh = sumPh / anzPh;
+                double duCh = sumCh / anzCh;
+                double duBi = sumBi / anzBi;
+                int fach1 = 0;
+                List<double> numbers = new List<double> { duIn, duPh, duCh, duBi };
+                // Liste sortieren
+                List<double> numbersa = numbers.ToList();
+                numbers.Sort();
+                for (int i = 0; i < numbers.Count; i++)
+                {
+                    if (numbers[3] == numbersa[i])
+                    {
+                        fach1 = i;
+                    }
+                }
+                switch (fach1)
+                {
+                    case 0:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Informatik")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                    case 1:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Physik")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                    case 2:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Chemie")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                    case 3:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Biologie")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                double duIn = sumIn / anzIn;
+                double duPh = sumPh / anzPh;
+                double duCh = sumCh / anzCh;
+                double duBi = sumBi / anzBi;
+                int fach1 = 0;
+                int fach2 = 0;
+                List<double> numbers = new List<double> { duIn, duPh, duCh, duBi };
+                // Liste sortieren
+                List<double> numbersa = numbers.ToList();
+                numbers.Sort();
+                for (int i = 0; i < numbers.Count; i++)
+                {
+                    if (numbers[3] == numbersa[i])
+                    {
+                        fach1 = i;
+                    }
+                    if (numbers[2] == numbersa[i])
+                    {
+                        fach2 = i;
+                    }
+                }
+                switch (fach2)
+                {
+                    case 0:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Informatik")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                    case 1:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Physik")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                    case 2:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Chemie")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                    case 3:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Biologie")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                }
+                switch (fach1)
+                {
+                    case 0:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Informatik")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                    case 1:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Physik")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                    case 2:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Chemie")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                    case 3:
+                        foreach (var item in Faecher)
+                        {
+                            if (item.Name == "Biologie")
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                        break;
+                }
+            }
         }
     }
 }

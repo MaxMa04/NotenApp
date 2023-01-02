@@ -192,13 +192,14 @@ namespace NotenApp.ViewModels
 
         public async Task<int?> GetPunktzahlBlock1()
         {
+            await FachService.EntscheideBioInfoPhysikChemie();
             
             List<HjFach> gesamtFaecher = await FachService.GetFaecher();
             List<HjFach> eingebrachteFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die im Endeffekt eingebracht werden 
             List<HjFach> pflichtFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die eingebracht werden müssen
             List<HjFach> uebrigeFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die eingebracht werden könnten
             //Zuweisung der einzelnen FächerHalbjahre in Pflichtfächer und Übrige Fächer
-            if (gesamtFaecher.Count == 0)
+            if (gesamtFaecher.Count == 0 || gesamtFaecher.Exists(t => t.IsLK) == false)
             {
                 return 1;
             }
@@ -283,7 +284,15 @@ namespace NotenApp.ViewModels
                 }
             }
             punktzahlBlock1 = (summeDurchschnitteAllerHalbjahre / 48) * 40;
-            return (int)Math.Round(punktzahlBlock1,0);
+            if(punktzahlBlock1 < 0 || punktzahlBlock1 > 600)
+            {
+                return 1;
+            }
+            else
+            {
+                return (int)Math.Round(punktzahlBlock1, 0);
+            }
+            
         }
     }
 }

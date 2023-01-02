@@ -45,5 +45,18 @@ namespace NotenApp.Pages
             }
             
         }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            if (created == true)
+            {
+                await FachService.UpdateName("-", prNummer);
+                
+            }
+            else
+            {
+                await Navigation.PopAsync();
+            }
+        }
     }
 }

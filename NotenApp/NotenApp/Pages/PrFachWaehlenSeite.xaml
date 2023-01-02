@@ -7,14 +7,20 @@
         <ViewModels:HalbjahrViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding FaecherHJ1}" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single">
-            <CollectionView.ItemTemplate >
-                <DataTemplate>
-                    <Frame>
-                        <Label Text="{Binding Name}"></Label>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <StackLayout>
+            <Button Text="Kein Fach" Clicked="Button_Clicked">
+                
+            </Button>
+            <CollectionView ItemsSource="{Binding FaecherHJ1}" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single">
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <Frame>
+                            <Label Text="{Binding Name}"></Label>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

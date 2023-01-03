@@ -18,6 +18,10 @@ namespace NotenApp.Services
         static SQLiteAsyncConnection db;
         static async Task Init()
         {
+            if(db!= null)
+            {
+                return;
+            }
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data");
 
             db = new SQLiteAsyncConnection(databasePath);

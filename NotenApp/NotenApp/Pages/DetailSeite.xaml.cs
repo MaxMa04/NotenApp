@@ -25,15 +25,15 @@ namespace NotenApp.Pages
         {
             InitializeComponent();
             this.fach = fach;
-            Label.Text = fach.Name;
-            Label1.Text = fach.EingebrachteHalbjahre.ToString();
             model = BindingContext as DetailViewModel;
+            model.FachName = fach.Name;
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
             await model.Initialize(fach);
-            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);    
+            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
+            
             //Sizing Collection View for LK Noten
 
             if(model.LKNoten.Count == 0)
@@ -55,6 +55,7 @@ namespace NotenApp.Pages
             }
             
             rdcv.Height = cv.HeightRequest;
+            model.Einzhj = await FachService.GetEinzubringendeHalbjahre(fach);
 
         }
 
@@ -64,11 +65,13 @@ namespace NotenApp.Pages
             await FachService.RemoveSingleNote(note);
             await model.Initialize(fach);
             model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
+            model.Einzhj = await FachService.GetEinzubringendeHalbjahre(fach);
         }
 
         private async void AddKlausurNote(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.Klausur,1));
+
         }
         private async void AddLKNote(object sender, EventArgs e)
         {

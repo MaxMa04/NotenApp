@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace NotenApp.Models
@@ -18,8 +19,6 @@ namespace NotenApp.Models
         public List<HjNote> LKNoten { get; set; }
         [Ignore]
         public List<HjNote> KlausurNoten { get; set; }
-
-
         public HjFach()
         {
             LKNoten = new List<HjNote>();

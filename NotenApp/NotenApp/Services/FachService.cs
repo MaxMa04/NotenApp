@@ -43,6 +43,10 @@ namespace NotenApp.Services
             await db.InsertAsync(newNote);
             fach.Durchschnitt = await GetFachDurchschnitt(fach);
             await db.UpdateAsync(fach);
+            if(fach.Name == "Informatik" || fach.Name == "Biologie" || fach.Name=="Physik"|| fach.Name == "Chemie")
+            {
+                await EntscheideBioInfoPhysikChemie();
+            }
 
 
         }
@@ -60,6 +64,25 @@ namespace NotenApp.Services
                 }
             }
             return facher;
+        }
+        public static async Task<int> GetEinzubringendeHalbjahre(HjFach fach)
+        {
+            await Init();
+            if (fach.Name == "Biologie" || fach.Name == "Chemie" || fach.Name == "Physik" || fach.Name == "Informatik")
+            {
+                await EntscheideBioInfoPhysikChemie();
+            }
+            
+            List<HjFach> facher = await GetFaecher(fach.Halbjahr);
+            int anzhj = 0;
+            foreach (var item in facher)
+            {
+                if(item.Name == fach.Name)
+                {
+                    anzhj = item.EingebrachteHalbjahre;
+                }
+            }
+            return anzhj;
         }
         public static async Task<List<HjFach>> GetFaecher()
         {

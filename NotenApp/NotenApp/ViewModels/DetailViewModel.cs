@@ -13,7 +13,17 @@ namespace NotenApp.ViewModels
     {
         public ObservableRangeCollection<HjNote> LKNoten { get; set; }
         public ObservableRangeCollection<HjNote> KlausurNoten { get; set; }
-        public string FachName { get; set; }
+        private string fachName;
+        public string FachName
+        {
+            get => fachName;
+            set
+            {
+                fachName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FachName)));
+            }
+        }
+    
         private float? fachDurchschnitt;
         public float? FachDurchschnitt
         {
@@ -22,6 +32,16 @@ namespace NotenApp.ViewModels
             {
                 fachDurchschnitt = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FachDurchschnitt)));
+            }
+        }
+        private int einzhj;
+        public int Einzhj
+        {
+            get => einzhj;
+            set
+            {
+                einzhj = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Einzhj)));
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

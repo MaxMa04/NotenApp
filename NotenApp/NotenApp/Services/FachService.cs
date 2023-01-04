@@ -76,17 +76,22 @@ namespace NotenApp.Services
             {
                 await EntscheideBioInfoPhysikChemie();
             }
-            
+            if (fach.Name == "G/R/W" || fach.Name == "Geografie")
+            {
+                await EntscheideGeoGRW();
+            }
+
             List<HjFach> facher = await GetFaecher(fach.Halbjahr);
-            int anzhj = 0;
             foreach (var item in facher)
             {
                 if(item.Name == fach.Name)
                 {
-                    anzhj = item.EingebrachteHalbjahre;
+                    return item.EingebrachteHalbjahre;
+                    
                 }
             }
-            return anzhj;
+            return -500;
+            
         }
         public static async Task<List<HjFach>> GetFaecher()
         {
@@ -477,6 +482,107 @@ namespace NotenApp.Services
         {
             await Init();
             return 1;
+        }
+        public static async Task EntscheideGeoGRW()
+        {
+            await Init();
+            List<HjFach> Faecher = await GetFaecher();
+            if(Faecher.Exists(t => t.Name == "G/R/W") == false)
+            {
+                foreach (var item in Faecher)
+                {
+                    if(item.Name == "Geografie" && item.IsPrFach != true)
+                    {
+                        item.EingebrachteHalbjahre = 2;
+                        await db.UpdateAsync(item);
+                    }
+                }
+                return;
+            }
+            if (Faecher.Exists(t => t.Name == "Geografie") == false)
+            {
+                foreach (var item in Faecher)
+                {
+                    if (item.Name == "G/R/W" && item.IsPrFach != true)
+                    {
+                        item.EingebrachteHalbjahre = 2;
+                        await db.UpdateAsync(item);
+                    }
+                }
+                return;
+            }
+            if(Faecher.Exists(t => t.Name == "G/R/W") == true && Faecher.Exists(t => t.Name == "Geografie") == true)
+            {
+                double sumGeo = 0;
+                double anzGeo = 0;
+                double sumGRW = 0;
+                double anzGRW = 0;
+                foreach (var item in Faecher)
+                {
+                    switch (item.Name)
+                    {
+                        case "G/R/W":
+                            if (item.Durchschnitt != null)
+                            {
+                                sumGRW += (double)item.Durchschnitt;
+                                anzGRW++;
+                            }
+                            if (item.IsPrFach == true)
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                item.EingebrachteHalbjahre = item.MinHalbjahre;
+                                await db.UpdateAsync(item);
+                            }
+                            break;
+                        case "Geografie":
+                            if (item.Durchschnitt != null)
+                            {
+                                sumGeo += (double)item.Durchschnitt;
+                                anzGeo++;
+                            }
+                            if (item.IsPrFach == true)
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                item.EingebrachteHalbjahre = item.MinHalbjahre;
+                                await db.UpdateAsync(item);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                double duGRW = sumGRW / anzGRW;
+                double duGeo = sumGeo / anzGeo;
+                if(duGRW > duGeo)
+                {
+                    foreach (var item in Faecher)
+                    {
+                        if(item.Name == "G/R/W")
+                        {
+                            item.EingebrachteHalbjahre = 2;
+                            await db.UpdateAsync(item);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var item in Faecher)
+                    {
+                        if (item.Name == "Geografie")
+                        {
+                            item.EingebrachteHalbjahre = 2;
+                            await db.UpdateAsync(item);
+                        }
+                    }
+                }
+            }
+
         }
         public static async Task EntscheideBioInfoPhysikChemie()
         {

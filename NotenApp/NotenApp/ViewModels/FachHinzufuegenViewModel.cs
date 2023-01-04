@@ -18,7 +18,7 @@ namespace NotenApp.ViewModels
                 new HjFach { Name = "Deutsch"    , MinHalbjahre=4, Aufgabenfeld=(int)FachAufgabenfeld.Sprachlich           , IsLK=false, IsPrFach=false     },
                 new HjFach { Name = "Englisch"   , MinHalbjahre=4, Aufgabenfeld=(int)FachAufgabenfeld.Sprachlich           , IsLK=false, IsPrFach=false     },
                 new HjFach { Name = "Physik"     , MinHalbjahre=1, Aufgabenfeld=(int)FachAufgabenfeld.Naturwissenschaftlich, IsLK=false, IsPrFach=false     },
-                new HjFach { Name = "G/R/W"      , MinHalbjahre=2, Aufgabenfeld=(int)FachAufgabenfeld.Gesellschaftlich     , IsLK=false, IsPrFach=false     },
+                new HjFach { Name = "G/R/W"      , MinHalbjahre=1, Aufgabenfeld=(int)FachAufgabenfeld.Gesellschaftlich     , IsLK=false, IsPrFach=false     },
                 new HjFach { Name = "Chemie"     , MinHalbjahre=1, Aufgabenfeld=(int)FachAufgabenfeld.Naturwissenschaftlich, IsLK=false, IsPrFach=false     },
                 new HjFach { Name = "Ethik"      , MinHalbjahre=2, Aufgabenfeld=(int)FachAufgabenfeld.Kein                 , IsLK=false, IsPrFach=false     },  
                 new HjFach { Name = "Religion"   , MinHalbjahre=2, Aufgabenfeld=(int)FachAufgabenfeld.Kein                 , IsLK=false, IsPrFach=false     },

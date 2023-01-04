@@ -193,6 +193,7 @@ namespace NotenApp.ViewModels
         public async Task<int?> GetPunktzahlBlock1()
         {
             await FachService.EntscheideBioInfoPhysikChemie();
+            await FachService.EntscheideGeoGRW();
             
             List<HjFach> gesamtFaecher = await FachService.GetFaecher();
             List<HjFach> eingebrachteFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die im Endeffekt eingebracht werden 

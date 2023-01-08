@@ -1,5 +1,6 @@
 ﻿using NotenApp.Logic;
 using NotenApp.Models;
+using NotenApp.ViewModels;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,10 @@ namespace NotenApp.Services
         static SQLiteAsyncConnection db;
         static async Task Init()
         {
-            if(db!= null)
-            {
-                return;
-            }
+            //if(db!= null)
+            //{
+            //    return;
+            //}
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data");
 
             db = new SQLiteAsyncConnection(databasePath);
@@ -80,6 +81,10 @@ namespace NotenApp.Services
             {
                 await EntscheideGeoGRW();
             }
+            if(fach.IsFremdsprache == true)
+            {
+                await EntscheideFremdsprache();
+            }
 
             List<HjFach> facher = await GetFaecher(fach.Halbjahr);
             foreach (var item in facher)
@@ -113,7 +118,7 @@ namespace NotenApp.Services
             }
             return Noten;
         }
-        public static async Task AddFach(string name, int aufgabenfeld, int halbjahr, int minHalbjahre, bool isLK, bool isPrFach) 
+        public static async Task AddFach(string name, int aufgabenfeld, int halbjahr, int minHalbjahre, bool isLK, bool isPrFach, bool isFremdsprache) 
         {
             await Init();
 
@@ -125,7 +130,8 @@ namespace NotenApp.Services
                 MinHalbjahre = minHalbjahre,
                 EingebrachteHalbjahre = minHalbjahre,
                 IsLK = isLK,
-                IsPrFach= isPrFach
+                IsPrFach= isPrFach,
+                IsFremdsprache = isFremdsprache
                 
             };
 
@@ -474,15 +480,237 @@ namespace NotenApp.Services
         public static async Task<float?> GetAbiturNote()
         {
             await Init();
-            return 1f;
+            int abipunktzahl = (int)await GetAbiturPunktzahl();
+            List<int> punktzahlen = new List<int> { 300,301,319,337,355,373,391,409,427,445,463,481,499,517,535,553,571,
+                589,607,625,643,661,679,697,715,733,751,769,787,805,823};
+            int stelle = 0;
+            float abiturNote;
+            if (abipunktzahl < 4)
+            {
+                return -1;
+            }
+            for (int i = 0; i < punktzahlen.Count; i++)
+            {
+                if(abipunktzahl >= punktzahlen[i])
+                {
+                    stelle = i;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            abiturNote = 4.0f - 0.1f * stelle;
+
+            return abiturNote;
         }
         
         
         public static async Task<int?> GetAbiturPunktzahl()
         {
             await Init();
-            return 1;
+            HalbjahrViewModel model = new HalbjahrViewModel();
+            float? durchschnittBlock2 = await GetDurchschnittBlock2();
+            int punktzahlBlock1 = (int)await model.GetPunktzahlBlock1();
+            
+            
+            if(durchschnittBlock2 != null && punktzahlBlock1 > 3)
+            {
+                int punktzahlBlock2 = (int)Math.Round((decimal)durchschnittBlock2, 0) * 20;
+                int abipunktzahl = punktzahlBlock2 + punktzahlBlock1;
+                return abipunktzahl;
+            }
+            else if(durchschnittBlock2== null && punktzahlBlock1 > 3)
+            {
+                float schBlock2 = (punktzahlBlock1 / 600) * 300;
+                int abipunktzahl = (int)Math.Round(schBlock2,0) + punktzahlBlock1;
+                return abipunktzahl;
+            }
+            else
+            {
+                return punktzahlBlock1;
+            }
+ 
         }
+        public static async Task EntscheideFremdsprache()
+        {
+            await Init();
+            List<HjFach> FaecherHj = await GetFaecher(1);
+            List<HjFach> GesamtFaecher = await GetFaecher();
+            int anzFS = 0;
+            string NaFS1 = null;
+            double suFs1 = 0;
+            double anFs1 = 0;
+            string NaFS2 = null;
+            double suFs2 = 0;
+            double anFs2 = 0;
+            string NaFS3 = null;
+            double suFs3 = 0;
+            double anFs3 = 0;
+            double duFs1;
+            double duFs2;
+            double duFs3;
+            foreach (var item in FaecherHj)
+            {
+                if (item.IsFremdsprache == true)
+                {
+                    anzFS++;
+                    if (NaFS1 == null)
+                    {
+                        NaFS1 = item.Name;
+                        foreach (var fach in GesamtFaecher)
+                        {
+                            if (fach.Name == NaFS1 && fach.Durchschnitt != null)
+                            {
+                                suFs1 += (double)fach.Durchschnitt;
+                                anFs1++;
+                            }
+                            if (fach.Name == NaFS1 && fach.IsPrFach == true)
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                fach.EingebrachteHalbjahre = fach.MinHalbjahre;
+                                await db.UpdateAsync(fach);
+                            }
+                        }
+                    }
+                    else if (NaFS2 == null)
+                    {
+                        NaFS2 = item.Name;
+                        foreach (var fach in GesamtFaecher)
+                        {
+                            if (fach.Name == NaFS2 && fach.Durchschnitt != null)
+                            {
+                                suFs2 += (double)fach.Durchschnitt;
+                                anFs2++;
+                            }
+                            if (fach.Name == NaFS2 && fach.IsPrFach == true)
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                fach.EingebrachteHalbjahre = fach.MinHalbjahre;
+                                await db.UpdateAsync(fach);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        NaFS3 = item.Name;
+                        foreach (var fach in GesamtFaecher)
+                        {
+                            if (fach.Name == NaFS3 && fach.Durchschnitt != null)
+                            {
+                                suFs3 += (double)fach.Durchschnitt;
+                                anFs3++;
+                            }
+                            if (fach.Name == NaFS3 && fach.IsPrFach == true)
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                fach.EingebrachteHalbjahre = fach.MinHalbjahre;
+                                await db.UpdateAsync(fach);
+                            }
+                        }
+                    }
+                }
+
+
+            }
+            switch (anzFS)
+            {
+                case 1:
+                    foreach (var item in GesamtFaecher)
+                    {
+                        if(item.IsFremdsprache == true)
+                        {
+                            item.EingebrachteHalbjahre = 4;
+                            await db.UpdateAsync(item);
+                        }
+                    }
+                    break;
+                case 2:
+                    duFs1 = suFs1 / anFs1;
+                    duFs2 = suFs2 / anFs2;
+                    List<double> durchschnitted = new List<double> { duFs1, duFs2};
+                    durchschnitted.Sort();
+                    if (duFs1 == durchschnitted[1])
+                    {
+                        foreach (var item in GesamtFaecher)
+                        {
+                            if (item.Name == NaFS1)
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in GesamtFaecher)
+                        {
+                            if (item.Name == NaFS2)
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                    }
+
+                    break;
+                case 3:
+                    duFs1 = suFs1 / anFs1;
+                    duFs2 = suFs2 / anFs2;
+                    duFs3 = suFs3 / anFs3;
+                    List<double> durchschnitte = new List<double> { duFs1, duFs2, duFs3 };
+                    durchschnitte.Sort();
+                    if (duFs1 == durchschnitte[2])
+                    {
+                        foreach (var item in GesamtFaecher)
+                        {
+                            if (item.Name == NaFS1)
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                    }
+                    else if (duFs2 == durchschnitte[2])
+                    {
+                        foreach (var item in GesamtFaecher)
+                        {
+                            if (item.Name == NaFS2)
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in GesamtFaecher)
+                        {
+                            if (item.Name == NaFS3)
+                            {
+                                item.EingebrachteHalbjahre = 4;
+                                await db.UpdateAsync(item);
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+
         public static async Task EntscheideGeoGRW()
         {
             await Init();

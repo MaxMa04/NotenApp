@@ -55,7 +55,7 @@ namespace NotenApp.Pages
             }
             
             rdcv.Height = cv.HeightRequest;
-            model.Einzhj = await FachService.GetEinzubringendeHalbjahre(fach);
+            model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
 
         }
 
@@ -65,7 +65,7 @@ namespace NotenApp.Pages
             await FachService.RemoveSingleNote(note);
             await model.Initialize(fach);
             model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
-            model.Einzhj = await FachService.GetEinzubringendeHalbjahre(fach);
+            model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
         }
 
         private async void AddKlausurNote(object sender, EventArgs e)

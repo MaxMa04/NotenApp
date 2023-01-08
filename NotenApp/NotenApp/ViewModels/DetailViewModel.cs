@@ -34,14 +34,14 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FachDurchschnitt)));
             }
         }
-        private int einzhj;
-        public int Einzhj
+        private int fachEinzubringendeHalbjahre;
+        public int FachEinzubringendeHalbjahre
         {
-            get => einzhj;
+            get => fachEinzubringendeHalbjahre;
             set
             {
-                einzhj = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Einzhj)));
+                fachEinzubringendeHalbjahre = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FachEinzubringendeHalbjahre)));
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

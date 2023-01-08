@@ -194,15 +194,20 @@ namespace NotenApp.ViewModels
         {
             await FachService.EntscheideBioInfoPhysikChemie();
             await FachService.EntscheideGeoGRW();
+            await FachService.EntscheideFremdsprache();
             
             List<HjFach> gesamtFaecher = await FachService.GetFaecher();
             List<HjFach> eingebrachteFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die im Endeffekt eingebracht werden 
             List<HjFach> pflichtFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die eingebracht werden müssen
             List<HjFach> uebrigeFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die eingebracht werden könnten
             //Zuweisung der einzelnen FächerHalbjahre in Pflichtfächer und Übrige Fächer
-            if (gesamtFaecher.Count == 0 || gesamtFaecher.Exists(t => t.IsLK) == false)
+            if (gesamtFaecher.Count < 40 )
             {
                 return 1;
+            }
+            if( gesamtFaecher.Exists(t => t.IsLK) == false)
+            {
+                return 2;
             }
             for (int j = 0; j < gesamtFaecher.Count; j++)
             {
@@ -287,7 +292,7 @@ namespace NotenApp.ViewModels
             punktzahlBlock1 = (summeDurchschnitteAllerHalbjahre / 48) * 40;
             if(punktzahlBlock1 < 0 || punktzahlBlock1 > 600)
             {
-                return 1;
+                return 3;
             }
             else
             {

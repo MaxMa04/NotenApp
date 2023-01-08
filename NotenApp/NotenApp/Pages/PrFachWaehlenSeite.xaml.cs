@@ -51,6 +51,7 @@ namespace NotenApp.Pages
             if (created == true)
             {
                 await FachService.UpdateName("-", prNummer);
+                await Navigation.PopAsync();
                 
             }
             else

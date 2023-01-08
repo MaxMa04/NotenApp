@@ -25,7 +25,7 @@ namespace NotenApp.Pages
         protected async override void OnAppearing()
         {
             base.OnAppearing(); 
-            model.P1 = await FachService.GetPrFach(3);
+            model.P1 = await FachService.GetPrFach(1);
             model.P2 = await FachService.GetPrFach(2);
             model.P3 = await FachService.GetPrFach(3);
             model.P4 = await FachService.GetPrFach(4);

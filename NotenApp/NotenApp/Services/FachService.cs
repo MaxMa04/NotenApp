@@ -507,24 +507,24 @@ namespace NotenApp.Services
         }
         
         
-        public static async Task<int?> GetAbiturPunktzahl()
+        public static async Task<float> GetAbiturPunktzahl()
         {
             await Init();
             HalbjahrViewModel model = new HalbjahrViewModel();
             float? durchschnittBlock2 = await GetDurchschnittBlock2();
-            int punktzahlBlock1 = (int)await model.GetPunktzahlBlock1();
+            float punktzahlBlock1 = (int)await model.GetPunktzahlBlock1();
             
             
             if(durchschnittBlock2 != null && punktzahlBlock1 > 3)
             {
-                int punktzahlBlock2 = (int)Math.Round((decimal)durchschnittBlock2, 0) * 20;
-                int abipunktzahl = punktzahlBlock2 + punktzahlBlock1;
+                float punktzahlBlock2 = (float)Math.Round((double)durchschnittBlock2, 0) * 20;
+                float abipunktzahl = punktzahlBlock2 + punktzahlBlock1;
                 return abipunktzahl;
             }
             else if(durchschnittBlock2== null && punktzahlBlock1 > 3)
             {
-                float schBlock2 = (punktzahlBlock1 / 600) * 300;
-                int abipunktzahl = (int)Math.Round(schBlock2,0) + punktzahlBlock1;
+                float schBlock2 = punktzahlBlock1 / 600 * 300;
+                float abipunktzahl = (float)Math.Round((double)schBlock2,0) + punktzahlBlock1;
                 return abipunktzahl;
             }
             else

@@ -13,21 +13,26 @@ namespace NotenApp
 {
     public partial class MainPage : ContentPage
     {
-        HalbjahrViewModel _model;
+        MainPageViewModel _model;
+        HalbjahrViewModel hjViewModel;
         public MainPage()
         {
             InitializeComponent();
-            _model = BindingContext as HalbjahrViewModel;
+            _model = BindingContext as MainPageViewModel;
+            hjViewModel = new HalbjahrViewModel();
             
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            _model.GesamtDurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
-            _model.GesamtDurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
-            _model.GesamtDurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
-            _model.GesamtDurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
-            _model.Bitte = await _model.GetPunktzahlBlock1();
+            int punktzahlBlock1 = (int)await hjViewModel.GetPunktzahlBlock1();
+            _model.DurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
+            _model.DurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
+            _model.DurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
+            _model.DurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
+            _model.PunktzahlBlock1 = punktzahlBlock1.ToString() + "/600";
+            _model.PunktzahlBlock2 = await FachService.GetPunktzahlBlock2();
+            _model.AbiturNote = await FachService.GetAbiturNote();
 
         }
         private async void Tapped1(object sender, System.EventArgs e)

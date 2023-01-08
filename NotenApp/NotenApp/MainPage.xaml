@@ -29,7 +29,7 @@
 
                 
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="130" />
+                <RowDefinition Height="140" />
                 <RowDefinition Height="90"/>
 
             </Grid.RowDefinitions>
@@ -71,7 +71,12 @@
                     <TapGestureRecognizer Tapped="OpenBlock1" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
                 <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Label TextColor="Black" Margin="0,7,0,-5" HorizontalTextAlignment="Center" Text="{Binding PunktzahlBlock1, FallbackValue='-'}" FontSize="Large"></Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <Label TextColor="Black" Margin="0,7,0,-5" HorizontalTextAlignment="Center" Text="Block 1" FontSize="Large"></Label>
+                        <Frame CornerRadius="20" Margin="0,8,0,0" BackgroundColor="Red">
+                            <Label TextColor="Black" Margin="-15" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" Text="{Binding PunktzahlBlock1}" FontSize="Small"></Label>
+                        </Frame>
+                    </StackLayout>
                     <StackLayout WidthRequest="280" Orientation="Horizontal">
                         <Frame CornerRadius="15" WidthRequest="18" Margin="0" HeightRequest="18">
                             <Frame.GestureRecognizers>
@@ -106,8 +111,13 @@
                     <TapGestureRecognizer Tapped="OpenBlock2" NumberOfTapsRequired="1" />
                 </Frame.GestureRecognizers>
                 <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Label TextColor="Black" Margin="0,7,0,0" HorizontalOptions="Center" Text="Block 2" FontSize="Large"></Label>
-                    <Label TextColor="Black" Margin="0,-5,0,0" Text="{Binding PunktzahlBlock2, FallbackValue='-'}" HorizontalOptions="Center" FontSize="Large"></Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <Label TextColor="Black" Margin="0,7,0,-5" HorizontalTextAlignment="Center" Text="Block 2" FontSize="Large"></Label>
+                        <Frame CornerRadius="20" Margin="0,8,0,0" BackgroundColor="Red">
+                            <Label TextColor="Black" Margin="-15" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" Text="{Binding PunktzahlBlock2}" FontSize="Small"></Label>
+                        </Frame>
+                    </StackLayout>
+                    <Label  TextColor="Black" Margin="0,-5,0,0" Text="{Binding DurchschnittBlock2, TargetNullValue='-'}" HorizontalOptions="Center" FontSize="Large"></Label>
                 </StackLayout>
             </Frame>
             <!--aktueller Abiturschnitt-->

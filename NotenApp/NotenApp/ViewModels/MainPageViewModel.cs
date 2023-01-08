@@ -78,6 +78,16 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AbiturNote)));
             }
         }
+        private float? durchschnittBlock2;
+        public float? DurchschnittBlock2
+        {
+            get => durchschnittBlock2;
+            set
+            {
+                durchschnittBlock2 = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DurchschnittBlock2)));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

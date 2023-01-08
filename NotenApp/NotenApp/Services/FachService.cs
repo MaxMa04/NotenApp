@@ -453,20 +453,19 @@ namespace NotenApp.Services
             durchschnittBlock2 = durchschnittsSumme / anzahlFaecher;
             return durchschnittBlock2;
         }
-        public static async Task<string> GetPunktzahlBlock2()
+        public static async Task<int> GetPunktzahlBlock2()
         {
             await Init();
             float? durchschnitt = await GetDurchschnittBlock2();
             float? iPunktzahl =  durchschnitt * 20;
-            if(iPunktzahl > 0)
-            {
-                string punktzahl = (int?)iPunktzahl + "/300";
+            if(iPunktzahl != null)
+            { 
 
-                return punktzahl;
+                return (int)Math.Round((decimal)iPunktzahl,0);
             }
             else
             {
-                return "-";
+                return 0;
             }
 
         }
@@ -485,7 +484,7 @@ namespace NotenApp.Services
                 589,607,625,643,661,679,697,715,733,751,769,787,805,823};
             int stelle = 0;
             float abiturNote;
-            if (abipunktzahl < 4)
+            if (abipunktzahl < 5)
             {
                 return -1;
             }
@@ -515,13 +514,13 @@ namespace NotenApp.Services
             float punktzahlBlock1 = (int)await model.GetPunktzahlBlock1();
             
             
-            if(durchschnittBlock2 != null && punktzahlBlock1 > 3)
+            if(durchschnittBlock2 != null && punktzahlBlock1 > 4)
             {
                 float punktzahlBlock2 = (float)Math.Round((double)durchschnittBlock2, 0) * 20;
                 float abipunktzahl = punktzahlBlock2 + punktzahlBlock1;
                 return abipunktzahl;
             }
-            else if(durchschnittBlock2== null && punktzahlBlock1 > 3)
+            else if(durchschnittBlock2== null && punktzahlBlock1 > 4)
             {
                 float schBlock2 = punktzahlBlock1 / 600 * 300;
                 float abipunktzahl = (float)Math.Round((double)schBlock2,0) + punktzahlBlock1;

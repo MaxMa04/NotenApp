@@ -233,6 +233,10 @@ namespace NotenApp.ViewModels
                             summeDurchschnitte += (float)fachh.Durchschnitt;
                         }
                     }
+                    if(anzahlDurchschnitte == 0)
+                    {
+                        return 3;
+                    }
                     foreach (var fachhh in faecher)
                     {
                         if (fachhh.Durchschnitt == null)
@@ -292,7 +296,7 @@ namespace NotenApp.ViewModels
             punktzahlBlock1 = (summeDurchschnitteAllerHalbjahre / 48) * 40;
             if(punktzahlBlock1 < 0 || punktzahlBlock1 > 600)
             {
-                return 3;
+                return 4;
             }
             else
             {

@@ -81,21 +81,22 @@ namespace NotenApp.Services
             {
                 await EntscheideGeoGRW();
             }
-            if(fach.IsFremdsprache == true)
-            {
-                await EntscheideFremdsprache();
-            }
+            //if(fach.IsFremdsprache == true)
+            //{
+            //    await EntscheideFremdsprache();
+            //}
 
-            List<HjFach> facher = await GetFaecher(fach.Halbjahr);
+            List<HjFach> facher = await GetFaecher();
+            int einghj = 0;
             foreach (var item in facher)
             {
                 if(item.Name == fach.Name)
                 {
-                    return item.EingebrachteHalbjahre;
+                    einghj = item.EingebrachteHalbjahre;
                     
                 }
             }
-            return -500;
+            return einghj;
             
         }
         public static async Task<List<HjFach>> GetFaecher()
@@ -367,7 +368,6 @@ namespace NotenApp.Services
                             
                         } 
                     }
-                    
                 }
             }
         }
@@ -756,6 +756,14 @@ namespace NotenApp.Services
                             }
                             if (item.IsPrFach == true)
                             {
+                                foreach(var item2 in Faecher)
+                                {
+                                    if(item2.Name == "Geografie")
+                                    {
+                                        item2.EingebrachteHalbjahre = item2.MinHalbjahre;
+                                        await db.UpdateAsync(item2);
+                                    }
+                                }
                                 return;
                             }
                             else
@@ -772,6 +780,14 @@ namespace NotenApp.Services
                             }
                             if (item.IsPrFach == true)
                             {
+                                foreach (var item2 in Faecher)
+                                {
+                                    if (item2.Name == "G/R/W")
+                                    {
+                                        item2.EingebrachteHalbjahre = item2.MinHalbjahre;
+                                        await db.UpdateAsync(item2);
+                                    }
+                                }
                                 return;
                             }
                             else

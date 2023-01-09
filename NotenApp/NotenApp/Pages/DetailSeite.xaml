@@ -15,7 +15,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="200" />
                 <RowDefinition Height="80" />
-                <RowDefinition Height="50"/>
+                <!--Beginn Notenverwaltung-->
+                <RowDefinition Height="50"/> 
                 <RowDefinition Height="45" />
                 <RowDefinition Height="50"/>
                 <RowDefinition x:Name="rdcv" Height="Auto" />

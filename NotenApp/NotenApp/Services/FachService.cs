@@ -157,11 +157,22 @@ namespace NotenApp.Services
         {
             await Init();
             List<HjFach> list = await db.Table<HjFach>().ToListAsync();
+            List<PrFach> list2 = await db.Table<PrFach>().ToListAsync();
             foreach (var item in list)
             {
                 if(item.Name == fach.Name)
                 {
                     await db.DeleteAsync<HjFach>(item.Id);
+                }
+            }
+            if(fach.IsPrFach == true)
+            {
+                foreach (var item in list2)
+                {
+                    if(item.Name == fach.Name)
+                    {
+                        await UpdateName("-", item.PrNummer);
+                    }
                 }
             }
             await RemoveAllNoten(fach);
@@ -887,6 +898,7 @@ namespace NotenApp.Services
                         if (item.IsPrFach == true)
                         {
                             sumPh = 0;
+                            anzPh = 0;
                             anzprfaecher++;
                         }
                         else
@@ -921,7 +933,7 @@ namespace NotenApp.Services
             {
                 return;
             }
-            if(anzprfaecher == 4)
+            else if(anzprfaecher == 4)
             {
                 double duIn = sumIn / anzIn;
                 double duPh = sumPh / anzPh;
@@ -938,6 +950,10 @@ namespace NotenApp.Services
                     {
                         fach1 = i;
                     }
+                }
+                if(anzIn == 0 && anzPh == 0 && anzCh == 0 && anzBi == 0)
+                {
+                    return;
                 }
                 switch (fach1)
                 {
@@ -981,9 +997,11 @@ namespace NotenApp.Services
                             }
                         }
                         break;
+                    default:
+                        break;
                 }
             }
-            else
+            else if(anzprfaecher == 0)
             {
                 double duIn = sumIn / anzIn;
                 double duPh = sumPh / anzPh;
@@ -1005,6 +1023,10 @@ namespace NotenApp.Services
                     {
                         fach2 = i;
                     }
+                }
+                if (anzIn == 0 && anzPh == 0 && anzCh == 0 && anzBi == 0)
+                {
+                    return;
                 }
                 switch (fach2)
                 {
@@ -1092,6 +1114,10 @@ namespace NotenApp.Services
                         }
                         break;
                 }
+            }
+            else
+            {
+                throw new Exception("Anzahl Prüfungsfächer falsch");
             }
         }
     }

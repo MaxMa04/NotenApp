@@ -33,6 +33,8 @@
                 </Frame>
                 <Label Text="{Binding FachEinzubringendeHalbjahre}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
                 <Label Text="{Binding FachName}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
+                <Label x:Name="hallo" Text="" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
+                <Label x:Name="hallo2" Text="" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" />
             </StackLayout>
             <!--Facheinstellungen-->
             <Button Grid.Row="1" Grid.Column="0" Text="Runden"/>

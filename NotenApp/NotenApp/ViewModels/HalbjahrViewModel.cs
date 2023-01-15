@@ -194,7 +194,7 @@ namespace NotenApp.ViewModels
         {
             await FachService.EntscheideBioInfoPhysikChemie();
             await FachService.EntscheideGeoGRW();
-            //await FachService.EntscheideFremdsprache();
+            await FachService.EntscheideFremdsprache();
             
             List<HjFach> gesamtFaecher = await FachService.GetFaecher();
             List<HjFach> eingebrachteFaecher = new List<HjFach>(); //alle Fächer mit Halbjahren, die im Endeffekt eingebracht werden 

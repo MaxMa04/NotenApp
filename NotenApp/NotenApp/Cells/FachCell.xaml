@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="NotenApp.Cells.FachCell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cells="clr-namespace:NotenApp.Cells"
+    xmlns:models="clr-namespace:NotenApp.Models"
+    Padding="5"
+    x:DataType="models:HjFach">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="140" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="65" />
+    </Grid.ColumnDefinitions>
+
+    <!--  Fachname  -->
+    <Label
+        Grid.Row="0"
+        FontSize="Medium"
+        HorizontalOptions="Start"
+        Text="{Binding Name}"
+        VerticalOptions="Center" />
+
+    <!--  Durchschnitt  -->
+    <Frame
+        Grid.RowSpan="2"
+        Grid.Column="2"
+        CornerRadius="35">
+        <Label
+            Margin="-40"
+            FontSize="Medium"
+            HorizontalOptions="CenterAndExpand"
+            Text="{Binding Durchschnitt, TargetNullValue='-'}"
+            TextColor="Black"
+            VerticalOptions="CenterAndExpand" />
+    </Frame>
+
+    <!--  Notenübersicht  -->
+    <!--  Klausuren  -->
+    <CollectionView
+        Grid.Row="0"
+        Grid.Column="1"
+        ItemsSource="{Binding KlausurNoten}">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <cells:NotenCell />
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+    </CollectionView>
+
+    <!--  LKs  -->
+    <CollectionView
+        Grid.Row="1"
+        Grid.Column="1"
+        ItemsSource="{Binding LKNoten}">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <cells:NotenCell />
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+    </CollectionView>
+</Grid>

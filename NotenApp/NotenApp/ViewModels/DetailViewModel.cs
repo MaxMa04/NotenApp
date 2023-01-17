@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using NotenApp.Logic;
 using NotenApp.Models;
 using NotenApp.Services;
 using System;
@@ -55,9 +56,7 @@ namespace NotenApp.ViewModels
         {
             LKNoten.Clear();
             KlausurNoten.Clear();
-            List<HjNote> gesamtNoten = (List<HjNote>)await FachService.GetNoten(fach.Halbjahr);
-            List<HjNote> Lk = new List<HjNote>();
-            List<HjNote> Kla = new List<HjNote>();
+            List<HjNote> gesamtNoten = await FachService.GetNoten(fach.Halbjahr);
             foreach (var note in gesamtNoten)
             {
                 if(note.Fach == fach.Name)
@@ -65,16 +64,17 @@ namespace NotenApp.ViewModels
                     switch (note.Typ)
                     {
                         case 1:
-                            Lk.Add(note);
+                            LKNoten.Add(note);
+                            await Task.Delay(50);
                             break;
                         case 2:
-                            Kla.Add(note);
+                            KlausurNoten.Add(note);
+                            await Task.Delay(50);
                             break;
                     }
                 }
             }
-            LKNoten.AddRange(Lk);
-            KlausurNoten.AddRange(Kla);
+            
         }
     }
 }

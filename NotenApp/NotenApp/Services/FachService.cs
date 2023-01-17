@@ -1,4 +1,5 @@
-﻿using NotenApp.Logic;
+﻿using MvvmHelpers;
+using NotenApp.Logic;
 using NotenApp.Models;
 using NotenApp.Pages;
 using NotenApp.ViewModels;

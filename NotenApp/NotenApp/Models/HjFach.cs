@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using MvvmHelpers;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,13 +18,13 @@ namespace NotenApp.Models
         public bool IsPrFach { get; set; }
         public bool IsFremdsprache { get; set; }
         [Ignore]
-        public List<HjNote> LKNoten { get; set; }
+        public ObservableRangeCollection<HjNote> LKNoten { get; set; }
         [Ignore]
-        public List<HjNote> KlausurNoten { get; set; }
+        public ObservableRangeCollection<HjNote> KlausurNoten { get; set; }
         public HjFach()
         {
-            LKNoten = new List<HjNote>();
-            KlausurNoten = new List<HjNote>();
+            LKNoten = new ObservableRangeCollection<HjNote>();
+            KlausurNoten = new ObservableRangeCollection<HjNote>();
         }
     }
 }

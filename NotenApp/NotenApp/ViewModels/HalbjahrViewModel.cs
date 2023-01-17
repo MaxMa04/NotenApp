@@ -105,6 +105,7 @@ namespace NotenApp.ViewModels
                     var facher1 = await FachService.GetFaecher(1);
                     facher1 = Controller.SortList(facher1);
                     var noten = await FachService.GetNoten(1);
+                    
                     FaecherHJ1.AddRange(facher1);
                     foreach (var fach in FaecherHJ1)
                     {
@@ -113,6 +114,7 @@ namespace NotenApp.ViewModels
                             if(note.Fach == fach.Name && note.Typ == 1)
                             {
                                 fach.LKNoten.Add(note);
+                                
                             }
                             if(note.Typ == 2 && note.Fach == fach.Name)
                             {

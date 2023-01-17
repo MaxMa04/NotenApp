@@ -528,7 +528,7 @@ namespace NotenApp.Services
             
             if(durchschnittBlock2 != null && punktzahlBlock1 > 4)
             {
-                float punktzahlBlock2 = (float)Math.Round((double)durchschnittBlock2, 0) * 20;
+                float punktzahlBlock2 = (float)Math.Round((double)durchschnittBlock2, 1) * 20;
                 float abipunktzahl = punktzahlBlock2 + punktzahlBlock1;
                 return abipunktzahl;
             }

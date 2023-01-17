@@ -14,7 +14,11 @@ namespace NotenApp.Logic
                 int maxIndex = i;
                 for (int j = i + 1; j < list.Count; j++)
                 {
-                    if (list[j].Durchschnitt > list[maxIndex].Durchschnitt)
+                    if (list[maxIndex].Durchschnitt == null)
+                    {
+                        maxIndex = j;
+                    }
+                    else if(list[j].Durchschnitt > list[maxIndex].Durchschnitt)
                     {
                         maxIndex = j;
                     }

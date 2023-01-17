@@ -103,6 +103,7 @@ namespace NotenApp.ViewModels
                 case 1:
                     FaecherHJ1.Clear();
                     var facher1 = await FachService.GetFaecher(1);
+                    facher1 = Controller.SortList(facher1);
                     var noten = await FachService.GetNoten(1);
                     FaecherHJ1.AddRange(facher1);
                     foreach (var fach in FaecherHJ1)
@@ -124,6 +125,7 @@ namespace NotenApp.ViewModels
                 case 2:
                     FaecherHJ2.Clear();
                     var facher2 = await FachService.GetFaecher(2);
+                    facher2= Controller.SortList(facher2);
                     var noten2 = await FachService.GetNoten(2);
                     FaecherHJ2.AddRange(facher2);
                     foreach (var fach in FaecherHJ2)
@@ -146,7 +148,7 @@ namespace NotenApp.ViewModels
                 case 3:
                     FaecherHJ3.Clear();
                     var facher3 = await FachService.GetFaecher(3);
-
+                    facher3 = Controller.SortList(facher3);
                     FaecherHJ3.AddRange(facher3);
                     var noten3 = await FachService.GetNoten(3);
                     foreach (var fach in FaecherHJ3)
@@ -163,12 +165,13 @@ namespace NotenApp.ViewModels
                             }
                         }
                     }
+                    
                     GesamtDurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
                     break;
                 case 4:
                     FaecherHJ4.Clear();
                     var facher4 = await FachService.GetFaecher(4);
-
+                    facher4 = Controller.SortList(facher4);
                     FaecherHJ4.AddRange(facher4);
                     var noten4 = await FachService.GetNoten(4);
                     foreach (var fach in FaecherHJ4)

@@ -9,6 +9,7 @@ namespace NotenApp
         public static string DB_Path = String.Empty;
         public App()
         {
+            
             InitializeComponent();
 
             MainPage = new NavigationPage(new MainPage());

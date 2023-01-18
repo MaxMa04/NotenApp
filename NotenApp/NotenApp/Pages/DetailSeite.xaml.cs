@@ -27,22 +27,7 @@ namespace NotenApp.Pages
             this.fach = fach;
             model = BindingContext as DetailViewModel;
             model.FachName = fach.Name;
-            if(fach.IsPrFach == true)
-            {
-                hallo.Text = "PRF";
-            }
-            else
-            {
-                hallo.Text= "kein PRF";
-            }
-            if (fach.IsFremdsprache == true)
-            {
-                hallo2.Text = "FS";
-            }
-            else
-            {
-                hallo2.Text = "Keine FS";
-            }
+
 
 
         }

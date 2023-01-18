@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
+    xmlns:switch="clr-namespace:Switch;assembly=Switch"
     x:Name="detailseite">
     <ContentPage.BindingContext>
         <ViewModels:DetailViewModel />
@@ -50,7 +51,7 @@
                     VerticalOptions="Center" />
             </Frame>
 
-
+            <switch:CustomSwitch />
 
             <!--  Durchschnitt, Ziel  -->
             <Frame

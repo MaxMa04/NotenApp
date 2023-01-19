@@ -220,7 +220,7 @@ namespace NotenApp.ViewModels
                 if (pflichtFaecher.Exists(t => t.Name == gesamtFaecher[j].Name) != true)
                 {
                     List<HjFach> faecher = new List<HjFach>(); //Fächer mit gleichem Fachnamen aus verschiedenem Halbjahr
-                    faecher.Add(gesamtFaecher[j]);
+                    
                     int anzahlDurchschnitte = 0;
                     float summeDurchschnitte = 0;
                     for (int i = 0; i < gesamtFaecher.Count; i++)

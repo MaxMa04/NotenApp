@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 
 using Foundation;
+using Switch.iOS;
 using UIKit;
 
 namespace NotenApp.iOS
@@ -27,7 +28,7 @@ namespace NotenApp.iOS
 
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            CustomSwitchRenderer.Init();
             return base.FinishedLaunching(app, options);
         }
     }

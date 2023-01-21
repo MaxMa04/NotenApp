@@ -25,14 +25,14 @@ namespace NotenApp.Services
             //{
             //    return;
             //}
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data");
+            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Datttaa");
 
             db = new SQLiteAsyncConnection(databasePath);
 
             await db.CreateTableAsync<HjFach>();
             await db.CreateTableAsync<PrFach>();
-            await db.CreateTableAsync<HjNote>();
-            await db.CreateTableAsync<PrNote>();
+            await db.CreateTableAsync<HJNote>();
+            await db.CreateTableAsync<Ziel>();
         }
 
         //Halbjahre
@@ -40,7 +40,7 @@ namespace NotenApp.Services
         {
             await Init();
 
-            HjNote newNote = new HjNote
+            HJNote newNote = new HJNote
             {
                 Note = note,
                 Typ = (int)notenTyp,
@@ -53,6 +53,14 @@ namespace NotenApp.Services
             if(fach.Name == "Informatik" || fach.Name == "Biologie" || fach.Name=="Physik"|| fach.Name == "Chemie")
             {
                 await EntscheideBioInfoPhysikChemie();
+            }
+            if (fach.Name == "G/R/W" || fach.Name == "Geografie")
+            {
+                await EntscheideGeoGRW();
+            }
+            if (fach.IsFremdsprache == true)
+            {
+                await EntscheideFremdsprache();
             }
 
 
@@ -107,11 +115,11 @@ namespace NotenApp.Services
             List<HjFach> Gesamtfacher = await db.Table<HjFach>().ToListAsync();
             return Gesamtfacher;
         }
-        public static async Task<List<HjNote>> GetNoten(int halbjahr)
+        public static async Task<List<HJNote>> GetNoten(int halbjahr)
         {
             await Init();
-            var noten = await db.Table<HjNote>().ToListAsync();
-            List<HjNote> Noten = new List<HjNote>();
+            var noten = await db.Table<HJNote>().ToListAsync();
+            List<HJNote> Noten = new List<HJNote>();
             foreach (var note in noten)
             {
                 if (note.Halbjahr == halbjahr)
@@ -140,11 +148,11 @@ namespace NotenApp.Services
 
             await db.InsertAsync(fach);
         }
-        public static async Task RemoveSingleNote(HjNote note)
+        public static async Task RemoveSingleNote(HJNote note)
         {
             await Init();
             
-            await db.DeleteAsync<HjNote>(note.Id);
+            await db.DeleteAsync<HJNote>(note.Id);
             var Gesamtfacher = await db.Table<HjFach>().ToListAsync();
             foreach (var fach in Gesamtfacher)
             {
@@ -183,12 +191,12 @@ namespace NotenApp.Services
         public static async Task RemoveAllNoten(HjFach fach)
         {
             await Init();
-            List<HjNote> noten = await db.Table<HjNote>().ToListAsync();
+            List<HJNote> noten = await db.Table<HJNote>().ToListAsync();
             foreach (var note in noten)
             {
                 if (note.Fach == fach.Name)
                 {
-                    await db.DeleteAsync<HjNote>(note.Id);
+                    await db.DeleteAsync<HJNote>(note.Id);
                 }
             }
         }
@@ -203,7 +211,7 @@ namespace NotenApp.Services
             List<float?> KlausurNoten = new List<float?>();
             bool hasLk = false;
             bool hasKlausur = false;
-            List<HjNote> gesamtNoten = await db.Table<HjNote>().ToListAsync();
+            List<HJNote> gesamtNoten = await db.Table<HJNote>().ToListAsync();
             foreach (var item in gesamtNoten)
             {
                 switch (item.Typ)
@@ -288,6 +296,45 @@ namespace NotenApp.Services
                 return (float)Math.Round(gesamtDurchschnitt, 1);
             }
         }
+        //Ziele
+        public static async Task AddZiel(int halbjahr, string fachName, int zielNote)
+        {
+            await Init();
+            Ziel ziel = new Ziel
+            {
+                FachName = fachName,
+                ZielNote = zielNote,
+                Halbjahr = halbjahr
+            };
+
+            await db.InsertAsync(ziel);
+
+        }
+        public static async Task DeleteZiel(Ziel ziel)
+        {
+            await Init();
+            await db.DeleteAsync(ziel);
+        }
+        public static async Task<List<Ziel>> GetZiele(int halbjahr)
+        {
+            await Init();
+            var GesamtZiele = await db.Table<Ziel>().ToListAsync();
+            List<Ziel> ziele = new List<Ziel>();
+            foreach (var ziel in GesamtZiele)
+            {
+                if (ziel.Halbjahr == halbjahr)
+                {
+                    ziele.Add(ziel);
+                }
+            }
+            return ziele;
+        }
+        public static async Task<List<Ziel>> GetZiele()
+        {
+            await Init();
+            var GesamtZiele = await db.Table<Ziel>().ToListAsync();
+            return GesamtZiele;
+        }
         //Prüfungen/Block2
         public static async Task AddPrFach(string name, int prNummer)
         {
@@ -321,18 +368,7 @@ namespace NotenApp.Services
         
             await db.InsertAsync(fach);
         }
-        public static async Task AddPrNote(int prNummer, int note)
-        {
-            await Init();
         
-            PrNote prnote = new PrNote()
-            {
-                Note = note,
-                PrNummer = prNummer
-            };
-        
-            await db.InsertAsync(prnote);
-        }
         public static async Task UpdateName(string name, int prNummer)
         {
             await Init();
@@ -486,7 +522,6 @@ namespace NotenApp.Services
         {
             await Init();
             await db.DeleteAllAsync<PrFach>();
-            await db.DeleteAllAsync<PrNote>();
         }
         //Abitur
         public static async Task<float?> GetAbiturNote()

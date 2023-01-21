@@ -12,8 +12,8 @@ namespace NotenApp.ViewModels
 {
     public  class DetailViewModel : INotifyPropertyChanged
     {
-        public ObservableRangeCollection<HjNote> LKNoten { get; set; }
-        public ObservableRangeCollection<HjNote> KlausurNoten { get; set; }
+        public ObservableRangeCollection<HJNote> LKNoten { get; set; }
+        public ObservableRangeCollection<HJNote> KlausurNoten { get; set; }
         private string fachName;
         public string FachName
         {
@@ -48,15 +48,15 @@ namespace NotenApp.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public DetailViewModel()
         {
-            LKNoten = new ObservableRangeCollection<HjNote>();
-            KlausurNoten = new ObservableRangeCollection<HjNote>();
+            LKNoten = new ObservableRangeCollection<HJNote>();
+            KlausurNoten = new ObservableRangeCollection<HJNote>();
         }
         
         public async Task Initialize(HjFach fach)
         {
             LKNoten.Clear();
             KlausurNoten.Clear();
-            List<HjNote> gesamtNoten = await FachService.GetNoten(fach.Halbjahr);
+            List<HJNote> gesamtNoten = await FachService.GetNoten(fach.Halbjahr);
             foreach (var note in gesamtNoten)
             {
                 if(note.Fach == fach.Name)

@@ -21,4 +21,5 @@ namespace NotenApp.Logic
         Kein = 4
 
     };
+    
 }

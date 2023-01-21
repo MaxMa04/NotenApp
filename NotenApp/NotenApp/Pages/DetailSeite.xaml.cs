@@ -64,7 +64,7 @@ namespace NotenApp.Pages
 
         private async void DeleteNote(object sender, SelectionChangedEventArgs e)
         {
-            var note = e.CurrentSelection.FirstOrDefault() as HjNote;
+            var note = e.CurrentSelection.FirstOrDefault() as HJNote;
             await FachService.RemoveSingleNote(note);
             await model.Initialize(fach);
             model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
@@ -79,6 +79,11 @@ namespace NotenApp.Pages
         private async void AddLKNote(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.LK,1));
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NotenSeite(fach));
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using MvvmHelpers;
+using NotenApp.Models;
+using NotenApp.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NotenApp.ViewModels
 {
@@ -88,7 +91,17 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DurchschnittBlock2)));
             }
         }
-
+        public ObservableRangeCollection<Ziel> FachZiele { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
+        public MainPageViewModel()
+        {
+            FachZiele = new ObservableRangeCollection<Ziel>();
+        }
+        public async Task Initialize()
+        {
+            FachZiele.Clear();
+            List<Ziel> ziele = await FachService.GetZiele();
+            FachZiele.AddRange(ziele);
+        }
     }
 }

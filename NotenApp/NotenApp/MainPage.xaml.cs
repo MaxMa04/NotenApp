@@ -1,4 +1,5 @@
-﻿using NotenApp.Pages;
+﻿using NotenApp.Models;
+using NotenApp.Pages;
 using NotenApp.Services;
 using NotenApp.ViewModels;
 using System;
@@ -31,6 +32,7 @@ namespace NotenApp
             _model.DurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
             _model.DurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
             _model.DurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
+            await _model.Initialize();
             if(punktzahlBlock1 < 5)
             {
                 _model.PunktzahlBlock1 = "-/600";
@@ -80,6 +82,14 @@ namespace NotenApp
         private async void OpenBlock2(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Block2Page());
+        }
+
+        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var ziel = e.CurrentSelection.FirstOrDefault() as Ziel;
+            await FachService.DeleteZiel(ziel);
+            await _model.Initialize();
+            
         }
     }
 }

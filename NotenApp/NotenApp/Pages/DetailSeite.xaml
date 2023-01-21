@@ -86,11 +86,14 @@
                 Grid.Column="3"
                 Margin="0,0,20,0"
                 BackgroundColor="#7BA4A8">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
                 <Label
                     Margin="-20"
                     FontSize="40"
                     HorizontalOptions="Center"
-                    Text="{Binding FachDurchschnitt, TargetNullValue='-'}"
+                    Text="Ziel"
                     TextColor="White"
                     VerticalOptions="Center" />
             </Frame>

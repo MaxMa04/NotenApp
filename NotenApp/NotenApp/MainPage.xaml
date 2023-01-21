@@ -1,23 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
-             x:Class="NotenApp.MainPage"
-             NavigationPage.HasNavigationBar="True">
+<ContentPage
+    x:Class="NotenApp.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
+    NavigationPage.HasNavigationBar="True">
     <ContentPage.ToolbarItems>
-        <ToolbarItem 
-                 IconImageSource="Settings.png"
-                 Order="Primary"
-                 Priority="0" 
-                 Clicked="OpenSettings"/>
+        <ToolbarItem
+            Clicked="OpenSettings"
+            IconImageSource="Settings.png"
+            Order="Primary"
+            Priority="0" />
     </ContentPage.ToolbarItems>
     <ContentPage.BindingContext>
-        <ViewModels:MainPageViewModel/>
+        <ViewModels:MainPageViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid BackgroundColor="#252621">
 
-            <!--Griddefinition-->
+            <!--  Griddefinition  -->
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -27,104 +28,196 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
 
-                
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="140" />
-                <RowDefinition Height="90"/>
+                <RowDefinition Height="90" />
 
             </Grid.RowDefinitions>
-            <!--Ziele-->
-
-            <ScrollView Grid.Row="0" Grid.ColumnSpan="4">
-                <StackLayout Margin="10" Grid.Row="1" Grid.ColumnSpan="5">
-                    <Label Text="Ziele" HorizontalOptions="Center" FontSize="20" TextColor="White"/>
-                    <Frame BackgroundColor="Red" CornerRadius="10" HeightRequest="20" Margin="5">
-                        <Label Text="Example" HorizontalOptions="Center"/>
-                    </Frame>
-                    <Frame BackgroundColor="LightYellow" CornerRadius="10" HeightRequest="20" Margin="5">
-                        <Label Text="Example" HorizontalOptions="Center"/>
-                    </Frame>
-                    <Frame BackgroundColor="Green" CornerRadius="10" HeightRequest="20" Margin="5">
-                        <Label Text="Example" HorizontalOptions="Center"/>
-                    </Frame>
-                    <Frame BackgroundColor="Blue" CornerRadius="10" HeightRequest="20" Margin="5">
-                        <Label Text="Example" HorizontalOptions="Center"/>
-                    </Frame>
-                    <Frame BackgroundColor="DarkGreen" CornerRadius="10" HeightRequest="20" Margin="5">
-                        <Label Text="Example" HorizontalOptions="Center"/>
-                    </Frame>
-                    <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
-                        <Label Text="Example" HorizontalOptions="Center"/>
-                    </Frame>
-                    <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
-                        <Label Text="Example" HorizontalOptions="Center"/>
-                    </Frame>
-                    <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
-                        <Label Text="Example" HorizontalOptions="Center"/>
-                    </Frame>
-
-                </StackLayout>
-            </ScrollView>
-            <!--aktueller Schnitt Block 1-->
-            <Frame CornerRadius="20" Margin="20,20,20,10" Grid.Row="1" Grid.ColumnSpan="4" Padding="-5">
+            <!--  Ziele  -->
+            <Frame
+                Grid.Row="0"
+                Grid.ColumnSpan="4"
+                BackgroundColor="AntiqueWhite">
+                <Label
+                    Margin="-15"
+                    FontSize="30"
+                    HorizontalOptions="Center"
+                    Text="Ziele"
+                    TextColor="DarkGoldenrod"
+                    VerticalOptions="Center" />
+            </Frame>
+            <CollectionView
+                Grid.Row="1"
+                Grid.ColumnSpan="4"
+                ItemsSource="{Binding FachZiele}"
+                SelectionChanged="CollectionView_SelectionChanged"
+                SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding ZielNote}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--  aktueller Schnitt Block 1  -->
+            <Frame
+                Grid.Row="2"
+                Grid.ColumnSpan="4"
+                Margin="20,20,20,10"
+                Padding="-5"
+                CornerRadius="20">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OpenBlock1" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpenBlock1" />
                 </Frame.GestureRecognizers>
                 <StackLayout HorizontalOptions="CenterAndExpand">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label TextColor="Black" Margin="0,7,0,-5" HorizontalTextAlignment="Center" Text="Block 1" FontSize="Large"></Label>
-                        <Frame CornerRadius="20" Margin="0,8,0,0" BackgroundColor="Red">
-                            <Label TextColor="Black" Margin="-15" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" Text="{Binding PunktzahlBlock1}" FontSize="Small"></Label>
+                    <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                        <Label
+                            Margin="0,7,0,-5"
+                            FontSize="Large"
+                            HorizontalTextAlignment="Center"
+                            Text="Block 1"
+                            TextColor="Black" />
+                        <Frame
+                            Margin="0,8,0,0"
+                            BackgroundColor="Red"
+                            CornerRadius="20">
+                            <Label
+                                Margin="-15"
+                                FontSize="Small"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding PunktzahlBlock1}"
+                                TextColor="Black"
+                                VerticalTextAlignment="Start" />
                         </Frame>
                     </StackLayout>
-                    <StackLayout WidthRequest="280" Orientation="Horizontal">
-                        <Frame CornerRadius="15" WidthRequest="18" Margin="0" HeightRequest="18">
+                    <StackLayout Orientation="Horizontal" WidthRequest="280">
+                        <Frame
+                            Margin="0"
+                            CornerRadius="15"
+                            HeightRequest="18"
+                            WidthRequest="18">
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Tapped1" NumberOfTapsRequired="1" />
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Tapped1" />
                             </Frame.GestureRecognizers>
-                            <Label TextColor="Black" Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding DurchschnittHJ1, TargetNullValue='-'}"></Label>
+                            <Label
+                                Margin="-15"
+                                FontSize="Medium"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding DurchschnittHJ1, TargetNullValue='-'}"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center" />
                         </Frame>
-                        <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
+                        <Frame
+                            Margin="10,0,0,0"
+                            CornerRadius="15"
+                            HeightRequest="18"
+                            WidthRequest="18">
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Tapped2" NumberOfTapsRequired="1" />
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Tapped2" />
                             </Frame.GestureRecognizers>
-                            <Label TextColor="Black" Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  FontSize="Medium" Text="{Binding DurchschnittHJ2, TargetNullValue='-'}"></Label>
+                            <Label
+                                Margin="-15"
+                                FontSize="Medium"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding DurchschnittHJ2, TargetNullValue='-'}"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center" />
                         </Frame>
-                        <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
+                        <Frame
+                            Margin="10,0,0,0"
+                            CornerRadius="15"
+                            HeightRequest="18"
+                            WidthRequest="18">
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Tapped3" NumberOfTapsRequired="1" />
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Tapped3" />
                             </Frame.GestureRecognizers>
-                            <Label TextColor="Black" Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding DurchschnittHJ3, TargetNullValue='-'}"></Label>
+                            <Label
+                                Margin="-15"
+                                FontSize="Medium"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding DurchschnittHJ3, TargetNullValue='-'}"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center" />
                         </Frame>
-                        <Frame CornerRadius="15" WidthRequest="18" Margin="10,0,0,0" HeightRequest="18">
+                        <Frame
+                            Margin="10,0,0,0"
+                            CornerRadius="15"
+                            HeightRequest="18"
+                            WidthRequest="18">
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Tapped4" NumberOfTapsRequired="1" />
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Tapped4" />
                             </Frame.GestureRecognizers>
-                            <Label TextColor="Black" Margin="-15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding DurchschnittHJ4, TargetNullValue='-'}"></Label>
+                            <Label
+                                Margin="-15"
+                                FontSize="Medium"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding DurchschnittHJ4, TargetNullValue='-'}"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center" />
                         </Frame>
                     </StackLayout>
                 </StackLayout>
             </Frame>
-            <!--aktueller Schnitt Block 2-->
-            <Frame CornerRadius="20" Margin="20,0,0,10" Grid.Row="2" Grid.ColumnSpan="2" Padding="0">
+            <!--  aktueller Schnitt Block 2  -->
+            <Frame
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Margin="20,0,0,10"
+                Padding="0"
+                CornerRadius="20">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OpenBlock2" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpenBlock2" />
                 </Frame.GestureRecognizers>
                 <StackLayout HorizontalOptions="CenterAndExpand">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label TextColor="Black" Margin="0,7,0,-5" HorizontalTextAlignment="Center" Text="Block 2" FontSize="Large"></Label>
-                        <Frame CornerRadius="20" Margin="0,8,0,0" BackgroundColor="Red">
-                            <Label TextColor="Black" Margin="-15" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" Text="{Binding PunktzahlBlock2}" FontSize="Small"></Label>
+                    <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                        <Label
+                            Margin="0,7,0,-5"
+                            FontSize="Large"
+                            HorizontalTextAlignment="Center"
+                            Text="Block 2"
+                            TextColor="Black" />
+                        <Frame
+                            Margin="0,8,0,0"
+                            BackgroundColor="Red"
+                            CornerRadius="20">
+                            <Label
+                                Margin="-15"
+                                FontSize="Small"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding PunktzahlBlock2}"
+                                TextColor="Black"
+                                VerticalTextAlignment="Start" />
                         </Frame>
                     </StackLayout>
-                    <Label  TextColor="Black" Margin="0,-5,0,0" Text="{Binding DurchschnittBlock2, TargetNullValue='-'}" HorizontalOptions="Center" FontSize="Large"></Label>
+                    <Label
+                        Margin="0,-5,0,0"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="{Binding DurchschnittBlock2, TargetNullValue='-'}"
+                        TextColor="Black" />
                 </StackLayout>
             </Frame>
-            <!--aktueller Abiturschnitt-->
-            <Frame CornerRadius="20" Margin="5,0,20,10" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Padding="0">
+            <!--  aktueller Abiturschnitt  -->
+            <Frame
+                Grid.Row="3"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Margin="5,0,20,10"
+                Padding="0"
+                CornerRadius="20">
                 <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Label  TextColor="Black" Margin="0,7,0,0" HorizontalOptions="Center" Text="Abischnitt" FontSize="Large"></Label>
-                    <Label  TextColor="Black" Margin="0,-5,0,0" Text="{Binding AbiturNote, FallbackValue='-'}" HorizontalOptions="Center" FontSize="Large"></Label>
+                    <Label
+                        Margin="0,7,0,0"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="Abischnitt"
+                        TextColor="Black" />
+                    <Label
+                        Margin="0,-5,0,0"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="{Binding AbiturNote, FallbackValue='-'}"
+                        TextColor="Black" />
                 </StackLayout>
             </Frame>
 

@@ -18,13 +18,13 @@ namespace NotenApp.Models
         public bool IsPrFach { get; set; }
         public bool IsFremdsprache { get; set; }
         [Ignore]
-        public ObservableRangeCollection<HjNote> LKNoten { get; set; }
+        public ObservableRangeCollection<HJNote> LKNoten { get; set; }
         [Ignore]
-        public ObservableRangeCollection<HjNote> KlausurNoten { get; set; }
+        public ObservableRangeCollection<HJNote> KlausurNoten { get; set; }
         public HjFach()
         {
-            LKNoten = new ObservableRangeCollection<HjNote>();
-            KlausurNoten = new ObservableRangeCollection<HjNote>();
+            LKNoten = new ObservableRangeCollection<HJNote>();
+            KlausurNoten = new ObservableRangeCollection<HJNote>();
         }
     }
 }

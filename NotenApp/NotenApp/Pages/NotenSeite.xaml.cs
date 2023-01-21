@@ -20,6 +20,7 @@ namespace NotenApp.Pages
         HalbjahrViewModel viewModel2;
         private int seitenZurück;
         bool isHalbjahr;
+        bool isZiel;
         int prNummer;
 
         public NotenSeite(HjFach fach, NotenTyp notenTyp, int seitenZurück)
@@ -30,6 +31,7 @@ namespace NotenApp.Pages
             viewModel2 = new HalbjahrViewModel();
             this.seitenZurück = seitenZurück;
             isHalbjahr = true;
+            isZiel = false;
             btn.Text = "Zurück";
         }
         public NotenSeite(NotenTyp notenTyp, int prNummer)
@@ -38,7 +40,15 @@ namespace NotenApp.Pages
             this.notenTyp = notenTyp;  
             this.prNummer = prNummer;
             isHalbjahr = false;
+            isZiel = false;
             btn.Text = "Keine Note";
+        }
+        public NotenSeite(HjFach fach)
+        {
+            InitializeComponent();
+            _fach2 = fach;
+            isHalbjahr = false;
+            isZiel = true;
         }
         private async void Button_Clicked1(object sender, EventArgs e)
         {
@@ -76,9 +86,14 @@ namespace NotenApp.Pages
                     }
                 }
             }
-            else
+            else if(isHalbjahr == false && isZiel == false)
             {
                 await FachService.UpdateNote(note, prNummer, notenTyp);
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                await FachService.AddZiel(_fach2.Halbjahr, _fach2.Name, note);
                 await Navigation.PopAsync();
             }
         }

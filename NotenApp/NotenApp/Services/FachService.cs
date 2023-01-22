@@ -329,6 +329,7 @@ namespace NotenApp.Services
             }
             return ziele;
         }
+        
         public static async Task<List<Ziel>> GetZiele()
         {
             await Init();

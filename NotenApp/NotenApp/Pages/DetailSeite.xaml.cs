@@ -36,7 +36,6 @@ namespace NotenApp.Pages
             base.OnAppearing();
             await model.Initialize(fach);
             model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
-            
             //Sizing Collection View for LK Noten
 
             if(model.LKNoten.Count == 0)

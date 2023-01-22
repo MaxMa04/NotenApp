@@ -93,7 +93,7 @@
                     Margin="-20"
                     FontSize="40"
                     HorizontalOptions="Center"
-                    Text="Ziel"
+                    Text="{Binding Ziel}"
                     TextColor="White"
                     VerticalOptions="Center" />
             </Frame>

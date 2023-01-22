@@ -14,6 +14,17 @@ namespace NotenApp.ViewModels
     {
         public ObservableRangeCollection<HJNote> LKNoten { get; set; }
         public ObservableRangeCollection<HJNote> KlausurNoten { get; set; }
+        private string ziel;
+        public string Ziel
+        {
+            get => ziel;
+            set
+            {
+                ziel = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Ziel)));
+            }
+        }
+
         private string fachName;
         public string FachName
         {
@@ -56,6 +67,19 @@ namespace NotenApp.ViewModels
         {
             LKNoten.Clear();
             KlausurNoten.Clear();
+            List<Ziel> ziele = await FachService.GetZiele(fach.Halbjahr);
+            foreach (var item in ziele)
+            {
+                if(item.FachName == fach.Name)
+                {
+                    Ziel = item.ZielNote.ToString();
+                    break;
+                }
+                else
+                {
+                    Ziel = "-";
+                }
+            }
             List<HJNote> gesamtNoten = await FachService.GetNoten(fach.Halbjahr);
             foreach (var note in gesamtNoten)
             {

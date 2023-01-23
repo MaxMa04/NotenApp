@@ -14,12 +14,36 @@ namespace NotenApp
 {
     public partial class MainPage : ContentPage
     {
-        MainPageViewModel _model;
+        MainPageViewModel model;
         public MainPage()
         {
             InitializeComponent();
-            _model = BindingContext as MainPageViewModel;
-            
+            model = BindingContext as MainPageViewModel;
+
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Task.Run(async () =>
+            {
+                model.DurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
+                model.DurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
+                model.DurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
+                model.DurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
+            });
+            Task.Run(async () =>
+            {
+                await model.InitializeZiele();
+            });
+            Task.Run(async () =>
+            {
+                await model.GetPunktzahlen();
+            });
+            Task.Run(async () =>
+            {
+                model.AbiturNote = await FachService.GetAbiturNote();
+            });
+
         }
 
         private async void Tapped1(object sender, System.EventArgs e)
@@ -58,7 +82,7 @@ namespace NotenApp
             await FachService.DeleteZiel(ziel);
             await Task.Run(async () =>
             {
-                await _model.Initialize();
+                await model.InitializeZiele();
             });
 
         }

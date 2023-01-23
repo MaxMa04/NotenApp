@@ -26,10 +26,10 @@ namespace NotenApp.Pages
             
             
         }
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            await _model.Refresh(1);
+            Task.Run( async () => { await _model.Refresh(1); });
 
         }
 

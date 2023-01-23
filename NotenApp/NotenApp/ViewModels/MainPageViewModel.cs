@@ -11,6 +11,7 @@ namespace NotenApp.ViewModels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
+        HalbjahrViewModel halbjahrViewModel = new HalbjahrViewModel();
         private float? durchschnittHJ1;
         public float? DurchschnittHJ1
         {
@@ -96,6 +97,47 @@ namespace NotenApp.ViewModels
         public MainPageViewModel()
         {
             FachZiele = new ObservableRangeCollection<Ziel>();
+            Task.Run(async () => 
+            { 
+                DurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
+                DurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
+                DurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
+                DurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);  
+            });
+            Task.Run(async () =>
+            {
+                await Initialize();
+            });
+            Task.Run(async () =>
+            {
+                int punktzahlBlock1 = (int)await halbjahrViewModel.GetPunktzahlBlock1();
+                int punktzahlBlock2 = await FachService.GetPunktzahlBlock2();
+
+
+                if (punktzahlBlock1 < 5)
+                {
+                    PunktzahlBlock1 = "-/600";
+                }
+                else
+                {
+                    PunktzahlBlock1 = punktzahlBlock1.ToString() + "/600";
+                }
+                DurchschnittBlock2 = await FachService.GetDurchschnittBlock2();
+                if (punktzahlBlock2 == 0)
+                {
+                    PunktzahlBlock2 = "-/300";
+                }
+                else
+                {
+                    PunktzahlBlock2 = punktzahlBlock2.ToString() + "/300";
+                }
+            });
+            Task.Run(async () =>
+            {
+                AbiturNote = await FachService.GetAbiturNote();
+            });
+
+
         }
         public async Task Initialize()
         {
@@ -103,5 +145,6 @@ namespace NotenApp.ViewModels
             List<Ziel> ziele = await FachService.GetZiele();
             FachZiele.AddRange(ziele);
         }
+
     }
 }

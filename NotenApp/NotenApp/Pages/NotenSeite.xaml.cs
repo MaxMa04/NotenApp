@@ -7,13 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace NotenApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NotenSeite : ContentPage
+    public partial class NotenSeite : Popup
     {
         private HjFach _fach2;
         NotenTyp notenTyp;
@@ -61,13 +62,15 @@ namespace NotenApp.Pages
                     await viewModel2.AddNote(_fach2, note, NotenTyp.LK);
                     if (seitenZurück == 2)
                     {
-                        Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-
-                        await Navigation.PopAsync();
+                        Dismiss(null);
+                        
+                        //Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+                        //
+                        //await Navigation.PopAsync();
                     }
                     else
                     {
-                        await Navigation.PopAsync();
+                        //await Navigation.PopAsync();
                     }
                 }
                 else
@@ -76,25 +79,25 @@ namespace NotenApp.Pages
 
                     if (seitenZurück == 2)
                     {
-                        Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-
-                        await Navigation.PopAsync();
+                        //Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+                        //
+                        //await Navigation.PopAsync();
                     }
                     else
                     {
-                        await Navigation.PopAsync();
+                        //await Navigation.PopAsync();
                     }
                 }
             }
             else if(isHalbjahr == false && isZiel == false)
             {
                 await FachService.UpdateNote(note, prNummer, notenTyp);
-                await Navigation.PopAsync();
+                //await Navigation.PopAsync();
             }
             else
             {
                 await FachService.AddZiel(_fach2.Halbjahr, _fach2.Name, note);
-                await Navigation.PopAsync();
+                //await Navigation.PopAsync();
             }
         }
 
@@ -103,13 +106,13 @@ namespace NotenApp.Pages
             if(isHalbjahr == true)
             {
                 
-                await Navigation.PopAsync();
+                //await Navigation.PopAsync();
             }
             else
             {
                 
                 await FachService.UpdateNote(null, prNummer, notenTyp);
-                await Navigation.PopAsync();
+                //await Navigation.PopAsync();
             }
         }
     }

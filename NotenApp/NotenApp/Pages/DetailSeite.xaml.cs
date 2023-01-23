@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -70,19 +70,22 @@ namespace NotenApp.Pages
             model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
         }
 
-        private async void AddKlausurNote(object sender, EventArgs e)
+        private void AddKlausurNote(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.Klausur,1));
+            Navigation.ShowPopup(new NotenSeite(fach, NotenTyp.Klausur, 1));
+            //await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.Klausur,1));
 
         }
-        private async void AddLKNote(object sender, EventArgs e)
+        private void AddLKNote(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.LK,1));
+            Navigation.ShowPopup(new NotenSeite(fach, NotenTyp.LK, 1));
+            //await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.LK,1));
         }
 
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NotenSeite(fach));
+            Navigation.ShowPopup(new NotenSeite(fach));
+            //await Navigation.PushAsync(new NotenSeite(fach));
         }
     }
 }

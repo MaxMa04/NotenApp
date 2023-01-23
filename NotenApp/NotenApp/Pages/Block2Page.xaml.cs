@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -103,66 +104,73 @@ namespace NotenApp.Pages
             
         }
         // Schriftliche Note
-        private async void UpdateNoteSchriftlich1(object sender, EventArgs e)
+        private void UpdateNoteSchriftlich1(object sender, EventArgs e)
         {
             if (model.P1 == null)
             {
                 return;
             }
-            await Navigation.PushAsync(new NotenSeite(NotenTyp.Schriftlich, 1));
+            Navigation.ShowPopup(new NotenSeite(NotenTyp.Schriftlich, 1));
+            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Schriftlich, 1));
         }
-        private async void UpdateNoteSchriftlich2(object sender, EventArgs e)
+        private void UpdateNoteSchriftlich2(object sender, EventArgs e)
         {
             if (model.P2 == null)
             {
                 return;
             }
-            await Navigation.PushAsync(new NotenSeite(NotenTyp.Schriftlich, 2));
+            Navigation.ShowPopup(new NotenSeite(NotenTyp.Schriftlich, 2));
+            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Schriftlich, 2));
         }
-        private async void UpdateNoteSchriftlich3(object sender, EventArgs e)
+        private void UpdateNoteSchriftlich3(object sender, EventArgs e)
         {
             if (model.P3 == null)
             {
                 return;
             }
-            await Navigation.PushAsync(new NotenSeite(NotenTyp.Schriftlich, 3));
+            Navigation.ShowPopup(new NotenSeite(NotenTyp.Schriftlich, 3));
+            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Schriftlich, 3));
         }
         //Mündliche Note
-        private async void UpdateNoteMündlich1(object sender, EventArgs e)
+        private  void UpdateNoteMündlich1(object sender, EventArgs e)
         {
 
             if (model.P1 == null)
             {
                 return;
             }
-            await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 1));
+            Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 1));
+            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 1));
         }
-        private async void UpdateNoteMündlich2(object sender, EventArgs e)
+        private void UpdateNoteMündlich2(object sender, EventArgs e)
         {
 
             if (model.P2 == null)
             {
                 return;
             }
-            await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 2));
+            Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 2));
+            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 2));
         }
-        private async void UpdateNoteMündlich3(object sender, EventArgs e)
+        private void UpdateNoteMündlich3(object sender, EventArgs e)
         {
 
             if (model.P3 == null)
             {
                 return;
             }
-            await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 3));
+            Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 3));
+            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 3));
         }
-        private async void UpdateNoteMündlich4(object sender, EventArgs e)
+        private void UpdateNoteMündlich4(object sender, EventArgs e)
         {
 
             if (model.P4 == null)
             {
                 return;
             }
-            await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 4));
+            Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 4));
+            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 4));
         }
         private async void UpdateNoteMündlich5(object sender, EventArgs e)
         {
@@ -171,7 +179,8 @@ namespace NotenApp.Pages
             {
                 return;
             }
-            await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 5));
+            Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 5));
+            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 5));
         }
         private async void Delete(object sender, EventArgs e)
         {

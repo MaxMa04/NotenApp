@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -29,10 +29,10 @@ namespace NotenApp.Pages
         }
 
 
-        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private  void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var fach = e.CurrentSelection.FirstOrDefault() as HjFach;
-            await Navigation.PushAsync(new EntscheidungsSeite(fach));
+            Navigation.ShowPopup(new EntscheidungsSeite(fach));
         }
 
 

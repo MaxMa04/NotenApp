@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NotenApp.Pages.EntscheidungsSeite">
-    <ContentPage.Content>
-        <StackLayout>
-            <Button Text="Lk" Clicked="LK_Button_Clicked"/>
-            <Button Text="Klausur" Clicked="Klausur_Button_Clicked"/>
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+<xct:Popup
+    x:Class="NotenApp.Pages.EntscheidungsSeite"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <StackLayout>
+        <Button Clicked="LK_Button_Clicked" Text="Lk" />
+        <Button Clicked="Klausur_Button_Clicked" Text="Klausur" />
+    </StackLayout>
+</xct:Popup>
+
+
+
+

@@ -172,7 +172,7 @@ namespace NotenApp.Pages
             Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 4));
             //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 4));
         }
-        private async void UpdateNoteMündlich5(object sender, EventArgs e)
+        private void UpdateNoteMündlich5(object sender, EventArgs e)
         {
 
             if (model.P5 == null)

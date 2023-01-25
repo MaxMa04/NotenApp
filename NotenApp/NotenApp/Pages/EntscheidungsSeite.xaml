@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<xct:Popup
+<xctViews:Popup
     x:Class="NotenApp.Pages.EntscheidungsSeite"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    xmlns:xctViews="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+    HorizontalOptions="CenterAndExpand"
+    Size="370,100"
+    VerticalOptions="EndAndExpand">
     <StackLayout>
         <Button Clicked="LK_Button_Clicked" Text="Lk" />
         <Button Clicked="Klausur_Button_Clicked" Text="Klausur" />
     </StackLayout>
-</xct:Popup>
+</xctViews:Popup>
 
 
 

@@ -18,7 +18,7 @@ namespace NotenApp.Pages
     {
         private HjFach _fach2;
         NotenTyp notenTyp;
-        HalbjahrViewModel viewModel2;
+        HalbjahrViewModel hjVm;
         private int seitenZurück;
         bool isHalbjahr;
         bool isZiel;
@@ -29,7 +29,7 @@ namespace NotenApp.Pages
             InitializeComponent();
             _fach2 = fach;
             this.notenTyp = notenTyp;
-            viewModel2 = new HalbjahrViewModel();
+            hjVm = new HalbjahrViewModel();
             this.seitenZurück = seitenZurück;
             isHalbjahr = true;
             isZiel = false;
@@ -50,54 +50,31 @@ namespace NotenApp.Pages
             _fach2 = fach;
             isHalbjahr = false;
             isZiel = true;
+            btn.Text = "Ziel löschen";
         }
         private async void Button_Clicked1(object sender, EventArgs e)
         {
             var button = (Button)sender;
             int note = Convert.ToInt32(button.Text);
+            //für Block 1
             if(isHalbjahr == true)
             {
-                if (notenTyp == NotenTyp.LK)
-                {
-                    await viewModel2.AddNote(_fach2, note, NotenTyp.LK);
-                    if (seitenZurück == 2)
-                    {
-                        Dismiss(null);
-                        
-                        //Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-                        //
-                        //await Navigation.PopAsync();
-                    }
-                    else
-                    {
-                        //await Navigation.PopAsync();
-                    }
-                }
-                else
-                {
-                    await viewModel2.AddNote(_fach2, note, NotenTyp.Klausur);
-
-                    if (seitenZurück == 2)
-                    {
-                        //Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-                        //
-                        //await Navigation.PopAsync();
-                    }
-                    else
-                    {
-                        //await Navigation.PopAsync();
-                    }
-                }
+                
+                Dismiss(note);
+                
             }
+            //für Prüfungen/Block2
             else if(isHalbjahr == false && isZiel == false)
             {
                 await FachService.UpdateNote(note, prNummer, notenTyp);
-                //await Navigation.PopAsync();
+                Dismiss(null);
             }
+            // Für Ziele
             else
             {
+                
                 await FachService.AddZiel(_fach2.Halbjahr, _fach2.Name, note);
-                //await Navigation.PopAsync();
+                Dismiss(null);
             }
         }
 
@@ -106,13 +83,18 @@ namespace NotenApp.Pages
             if(isHalbjahr == true)
             {
                 
-                //await Navigation.PopAsync();
+                Dismiss(null);
             }
-            else
+            else if (isHalbjahr == false && isZiel == false)
             {
                 
                 await FachService.UpdateNote(null, prNummer, notenTyp);
-                //await Navigation.PopAsync();
+                Dismiss(null);
+            }
+            else
+            {
+                await FachService.AddZiel(_fach2.Halbjahr, _fach2.Name, null);
+                Dismiss(null);
             }
         }
     }

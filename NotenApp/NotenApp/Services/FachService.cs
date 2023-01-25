@@ -297,19 +297,40 @@ namespace NotenApp.Services
             }
         }
         //Ziele
-        public static async Task AddZiel(int halbjahr, string fachName, int zielNote)
+        public static async Task AddZiel(int halbjahr, string fachName, int? zielNote)
         {
             await Init();
-            Ziel ziel = new Ziel
+            List<Ziel> ziele = await GetZiele(halbjahr);
+            if(ziele.Exists(t => t.FachName == fachName) != true)
             {
-                FachName = fachName,
-                ZielNote = zielNote,
-                Halbjahr = halbjahr
-            };
+                Ziel ziel = new Ziel
+                {
+                    FachName = fachName,
+                    ZielNote = zielNote,
+                    Halbjahr = halbjahr
+                };
+                await db.InsertAsync(ziel);
+            }
+            else
+            {
+                foreach (var item in ziele)
+                {
+                    if(item.FachName == fachName && zielNote != null)
+                    {
+                        item.ZielNote = zielNote;
+                        await db.UpdateAsync(item);
+                    }
+                    else
+                    {
+                        await DeleteZiel(item);
+                    }
+                }
+            }
 
-            await db.InsertAsync(ziel);
+            
 
         }
+        
         public static async Task DeleteZiel(Ziel ziel)
         {
             await Init();

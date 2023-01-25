@@ -24,8 +24,10 @@ namespace NotenApp.Pages
         }
         private void LK_Button_Clicked(object sender, EventArgs e)
         {
-            Dismiss(null);
-            Navigation.ShowPopup(new NotenSeite(fach, NotenTyp.LK, 2));
+            
+            //var result = await Navigation.ShowPopupAsync(new NotenSeite(fach, NotenTyp.LK, 2));
+            NotenTyp s = NotenTyp.LK;
+            Dismiss(s);
             //await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.LK, 2));           
         }
         private void Klausur_Button_Clicked(object sender, EventArgs e)

@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<xct:Popup
+<xctViews:Popup
     x:Class="NotenApp.Pages.NotenSeite"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    xmlns:xctViews="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+    HorizontalOptions="CenterAndExpand"
+    Size="370,220"
+    VerticalOptions="EndAndExpand">
 
     <Grid Margin="10,10,10,480">
         <Grid.RowDefinitions>
@@ -111,4 +114,4 @@
             Text="" />
     </Grid>
 
-</xct:Popup>
+</xctViews:Popup>

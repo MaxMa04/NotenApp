@@ -14,6 +14,6 @@ namespace NotenApp.Models
         public int Halbjahr { get; set; }
         public string Beschreibung { get; set; }
         public int ErforderlicheNote { get; set; }
-        public int ZielNote { get; set; }
+        public int? ZielNote { get; set; }
     }
 }

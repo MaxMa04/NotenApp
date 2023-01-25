@@ -103,11 +103,11 @@ namespace NotenApp.ViewModels
                 case 1:
                     FaecherHJ1.Clear();
                     var facher1 = await FachService.GetFaecher(1);
-                    facher1 = Controller.SortList(facher1);
+                    
                     var noten = await FachService.GetNoten(1);
                     
-                    FaecherHJ1.AddRange(facher1);
-                    foreach (var fach in FaecherHJ1)
+                    
+                    foreach (var fach in facher1)
                     {
                         foreach (var note in noten)
                         {
@@ -122,6 +122,8 @@ namespace NotenApp.ViewModels
                             }
                         }
                     }
+                    facher1 = Controller.SortList(facher1);
+                    FaecherHJ1.AddRange(facher1);
                     GesamtDurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
                     break;
                 case 2:

@@ -21,5 +21,11 @@ namespace NotenApp.Logic
         Kein = 4
 
     };
+    public enum WhichNote
+    {
+        Block1 = 1,
+        Block2 = 2,
+        Ziel = 3
+    };
     
 }

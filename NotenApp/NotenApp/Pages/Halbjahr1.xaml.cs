@@ -49,17 +49,20 @@ namespace NotenApp.Pages
             {
                 return;
             }
-            NotenTyp? notenTyp = (NotenTyp?)await Navigation.ShowPopupAsync(new EntscheidungsSeite(fach));
+
+            NotenTyp? notenTyp = (NotenTyp?)await Navigation.ShowPopupAsync(new EntscheidungsPopup());
             int? note = null;
+
             if (notenTyp != null)
             {
-                 note = (int?)await Navigation.ShowPopupAsync(new NotenSeite(fach, NotenTyp.LK, 2));
+                 note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1));
             }
             
             if (notenTyp != null && note != null)
             {
                 await _model.AddNote(fach, (int)note, (NotenTyp)notenTyp);
             }
+
             cv.SelectedItem = null;
             
         }

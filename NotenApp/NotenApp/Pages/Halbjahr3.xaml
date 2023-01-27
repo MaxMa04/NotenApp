@@ -62,6 +62,7 @@
             <!--  Übersicht der Noten und Fächer  -->
 
             <CollectionView
+                x:Name="cv"
                 Grid.Row="1"
                 ItemsSource="{Binding FaecherHJ3}"
                 SelectionChanged="CollectionView_SelectionChanged"

@@ -26,21 +26,7 @@ namespace NotenApp.Pages
         protected async override void OnAppearing()
         {
             base.OnAppearing(); 
-            model.P1 = await FachService.GetPrFach(1);
-            model.P2 = await FachService.GetPrFach(2);
-            model.P3 = await FachService.GetPrFach(3);
-            model.P4 = await FachService.GetPrFach(4);
-            model.P5 = await FachService.GetPrFach(5);
-            int punktzahlBlock2 = await FachService.GetPunktzahlBlock2();
-            model.DurchschnittBlock2 = await FachService.GetDurchschnittBlock2();
-            if(punktzahlBlock2 == 0)
-            {
-                model.PunktzahlBlock2 = "-/300";
-            }
-            else
-            {
-                model.PunktzahlBlock2 = punktzahlBlock2.ToString() + "/300"; 
-            }
+            await model.InitBlock2();
         }
         //FachName
         private async void SetPrFach1(object sender, EventArgs e)
@@ -104,83 +90,92 @@ namespace NotenApp.Pages
             
         }
         // Schriftliche Note
-        private void UpdateNoteSchriftlich1(object sender, EventArgs e)
+        private async void UpdateNoteSchriftlich1(object sender, EventArgs e)
         {
             if (model.P1 == null)
             {
                 return;
             }
-            Navigation.ShowPopup(new NotenSeite(NotenTyp.Schriftlich, 1));
-            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Schriftlich, 1));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            await FachService.UpdateNote(note, 1, NotenTyp.Schriftlich);
+            await model.InitBlock2();
+
         }
-        private void UpdateNoteSchriftlich2(object sender, EventArgs e)
+        private async void UpdateNoteSchriftlich2(object sender, EventArgs e)
         {
             if (model.P2 == null)
             {
                 return;
             }
-            Navigation.ShowPopup(new NotenSeite(NotenTyp.Schriftlich, 2));
-            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Schriftlich, 2));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            await FachService.UpdateNote(note, 2, NotenTyp.Schriftlich);
+            await model.InitBlock2();
         }
-        private void UpdateNoteSchriftlich3(object sender, EventArgs e)
+        private async void UpdateNoteSchriftlich3(object sender, EventArgs e)
         {
             if (model.P3 == null)
             {
                 return;
             }
-            Navigation.ShowPopup(new NotenSeite(NotenTyp.Schriftlich, 3));
-            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Schriftlich, 3));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            await FachService.UpdateNote(note, 3, NotenTyp.Schriftlich);
+            await model.InitBlock2();
         }
         //Mündliche Note
-        private  void UpdateNoteMündlich1(object sender, EventArgs e)
+        private async void UpdateNoteMündlich1(object sender, EventArgs e)
         {
 
             if (model.P1 == null)
             {
                 return;
             }
-            Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 1));
-            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 1));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            await FachService.UpdateNote(note, 1, NotenTyp.Mündlich);
+            await model.InitBlock2();
         }
-        private void UpdateNoteMündlich2(object sender, EventArgs e)
+        private async void UpdateNoteMündlich2(object sender, EventArgs e)
         {
 
             if (model.P2 == null)
             {
                 return;
             }
-            Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 2));
-            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 2));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            await FachService.UpdateNote(note, 2, NotenTyp.Mündlich);
+            await model.InitBlock2();
         }
-        private void UpdateNoteMündlich3(object sender, EventArgs e)
+        private async void UpdateNoteMündlich3(object sender, EventArgs e)
         {
 
             if (model.P3 == null)
             {
                 return;
             }
-            Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 3));
-            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 3));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            await FachService.UpdateNote(note, 3, NotenTyp.Mündlich);
+            await model.InitBlock2();
         }
-        private void UpdateNoteMündlich4(object sender, EventArgs e)
+        private  async void UpdateNoteMündlich4(object sender, EventArgs e)
         {
 
             if (model.P4 == null)
             {
                 return;
             }
-            Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 4));
-            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 4));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            await FachService.UpdateNote(note, 4, NotenTyp.Mündlich);
+            await model.InitBlock2();
         }
-        private void UpdateNoteMündlich5(object sender, EventArgs e)
+        private async void UpdateNoteMündlich5(object sender, EventArgs e)
         {
 
             if (model.P5 == null)
             {
                 return;
             }
-            Navigation.ShowPopup(new NotenSeite(NotenTyp.Mündlich, 5));
-            //await Navigation.PushAsync(new NotenSeite(NotenTyp.Mündlich, 5));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            await FachService.UpdateNote(note, 5, NotenTyp.Mündlich);
+            await model.InitBlock2();
         }
         private async void Delete(object sender, EventArgs e)
         {

@@ -1,4 +1,5 @@
-﻿using NotenApp.Models;
+﻿using NotenApp.Logic;
+using NotenApp.Models;
 using NotenApp.Services;
 using NotenApp.ViewModels;
 using System;
@@ -29,10 +30,28 @@ namespace NotenApp.Pages
 
 
 
-        private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var fach = e.CurrentSelection.FirstOrDefault() as HjFach;
-            Navigation.ShowPopup(new EntscheidungsSeite(fach));
+            if (fach == null)
+            {
+                return;
+            }
+
+            NotenTyp? notenTyp = (NotenTyp?)await Navigation.ShowPopupAsync(new EntscheidungsPopup());
+            int? note = null;
+
+            if (notenTyp != null)
+            {
+                note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1));
+            }
+
+            if (notenTyp != null && note != null)
+            {
+                await _model.AddNote(fach, (int)note, (NotenTyp)notenTyp);
+            }
+
+            cv.SelectedItem = null;
         }
 
 

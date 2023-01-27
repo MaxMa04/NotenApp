@@ -70,22 +70,37 @@ namespace NotenApp.Pages
             model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
         }
 
-        private void AddKlausurNote(object sender, EventArgs e)
+        private async void AddKlausurNote(object sender, EventArgs e)
         {
-            Navigation.ShowPopup(new NotenSeite(fach, NotenTyp.Klausur, 1));
-            //await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.Klausur,1));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1));
+            if(note != null)
+            {
+                await FachService.AddNote(fach, (int)note, NotenTyp.Klausur);
+            }
+            await model.Initialize(fach);
+            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
+            model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
 
         }
-        private void AddLKNote(object sender, EventArgs e)
+        private async void AddLKNote(object sender, EventArgs e)
         {
-            Navigation.ShowPopup(new NotenSeite(fach, NotenTyp.LK, 1));
-            //await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.LK,1));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1));
+            if (note != null)
+            {
+                await FachService.AddNote(fach, (int)note, NotenTyp.LK);
+            }
+            await model.Initialize(fach);
+            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
+            model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            Navigation.ShowPopup(new NotenSeite(fach));
-            //await Navigation.PushAsync(new NotenSeite(fach));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Ziel));
+            
+            await FachService.AddZiel(fach.Halbjahr, fach.Name, note);
+            await model.Initialize(fach);
+          
         }
     }
 }

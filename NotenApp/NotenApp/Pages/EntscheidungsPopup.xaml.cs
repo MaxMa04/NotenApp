@@ -13,27 +13,28 @@ using Xamarin.Forms.Xaml;
 namespace NotenApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EntscheidungsSeite : Popup
+    public partial class EntscheidungsPopup : Popup
     {
-        private HjFach fach;
+        
 
-        public EntscheidungsSeite(HjFach fach)
+        public EntscheidungsPopup()
         {
             InitializeComponent();
-            this.fach = fach;
+            
         }
         private void LK_Button_Clicked(object sender, EventArgs e)
         {
             
             //var result = await Navigation.ShowPopupAsync(new NotenSeite(fach, NotenTyp.LK, 2));
-            NotenTyp s = NotenTyp.LK;
-            Dismiss(s);
+            NotenTyp notenTyp = NotenTyp.LK;
+            Dismiss(notenTyp);
             //await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.LK, 2));           
         }
         private void Klausur_Button_Clicked(object sender, EventArgs e)
         {
-            Navigation.ShowPopup(new NotenSeite(fach, NotenTyp.Klausur, 2));
-            //await Navigation.PushAsync(new NotenSeite(fach, NotenTyp.Klausur, 2));
+            NotenTyp notenTyp = NotenTyp.Klausur;
+            Dismiss(notenTyp);
+            
         }
     }
 }

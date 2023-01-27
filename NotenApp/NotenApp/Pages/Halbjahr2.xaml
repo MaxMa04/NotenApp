@@ -61,9 +61,10 @@
             <!--  Übersicht der Noten und Fächer  -->
 
             <CollectionView
+                x:Name="cv"
                 Grid.Row="1"
                 ItemsSource="{Binding FaecherHJ2}"
-                SelectionChanged="CollectionView_SelectionChanged"
+                SelectionChanged="cv_SelectionChanged"
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

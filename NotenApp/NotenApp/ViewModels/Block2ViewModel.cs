@@ -1,9 +1,11 @@
 ﻿using NotenApp.Models;
+using NotenApp.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NotenApp.ViewModels
 {
@@ -81,5 +83,24 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PunktzahlBlock2)));
             }
         }
+        public async Task InitBlock2()
+        {
+            P1 = await FachService.GetPrFach(1);
+            P2 = await FachService.GetPrFach(2);
+            P3 = await FachService.GetPrFach(3);
+            P4 = await FachService.GetPrFach(4);
+            P5 = await FachService.GetPrFach(5);
+            int punktzahlBlock2 = await FachService.GetPunktzahlBlock2();
+            DurchschnittBlock2 = await FachService.GetDurchschnittBlock2();
+            if (punktzahlBlock2 == 0)
+            {
+                PunktzahlBlock2 = "-/300";
+            }
+            else
+            {
+                PunktzahlBlock2 = punktzahlBlock2.ToString() + "/300";
+            }
+        }
+        
     }
 }

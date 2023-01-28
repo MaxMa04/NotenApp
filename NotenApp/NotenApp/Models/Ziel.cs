@@ -13,7 +13,8 @@ namespace NotenApp.Models
         public string FachName { get; set; }
         public int Halbjahr { get; set; }
         public string Beschreibung { get; set; }
-        public int ErforderlicheNote { get; set; }
+        public int ErforderlicheLKNote { get; set; }
+        public int ErforderlicheKLNote { get; set; }
         public int? ZielNote { get; set; }
     }
 }

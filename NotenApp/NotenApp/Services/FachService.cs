@@ -69,15 +69,8 @@ namespace NotenApp.Services
         public static async Task<List<HjFach>> GetFaecher(int halbjahr)
         {
             await Init();
-            var Gesamtfacher = await db.Table<HjFach>().ToListAsync();
-            List<HjFach> facher = new List<HjFach>();
-            foreach (var fach in Gesamtfacher)
-            {
-                if(fach.Halbjahr == halbjahr)
-                {
-                    facher.Add(fach);
-                }
-            }
+            var query = db.Table<HjFach>().Where(f => f.Halbjahr == halbjahr);
+            List<HjFach> facher = await query.ToListAsync();
             return facher;
         }
         public static async Task<int> GetEinzubringendeHalbjahre(HjFach fach)
@@ -115,18 +108,12 @@ namespace NotenApp.Services
             List<HjFach> Gesamtfacher = await db.Table<HjFach>().ToListAsync();
             return Gesamtfacher;
         }
-        public static async Task<List<HJNote>> GetNoten(int halbjahr)
+        public static async Task<List<HJNote>> GetFachNoten(HjFach fach, NotenTyp notenTyp)
         {
             await Init();
-            var noten = await db.Table<HJNote>().ToListAsync();
-            List<HJNote> Noten = new List<HJNote>();
-            foreach (var note in noten)
-            {
-                if (note.Halbjahr == halbjahr)
-                {
-                    Noten.Add(note);
-                }
-            }
+            var query = db.Table<HJNote>().Where(n => n.Fach == fach.Name && n.Halbjahr == fach.Halbjahr && n.Typ == (int)notenTyp);
+            List<HJNote> Noten = await query.ToListAsync();
+            
             return Noten;
         }
         public static async Task AddFach(string name, int aufgabenfeld, int halbjahr, int minHalbjahre, bool isLK, bool isPrFach, bool isFremdsprache) 

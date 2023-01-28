@@ -103,24 +103,13 @@ namespace NotenApp.ViewModels
                 case 1:
                     FaecherHJ1.Clear();
                     var facher1 = await FachService.GetFaecher(1);
-                    
-                    var noten = await FachService.GetNoten(1);
-                    
-                    
+
                     foreach (var fach in facher1)
                     {
-                        foreach (var note in noten)
-                        {
-                            if(note.Fach == fach.Name && note.Typ == 1)
-                            {
-                                fach.LKNoten.Add(note);
-                                
-                            }
-                            if(note.Typ == 2 && note.Fach == fach.Name)
-                            {
-                                fach.KlausurNoten.Add(note);
-                            }
-                        }
+                        var lkn = await FachService.GetFachNoten(fach, NotenTyp.LK);
+                        var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
+                        fach.LKNoten.AddRange(lkn);
+                        fach.KlausurNoten.AddRange(kln);
                     }
                     facher1 = Controller.SortList(facher1);
                     FaecherHJ1.AddRange(facher1);
@@ -129,69 +118,46 @@ namespace NotenApp.ViewModels
                 case 2:
                     FaecherHJ2.Clear();
                     var facher2 = await FachService.GetFaecher(2);
-                    facher2= Controller.SortList(facher2);
-                    var noten2 = await FachService.GetNoten(2);
-                    FaecherHJ2.AddRange(facher2);
-                    foreach (var fach in FaecherHJ2)
+                    foreach (var fach in facher2)
                     {
-                        foreach (var note in noten2)
-                        {
-                            if (note.Fach == fach.Name && note.Typ == 1)
-                            {
-                                fach.LKNoten.Add(note);
-                            }
-                            if (note.Typ == 2 && note.Fach == fach.Name)
-                            {
-                                fach.KlausurNoten.Add(note);
-                            }
-                        }
+                        var lkn = await FachService.GetFachNoten(fach, NotenTyp.LK);
+                        var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
+                        fach.LKNoten.AddRange(lkn);
+                        fach.KlausurNoten.AddRange(kln);
                     }
+                    facher2 = Controller.SortList(facher2);
+                    FaecherHJ2.AddRange(facher2);
                     GesamtDurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
 
                     break;
                 case 3:
                     FaecherHJ3.Clear();
                     var facher3 = await FachService.GetFaecher(3);
+                    foreach (var fach in facher3)
+                    {
+                        var lkn = await FachService.GetFachNoten(fach, NotenTyp.LK);
+                        var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
+                        fach.LKNoten.AddRange(lkn);
+                        fach.KlausurNoten.AddRange(kln);
+                    }
                     facher3 = Controller.SortList(facher3);
                     FaecherHJ3.AddRange(facher3);
-                    var noten3 = await FachService.GetNoten(3);
-                    foreach (var fach in FaecherHJ3)
-                    {
-                        foreach (var note in noten3)
-                        {
-                            if (note.Fach == fach.Name && note.Typ == 1)
-                            {
-                                fach.LKNoten.Add(note);
-                            }
-                            if (note.Typ == 2 && note.Fach == fach.Name)
-                            {
-                                fach.KlausurNoten.Add(note);
-                            }
-                        }
-                    }
-                    
                     GesamtDurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
                     break;
                 case 4:
                     FaecherHJ4.Clear();
                     var facher4 = await FachService.GetFaecher(4);
+                    
+
+                    foreach (var fach in facher4)
+                    {
+                        var lkn = await FachService.GetFachNoten(fach, NotenTyp.LK);
+                        var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
+                        fach.LKNoten.AddRange(lkn);
+                        fach.KlausurNoten.AddRange(kln);
+                    }
                     facher4 = Controller.SortList(facher4);
                     FaecherHJ4.AddRange(facher4);
-                    var noten4 = await FachService.GetNoten(4);
-                    foreach (var fach in FaecherHJ4)
-                    {
-                        foreach (var note in noten4)
-                        {
-                            if (note.Fach == fach.Name && note.Typ == 1)
-                            {
-                                fach.LKNoten.Add(note);
-                            }
-                            if (note.Typ == 2 && note.Fach == fach.Name)
-                            {
-                                fach.KlausurNoten.Add(note);
-                            }
-                        }
-                    }
                     GesamtDurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
                     break;
             }

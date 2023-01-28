@@ -80,25 +80,11 @@ namespace NotenApp.ViewModels
                     Ziel = "-";
                 }
             }
-            List<HJNote> gesamtNoten = await FachService.GetNoten(fach.Halbjahr);
-            foreach (var note in gesamtNoten)
-            {
-                if(note.Fach == fach.Name)
-                {
-                    switch (note.Typ)
-                    {
-                        case 1:
-                            LKNoten.Add(note);
-                            await Task.Delay(50);
-                            break;
-                        case 2:
-                            KlausurNoten.Add(note);
-                            await Task.Delay(50);
-                            break;
-                    }
-                }
-            }
-            
+            var lKNoten = await FachService.GetFachNoten(fach, NotenTyp.LK);
+            LKNoten.AddRange(lKNoten);
+            var klausurNoten = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
+            KlausurNoten.AddRange(klausurNoten);
+
         }
     }
 }

@@ -10,7 +10,7 @@
         <ViewModels:HalbjahrViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid BackgroundColor="#303030">
+        <Grid BackgroundColor="{StaticResource Primary}">
 
             <!--  Griddefinition  -->
 

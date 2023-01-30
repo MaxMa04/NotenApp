@@ -12,8 +12,7 @@ namespace NotenApp.Models
         public int Id { get; set; }
         public int Note { get; set; }
         public int Typ { get; set; }
-        public string Fach { get; set; }
-        public int Halbjahr { get; set; }
+        public int FachId { get; set; }
 
     }
 }

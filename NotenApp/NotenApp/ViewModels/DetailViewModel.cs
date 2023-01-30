@@ -67,19 +67,19 @@ namespace NotenApp.ViewModels
         {
             LKNoten.Clear();
             KlausurNoten.Clear();
-            List<Ziel> ziele = await FachService.GetZiele(fach.Halbjahr);
-            foreach (var item in ziele)
+            Ziel ziel = await FachService.GetZiele(fach);
+            
+            
+            if(ziel != null)
             {
-                if(item.FachName == fach.Name)
-                {
-                    Ziel = item.ZielNote.ToString();
-                    break;
-                }
-                else
-                {
-                    Ziel = "-";
-                }
+                Ziel = ziel.ZielNote.ToString();
+                
             }
+            else
+            {
+                Ziel = "-";
+            }
+            
             var lKNoten = await FachService.GetFachNoten(fach, NotenTyp.LK);
             LKNoten.AddRange(lKNoten);
             var klausurNoten = await FachService.GetFachNoten(fach, NotenTyp.Klausur);

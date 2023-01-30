@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NotenApp.App">
+<Application
+    x:Class="NotenApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="Primary">#5d5d67</Color>
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="SlateGray" />
                 <Setter Property="BarTextColor" Value="ForestGreen" />

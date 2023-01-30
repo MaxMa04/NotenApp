@@ -98,7 +98,7 @@ namespace NotenApp.Pages
         {
             int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Ziel));
             
-            await FachService.AddZiel(fach.Halbjahr, fach.Name, note);
+            await FachService.AddZiel(fach, note);
             await model.Initialize(fach);
           
         }

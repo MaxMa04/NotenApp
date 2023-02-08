@@ -16,7 +16,7 @@
         <ViewModels:MainPageViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid BackgroundColor="#252621">
+        <Grid BackgroundColor="{StaticResource PrimaryB}">
 
             <!--  Griddefinition  -->
 
@@ -38,13 +38,13 @@
             <Frame
                 Grid.Row="0"
                 Grid.ColumnSpan="4"
-                BackgroundColor="AntiqueWhite">
+                BackgroundColor="{StaticResource FourthB}">
                 <Label
                     Margin="-15"
                     FontSize="30"
                     HorizontalOptions="Center"
                     Text="Ziele"
-                    TextColor="DarkGoldenrod"
+                    TextColor="Black"
                     VerticalOptions="Center" />
             </Frame>
             <CollectionView

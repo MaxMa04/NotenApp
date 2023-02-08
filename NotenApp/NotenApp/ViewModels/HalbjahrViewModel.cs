@@ -6,6 +6,7 @@ using NotenApp.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -85,49 +86,131 @@ namespace NotenApp.ViewModels
         public async Task AddNote(HjFach fach, int note, NotenTyp notenTyp)
         {
             await FachService.AddNote(fach, note, notenTyp);
-            await Refresh(fach.Halbjahr);
+
+            await AdjustFacher(fach);
             
+            await Task.Run(async () => {
+                await ChangeHjDurchschnitt(fach.Halbjahr);
+            });
+
+
+        }
+        public async Task AdjustFacher(HjFach fach)
+        {
+            HjFach fachh = await FachService.GetFach(fach);
+            await GetNoten(fachh);
+            switch (fach.Halbjahr)
+            {
+                case 1:
+                    await Task.Run(() => {
+                        FaecherHJ1.Remove(fach);
+
+                        FaecherHJ1.Insert(0, fachh);
+                        FaecherHJ1 = Controller.SortList(FaecherHJ1);
+                    }); 
+                    break;
+                case 2:
+
+                    await Task.Run(() => {
+                        FaecherHJ2.Remove(fach);
+                                 
+                        FaecherHJ2.Insert(0, fachh);
+                        FaecherHJ2 = Controller.SortList(FaecherHJ2);
+                    });
+
+                    break;
+                case 3:
+
+                    await Task.Run(() => {
+                        FaecherHJ3.Remove(fach);
+                                 
+                        FaecherHJ3.Insert(0, fachh);
+                        FaecherHJ3 = Controller.SortList(FaecherHJ3);
+                    });
+                    break;
+                case 4:
+
+                    await Task.Run(() => {
+                        FaecherHJ4.Remove(fach);
+                                 
+                        FaecherHJ4.Insert(0, fachh);
+                        FaecherHJ4 = Controller.SortList(FaecherHJ4);
+                    });
+                    break;
+            }
         }
         public async Task Remove(HjFach fach)
         {
             await FachService.RemoveFach(fach);
-            await Refresh(fach.Halbjahr);
+            await Task.Run( ()=> FaecherHJ1.Remove(fach));
             
-
+            await ChangeHjDurchschnitt(fach.Halbjahr);
+            
         }
+        public async Task ChangeHjDurchschnitt(int halbjahr)
+        {
+            switch (halbjahr)
+            {
+                case 1:
+                    GesamtDurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
+                    break;
+                case 2:
 
+                    GesamtDurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
+
+                    break;
+                case 3:
+
+                    GesamtDurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
+                    break;
+                case 4:
+
+                    GesamtDurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
+                    break;
+            }
+        }
+        public async Task GetNoten(HjFach fach)
+        {
+            await Task.Run (async () => { 
+                var lkn = await FachService.GetFachNotenHjView(fach, NotenTyp.LK);
+                fach.LKNoten.AddRange(lkn);
+            });
+            await Task.Run(async () => {
+                var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
+
+                fach.KlausurNoten.AddRange(kln);
+            });
+       
+            
+            
+        }
         public async Task Refresh(int halbjahr)
         {
             switch (halbjahr)
             {
                 case 1:
+                    
                     FaecherHJ1.Clear();
                     var facher1 = await FachService.GetFaecher(1);
 
                     foreach (var fach in facher1)
                     {
-                        var lkn = await FachService.GetFachNoten(fach, NotenTyp.LK);
-                        var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
-                        fach.LKNoten.AddRange(lkn);
-                        fach.KlausurNoten.AddRange(kln);
+                        await GetNoten(fach);
                     }
                     facher1 = Controller.SortList(facher1);
                     FaecherHJ1.AddRange(facher1);
-                    GesamtDurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
+                    await ChangeHjDurchschnitt(1);
                     break;
                 case 2:
                     FaecherHJ2.Clear();
                     var facher2 = await FachService.GetFaecher(2);
                     foreach (var fach in facher2)
                     {
-                        var lkn = await FachService.GetFachNoten(fach, NotenTyp.LK);
-                        var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
-                        fach.LKNoten.AddRange(lkn);
-                        fach.KlausurNoten.AddRange(kln);
+                        await GetNoten(fach);
                     }
                     facher2 = Controller.SortList(facher2);
                     FaecherHJ2.AddRange(facher2);
-                    GesamtDurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
+                    await ChangeHjDurchschnitt(2);
 
                     break;
                 case 3:
@@ -135,14 +218,11 @@ namespace NotenApp.ViewModels
                     var facher3 = await FachService.GetFaecher(3);
                     foreach (var fach in facher3)
                     {
-                        var lkn = await FachService.GetFachNoten(fach, NotenTyp.LK);
-                        var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
-                        fach.LKNoten.AddRange(lkn);
-                        fach.KlausurNoten.AddRange(kln);
+                        await GetNoten(fach);
                     }
                     facher3 = Controller.SortList(facher3);
                     FaecherHJ3.AddRange(facher3);
-                    GesamtDurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
+                    await ChangeHjDurchschnitt(3);
                     break;
                 case 4:
                     FaecherHJ4.Clear();
@@ -151,14 +231,11 @@ namespace NotenApp.ViewModels
 
                     foreach (var fach in facher4)
                     {
-                        var lkn = await FachService.GetFachNoten(fach, NotenTyp.LK);
-                        var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
-                        fach.LKNoten.AddRange(lkn);
-                        fach.KlausurNoten.AddRange(kln);
+                        await GetNoten(fach);
                     }
                     facher4 = Controller.SortList(facher4);
                     FaecherHJ4.AddRange(facher4);
-                    GesamtDurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
+                    await ChangeHjDurchschnitt(4);
                     break;
             }
         }

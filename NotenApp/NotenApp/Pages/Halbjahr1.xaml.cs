@@ -25,7 +25,7 @@ namespace NotenApp.Pages
             
             InitializeComponent();
             _model = BindingContext as HalbjahrViewModel;
-            
+           
             
         }
         protected override void OnAppearing()

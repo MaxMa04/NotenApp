@@ -1,165 +1,316 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NotenApp.Pages.Block2Page"
-             xmlns:ViewModels="clr-namespace:NotenApp.ViewModels">
+<ContentPage
+    x:Class="NotenApp.Pages.Block2Page"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels">
     <ContentPage.BindingContext>
-        <ViewModels:Block2ViewModel/>
+        <ViewModels:Block2ViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid Padding="10" BackgroundColor="DarkGray">
+        <Grid Padding="10" BackgroundColor="{StaticResource PrimaryB}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="3*"/>
-               
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <!--Abgrenzungen-->
-            <Frame Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="Red">
+            <!--  Abgrenzungen  -->
+            <Frame
+                Grid.Row="0"
+                Grid.ColumnSpan="4"
+                BackgroundColor="{StaticResource PrimaryB}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.ColumnSpan="2" Text="Block 2" FontSize="35" VerticalOptions="Center" HorizontalOptions="Center"></Label>
-                    <Frame Margin="20,0,0,0" CornerRadius="40" Grid.Row="1" BackgroundColor="Aqua">
-                        <Label Margin="-10" Text="{Binding DurchschnittBlock2, TargetNullValue='-'}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                    <Label
+                        Grid.ColumnSpan="2"
+                        FontSize="35"
+                        HorizontalOptions="Center"
+                        Text="Block 2"
+                        TextColor="{StaticResource SecondaryB}"
+                        VerticalOptions="Center" />
+                    <Frame
+                        Grid.Row="1"
+                        Margin="20,0,0,0"
+                        BackgroundColor="{StaticResource FourthB}"
+                        CornerRadius="40">
+                        <Label
+                            Margin="-10"
+                            FontSize="Large"
+                            HorizontalOptions="Center"
+                            Text="{Binding DurchschnittBlock2, TargetNullValue='-'}"
+                            TextColor="{StaticResource SecondaryB}"
+                            VerticalOptions="Center" />
                     </Frame>
-                    <Frame Margin="0,0,20,0" CornerRadius="40" Grid.Row="1" Grid.Column="1" BackgroundColor="Aqua">
-                        <Label Margin="-10" Text="{Binding PunktzahlBlock2}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                    <Frame
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,0,20,0"
+                        BackgroundColor="{StaticResource FourthB}"
+                        CornerRadius="40">
+                        <Label
+                            Margin="-10"
+                            FontSize="Large"
+                            HorizontalOptions="Center"
+                            Text="{Binding PunktzahlBlock2}"
+                            TextColor="{StaticResource SecondaryB}"
+                            VerticalOptions="Center" />
                     </Frame>
                 </Grid>
             </Frame>
-            <Frame Grid.Row="7" Grid.ColumnSpan="4" BackgroundColor="Red"/>
-            <!--Block2-->
-            <!--Erklärung-->
-            <Frame Grid.Row="1" BackgroundColor="Black">
+            <Frame
+                Grid.Row="7"
+                Grid.ColumnSpan="4"
+                BackgroundColor="{StaticResource PrimaryB}" />
+            <!--  Block2  -->
+            <!--  Erklärung  -->
+            <Frame Grid.Row="1" BackgroundColor="{StaticResource FourthB}">
+                <Label
+                    Margin="-10"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="Nr."
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource FourthB}">
+                <Label
+                    Margin="-10"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="Fach"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="1"
+                Grid.Column="2"
+                BackgroundColor="{StaticResource FourthB}">
+                <Image Margin="-5" Source="schriftlich.png" />
+            </Frame>
+            <Frame
+                Grid.Row="1"
+                Grid.Column="3"
+                BackgroundColor="{StaticResource FourthB}">
+                <Image Margin="-10" Source="muendlich.png" />
+            </Frame>
+            <!--  P1  -->
+            <Frame Grid.Row="2" BackgroundColor="{StaticResource FourthB}">
+                <Label
+                    Margin="-10"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="1"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="2"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Delete" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetPrFach1" />
                 </Frame.GestureRecognizers>
-                <Label Margin="-10" Text="Nr." FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                <Label
+                    Margin="-10"
+                    FontSize="18"
+                    HorizontalOptions="StartAndExpand"
+                    Text="{Binding P1.Name, FallbackValue='Leistungskurs'}"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="CenterAndExpand" />
             </Frame>
-            <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="Aqua">
-                <Label Margin="-10" Text="Fach" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
-            </Frame>
-            <Frame Grid.Row="1" Grid.Column="2" BackgroundColor="Aqua">
-                <Image Margin="-5" Source="schriftlich.png"></Image>
-            </Frame>
-            <Frame Grid.Row="1" Grid.Column="3" BackgroundColor="Aqua">
-                <Image Margin="-10" Source="muendlich.png"></Image>
-            </Frame>
-            <!--P1-->
-            <Frame Grid.Row="2" BackgroundColor="Aqua">
-                <Label Margin="-10" Text="1" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
-            </Frame>
-            <Frame Grid.Row="2" Grid.Column="1" BackgroundColor="Aqua">
+            <Frame
+                Grid.Row="2"
+                Grid.Column="2"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="SetPrFach1" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteSchriftlich1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P1.Name, FallbackValue='Leistungskurs'}"></Label>
+                <Label Text="{Binding P1.NoteSchriftlich}" TextColor="{StaticResource SecondaryB}" />
             </Frame>
-            <Frame Grid.Row="2" Grid.Column="2" BackgroundColor="Aqua">
+            <Frame
+                Grid.Row="2"
+                Grid.Column="3"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="UpdateNoteSchriftlich1" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P1.NoteSchriftlich}"></Label>
+                <Label Text="{Binding P1.NoteMündlich}" TextColor="{StaticResource SecondaryB}" />
             </Frame>
-            <Frame Grid.Row="2" Grid.Column="3" BackgroundColor="Aqua">
+            <!--  P2  -->
+            <Frame Grid.Row="3" BackgroundColor="{StaticResource FourthB}">
+                <Label
+                    Margin="-10"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="2"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="3"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="UpdateNoteMündlich1" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetPrFach2" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P1.NoteMündlich}"></Label>
+                <Label
+                    Margin="-10"
+                    FontSize="18"
+                    HorizontalOptions="StartAndExpand"
+                    Text="{Binding P2.Name, FallbackValue='Leistungskurs'}"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="CenterAndExpand" />
             </Frame>
-            <!--P2-->
-            <Frame Grid.Row="3" BackgroundColor="Aqua">
-                <Label Margin="-10" Text="2" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
-            </Frame>
-            <Frame Grid.Row="3" Grid.Column="1" BackgroundColor="Green">
+            <Frame
+                Grid.Row="3"
+                Grid.Column="2"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="SetPrFach2" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteSchriftlich2" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P2.Name, FallbackValue='Leistungskurs'}"></Label>
+                <Label Text="{Binding P2.NoteSchriftlich}" TextColor="{StaticResource SecondaryB}" />
             </Frame>
-            <Frame Grid.Row="3" Grid.Column="2" BackgroundColor="Aqua">
+            <Frame
+                Grid.Row="3"
+                Grid.Column="3"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="UpdateNoteSchriftlich2" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich2" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P2.NoteSchriftlich}"></Label>
+                <Label Text="{Binding P2.NoteMündlich}" TextColor="{StaticResource SecondaryB}" />
             </Frame>
-            <Frame Grid.Row="3" Grid.Column="3" BackgroundColor="Aqua">
+            <!--  P3  -->
+            <Frame Grid.Row="4" BackgroundColor="{StaticResource FourthB}">
+                <Label
+                    Margin="-10"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="3"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="4"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="UpdateNoteMündlich2" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetPrFach3" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P2.NoteMündlich}"></Label>
+                <Label
+                    Margin="-10"
+                    FontSize="18"
+                    HorizontalOptions="StartAndExpand"
+                    Text="{Binding P3.Name, FallbackValue='Grundkurs'}"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="CenterAndExpand" />
             </Frame>
-            <!--P3-->
-            <Frame Grid.Row="4" BackgroundColor="Aqua">
-                <Label Margin="-10" Text="3" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
-            </Frame>
-            <Frame Grid.Row="4" Grid.Column="1" BackgroundColor="Aqua">
+            <Frame
+                Grid.Row="4"
+                Grid.Column="2"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="SetPrFach3" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteSchriftlich3" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P3.Name, FallbackValue='Grundkurs'}"></Label>
+                <Label Text="{Binding P3.NoteSchriftlich}" TextColor="{StaticResource SecondaryB}" />
             </Frame>
-            <Frame Grid.Row="4" Grid.Column="2" BackgroundColor="Aqua">
+            <Frame
+                Grid.Row="4"
+                Grid.Column="3"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="UpdateNoteSchriftlich3" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich3" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P3.NoteSchriftlich}"></Label>
+                <Label Text="{Binding P3.NoteMündlich}" TextColor="{StaticResource SecondaryB}" />
             </Frame>
-            <Frame Grid.Row="4" Grid.Column="3" BackgroundColor="Aqua">
+            <!--  P4  -->
+            <Frame Grid.Row="5" BackgroundColor="{StaticResource FourthB}">
+                <Label
+                    Margin="-10"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="4"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="5"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="UpdateNoteMündlich3" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetPrFach4" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P3.NoteMündlich}"></Label>
+                <Label
+                    Margin="-10"
+                    FontSize="18"
+                    HorizontalOptions="StartAndExpand"
+                    Text="{Binding P4.Name, FallbackValue='Grundkurs'}"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="CenterAndExpand" />
             </Frame>
-            <!--P4-->
-            <Frame Grid.Row="5" BackgroundColor="Aqua">
-                <Label Margin="-10" Text="4" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
-            </Frame>
-            <Frame Grid.Row="5" Grid.Column="1" BackgroundColor="Aqua">
+            <Frame
+                Grid.Row="5"
+                Grid.Column="3"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="SetPrFach4" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich4" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P4.Name, FallbackValue='Grundkurs'}"></Label>
+                <Label Text="{Binding P4.NoteMündlich}" TextColor="{StaticResource SecondaryB}" />
             </Frame>
-            <Frame Grid.Row="5" Grid.Column="3" BackgroundColor="Aqua">
+            <!--  P5  -->
+            <Frame Grid.Row="6" BackgroundColor="{StaticResource FourthB}">
+                <Label
+                    Margin="-10"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="5"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="6"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="UpdateNoteMündlich4" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetPrFach5" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P4.NoteMündlich}"></Label>
+                <Label
+                    Margin="-10"
+                    FontSize="18"
+                    HorizontalOptions="StartAndExpand"
+                    Text="{Binding P5.Name, FallbackValue='Grundkurs'}"
+                    TextColor="{StaticResource SecondaryB}"
+                    VerticalOptions="CenterAndExpand" />
             </Frame>
-            <!--P5-->
-            <Frame Grid.Row="6" BackgroundColor="Aqua">
-                <Label Margin="-10" Text="5" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"></Label>
-            </Frame>
-            <Frame Grid.Row="6" Grid.Column="1" BackgroundColor="Aqua">
+            <Frame
+                Grid.Row="6"
+                Grid.Column="3"
+                BackgroundColor="{StaticResource FourthB}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="SetPrFach5" NumberOfTapsRequired="1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich5" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P5.Name, FallbackValue='Grundkurs'}"></Label>
-            </Frame>
-            <Frame Grid.Row="6" Grid.Column="3" BackgroundColor="Aqua">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="UpdateNoteMündlich5" NumberOfTapsRequired="1" />
-                </Frame.GestureRecognizers>
-                <Label Text="{Binding P5.NoteMündlich}"></Label>
+                <Label Text="{Binding P5.NoteMündlich}" TextColor="{StaticResource SecondaryB}" />
             </Frame>
 
         </Grid>

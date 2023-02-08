@@ -115,6 +115,27 @@ namespace NotenApp.Services
             
             return Noten;
         }
+        public static async Task<List<HJNote>> GetFachNotenHjView(HjFach fach, NotenTyp notenTyp)
+        {
+            await Init();
+            var query = db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)notenTyp);
+            List<HJNote> Noten = await query.ToListAsync();
+            List<HJNote> retNoten = new List<HJNote>(); 
+            if(Noten.Count > 6)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    retNoten.Add(Noten[i]);
+                }
+                return retNoten;
+            }
+            else
+            {
+                return Noten;
+            }
+
+            
+        }
         public static async Task AddFach(string name, int aufgabenfeld, int halbjahr, int minHalbjahre, bool isLK, bool isPrFach, bool isFremdsprache) 
         {
             await Init();
@@ -282,11 +303,18 @@ namespace NotenApp.Services
                 return (float)Math.Round(gesamtDurchschnitt, 1);
             }
         }
+        public static async Task<HjFach> GetFach(HjFach fach)
+        {
+            await Init();
+            var query = db.Table<HjFach>().Where(f => f.Id == fach.Id);
+            HjFach fachd = await query.FirstOrDefaultAsync();
+            return fachd;
+        }
         //Ziele
         public static async Task AddZiel(HjFach fach, int? zielNote)
         {
             await Init();
-            Ziel ziel = await GetZiele(fach);
+            Ziel ziel = await GetFachZiel(fach);
             if(ziel == null)
             {
                 Ziel nziel = new Ziel
@@ -320,7 +348,7 @@ namespace NotenApp.Services
             await Init();
             await db.DeleteAsync(ziel);
         }
-        public static async Task<Ziel> GetZiele(HjFach fach)
+        public static async Task<Ziel> GetFachZiel(HjFach fach)
         {
             await Init();
             var query = db.Table<Ziel>().Where(z => z.FachId == fach.Id);

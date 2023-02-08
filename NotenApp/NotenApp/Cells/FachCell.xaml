@@ -41,35 +41,28 @@
     </Frame>
 
     <!--  Notenübersicht  -->
-    <!--  Klausuren  -->
-    <CollectionView
-        Grid.Row="0"
-        Grid.Column="1"
-        ItemsSource="{Binding KlausurNoten}">
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal" />
-        </CollectionView.ItemsLayout>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <cells:NotenCell />
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
 
-    </CollectionView>
-
-    <!--  LKs  -->
-    <CollectionView
+    <StackLayout
         Grid.Row="1"
         Grid.Column="1"
-        ItemsSource="{Binding LKNoten}">
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal" />
-        </CollectionView.ItemsLayout>
-        <CollectionView.ItemTemplate>
+        BindableLayout.ItemsSource="{Binding LKNoten}"
+        Orientation="Horizontal">
+        <BindableLayout.ItemTemplate>
             <DataTemplate>
                 <cells:NotenCell />
             </DataTemplate>
-        </CollectionView.ItemTemplate>
-
-    </CollectionView>
+        </BindableLayout.ItemTemplate>
+    </StackLayout>
+    <!--  Klausuren  -->
+    <StackLayout
+        Grid.Row="0"
+        Grid.Column="1"
+        BindableLayout.ItemsSource="{Binding KlausurNoten}"
+        Orientation="Horizontal">
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <cells:NotenCell />
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </StackLayout>
 </Grid>

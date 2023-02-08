@@ -67,7 +67,7 @@ namespace NotenApp.ViewModels
         {
             LKNoten.Clear();
             KlausurNoten.Clear();
-            Ziel ziel = await FachService.GetZiele(fach);
+            Ziel ziel = await FachService.GetFachZiel(fach);
             
             
             if(ziel != null)

@@ -177,9 +177,6 @@ namespace NotenApp.Pages
             await FachService.UpdateNote(note, 5, NotenTyp.Mündlich);
             await model.InitBlock2();
         }
-        private async void Delete(object sender, EventArgs e)
-        {
-            await FachService.Delete();
-        }
+
     }
 }

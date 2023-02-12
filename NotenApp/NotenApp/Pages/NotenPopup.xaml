@@ -8,7 +8,7 @@
     Size="370,220"
     VerticalOptions="EndAndExpand">
 
-    <Grid Margin="10,10,10,480">
+    <Grid  BackgroundColor="{StaticResource FourthB}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />

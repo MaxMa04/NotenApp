@@ -46,5 +46,14 @@ namespace NotenApp.Pages
         {
             Dismiss(null);
         }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            var frame = (Frame)sender;
+            Label label = (Label)frame.GetChildren().FirstOrDefault();
+            int text = Convert.ToInt16(label.Text);
+            Dismiss(text);
+            
+        }
     }
 }

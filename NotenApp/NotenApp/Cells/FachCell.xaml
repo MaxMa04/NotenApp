@@ -6,7 +6,8 @@
     xmlns:cells="clr-namespace:NotenApp.Cells"
     xmlns:models="clr-namespace:NotenApp.Models"
     Padding="5"
-    x:DataType="models:HjFach">
+    x:DataType="models:HjFach"
+    BackgroundColor="{StaticResource FourthB}">
     <Grid.RowDefinitions>
         <RowDefinition Height="*" />
         <RowDefinition Height="*" />
@@ -30,6 +31,7 @@
     <Frame
         Grid.RowSpan="2"
         Grid.Column="2"
+        BackgroundColor="{StaticResource FithB}"
         CornerRadius="35">
         <Label
             Margin="-40"

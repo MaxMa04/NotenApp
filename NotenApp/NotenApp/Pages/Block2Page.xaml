@@ -3,7 +3,8 @@
     x:Class="NotenApp.Pages.Block2Page"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels">
+    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
+    xmlns:local="clr-namespace:NotenApp.Logic">
     <ContentPage.BindingContext>
         <ViewModels:Block2ViewModel />
     </ContentPage.BindingContext>
@@ -107,13 +108,13 @@
                 Grid.Row="1"
                 Grid.Column="2"
                 BackgroundColor="{StaticResource FourthB}">
-                <Image Margin="-5" Source="schriftlich.png" />
+                <Image Margin="-5" Source="{local:ImageResource NotenApp.Bilder.schriftlich.png}" />
             </Frame>
             <Frame
                 Grid.Row="1"
                 Grid.Column="3"
                 BackgroundColor="{StaticResource FourthB}">
-                <Image Margin="-10" Source="muendlich.png" />
+                <Image Margin="-10" Source="{local:ImageResource NotenApp.Bilder.muendlich.png}" />
             </Frame>
             <!--  P1  -->
             <Frame Grid.Row="2" BackgroundColor="{StaticResource FourthB}">

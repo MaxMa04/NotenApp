@@ -5,13 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="PrimaryB">#343434</Color>
-            <Color x:Key="SecondaryB">#F0F4EF</Color>
-            <Color x:Key="ThirdB">#344966</Color>
-            <Color x:Key="FourthB">#B4CDED</Color>
-            <Color x:Key="FithB">#BFCC94</Color>
+            <Color x:Key="PrimaryB">#3D3D3D</Color>
+            <Color x:Key="SecondaryB">#ff82a9</Color>
+            <Color x:Key="ThirdB">#ffc0be</Color>
+            <Color x:Key="FourthB">#ffebe7</Color>
+            <Color x:Key="FithB">#FFFFFF</Color>
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource ThirdB}" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource SecondaryB}" />
                 <Setter Property="BarTextColor" Value="{StaticResource FithB}" />
             </Style>
         </ResourceDictionary>

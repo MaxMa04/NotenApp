@@ -5,6 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:NotenApp.Models"
     x:DataType="models:HJNote">
-    <Label FontSize="Medium" Text="{Binding Note}" />
+    <Label
+        FontSize="Medium"
+        Text="{Binding Note}"
+        TextColor="Black" />
 
 </ContentView>

@@ -25,20 +25,21 @@
         FontSize="Medium"
         HorizontalOptions="Start"
         Text="{Binding Name}"
+        TextColor="Black"
         VerticalOptions="Center" />
 
     <!--  Durchschnitt  -->
     <Frame
         Grid.RowSpan="2"
         Grid.Column="2"
-        BackgroundColor="{StaticResource FithB}"
+        BackgroundColor="{StaticResource ThirdB}"
         CornerRadius="35">
         <Label
             Margin="-40"
-            FontSize="Medium"
+            FontSize="Large"
             HorizontalOptions="CenterAndExpand"
             Text="{Binding Durchschnitt, TargetNullValue='-'}"
-            TextColor="Black"
+            TextColor="{StaticResource FithB}"
             VerticalOptions="CenterAndExpand" />
     </Frame>
 

@@ -422,6 +422,7 @@ namespace NotenApp.Services
                 if(item.PrNummer == prNummer)
                 {
                     item.Name = name;
+                    
                     await db.UpdateAsync(item);
                     foreach (var hjFach in HjFaecher)
                     {
@@ -771,17 +772,43 @@ namespace NotenApp.Services
         public static async Task EntscheideGeoGRW()
         {
             await Init();
-            List<HjFach> Faecher = await GetFaecher();
-            if(Faecher.Exists(t => t.Name == "G/R/W") == false)
+            
+            var query1 = db.Table<HjFach>().Where(f => f.Name == "Geografie"); 
+            var query2 = db.Table<HjFach>().Where(f => f.Name == "G/R/W");
+            List<HjFach> GeoFaecher = await query1.ToListAsync();
+            List<HjFach> GRWFaecher = await query2.ToListAsync();
+            if(GeoFaecher.Exists(f => f.IsPrFach == true) && GRWFaecher.Exists(f => f.IsPrFach))
             {
-                foreach (var item in Faecher)
+                return;
+            }
+            else if (GeoFaecher.Exists(f => f.IsPrFach == true))
+            {
+                foreach (var item in GRWFaecher)
                 {
-                    if(item.Name == "Geografie" && item.IsPrFach != true)
+                    item.EingebrachteHalbjahre = item.MinHalbjahre;
+                    await db.UpdateAsync(item);
+                }
+                return;
+            }
+            else if(GRWFaecher.Exists(f => f.IsPrFach == true))
+            {
+                foreach (var item in GeoFaecher)
+                {
+                    item.EingebrachteHalbjahre = item.MinHalbjahre;
+                    await db.UpdateAsync(item);
+                }
+                return;
+            }
+            if (GeoFaecher.Any() != true)
+            {
+                foreach (var item in GRWFaecher)
+                {
+                    if(item.IsPrFach != true)
                     {
                         item.EingebrachteHalbjahre = 2;
                         await db.UpdateAsync(item);
                     }
-                    else if(item.Name == "Geografie")
+                    else
                     {
                         item.EingebrachteHalbjahre = 4;
                         await db.UpdateAsync(item);
@@ -789,16 +816,16 @@ namespace NotenApp.Services
                 }
                 return;
             }
-            if (Faecher.Exists(t => t.Name == "Geografie") == false)
+            if (GRWFaecher.Any() != true)
             {
-                foreach (var item in Faecher)
+                foreach (var item in GeoFaecher)
                 {
-                    if (item.Name == "G/R/W" && item.IsPrFach != true)
+                    if (item.IsPrFach != true)
                     {
                         item.EingebrachteHalbjahre = 2;
                         await db.UpdateAsync(item);
                     }
-                    else if (item.Name == "G/R/W")
+                    else
                     {
                         item.EingebrachteHalbjahre = 4;
                         await db.UpdateAsync(item);
@@ -806,98 +833,44 @@ namespace NotenApp.Services
                 }
                 return;
             }
-            if(Faecher.Exists(t => t.Name == "G/R/W") == true && Faecher.Exists(t => t.Name == "Geografie") == true)
+            if(GeoFaecher.Any() && GRWFaecher.Any())
             {
-                double sumGeo = 0;
-                double anzGeo = 0;
-                double sumGRW = 0;
-                double anzGRW = 0;
-                foreach (var item in Faecher)
+                GeoFaecher = Controller.SortList(GeoFaecher);
+                GRWFaecher = Controller.SortList(GRWFaecher);
+                
+
+                double? sumGeo = (double?)(GeoFaecher[0].Durchschnitt + GeoFaecher[1].Durchschnitt) / 2;
+                
+                double? sumGRW = (double?)(GRWFaecher[0].Durchschnitt + GRWFaecher[1].Durchschnitt) / 2; ;
+                
+                if (sumGeo > sumGRW)
                 {
-                    switch (item.Name)
+                    foreach (var item in GeoFaecher)
                     {
-                        case "G/R/W":
-                            if (item.Durchschnitt != null)
-                            {
-                                sumGRW += (double)item.Durchschnitt;
-                                anzGRW++;
-                            }
-                            if (item.IsPrFach == true)
-                            {
-                                
-                                foreach(var item2 in Faecher)
-                                {
-                                    if(item2.Name == "Geografie")
-                                    {
-                                        item2.EingebrachteHalbjahre = item2.MinHalbjahre;
-                                        await db.UpdateAsync(item2);
-                                    }
-                                }
-                                return;
-                            }
-                            else
-                            {
-                                item.EingebrachteHalbjahre = item.MinHalbjahre;
-                                await db.UpdateAsync(item);
-                            }
-                            break;
-                        case "Geografie":
-                            if (item.Durchschnitt != null)
-                            {
-                                sumGeo += (double)item.Durchschnitt;
-                                anzGeo++;
-                            }
-                            if (item.IsPrFach == true)
-                            {
-                                
-                                foreach (var item2 in Faecher)
-                                {
-                                    if (item2.Name == "G/R/W")
-                                    {
-                                        item2.EingebrachteHalbjahre = item2.MinHalbjahre;
-                                        await db.UpdateAsync(item2);
-                                    }
-                                }
-                                return;
-                            }
-                            else
-                            {
-                                item.EingebrachteHalbjahre = item.MinHalbjahre;
-                                await db.UpdateAsync(item);
-                            }
-                            break;
-                        default:
-                            break;
+                        item.EingebrachteHalbjahre = 2;
+                        await db.UpdateAsync(item);
                     }
-                }
-                if(anzGeo == 0 && anzGRW == 0)
-                {
-                    return;
-                }
-                double duGRW = sumGRW / anzGRW;
-                double duGeo = sumGeo / anzGeo;
-                if(duGRW > duGeo)
-                {
-                    foreach (var item in Faecher)
+                    foreach (var item in GRWFaecher)
                     {
-                        if(item.Name == "G/R/W")
-                        {
-                            item.EingebrachteHalbjahre = 2;
-                            await db.UpdateAsync(item);
-                        }
+                        item.EingebrachteHalbjahre = item.MinHalbjahre;
+                        await db.UpdateAsync(item);
                     }
                 }
                 else
                 {
-                    foreach (var item in Faecher)
+                    foreach (var item in GeoFaecher)
                     {
-                        if (item.Name == "Geografie")
-                        {
-                            item.EingebrachteHalbjahre = 2;
-                            await db.UpdateAsync(item);
-                        }
+                        item.EingebrachteHalbjahre = item.MinHalbjahre;
+                        await db.UpdateAsync(item);
+                    }
+                    foreach (var item in GRWFaecher)
+                    {
+                        item.EingebrachteHalbjahre = 2;
+                        await db.UpdateAsync(item);
                     }
                 }
+                
+                
             }
 
         }

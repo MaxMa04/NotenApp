@@ -27,7 +27,7 @@
                 <Frame
                     Margin="20"
                     Padding="0"
-                    BackgroundColor="{StaticResource FourthB}"
+                    BackgroundColor="{StaticResource SecondaryB}"
                     CornerRadius="70"
                     HeightRequest="140"
                     HorizontalOptions="Center"
@@ -95,7 +95,7 @@
 
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            
+
                             <cells:FachCell />
                         </SwipeView>
                     </DataTemplate>

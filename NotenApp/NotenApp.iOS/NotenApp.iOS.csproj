@@ -145,4 +145,22 @@
       <Name>NotenApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Plus1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Fragezeichen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\muendlich.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\School.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\schriftlich.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Settings.png" />
+  </ItemGroup>
 </Project>

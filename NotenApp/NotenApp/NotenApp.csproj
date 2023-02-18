@@ -11,20 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Bilder\Fragezeichen.png" />
-    <None Remove="Bilder\muendlich.png" />
-    <None Remove="Bilder\Plus1.png" />
-    <None Remove="Bilder\School.png" />
-    <None Remove="Bilder\schriftlich.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="IeuanWalker.CustomSwitch" Version="2.2.1" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
-    <PackageReference Include="Resizetizer.NT" Version="0.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.5" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />

@@ -546,11 +546,6 @@ namespace NotenApp.Services
             }
 
         }
-        public static async Task Delete()
-        {
-            await Init();
-            await db.DeleteAllAsync<PrFach>();
-        }
         //Abitur
         public static async Task<float?> GetAbiturNote()
         {

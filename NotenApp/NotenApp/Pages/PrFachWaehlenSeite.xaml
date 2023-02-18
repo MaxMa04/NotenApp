@@ -16,7 +16,7 @@
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame>
+                        <Frame BackgroundColor="{StaticResource ThirdB}">
                             <Label Text="{Binding Name}" TextColor="Black" />
                         </Frame>
                     </DataTemplate>

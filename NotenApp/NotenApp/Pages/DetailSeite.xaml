@@ -6,235 +6,227 @@
     xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
     xmlns:switch="clr-namespace:Switch;assembly=Switch"
     x:Name="detailseite">
+    <NavigationPage.TitleView>
+        <Label
+            FontSize="30"
+            Text="{Binding FachName}"
+            TextColor="{StaticResource FithB}" />
+    </NavigationPage.TitleView>
     <ContentPage.BindingContext>
         <ViewModels:DetailViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid BackgroundColor="#303030">
+        <Grid BackgroundColor="{StaticResource FourthB}">
 
             <!--  Griddefinition  -->
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
-                <!--  0  -->
-                <RowDefinition Height="60" />
-                <!--  1  -->
-                <RowDefinition Height="50" />
-                <!--  2  -->
-                <RowDefinition Height="50" />
-                <!--  3  -->
-                <!--  Beginn Notenverwaltung  -->
-                <RowDefinition Height="50" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="50" />
-                <RowDefinition x:Name="rdcv" Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <!--  Fachname, ist Leistungskurs?  -->
             <Frame
-                Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                Margin="20,0,0,0"
-                BackgroundColor="#7BA4A8">
-                <Label
-                    Margin="-20"
-                    FontSize="40"
-                    HorizontalOptions="Center"
-                    Text="{Binding FachName}"
-                    TextColor="White"
-                    VerticalOptions="Center" />
-            </Frame>
-
-            <switch:CustomSwitch
-                Grid.Row="0"
-                Grid.Column="3"
-                BackgroundColor="#A6A6A6"
-                CornerRadius="10"
-                HeightRequest="20"
+                Margin="20"
+                Padding="0"
+                BackgroundColor="{StaticResource SecondaryB}"
+                CornerRadius="70"
+                HeightRequest="140"
                 HorizontalOptions="Center"
-                KnobColor="#fafafa"
-                KnobCornerRadius="17"
-                KnobHeight="34"
-                KnobLimit="Max"
-                KnobWidth="34"
                 VerticalOptions="Center"
-                VibrateDuration="20"
-                WidthRequest="60" />
-
-            <!--  Durchschnitt, Ziel  -->
-            <Frame
-                Grid.Row="1"
-                Grid.ColumnSpan="3"
-                Margin="20,0,0,0"
-                BackgroundColor="#7BA4A8">
+                WidthRequest="140">
                 <Label
-                    Margin="-20"
-                    FontSize="40"
+                    FontSize="50"
                     HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
                     Text="{Binding FachDurchschnitt, TargetNullValue='-'}"
-                    TextColor="White"
-                    VerticalOptions="Center" />
-            </Frame>
-            <Frame
-                Grid.Row="1"
-                Grid.Column="3"
-                Margin="0,0,20,0"
-                BackgroundColor="#7BA4A8">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />
-                </Frame.GestureRecognizers>
-                <Label
-                    Margin="-20"
-                    FontSize="40"
-                    HorizontalOptions="Center"
-                    Text="{Binding Ziel}"
-                    TextColor="White"
-                    VerticalOptions="Center" />
-            </Frame>
-            <!--  Einzubringende Halbjahre  -->
-            <Frame
-                Grid.Row="2"
-                Grid.ColumnSpan="4"
-                Margin="20,0,20,0"
-                BackgroundColor="#7BA4A8">
-                <Label
-                    Margin="-20"
-                    FontSize="40"
-                    HorizontalOptions="Center"
-                    Text="{Binding FachEinzubringendeHalbjahre, TargetNullValue='-'}"
-                    TextColor="White"
-                    VerticalOptions="Center" />
-            </Frame>
-            <Frame
-                Grid.Row="3"
-                Grid.ColumnSpan="4"
-                Margin="20,0,20,0"
-                BackgroundColor="#7BA4A8">
-                <Label
-                    Margin="-20"
-                    FontSize="40"
-                    HorizontalOptions="Center"
-                    Text="{Binding FachDurchschnitt, TargetNullValue='-'}"
-                    TextColor="White"
-                    VerticalOptions="Center" />
+                    TextColor="{StaticResource FithB}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
             </Frame>
 
+            <Frame Grid.Row="1" BackgroundColor="{StaticResource PrimaryB}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.5*" />
+                        <RowDefinition Height="1.5*" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="5.5*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            <!--  Klausur Noten Übersicht  -->
-            <Frame
-                Grid.Row="4"
-                Grid.ColumnSpan="4"
-                Margin="10,0,10,-6"
-                BackgroundColor="Red">
-                <StackLayout Orientation="Horizontal">
-                    <Label
-                        Margin="0,-10"
-                        FontSize="Medium"
-                        Text="Klausur-Noten"
-                        VerticalOptions="Center" />
-                    <ImageButton
-                        Margin="0,-10"
-                        Clicked="AddKlausurNote"
-                        Source="Plus1.png"
-                        VerticalOptions="Center" />
-                </StackLayout>
-            </Frame>
-            <CollectionView
-                Grid.Row="5"
-                Grid.ColumnSpan="4"
-                Margin="10,0,10,-15"
-                Background="LightGreen"
-                BackgroundColor="White"
-                ItemsSource="{Binding KlausurNoten}"
-                SelectionChanged="DeleteNote"
-                SelectionMode="Single">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        HorizontalItemSpacing="3"
-                        Orientation="Vertical"
-                        Span="6"
-                        VerticalItemSpacing="5" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
+
+                    <StackLayout
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="25"
+                            HorizontalOptions="Center"
+                            Text="LK"
+                            TextColor="{StaticResource FithB}"
+                            VerticalOptions="Center" />
+                        <switch:CustomSwitch
+                            BackgroundColor="{StaticResource FourthB}"
+                            CornerRadius="10"
+                            HeightRequest="20"
+                            HorizontalOptions="Center"
+                            KnobColor="{StaticResource ThirdB}"
+                            KnobCornerRadius="17"
+                            KnobHeight="34"
+                            KnobLimit="Max"
+                            KnobWidth="34"
+                            VerticalOptions="Center"
+                            VibrateDuration="20"
+                            WidthRequest="60" />
+                        <BoxView
+                            Margin="10,0,10,0"
+                            HorizontalOptions="FillAndExpand"
+                            WidthRequest="4"
+                            Color="{StaticResource SecondaryB}" />
+                        <Label
+                            FontSize="25"
+                            HorizontalOptions="Center"
+                            Text="Ziel"
+                            TextColor="{StaticResource FithB}"
+                            VerticalOptions="Center" />
                         <Frame
-                            Margin="5"
-                            BackgroundColor="{StaticResource SecondaryB}"
-                            CornerRadius="20"
-                            HeightRequest="9">
+                            BackgroundColor="{StaticResource ThirdB}"
+                            CornerRadius="15"
+                            HeightRequest="15"
+                            WidthRequest="15">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />
+                            </Frame.GestureRecognizers>
                             <Label
                                 Margin="-10"
-                                FontSize="Medium"
+                                FontSize="25"
                                 HorizontalOptions="Center"
-                                Text="{Binding Note}"
+                                Text="{Binding Ziel}"
                                 TextColor="Black"
                                 VerticalOptions="Center" />
                         </Frame>
+                    </StackLayout>
 
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    <Frame Grid.Row="1" Grid.ColumnSpan="2">
+                        <Label
+                            Margin="-20"
+                            FontSize="16"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="In " TextColor="Black" />
+                                    <Span Text="{Binding FachName}" TextColor="Black" />
+                                    <Span Text=" musst du " TextColor="Black" />
+                                    <Span Text="{Binding FachEinzubringendeHalbjahre}" TextColor="{StaticResource SecondaryB}" />
+                                    <Span Text=" Halbjahr(e) einbringen!" TextColor="Black" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <CollectionView
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="Transparent"
+                        Header="{Binding .}"
+                        ItemsSource="{Binding KlausurNoten}"
+                        SelectionChanged="DeleteNote"
+                        SelectionMode="Single">
+                        <CollectionView.HeaderTemplate>
+                            <DataTemplate>
+                                <Label
+                                    FontSize="25"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Noten"
+                                    TextColor="{StaticResource FithB}" />
+                            </DataTemplate>
+                        </CollectionView.HeaderTemplate>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                HorizontalItemSpacing="3"
+                                Orientation="Vertical"
+                                Span="6"
+                                VerticalItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Margin="5"
+                                    BackgroundColor="{StaticResource SecondaryB}"
+                                    CornerRadius="20"
+                                    HeightRequest="9">
+                                    <Label
+                                        Margin="-10"
+                                        FontSize="Medium"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Note}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </Frame>
 
-            <!--  LK Noten Übersicht  -->
-            <Frame
-                Grid.Row="6"
-                Grid.ColumnSpan="4"
-                Margin="10,10,10,-16"
-                BackgroundColor="Red">
-                <StackLayout Orientation="Horizontal">
-                    <Label
-                        Margin="0,-10"
-                        FontSize="Medium"
-                        Text="LK-Noten"
-                        VerticalOptions="Center" />
-                    <ImageButton
-                        Margin="0,-10"
-                        Clicked="AddLKNote"
-                        Source="Plus1.png"
-                        VerticalOptions="Center" />
-                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <CollectionView
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="Transparent"
+                        ItemsSource="{Binding LKNoten}"
+                        SelectionChanged="DeleteNote"
+                        SelectionMode="Single">
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                HorizontalItemSpacing="3"
+                                Orientation="Vertical"
+                                Span="6"
+                                VerticalItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Margin="5"
+                                    BackgroundColor="{StaticResource FourthB}"
+                                    CornerRadius="20"
+                                    HeightRequest="9">
+                                    <Label
+                                        Margin="-10"
+                                        FontSize="Medium"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Note}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </Frame>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+                    <!--  AddNote Button  -->
+                    <Frame
+                        Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        Margin="0,0,0,-15"
+                        BackgroundColor="{StaticResource SecondaryB}"
+                        CornerRadius="25"
+                        HeightRequest="15"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="15">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="AddNote" />
+                        </Frame.GestureRecognizers>
+                        <Image Scale="2.5" Source="Plus1.png" />
+                    </Frame>
+                </Grid>
             </Frame>
-            <CollectionView
-                x:Name="cv"
-                Grid.Row="7"
-                Grid.ColumnSpan="4"
-                Margin="10"
-                BackgroundColor="Aqua"
-                ItemsSource="{Binding LKNoten}"
-                SelectionChanged="DeleteNote"
-                SelectionMode="Single">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        HorizontalItemSpacing="3"
-                        Orientation="Vertical"
-                        Span="6"
-                        VerticalItemSpacing="5" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame
-                            Margin="5"
-                            BackgroundColor="{StaticResource SecondaryB}"
-                            CornerRadius="20"
-                            HeightRequest="9">
-                            <Label
-                                Margin="-10"
-                                FontSize="Medium"
-                                HorizontalOptions="Center"
-                                Text="{Binding Note}"
-                                TextColor="Black"
-                                VerticalOptions="Center" />
-                        </Frame>
 
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
 
         </Grid>
     </ContentPage.Content>

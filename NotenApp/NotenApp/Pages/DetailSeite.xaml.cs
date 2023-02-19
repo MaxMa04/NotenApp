@@ -36,27 +36,7 @@ namespace NotenApp.Pages
             base.OnAppearing();
             await model.Initialize(fach);
             model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
-            //Sizing Collection View for LK Noten
 
-            if(model.LKNoten.Count == 0)
-            {
-                cv.HeightRequest = 1;
-            }
-            else if (model.LKNoten.Count < 7)
-            {
-                cv.HeightRequest = heightNote;
-            }
-            else if (model.LKNoten.Count < 25)
-            {
-                heightCollView = model.LKNoten.Count / 6;
-                cv.HeightRequest = heightNote + heightNote * (int)heightCollView - 15 * (int)heightCollView;
-            }
-            else
-            {
-                cv.HeightRequest = heightNote * 4 - 12 * 4;
-            }
-            
-            rdcv.Height = cv.HeightRequest;
             model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
 
         }
@@ -101,6 +81,25 @@ namespace NotenApp.Pages
             await FachService.AddZiel(fach, note);
             await model.Initialize(fach);
           
+        }
+
+        private async void AddNote(object sender, EventArgs e)
+        {
+            NotenTyp? notenTyp = (NotenTyp?)await Navigation.ShowPopupAsync(new EntscheidungsPopup());
+            int? note = null;
+
+            if (notenTyp != null)
+            {
+                note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1));
+            }
+
+            if (notenTyp != null && note != null)
+            {
+                await FachService.AddNote(fach, (int)note, (NotenTyp)notenTyp);
+            }
+            await model.Initialize(fach);
+            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
+            model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
         }
     }
 }

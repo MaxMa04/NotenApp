@@ -6,15 +6,15 @@
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
     xmlns:local="clr-namespace:NotenApp.Pages"
     android:TabbedPage.ToolbarPlacement="Bottom"
-    BarBackgroundColor="White"
+    BarBackgroundColor="{StaticResource PrimaryB}"
     NavigationPage.HasNavigationBar="True"
-    SelectedTabColor="Black"
-    UnselectedTabColor="Blue">
+    SelectedTabColor="{StaticResource SecondaryB}"
+    UnselectedTabColor="{StaticResource FithB}">
 
 
 
     <!--  Pages can be added as references or inline  -->
-    <local:Halbjahr1 Title="HJ1" IconImageSource="School.png" />
+    <local:Halbjahr1 Title="HJ1" />
     <local:Halbjahr2 Title="HJ2" />
     <local:Halbjahr3 Title="HJ3" />
     <local:Halbjahr4 Title="HJ4" />

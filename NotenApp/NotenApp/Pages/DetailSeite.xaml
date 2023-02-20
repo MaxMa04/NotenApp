@@ -16,7 +16,7 @@
         <ViewModels:DetailViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid BackgroundColor="{StaticResource FourthB}">
+        <Grid BackgroundColor="{StaticResource ThirdB}">
 
             <!--  Griddefinition  -->
 
@@ -27,7 +27,7 @@
             <Frame
                 Margin="20"
                 Padding="0"
-                BackgroundColor="{StaticResource SecondaryB}"
+                BackgroundColor="{StaticResource FourthB}"
                 CornerRadius="70"
                 HeightRequest="140"
                 HorizontalOptions="Center"
@@ -38,7 +38,7 @@
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     Text="{Binding FachDurchschnitt, TargetNullValue='-'}"
-                    TextColor="{StaticResource FithB}"
+                    TextColor="{StaticResource SecondaryB}"
                     VerticalOptions="Center"
                     VerticalTextAlignment="Center" />
             </Frame>
@@ -47,9 +47,11 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1.5*" />
-                        <RowDefinition Height="1.5*" />
-                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="1.7*" />
                         <RowDefinition Height="5.5*" />
+                        <RowDefinition Height="1.5*" />
+
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -57,73 +59,85 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-
-                    <StackLayout
-                        Grid.Row="0"
-                        Grid.ColumnSpan="2"
-                        HorizontalOptions="Center"
-                        Orientation="Horizontal"
-                        VerticalOptions="Center">
-                        <Label
-                            FontSize="25"
+                    <StackLayout Grid.Row="0" Grid.ColumnSpan="2">
+                        <StackLayout
                             HorizontalOptions="Center"
-                            Text="LK"
-                            TextColor="{StaticResource FithB}"
-                            VerticalOptions="Center" />
-                        <switch:CustomSwitch
-                            BackgroundColor="{StaticResource FourthB}"
-                            CornerRadius="10"
-                            HeightRequest="20"
-                            HorizontalOptions="Center"
-                            KnobColor="{StaticResource ThirdB}"
-                            KnobCornerRadius="17"
-                            KnobHeight="34"
-                            KnobLimit="Max"
-                            KnobWidth="34"
-                            VerticalOptions="Center"
-                            VibrateDuration="20"
-                            WidthRequest="60" />
-                        <BoxView
-                            Margin="10,0,10,0"
-                            HorizontalOptions="FillAndExpand"
-                            WidthRequest="4"
-                            Color="{StaticResource SecondaryB}" />
-                        <Label
-                            FontSize="25"
-                            HorizontalOptions="Center"
-                            Text="Ziel"
-                            TextColor="{StaticResource FithB}"
-                            VerticalOptions="Center" />
-                        <Frame
-                            BackgroundColor="{StaticResource ThirdB}"
-                            CornerRadius="15"
-                            HeightRequest="15"
-                            WidthRequest="15">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />
-                            </Frame.GestureRecognizers>
+                            Orientation="Horizontal"
+                            VerticalOptions="Center">
                             <Label
-                                Margin="-10"
                                 FontSize="25"
                                 HorizontalOptions="Center"
-                                Text="{Binding Ziel}"
-                                TextColor="Black"
+                                Text="LK"
+                                TextColor="{StaticResource FithB}"
                                 VerticalOptions="Center" />
-                        </Frame>
+                            <switch:CustomSwitch
+                                BackgroundColor="{StaticResource FourthB}"
+                                CornerRadius="10"
+                                HeightRequest="20"
+                                HorizontalOptions="Center"
+                                KnobColor="{StaticResource ThirdB}"
+                                KnobCornerRadius="17"
+                                KnobHeight="34"
+                                KnobLimit="Max"
+                                KnobWidth="34"
+                                VerticalOptions="Center"
+                                VibrateDuration="20"
+                                WidthRequest="60" />
+                            <BoxView
+                                Margin="10,0,10,0"
+                                HorizontalOptions="FillAndExpand"
+                                WidthRequest="4"
+                                Color="{StaticResource SecondaryB}" />
+                            <Label
+                                FontSize="25"
+                                HorizontalOptions="Center"
+                                Text="Ziel"
+                                TextColor="{StaticResource FithB}"
+                                VerticalOptions="Center" />
+                            <Frame
+                                BackgroundColor="{StaticResource ThirdB}"
+                                CornerRadius="15"
+                                HeightRequest="15"
+                                WidthRequest="15">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />
+                                </Frame.GestureRecognizers>
+                                <Label
+                                    Margin="-10"
+                                    FontSize="25"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Ziel}"
+                                    TextColor="Black"
+                                    VerticalOptions="Center" />
+                            </Frame>
+                        </StackLayout>
+                        <BoxView HeightRequest="4" Color="{StaticResource SecondaryB}" />
                     </StackLayout>
-
-                    <Frame Grid.Row="1" Grid.ColumnSpan="2">
+                    <Label
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        FontAttributes="Bold"
+                        FontSize="25"
+                        HorizontalOptions="Center"
+                        Text="Noten"
+                        TextColor="{StaticResource FithB}" />
+                    <Frame
+                        Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="50">
                         <Label
-                            Margin="-20"
-                            FontSize="16"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center">
+                            FontSize="15"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="In " TextColor="Black" />
                                     <Span Text="{Binding FachName}" TextColor="Black" />
                                     <Span Text=" musst du " TextColor="Black" />
-                                    <Span Text="{Binding FachEinzubringendeHalbjahre}" TextColor="{StaticResource SecondaryB}" />
+                                    <Span
+                                        FontAttributes="Bold"
+                                        Text="{Binding FachEinzubringendeHalbjahre}"
+                                        TextColor="{StaticResource SecondaryB}" />
                                     <Span Text=" Halbjahr(e) einbringen!" TextColor="Black" />
                                 </FormattedString>
                             </Label.FormattedText>
@@ -133,19 +147,21 @@
                         Grid.Row="2"
                         Grid.ColumnSpan="2"
                         BackgroundColor="Transparent"
-                        Header="{Binding .}"
                         ItemsSource="{Binding KlausurNoten}"
                         SelectionChanged="DeleteNote"
                         SelectionMode="Single">
-                        <CollectionView.HeaderTemplate>
-                            <DataTemplate>
-                                <Label
-                                    FontSize="25"
-                                    HorizontalTextAlignment="Center"
-                                    Text="Noten"
-                                    TextColor="{StaticResource FithB}" />
-                            </DataTemplate>
-                        </CollectionView.HeaderTemplate>
+
+
+                        <CollectionView.EmptyView>
+                            <Label
+                                Margin="10,25,10,10"
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                HorizontalOptions="Fill"
+                                HorizontalTextAlignment="Center"
+                                Text="Noch keine Klausur eingetragen."
+                                TextColor="{StaticResource FithB}" />
+                        </CollectionView.EmptyView>
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout
                                 HorizontalItemSpacing="3"
@@ -179,7 +195,18 @@
                         ItemsSource="{Binding LKNoten}"
                         SelectionChanged="DeleteNote"
                         SelectionMode="Single">
-
+                        <CollectionView.EmptyView>
+                            <ContentView>
+                                <Label
+                                    Margin="10,25,10,10"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="Fill"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Noch keine Lk eingetragen."
+                                    TextColor="{StaticResource FithB}" />
+                            </ContentView>
+                        </CollectionView.EmptyView>
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout
                                 HorizontalItemSpacing="3"
@@ -207,10 +234,33 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-
-                    <!--  AddNote Button  -->
                     <Frame
                         Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource ThirdB}"
+                        CornerRadius="15">
+                        <Label
+                            Margin="-20"
+                            FontSize="15"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="In " TextColor="Black" />
+                                    <Span Text="{Binding FachName}" TextColor="Black" />
+                                    <Span Text=" musst du " TextColor="Black" />
+                                    <Span
+                                        FontAttributes="Bold"
+                                        Text="{Binding FachEinzubringendeHalbjahre}"
+                                        TextColor="{StaticResource SecondaryB}" />
+                                    <Span Text=" Halbjahr(e) einbringen!" TextColor="Black" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <!--  AddNote Button  -->
+                    <Frame
+                        Grid.Row="5"
                         Grid.ColumnSpan="2"
                         Margin="0,0,0,-15"
                         BackgroundColor="{StaticResource SecondaryB}"

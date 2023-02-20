@@ -315,7 +315,11 @@ namespace NotenApp.Services
         {
             await Init();
             Ziel ziel = await GetFachZiel(fach);
-            if(ziel == null)
+            if (ziel == null && zielNote == null)
+            {
+                return;
+            }
+            else if(ziel == null && zielNote != null)
             {
                 Ziel nziel = new Ziel
                 {

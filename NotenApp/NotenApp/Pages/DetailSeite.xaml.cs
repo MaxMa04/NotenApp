@@ -50,30 +50,6 @@ namespace NotenApp.Pages
             model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
         }
 
-        private async void AddKlausurNote(object sender, EventArgs e)
-        {
-            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1));
-            if(note != null)
-            {
-                await FachService.AddNote(fach, (int)note, NotenTyp.Klausur);
-            }
-            await model.Initialize(fach);
-            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
-            model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
-
-        }
-        private async void AddLKNote(object sender, EventArgs e)
-        {
-            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1));
-            if (note != null)
-            {
-                await FachService.AddNote(fach, (int)note, NotenTyp.LK);
-            }
-            await model.Initialize(fach);
-            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
-            model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
-        }
-
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Ziel));

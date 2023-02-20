@@ -62,29 +62,49 @@ namespace NotenApp.ViewModels
             LKNoten = new ObservableRangeCollection<HJNote>();
             KlausurNoten = new ObservableRangeCollection<HJNote>();
         }
-        
-        public async Task Initialize(HjFach fach)
+        public async Task InitZiel(HjFach fach)
         {
-            LKNoten.Clear();
-            KlausurNoten.Clear();
             Ziel ziel = await FachService.GetFachZiel(fach);
-            
-            
-            if(ziel != null)
+
+
+            if (ziel != null)
             {
                 Ziel = ziel.ZielNote.ToString();
-                
+
             }
             else
             {
                 Ziel = "-";
             }
-            
-            var lKNoten = await FachService.GetFachNoten(fach, NotenTyp.LK);
-            LKNoten.AddRange(lKNoten);
+        }
+        public async Task InitKlausuren(HjFach fach)
+        {
+            KlausurNoten.Clear();
             var klausurNoten = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
-            KlausurNoten.AddRange(klausurNoten);
+            foreach (var item in klausurNoten)
+            {
+                KlausurNoten.Add(item);
+                await Task.Delay(10);
+            }
 
+        }
+        public async Task InitLks(HjFach fach)
+        {
+            LKNoten.Clear();
+            var lKNoten = await FachService.GetFachNoten(fach, NotenTyp.LK);
+            foreach (var item in lKNoten)
+            {
+                LKNoten.Add(item);
+                await Task.Delay(10);
+            }
+        }
+        public async Task InitFachDurchschnitt(HjFach fach)
+        {
+            FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
+        }
+        public async Task InitEinzHj(HjFach fach)
+        {
+            FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
         }
     }
 }

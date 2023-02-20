@@ -26,18 +26,17 @@ namespace NotenApp.Pages
             InitializeComponent();
             this.fach = fach;
             model = BindingContext as DetailViewModel;
-            model.FachName = fach.Name;
-
-
-
+            
         }
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            await model.Initialize(fach);
-            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
-
-            model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
+            model.FachName = fach.Name;
+            Task.Run(async () => { await model.InitLks(fach); });
+            Task.Run(async () => { await model.InitKlausuren(fach); });
+            Task.Run(async () => { await model.InitEinzHj(fach); });
+            Task.Run(async () => { await model.InitFachDurchschnitt(fach); });
+            Task.Run(async () => { await model.InitZiel(fach); });
 
         }
 
@@ -45,9 +44,18 @@ namespace NotenApp.Pages
         {
             var note = e.CurrentSelection.FirstOrDefault() as HJNote;
             await FachService.RemoveSingleNote(note);
-            await model.Initialize(fach);
-            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
-            model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
+            switch (note.Typ)
+            {
+                case (int)NotenTyp.LK:
+                     await model.InitLks(fach);
+                    break;
+                case (int)NotenTyp.Klausur:
+                    await model.InitKlausuren(fach);
+                    break;
+                
+            }
+            await model.InitFachDurchschnitt(fach);
+            await model.InitEinzHj(fach);
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -55,7 +63,7 @@ namespace NotenApp.Pages
             int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Ziel));
             
             await FachService.AddZiel(fach, note);
-            await model.Initialize(fach);
+            await model.InitZiel(fach);
           
         }
 
@@ -72,10 +80,20 @@ namespace NotenApp.Pages
             if (notenTyp != null && note != null)
             {
                 await FachService.AddNote(fach, (int)note, (NotenTyp)notenTyp);
+                switch (notenTyp)
+                {
+                    case NotenTyp.LK:
+                        await model.InitLks(fach);
+                        break;
+                    case NotenTyp.Klausur:
+                        await model.InitKlausuren(fach);
+                        break;
+
+                }
             }
-            await model.Initialize(fach);
-            model.FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
-            model.FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
+
+            await model.InitFachDurchschnitt(fach);
+            await model.InitEinzHj(fach);
         }
     }
 }

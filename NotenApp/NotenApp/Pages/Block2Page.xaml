@@ -30,7 +30,7 @@
             <Frame
                 Grid.Row="0"
                 Grid.ColumnSpan="4"
-                BackgroundColor="{StaticResource PrimaryB}">
+                BackgroundColor="Transparent">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -76,10 +76,7 @@
                     </Frame>
                 </Grid>
             </Frame>
-            <Frame
-                Grid.Row="7"
-                Grid.ColumnSpan="4"
-                BackgroundColor="{StaticResource PrimaryB}" />
+
             <!--  Block2  -->
             <!--  Erklärung  -->
             <Frame Grid.Row="1" BackgroundColor="{StaticResource FourthB}">

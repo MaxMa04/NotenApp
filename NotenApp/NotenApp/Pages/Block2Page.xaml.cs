@@ -92,7 +92,7 @@ namespace NotenApp.Pages
         // Schriftliche Note
         private async void UpdateNoteSchriftlich1(object sender, EventArgs e)
         {
-            if (model.P1 == null)
+            if (model.P1 == null || model.P1.Name == "-")
             {
                 return;
             }
@@ -103,7 +103,7 @@ namespace NotenApp.Pages
         }
         private async void UpdateNoteSchriftlich2(object sender, EventArgs e)
         {
-            if (model.P2 == null)
+            if (model.P2 == null || model.P2.Name == "-")
             {
                 return;
             }
@@ -113,7 +113,7 @@ namespace NotenApp.Pages
         }
         private async void UpdateNoteSchriftlich3(object sender, EventArgs e)
         {
-            if (model.P3 == null)
+            if (model.P3 == null || model.P3.Name == "-")
             {
                 return;
             }
@@ -125,7 +125,7 @@ namespace NotenApp.Pages
         private async void UpdateNoteMündlich1(object sender, EventArgs e)
         {
 
-            if (model.P1 == null)
+            if (model.P1 == null || model.P1.Name == "-")
             {
                 return;
             }
@@ -136,7 +136,7 @@ namespace NotenApp.Pages
         private async void UpdateNoteMündlich2(object sender, EventArgs e)
         {
 
-            if (model.P2 == null)
+            if (model.P2 == null || model.P2.Name == "-")
             {
                 return;
             }
@@ -147,7 +147,7 @@ namespace NotenApp.Pages
         private async void UpdateNoteMündlich3(object sender, EventArgs e)
         {
 
-            if (model.P3 == null)
+            if (model.P3 == null || model.P3.Name == "-")
             {
                 return;
             }
@@ -158,7 +158,7 @@ namespace NotenApp.Pages
         private  async void UpdateNoteMündlich4(object sender, EventArgs e)
         {
 
-            if (model.P4 == null)
+            if (model.P4 == null || model.P4.Name == "-")
             {
                 return;
             }
@@ -169,7 +169,7 @@ namespace NotenApp.Pages
         private async void UpdateNoteMündlich5(object sender, EventArgs e)
         {
 
-            if (model.P5 == null)
+            if (model.P5 == null || model.P5.Name == "-")
             {
                 return;
             }

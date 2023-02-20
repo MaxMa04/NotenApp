@@ -161,6 +161,6 @@
     <BundleResource Include="Resources\schriftlich.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Settings.png" />
+    <BundleResource Include="Resources\Settings.png" />
   </ItemGroup>
 </Project>

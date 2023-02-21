@@ -40,10 +40,10 @@ namespace NotenApp.Pages
 
         }
 
-        private void DeleteNote(object sender, SelectionChangedEventArgs e)
+        private async void DeleteNote(object sender, SelectionChangedEventArgs e)
         {
             var note = e.CurrentSelection.FirstOrDefault() as HJNote;
-            Task.Run(async () => { await FachService.RemoveSingleNote(note); });
+            await FachService.RemoveSingleNote(note); 
             
             switch (note.Typ)
             {
@@ -55,8 +55,8 @@ namespace NotenApp.Pages
                     break;
                 
             }
-            Task.Run(async () => { await model.InitEinzHj(fach); });
-            Task.Run(async () => { await model.InitFachDurchschnitt(fach); });
+            await model.InitEinzHj(fach);
+            await model.InitFachDurchschnitt(fach);
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -77,16 +77,12 @@ namespace NotenApp.Pages
             {
                 note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1));
             }
-
+            
             if (notenTyp != null && note != null)
             {
-                HJNote no = new HJNote
-                {
-                    Note = (int)note,
-                    Typ = (int)notenTyp
-
-                };
+                
                 await FachService.AddNote(fach, (int)note, (NotenTyp)notenTyp);
+                HJNote no = await FachService.ReturnLastNote(fach);
                 switch (notenTyp)
                 {
                     case NotenTyp.LK:

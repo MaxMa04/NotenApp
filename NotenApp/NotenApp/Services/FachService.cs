@@ -155,6 +155,13 @@ namespace NotenApp.Services
 
             await db.InsertAsync(fach);
         }
+        public static async Task<HJNote> ReturnLastNote(HjFach fach)
+        {
+            await Init();
+            var query = db.Table<HJNote>().Where(n => n.FachId == fach.Id);
+            List<HJNote> noten = await query.ToListAsync();
+            return noten.Last();
+        }
         public static async Task RemoveSingleNote(HJNote note)
         {
             await Init();

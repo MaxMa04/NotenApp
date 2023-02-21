@@ -17,17 +17,18 @@
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="140" />
         <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="65" />
+        <ColumnDefinition Width="60" />
     </Grid.ColumnDefinitions>
 
     <!--  Fachname  -->
     <Label
         Grid.Row="0"
+        Grid.RowSpan="2"
         FontSize="Medium"
         HorizontalOptions="Start"
         Text="{Binding Name}"
         TextColor="Black"
-        VerticalOptions="Center" />
+        VerticalOptions="Start" />
 
     <!--  Durchschnitt  -->
     <Frame

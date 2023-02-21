@@ -77,26 +77,16 @@ namespace NotenApp.ViewModels
                 Ziel = "-";
             }
         }
-        public async Task InitKlausuren(HjFach fach)
+        public async Task InitNoten(HjFach fach)
         {
             KlausurNoten.Clear();
             var klausurNoten = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
-            foreach (var item in klausurNoten)
-            {
-                KlausurNoten.Add(item);
-                await Task.Delay(10);
-            }
-
-        }
-        public async Task InitLks(HjFach fach)
-        {
+            KlausurNoten.AddRange(klausurNoten);
             LKNoten.Clear();
             var lKNoten = await FachService.GetFachNoten(fach, NotenTyp.LK);
-            foreach (var item in lKNoten)
-            {
-                LKNoten.Add(item);
-                await Task.Delay(10);
-            }
+            LKNoten.AddRange(lKNoten);
+
+
         }
         public async Task InitFachDurchschnitt(HjFach fach)
         {

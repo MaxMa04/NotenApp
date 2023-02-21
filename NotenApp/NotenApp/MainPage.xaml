@@ -23,36 +23,52 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
 
-                <RowDefinition Height="50" />
+
                 <RowDefinition Height="*" />
                 <RowDefinition Height="140" />
                 <RowDefinition Height="90" />
 
             </Grid.RowDefinitions>
             <!--  Ziele  -->
-            <Frame
-                Grid.Row="0"
-                Grid.ColumnSpan="4"
-                BackgroundColor="{StaticResource FourthB}">
-                <Label
-                    Margin="-15"
-                    FontSize="30"
-                    HorizontalOptions="Center"
-                    Text="Ziele"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-            </Frame>
+
+
             <CollectionView
-                Grid.Row="1"
-                Grid.ColumnSpan="4"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
                 ItemsSource="{Binding FachZiele}"
                 SelectionChanged="CollectionView_SelectionChanged"
                 SelectionMode="Single">
+                <CollectionView.Header>
+
+                    <Label
+                        FontSize="30"
+                        HorizontalTextAlignment="Center"
+                        Text="Ziele"
+                        TextColor="{StaticResource FithB}" />
+                </CollectionView.Header>
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label
+                                Margin="10,25,10,10"
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                HorizontalOptions="Fill"
+                                HorizontalTextAlignment="Center"
+                                Text="Aktuell hast du dir noch kein Ziel gesetzt."
+                                TextColor="{StaticResource FithB}" />
+                            <Label
+                                FontSize="14"
+                                HorizontalOptions="Fill"
+                                HorizontalTextAlignment="Center"
+                                Text="Füge ein Ziel direkt auf der Detailseite eines Faches hinzu!"
+                                TextColor="{StaticResource FithB}" />
+                        </StackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Label Text="{Binding ZielNote}" />
@@ -61,8 +77,8 @@
             </CollectionView>
             <!--  aktueller Schnitt Block 1  -->
             <Frame
-                Grid.Row="2"
-                Grid.ColumnSpan="4"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
                 Margin="20,20,20,10"
                 Padding="-5"
                 BackgroundColor="{StaticResource FourthB}"
@@ -165,8 +181,7 @@
             </Frame>
             <!--  aktueller Schnitt Block 2  -->
             <Frame
-                Grid.Row="3"
-                Grid.ColumnSpan="2"
+                Grid.Row="2"
                 Margin="20,0,0,10"
                 Padding="0"
                 BackgroundColor="{StaticResource FourthB}"
@@ -205,9 +220,8 @@
             </Frame>
             <!--  aktueller Abiturschnitt  -->
             <Frame
-                Grid.Row="3"
-                Grid.Column="2"
-                Grid.ColumnSpan="2"
+                Grid.Row="2"
+                Grid.Column="1"
                 Margin="5,0,20,10"
                 Padding="0"
                 BackgroundColor="{StaticResource FourthB}"

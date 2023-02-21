@@ -32,30 +32,31 @@ namespace NotenApp.Pages
         {
             base.OnAppearing();
             model.FachName = fach.Name;
-            Task.Run(async () => { await model.InitLks(fach); });
-            Task.Run(async () => { await model.InitKlausuren(fach); });
+            Task.Run(async () => { await model.InitNoten(fach); });
+            
             Task.Run(async () => { await model.InitEinzHj(fach); });
             Task.Run(async () => { await model.InitFachDurchschnitt(fach); });
             Task.Run(async () => { await model.InitZiel(fach); });
 
         }
 
-        private async void DeleteNote(object sender, SelectionChangedEventArgs e)
+        private void DeleteNote(object sender, SelectionChangedEventArgs e)
         {
             var note = e.CurrentSelection.FirstOrDefault() as HJNote;
-            await FachService.RemoveSingleNote(note);
+            Task.Run(async () => { await FachService.RemoveSingleNote(note); });
+            
             switch (note.Typ)
             {
                 case (int)NotenTyp.LK:
-                     await model.InitLks(fach);
+                     model.LKNoten.Remove(note);
                     break;
                 case (int)NotenTyp.Klausur:
-                    await model.InitKlausuren(fach);
+                    model.KlausurNoten.Remove(note);
                     break;
                 
             }
-            await model.InitFachDurchschnitt(fach);
-            await model.InitEinzHj(fach);
+            Task.Run(async () => { await model.InitEinzHj(fach); });
+            Task.Run(async () => { await model.InitFachDurchschnitt(fach); });
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -79,14 +80,20 @@ namespace NotenApp.Pages
 
             if (notenTyp != null && note != null)
             {
+                HJNote no = new HJNote
+                {
+                    Note = (int)note,
+                    Typ = (int)notenTyp
+
+                };
                 await FachService.AddNote(fach, (int)note, (NotenTyp)notenTyp);
                 switch (notenTyp)
                 {
                     case NotenTyp.LK:
-                        await model.InitLks(fach);
+                        model.LKNoten.Add(no);
                         break;
                     case NotenTyp.Klausur:
-                        await model.InitKlausuren(fach);
+                        model.KlausurNoten.Add(no);
                         break;
 
                 }

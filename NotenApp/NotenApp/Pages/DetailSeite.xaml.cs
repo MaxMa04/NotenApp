@@ -3,6 +3,7 @@ using NotenApp.Logic;
 using NotenApp.Models;
 using NotenApp.Services;
 using NotenApp.ViewModels;
+using Switch;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,9 +20,8 @@ namespace NotenApp.Pages
     public partial class DetailSeite : ContentPage
     {
         public HjFach fach;
+        public int whichtime;
         DetailViewModel model;
-        public decimal heightCollView;
-        public const float heightNote = 80; //Höhe der einzelnen Noten in der Übersicht
         public DetailSeite(HjFach fach)
         {
             InitializeComponent();
@@ -33,8 +33,12 @@ namespace NotenApp.Pages
         {
             base.OnAppearing();
             model.FachName = fach.Name;
-            Task.Run(async () => { await model.InitNoten(fach); });
-            
+            if (fach.IsLK)
+            {
+                _switch.IsToggled = true;
+            }
+            whichtime= 0;
+            Task.Run(async () => { await model.InitNoten(fach); });           
             Task.Run(async () => { await model.InitEinzHj(fach); });
             Task.Run(async () => { await model.InitFachDurchschnitt(fach); });
             Task.Run(async () => { await model.InitZiel(fach); });
@@ -114,6 +118,15 @@ namespace NotenApp.Pages
             }
 
         }
+
+        private async void CustomSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+            await model.HandleSwitch(fach, _switch.IsToggled);
+            
+        }
+
         
+
+
     }
 }

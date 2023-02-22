@@ -155,6 +155,24 @@ namespace NotenApp.Services
 
             await db.InsertAsync(fach);
         }
+        public static async Task UpdateFachState(HjFach fach, string state)
+        {
+            await Init();
+            switch (state)
+            {
+                case "LK":
+                    fach.IsLK = true;
+                    await db.UpdateAsync(fach);
+                    break;
+                case "GK":
+                    fach.IsLK = false;
+                    await db.UpdateAsync(fach);
+                    break;
+                default:
+                    break;
+            }
+
+        }
         public static async Task<HJNote> ReturnLastNote(HjFach fach)
         {
             await Init();

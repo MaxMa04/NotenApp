@@ -14,6 +14,8 @@ namespace NotenApp.ViewModels
     {
         public ObservableRangeCollection<HJNote> LKNoten { get; set; }
         public ObservableRangeCollection<HJNote> KlausurNoten { get; set; }
+
+
         private string ziel;
         public string Ziel
         {
@@ -95,6 +97,55 @@ namespace NotenApp.ViewModels
         public async Task InitEinzHj(HjFach fach)
         {
             FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
+        }
+        public async Task HandleSwitch(HjFach fach, bool isToggled)
+        {
+            
+            PrFach p1 = await FachService.GetPrFach(1);
+            PrFach p2 = await FachService.GetPrFach(2);
+            if (isToggled == true)
+            {
+                await FachService.UpdateFachState(fach, "LK");
+                if (p1 == null)
+                {
+                    await FachService.AddPrFach(fach.Name, 1);
+                }
+                else if (p1.Name == "-" || p1.Name == fach.Name)
+                {
+                    await FachService.UpdateName(fach.Name, 1);
+                }
+                else if (p2 == null)
+                {
+                    await FachService.AddPrFach(fach.Name, 2);
+                }
+                else if (p2.Name == "-" || p2.Name == fach.Name)
+                {
+                    await FachService.UpdateName(fach.Name, 2);
+                }
+                else
+                {
+                    Console.WriteLine("Fehler");
+                }
+                
+            }
+            else
+            {
+                await FachService.UpdateFachState(fach, "GK");
+                if (p1.Name == fach.Name)
+                {
+                    await FachService.UpdateName("-", 1);
+                }
+                else if (p2.Name == fach.Name)
+                {
+                    await FachService.UpdateName("-", 2);
+                }
+                else
+                {
+                    Console.WriteLine("Fehler");
+                }
+            }
+
+
         }
     }
 }

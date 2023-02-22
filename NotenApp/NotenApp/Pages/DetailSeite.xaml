@@ -72,6 +72,7 @@
                                 TextColor="{StaticResource FithB}"
                                 VerticalOptions="Center" />
                             <switch:CustomSwitch
+                                x:Name="_switch"
                                 BackgroundColor="{StaticResource FourthB}"
                                 CornerRadius="10"
                                 HeightRequest="20"
@@ -81,6 +82,7 @@
                                 KnobHeight="34"
                                 KnobLimit="Max"
                                 KnobWidth="34"
+                                Toggled="CustomSwitch_Toggled"
                                 VerticalOptions="Center"
                                 VibrateDuration="20"
                                 WidthRequest="60" />

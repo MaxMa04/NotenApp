@@ -47,8 +47,8 @@
             <Frame Grid.Row="1" BackgroundColor="{StaticResource PrimaryB}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1.5*" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="1.7*" />
+                        <RowDefinition Height="0.8*" />
                         <RowDefinition Height="1.7*" />
                         <RowDefinition Height="5.5*" />
                         <RowDefinition Height="1.5*" />
@@ -108,7 +108,7 @@
                                     FontSize="25"
                                     HorizontalOptions="Center"
                                     Text="{Binding Ziel}"
-                                    TextColor="Black"
+                                    TextColor="White"
                                     VerticalOptions="Center" />
                             </Frame>
                         </StackLayout>

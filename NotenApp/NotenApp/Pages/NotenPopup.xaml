@@ -5,10 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xctViews="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
     HorizontalOptions="CenterAndExpand"
-    Size="370,220"
+    Size="370,240"
     VerticalOptions="EndAndExpand">
 
-    <Grid BackgroundColor="{StaticResource FourthB}">
+    <Grid Padding="10" BackgroundColor="{StaticResource PrimaryB}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -28,90 +28,141 @@
         <Button
             Grid.Row="0"
             Grid.Column="2"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="0" />
+            CornerRadius="15"
+            Text="0"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="1"
             Grid.Column="0"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="1" />
+            CornerRadius="15"
+            Text="1"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="1"
             Grid.Column="1"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="2" />
+            CornerRadius="15"
+            Text="2"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="1"
             Grid.Column="2"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="3" />
+            CornerRadius="15"
+            Text="3"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="1"
             Grid.Column="3"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="4" />
+            CornerRadius="15"
+            Text="4"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="1"
             Grid.Column="4"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="5" />
+            CornerRadius="15"
+            Text="5"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="2"
             Grid.Column="0"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="6" />
+            CornerRadius="15"
+            Text="6"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="2"
             Grid.Column="1"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="7" />
+            CornerRadius="15"
+            Text="7"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="2"
             Grid.Column="2"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="8" />
+            CornerRadius="15"
+            Text="8"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="2"
             Grid.Column="3"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="9" />
+            CornerRadius="15"
+            Text="9"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="2"
             Grid.Column="4"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="10" />
+            CornerRadius="15"
+            Text="10"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="3"
             Grid.Column="0"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="11" />
+            CornerRadius="15"
+            Text="11"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="3"
             Grid.Column="1"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="12" />
+            CornerRadius="15"
+            Text="12"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="3"
             Grid.Column="2"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="13" />
+            CornerRadius="15"
+            Text="13"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="3"
             Grid.Column="3"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="14" />
+            CornerRadius="15"
+            Text="14"
+            TextColor="{StaticResource FithB}" />
         <Button
             Grid.Row="3"
             Grid.Column="4"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked1"
-            Text="15" />
+            CornerRadius="15"
+            Text="15"
+            TextColor="{StaticResource FithB}" />
         <Button
             x:Name="btn"
             Grid.Row="4"
             Grid.Column="2"
             Margin="-30,0"
+            BackgroundColor="{StaticResource SecondaryB}"
             Clicked="Button_Clicked"
-            Text="" />
+            CornerRadius="15"
+            Text=""
+            TextColor="{StaticResource FithB}" />
     </Grid>
 
 </xctViews:Popup>

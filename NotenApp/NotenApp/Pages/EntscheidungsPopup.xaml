@@ -5,12 +5,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xctViews="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
     HorizontalOptions="CenterAndExpand"
-    Size="370,100"
+    Size="370,80"
     VerticalOptions="EndAndExpand">
-    <StackLayout>
-        <Button Clicked="LK_Button_Clicked" Text="Lk" />
-        <Button Clicked="Klausur_Button_Clicked" Text="Klausur" />
-    </StackLayout>
+    <Grid Padding="10,15" BackgroundColor="{StaticResource PrimaryB}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Button
+            Grid.Column="0"
+            BackgroundColor="{StaticResource SecondaryB}"
+            Clicked="LK_Button_Clicked"
+            CornerRadius="20"
+            FontSize="20"
+            Text="Lk"
+            TextColor="{StaticResource FithB}" />
+        <Button
+            Grid.Column="1"
+            BackgroundColor="{StaticResource SecondaryB}"
+            Clicked="Klausur_Button_Clicked"
+            CornerRadius="20"
+            FontSize="20"
+            Text="Klausur"
+            TextColor="{StaticResource FithB}" />
+    </Grid>
 </xctViews:Popup>
 
 

@@ -28,6 +28,7 @@ namespace NotenApp.Logic
             }
             return list;
         }
+
         public static List<HjFach> SortList(List<HjFach> list)
         {
             for (int i = 0; i < list.Count - 1; i++)

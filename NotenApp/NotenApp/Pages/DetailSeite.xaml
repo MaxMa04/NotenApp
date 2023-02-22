@@ -33,6 +33,7 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 WidthRequest="140">
+
                 <Label
                     FontSize="50"
                     HorizontalOptions="Center"

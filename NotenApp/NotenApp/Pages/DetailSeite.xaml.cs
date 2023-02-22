@@ -5,6 +5,7 @@ using NotenApp.Services;
 using NotenApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,18 +44,8 @@ namespace NotenApp.Pages
         private async void DeleteNote(object sender, SelectionChangedEventArgs e)
         {
             var note = e.CurrentSelection.FirstOrDefault() as HJNote;
-            await FachService.RemoveSingleNote(note); 
-            
-            switch (note.Typ)
-            {
-                case (int)NotenTyp.LK:
-                     model.LKNoten.Remove(note);
-                    break;
-                case (int)NotenTyp.Klausur:
-                    model.KlausurNoten.Remove(note);
-                    break;
-                
-            }
+            await FachService.RemoveSingleNote(note);
+            await Task.Run(() => AdjustNoten(note, "REMOVENOTE"));
             await model.InitEinzHj(fach);
             await model.InitFachDurchschnitt(fach);
         }
@@ -83,20 +74,46 @@ namespace NotenApp.Pages
                 
                 await FachService.AddNote(fach, (int)note, (NotenTyp)notenTyp);
                 HJNote no = await FachService.ReturnLastNote(fach);
-                switch (notenTyp)
-                {
-                    case NotenTyp.LK:
-                        model.LKNoten.Add(no);
-                        break;
-                    case NotenTyp.Klausur:
-                        model.KlausurNoten.Add(no);
-                        break;
-
-                }
+                await Task.Run(() => AdjustNoten(no, "ADDNOTE"));
+                
             }
 
             await model.InitFachDurchschnitt(fach);
             await model.InitEinzHj(fach);
         }
+        public void AdjustNoten(HJNote note, string _case)
+        {
+            switch (_case)
+            {
+                case "ADDNOTE":
+                    switch (note.Typ)
+                    {
+                        case (int)NotenTyp.LK:
+                            model.LKNoten.Add(note);
+                            break;
+                        case (int)NotenTyp.Klausur:
+                            model.KlausurNoten.Add(note);
+                            
+                            break;
+
+                    }
+                    break;
+                case "REMOVENOTE":
+                    switch (note.Typ)
+                    {
+                        case (int)NotenTyp.LK:
+                            model.LKNoten.Remove(note);
+                            
+                            break;
+                        case (int)NotenTyp.Klausur:
+                            model.KlausurNoten.Remove(note);
+                            
+                            break;
+                    }
+                    break;
+            }
+
+        }
+        
     }
 }

@@ -2,11 +2,13 @@
 using NotenApp.Logic;
 using NotenApp.Models;
 using NotenApp.Services;
+using Switch;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace NotenApp.ViewModels
 {
@@ -97,6 +99,29 @@ namespace NotenApp.ViewModels
         public async Task InitEinzHj(HjFach fach)
         {
             FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
+        }
+        public async Task DetermineSwitchStartBehavior(HjFach fach, CustomSwitch _switch)
+        {
+            
+            if (fach.IsLK)
+            {
+                Device.BeginInvokeOnMainThread(() => {
+                    _switch.IsToggled = true;
+                });
+                
+            }
+            else
+            {
+                int countLK = await FachService.GetLKCount();
+                if(countLK < 2)
+                {
+                    _switch.IsEnabled = true;
+                }
+                else
+                {
+                    _switch.IsEnabled = false;
+                }
+            }
         }
         public async Task HandleSwitch(HjFach fach, bool isToggled)
         {

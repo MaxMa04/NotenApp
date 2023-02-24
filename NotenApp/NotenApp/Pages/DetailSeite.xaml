@@ -66,27 +66,70 @@
                             HorizontalOptions="Center"
                             Orientation="Horizontal"
                             VerticalOptions="Center">
-                            <Label
-                                FontSize="25"
-                                HorizontalOptions="Center"
-                                Text="LK"
-                                TextColor="{StaticResource FithB}"
-                                VerticalOptions="Center" />
                             <switch:CustomSwitch
                                 x:Name="_switch"
                                 BackgroundColor="{StaticResource FourthB}"
-                                CornerRadius="10"
-                                HeightRequest="20"
-                                HorizontalOptions="Center"
-                                KnobColor="{StaticResource ThirdB}"
-                                KnobCornerRadius="17"
-                                KnobHeight="34"
-                                KnobLimit="Max"
-                                KnobWidth="34"
+                                CornerRadius="5"
+                                HeightRequest="40"
+                                KnobHeight="40"
+                                KnobLimit="Boundary"
+                                KnobWidth="60"
+                                SwitchPanUpdate="CustomSwitch_SwitchPanUpdate"
                                 Toggled="CustomSwitch_Toggled"
-                                VerticalOptions="Center"
                                 VibrateDuration="20"
-                                WidthRequest="60" />
+                                WidthRequest="120">
+                                <switch:CustomSwitch.BackgroundContent>
+                                    <FlexLayout JustifyContent="SpaceEvenly">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="FillAndExpand"
+                                            HorizontalTextAlignment="Center"
+                                            Text="GK"
+                                            TextColor="DarkGray"
+                                            VerticalOptions="FillAndExpand"
+                                            VerticalTextAlignment="Center"
+                                            WidthRequest="60" />
+                                        <Label
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="FillAndExpand"
+                                            HorizontalTextAlignment="Center"
+                                            Text="LK"
+                                            TextColor="DarkGray"
+                                            VerticalOptions="FillAndExpand"
+                                            VerticalTextAlignment="Center"
+                                            WidthRequest="60" />
+                                    </FlexLayout>
+                                </switch:CustomSwitch.BackgroundContent>
+
+                                <switch:CustomSwitch.KnobContent>
+                                    <StackLayout Orientation="Horizontal">
+                                        <FlexLayout
+                                            x:Name="Flex"
+                                            JustifyContent="SpaceEvenly"
+                                            WidthRequest="120">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                HorizontalOptions="FillAndExpand"
+                                                HorizontalTextAlignment="Center"
+                                                Text="GK"
+                                                TextColor="{StaticResource SecondaryB}"
+                                                VerticalOptions="FillAndExpand"
+                                                VerticalTextAlignment="Center"
+                                                WidthRequest="60" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                HorizontalOptions="FillAndExpand"
+                                                HorizontalTextAlignment="Center"
+                                                Text="LK"
+                                                TextColor="{StaticResource SecondaryB}"
+                                                VerticalOptions="FillAndExpand"
+                                                VerticalTextAlignment="Center"
+                                                WidthRequest="60" />
+                                        </FlexLayout>
+                                    </StackLayout>
+                                </switch:CustomSwitch.KnobContent>
+                            </switch:CustomSwitch>
+
                             <BoxView
                                 Margin="10,0,10,0"
                                 HorizontalOptions="FillAndExpand"

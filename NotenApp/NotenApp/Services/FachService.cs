@@ -35,7 +35,21 @@ namespace NotenApp.Services
             await db.CreateTableAsync<Ziel>();
         }
 
-        //Halbjahre
+        //
+        //
+        //
+        //
+        //
+        //
+        //Block 1
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
         public static async Task AddNote(HjFach fach, int note, NotenTyp notenTyp)
         {
             await Init();
@@ -173,13 +187,14 @@ namespace NotenApp.Services
             }
 
         }
-        public static async Task<HJNote> ReturnLastNote(HjFach fach)
+        public static async Task<int> GetLKCount()
         {
             await Init();
-            var query = db.Table<HJNote>().Where(n => n.FachId == fach.Id);
-            List<HJNote> noten = await query.ToListAsync();
-            return noten.Last();
-        }
+            var query = db.Table<HjFach>().Where(f => f.IsLK);
+            int count = await query.CountAsync();
+
+            return count/4;            
+        } 
         public static async Task RemoveSingleNote(HJNote note)
         {
             await Init();
@@ -335,7 +350,21 @@ namespace NotenApp.Services
             HjFach fachd = await query.FirstOrDefaultAsync();
             return fachd;
         }
+        //
+        //
+        //
+        //
+        //
+        //
+        //
         //Ziele
+        //
+        //
+        //
+        //
+        //
+        //
+        //
         public static async Task AddZiel(HjFach fach, int? zielNote)
         {
             await Init();
@@ -391,7 +420,19 @@ namespace NotenApp.Services
             var GesamtZiele = await db.Table<Ziel>().ToListAsync();
             return GesamtZiele;
         }
-        //Prüfungen/Block2
+        //
+        //
+        //
+        //
+        //
+        //Block2
+        //
+        //
+        //
+        //
+        //
+        //
+
         public static async Task AddPrFach(string name, int prNummer)
         {
             await Init();
@@ -428,54 +469,46 @@ namespace NotenApp.Services
         public static async Task UpdateName(string name, int prNummer)
         {
             await Init();
-            List<PrFach> PrFaecher = await db.Table<PrFach>().ToListAsync();
-            List<HjFach> HjFaecher = await db.Table<HjFach>().ToListAsync();
+            PrFach prFach = await db.Table<PrFach>().Where(pf => pf.PrNummer == prNummer).FirstOrDefaultAsync();
+            List<HjFach> HjFaecher = await db.Table<HjFach>().Where(hf => hf.Name == prFach.Name || hf.Name == name).ToListAsync();
             foreach (var hjFach in HjFaecher) //einzubringende Halbjahre werden angepasst für altes Fach
-            {
-                foreach (var fach in PrFaecher)
+            { 
+                if(hjFach.Name == prFach.Name)
                 {
+                    hjFach.EingebrachteHalbjahre = hjFach.MinHalbjahre;
+                    hjFach.IsPrFach = false;
+                    hjFach.IsLK = false;
+                    await db.UpdateAsync(hjFach);
+                }             
+            }
+            prFach.Name = name;
+            prFach.NoteMündlich = null;
+            prFach.NoteSchriftlich = null;
+            prFach.Durchschnitt = null;
                     
-                    if(hjFach.Name == fach.Name && fach.PrNummer == prNummer)
+            await db.UpdateAsync(prFach);
+            foreach (var hjFach in HjFaecher)
+            {
+                if(hjFach.Name == name)
+                {
+                    if(prNummer == 1 || prNummer == 2)
                     {
-                        hjFach.EingebrachteHalbjahre = hjFach.MinHalbjahre;
-                        hjFach.IsPrFach = false;
-                        hjFach.IsLK = false;
+                        hjFach.EingebrachteHalbjahre = 4;
+                        hjFach.IsPrFach = true;
+                        hjFach.IsLK=true;
+
                         await db.UpdateAsync(hjFach);
-
                     }
-                }
-            }
-            foreach (var item in PrFaecher) //neuer Name wird zugewiesen + einzubringende Halbjahre werden angepasst für neues Fach
-            {
-
-                if(item.PrNummer == prNummer)
-                {
-                    item.Name = name;
-                    
-                    await db.UpdateAsync(item);
-                    foreach (var hjFach in HjFaecher)
+                    else
                     {
-                        if(hjFach.Name == name)
-                        {
-                            if(prNummer == 1 || prNummer == 2)
-                            {
-                                hjFach.EingebrachteHalbjahre = 4;
-                                hjFach.IsPrFach = true;
-                                hjFach.IsLK=true;
-
-                                await db.UpdateAsync(hjFach);
-                            }
-                            else
-                            {
-                                hjFach.EingebrachteHalbjahre = 4;
-                                hjFach.IsPrFach = true;
-                                await db.UpdateAsync(hjFach);
-                            }
-                            
-                        } 
+                        hjFach.EingebrachteHalbjahre = 4;
+                        hjFach.IsPrFach = true;
+                        await db.UpdateAsync(hjFach);
                     }
-                }
+                    
+                } 
             }
+            
         }
         public static async Task UpdateNote(int? note, int prNummer, NotenTyp notenTyp)
         {

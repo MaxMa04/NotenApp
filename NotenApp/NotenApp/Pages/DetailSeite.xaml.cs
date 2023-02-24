@@ -4,6 +4,7 @@ using NotenApp.Models;
 using NotenApp.Services;
 using NotenApp.ViewModels;
 using Switch;
+using Switch.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,7 +21,6 @@ namespace NotenApp.Pages
     public partial class DetailSeite : ContentPage
     {
         public HjFach fach;
-        public int whichtime;
         DetailViewModel model;
         public DetailSeite(HjFach fach)
         {
@@ -33,11 +33,7 @@ namespace NotenApp.Pages
         {
             base.OnAppearing();
             model.FachName = fach.Name;
-            if (fach.IsLK)
-            {
-                _switch.IsToggled = true;
-            }
-            whichtime= 0;
+            Task.Run(async () => { await model.DetermineSwitchStartBehavior(fach, _switch); });
             Task.Run(async () => { await model.InitNoten(fach); });           
             Task.Run(async () => { await model.InitEinzHj(fach); });
             Task.Run(async () => { await model.InitFachDurchschnitt(fach); });
@@ -92,5 +88,18 @@ namespace NotenApp.Pages
             await model.HandleSwitch(fach, _switch.IsToggled);
         }
 
+        private void CustomSwitch_SwitchPanUpdate(object sender, Switch.Events.SwitchPanUpdatedEventArgs e)
+        {
+            Flex.TranslationX = -(e.TranslateX + e.XRef);
+
+            Color fromColorLight = _switch.IsToggled ? Color.FromHex("#ffc0be") : Color.FromHex("#ffc0be");
+            Color toColorLight = _switch.IsToggled ? Color.FromHex("#ffc0be") : Color.FromHex("#ffc0be");
+
+            double t = e.Percentage * 0.01;
+
+            _switch.KnobCornerRadius = _switch.IsToggled ? new CornerRadius(0, 5, 0, 5) : new CornerRadius(5, 0, 5, 0);
+            _switch.KnobColor = ColorAnimationUtil.ColorAnimation(fromColorLight, toColorLight, t);
+        }
+    
     }
 }

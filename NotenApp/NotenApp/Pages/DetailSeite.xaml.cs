@@ -49,7 +49,7 @@ namespace NotenApp.Pages
         {
             var note = e.CurrentSelection.FirstOrDefault() as HJNote;
             await FachService.RemoveSingleNote(note);
-            await Task.Run(() => AdjustNoten(note, "REMOVENOTE"));
+            await model.InitNoten(fach);
             await model.InitEinzHj(fach);
             await model.InitFachDurchschnitt(fach);
         }
@@ -77,56 +77,20 @@ namespace NotenApp.Pages
             {
                 
                 await FachService.AddNote(fach, (int)note, (NotenTyp)notenTyp);
-                HJNote no = await FachService.ReturnLastNote(fach);
-                await Task.Run(() => AdjustNoten(no, "ADDNOTE"));
+                
+                await model.InitNoten(fach);
                 
             }
 
             await model.InitFachDurchschnitt(fach);
             await model.InitEinzHj(fach);
         }
-        public void AdjustNoten(HJNote note, string _case)
-        {
-            switch (_case)
-            {
-                case "ADDNOTE":
-                    switch (note.Typ)
-                    {
-                        case (int)NotenTyp.LK:
-                            model.LKNoten.Add(note);
-                            break;
-                        case (int)NotenTyp.Klausur:
-                            model.KlausurNoten.Add(note);
-                            
-                            break;
 
-                    }
-                    break;
-                case "REMOVENOTE":
-                    switch (note.Typ)
-                    {
-                        case (int)NotenTyp.LK:
-                            model.LKNoten.Remove(note);
-                            
-                            break;
-                        case (int)NotenTyp.Klausur:
-                            model.KlausurNoten.Remove(note);
-                            
-                            break;
-                    }
-                    break;
-            }
-
-        }
 
         private async void CustomSwitch_Toggled(object sender, ToggledEventArgs e)
         {
             await model.HandleSwitch(fach, _switch.IsToggled);
-            
         }
-
-        
-
 
     }
 }

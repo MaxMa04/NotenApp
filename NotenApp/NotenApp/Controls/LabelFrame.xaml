@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="NotenApp.Controls.LabelFrame"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    HeightRequest="60"
+    WidthRequest="55">
+    <Frame
+        x:Name="frame"
+        CornerRadius="20"
+        HasShadow="False">
+        <Label
+            x:Name="innerLabel"
+            Margin="-5"
+            FontSize="Medium"
+            HorizontalOptions="CenterAndExpand"
+            TextColor="Black"
+            VerticalOptions="CenterAndExpand" />
+    </Frame>
+</ContentView>

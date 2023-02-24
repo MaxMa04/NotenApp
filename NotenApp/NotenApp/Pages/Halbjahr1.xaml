@@ -78,6 +78,7 @@
                 ItemsSource="{Binding FaecherHJ1}"
                 SelectionChanged="CollectionView_SelectionChanged"
                 SelectionMode="Single">
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView HeightRequest="75">

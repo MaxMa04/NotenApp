@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
+    xmlns:local="clr-namespace:NotenApp.Controls"
     xmlns:switch="clr-namespace:Switch;assembly=Switch"
     x:Name="detailseite">
     <NavigationPage.TitleView>
@@ -167,27 +168,14 @@
                         </CollectionView.EmptyView>
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout
-                                HorizontalItemSpacing="3"
+                                HorizontalItemSpacing="2"
                                 Orientation="Vertical"
                                 Span="6"
                                 VerticalItemSpacing="5" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame
-                                    Margin="5"
-                                    BackgroundColor="{StaticResource SecondaryB}"
-                                    CornerRadius="20"
-                                    HeightRequest="9">
-                                    <Label
-                                        Margin="-10"
-                                        FontSize="Medium"
-                                        HorizontalOptions="Center"
-                                        Text="{Binding Note}"
-                                        TextColor="Black"
-                                        VerticalOptions="Center" />
-                                </Frame>
-
+                                <local:LabelFrame FrameColor="{StaticResource SecondaryB}" FrameText="{Binding Note}" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -212,27 +200,14 @@
                         </CollectionView.EmptyView>
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout
-                                HorizontalItemSpacing="3"
+                                HorizontalItemSpacing="2"
                                 Orientation="Vertical"
                                 Span="6"
                                 VerticalItemSpacing="5" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame
-                                    Margin="5"
-                                    BackgroundColor="{StaticResource FourthB}"
-                                    CornerRadius="20"
-                                    HeightRequest="9">
-                                    <Label
-                                        Margin="-10"
-                                        FontSize="Medium"
-                                        HorizontalOptions="Center"
-                                        Text="{Binding Note}"
-                                        TextColor="Black"
-                                        VerticalOptions="Center" />
-                                </Frame>
-
+                                <local:LabelFrame FrameColor="{StaticResource FourthB}" FrameText="{Binding Note}" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

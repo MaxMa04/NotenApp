@@ -11,7 +11,8 @@ namespace NotenApp.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public int FachId { get; set; }
-        public string Beschreibung { get; set; }
+        public string FachName { get; set; }
+        public int Halbjahr { get; set; }
         public int ErforderlicheLKNote { get; set; }
         public int ErforderlicheKLNote { get; set; }
         public int? ZielNote { get; set; }

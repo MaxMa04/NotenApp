@@ -378,7 +378,9 @@ namespace NotenApp.Services
                 Ziel nziel = new Ziel
                 {
                     ZielNote = zielNote,
-                    FachId = fach.Id
+                    FachId = fach.Id,
+                    FachName = fach.Name,
+                    Halbjahr = fach.Halbjahr
                 };
                 await db.InsertAsync(nziel);
             }

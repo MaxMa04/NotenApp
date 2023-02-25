@@ -3,7 +3,8 @@
     x:Class="NotenApp.Pages.Block2Page"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels">
+    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
+    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
     <ContentPage.BindingContext>
         <ViewModels:Block2ViewModel />
     </ContentPage.BindingContext>
@@ -104,13 +105,25 @@
                 Grid.Row="1"
                 Grid.Column="2"
                 BackgroundColor="{StaticResource FourthB}">
-                <Image Margin="-5" Source="schriftlich.png" />
+                <lottie:AnimationView
+                    Margin="-30"
+                    Animation="schriftlich.json"
+                    AutoPlay="True"
+                    HorizontalOptions="FillAndExpand"
+                    RepeatMode="Infinite"
+                    VerticalOptions="FillAndExpand" />
             </Frame>
             <Frame
                 Grid.Row="1"
                 Grid.Column="3"
                 BackgroundColor="{StaticResource FourthB}">
-                <Image Margin="-10" Source="muendlich.png" />
+                <lottie:AnimationView
+                    Margin="-30"
+                    Animation="muendlich.json"
+                    AutoPlay="True"
+                    HorizontalOptions="FillAndExpand"
+                    RepeatMode="Infinite"
+                    VerticalOptions="FillAndExpand" />
             </Frame>
             <!--  P1  -->
             <Frame Grid.Row="2" BackgroundColor="{StaticResource FourthB}">

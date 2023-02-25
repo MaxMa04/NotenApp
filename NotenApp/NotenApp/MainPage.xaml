@@ -38,6 +38,7 @@
             <CollectionView
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
+                Margin="20,0,20,0"
                 ItemsSource="{Binding FachZiele}"
                 SelectionChanged="CollectionView_SelectionChanged"
                 SelectionMode="Single">
@@ -53,25 +54,57 @@
                     <ContentView>
                         <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                             <Label
-                                Margin="10,25,10,10"
+                                Margin="0,0,0,10"
                                 FontAttributes="Bold"
-                                FontSize="18"
+                                FontSize="17"
                                 HorizontalOptions="Fill"
                                 HorizontalTextAlignment="Center"
-                                Text="Aktuell hast du dir noch kein Ziel gesetzt."
+                                Text="Aktuell hast du dir noch keine Ziele gesetzt."
                                 TextColor="{StaticResource FithB}" />
                             <Label
-                                FontSize="14"
+                                FontSize="13"
                                 HorizontalOptions="Fill"
                                 HorizontalTextAlignment="Center"
-                                Text="Füge ein Ziel direkt auf der Detailseite eines Faches hinzu!"
+                                Text="Füge ein Ziel auf der Detailseite eines Faches hinzu!"
                                 TextColor="{StaticResource FithB}" />
                         </StackLayout>
                     </ContentView>
                 </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding ZielNote}" />
+                        <Frame
+                            Padding="20"
+                            BackgroundColor="{StaticResource ThirdB}"
+                            CornerRadius="15"
+                            HeightRequest="20">
+                            <Label
+                                Margin="-5,-20,-5,-20"
+                                FontSize="13"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Um " TextColor="Black" />
+                                        <Span Text="{Binding ZielNote}" TextColor="{StaticResource SecondaryB}" />
+                                        <Span Text=" Punkte in " TextColor="Black" />
+                                        <Span Text="{Binding FachName}" TextColor="Black" />
+                                        <Span Text=" in Halbjahr " TextColor="Black" />
+                                        <Span Text="{Binding Halbjahr}" TextColor="Black" />
+                                        <Span Text=" zu erreichen, schreibe " TextColor="Black" />
+                                        <Span Text="{Binding ErforderlicheLKNote}" TextColor="Black" />
+                                        <Span Text=" (LK) bzw. " TextColor="Black" />
+                                        <Span Text="{Binding ErforderlicheKLNote}" TextColor="Black" />
+                                        <Span Text=" (Klausur) Punkte!" TextColor="Black" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

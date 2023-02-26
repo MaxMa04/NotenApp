@@ -12,6 +12,8 @@ namespace NotenApp.Models
         public int Id { get; set; }
         public int FachId { get; set; }
         public string FachName { get; set; }
+        public string Span1 { get; set; }
+        public string Span2 { get; set; }
         public int Halbjahr { get; set; }
         public int ErforderlicheLKNote { get; set; }
         public int ErforderlicheKLNote { get; set; }

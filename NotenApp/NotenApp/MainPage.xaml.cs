@@ -19,7 +19,7 @@ namespace NotenApp
         {
             InitializeComponent();
             model = BindingContext as MainPageViewModel;
-
+            
         }
         protected override void OnAppearing()
         {

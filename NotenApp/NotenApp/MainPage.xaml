@@ -90,11 +90,12 @@
                                     <FormattedString>
                                         <Span Text="Um " TextColor="Black" />
                                         <Span Text="{Binding ZielNote}" TextColor="{StaticResource SecondaryB}" />
-                                        <Span Text=" Punkte in " TextColor="Black" />
+                                        <Span Text="{Binding Span1}" TextColor="Black" />
                                         <Span Text="{Binding FachName}" TextColor="Black" />
-                                        <Span Text=" in Halbjahr " TextColor="Black" />
+                                        <Span Text=" Halbjahr " TextColor="Black" />
                                         <Span Text="{Binding Halbjahr}" TextColor="Black" />
-                                        <Span Text=" zu erreichen, schreibe " TextColor="Black" />
+                                        <Span Text="{Binding Span2}" TextColor="Black" />
+                                        <Span Text=", schreibe mindestens " TextColor="Black" />
                                         <Span Text="{Binding ErforderlicheLKNote}" TextColor="Black" />
                                         <Span Text=" (LK) bzw. " TextColor="Black" />
                                         <Span Text="{Binding ErforderlicheKLNote}" TextColor="Black" />

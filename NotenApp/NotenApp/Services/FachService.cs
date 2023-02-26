@@ -62,6 +62,7 @@ namespace NotenApp.Services
             };
             await db.InsertAsync(newNote);
             fach.Durchschnitt = await GetFachDurchschnitt(fach);
+            await UpdateZielErforderlicheNoten(fach);
             await db.UpdateAsync(fach);
             if(fach.Name == "Informatik" || fach.Name == "Biologie" || fach.Name=="Physik"|| fach.Name == "Chemie")
             {
@@ -206,34 +207,35 @@ namespace NotenApp.Services
                 if(fach.Id == note.FachId)
                 {
                     fach.Durchschnitt = await GetFachDurchschnitt(fach);
+                    await UpdateZielErforderlicheNoten(fach);
                     await db.UpdateAsync(fach);
                 }
             }
+            
         }
         public static async Task RemoveFach(HjFach fach)
         {
             await Init();
-            List<HjFach> list = await db.Table<HjFach>().ToListAsync();
-            List<PrFach> list2 = await db.Table<PrFach>().ToListAsync();
+            List<HjFach> list = await db.Table<HjFach>().Where(f => f.Name == fach.Name).ToListAsync();
+            
+            Ziel ziel = await db.Table<Ziel>().Where(z => z.FachId == fach.Id).FirstOrDefaultAsync();
             foreach (var item in list)
             {
-                if(item.Name == fach.Name)
-                {
-                    await db.DeleteAsync<HjFach>(item.Id);
-                }
+                await db.DeleteAsync<HjFach>(item.Id);
+                await RemoveAllNoten(item);
             }
-            if(fach.IsPrFach == true)
+            if (fach.IsPrFach)
             {
-                foreach (var item in list2)
-                {
-                    if(item.Name == fach.Name)
-                    {
-                        await UpdateName("-", item.PrNummer);
-                    }
-                }
+                PrFach prFach = await db.Table<PrFach>().Where(f => f.Name == fach.Name).FirstOrDefaultAsync();
+                await UpdateName("-", prFach.PrNummer);
             }
-            await RemoveAllNoten(fach);
-            await db.DeleteAsync<HjFach>(fach.Id);
+            
+            if(ziel != null)
+            {
+                await DeleteZiel(ziel);
+            }
+            
+            
         }
         public static async Task RemoveAllNoten(HjFach fach)
         {
@@ -383,6 +385,7 @@ namespace NotenApp.Services
                     Halbjahr = fach.Halbjahr
                 };
                 await db.InsertAsync(nziel);
+                await UpdateZielErforderlicheNoten(fach);
             }
             else
             {
@@ -391,6 +394,7 @@ namespace NotenApp.Services
                 {
                     ziel.ZielNote = zielNote;
                     await db.UpdateAsync(ziel);
+                    await UpdateZielErforderlicheNoten(fach);
                 }
                 else
                 {
@@ -408,11 +412,132 @@ namespace NotenApp.Services
             await Init();
             await db.DeleteAsync(ziel);
         }
+        public static async Task UpdateZielErforderlicheNoten(HjFach fach)
+        {
+            await Init();
+            Ziel ziel = await GetFachZiel(fach);
+            if (ziel != null)
+            {
+                float zielNote = (float)ziel.ZielNote - 0.5f;
+                List<HJNote> lks = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)NotenTyp.LK).ToListAsync();
+                List<HJNote> klausuren = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)NotenTyp.Klausur).ToListAsync();
+                if (klausuren.Count == 0 && lks.Count == 0)
+                {
+                    ziel.ErforderlicheKLNote = (int)ziel.ZielNote;
+                    ziel.ErforderlicheLKNote = (int)ziel.ZielNote;
+                    ziel.Span1 = " Punkte in ";
+                    ziel.Span2 = " zu erreichen";
+                    await db.UpdateAsync(ziel);
+                    return;
+                }
+                float sumKl = 0;
+                float sumLk = 0;
+                foreach (var item in lks)
+                {
+                    sumLk += (float)item.Note;
+                }
+                foreach (var item in klausuren)
+                {
+                    sumKl += (float)item.Note;
+                }
+                float duKl = sumKl / klausuren.Count;
+                float duLk = sumLk / lks.Count;
+                if(lks.Count == 0 && klausuren.Count > 0)
+                {
+                    ziel.ErforderlicheLKNote = (int)Math.Round(zielNote * 2 - duKl);
+                    ziel.ErforderlicheKLNote = (int)Math.Round(zielNote * (klausuren.Count + 1) - sumKl);
+                    if (ziel.ErforderlicheLKNote > 15 || ziel.ErforderlicheKLNote > 15)
+                    {
+                        ziel.Span1 = " Punkten in ";
+                        ziel.Span2 = " näher zu kommen";
+                        ziel.ErforderlicheKLNote = 15;
+                        ziel.ErforderlicheLKNote = 15;
+                    }
+                    else if(ziel.ErforderlicheLKNote < 0 || ziel.ErforderlicheKLNote < 0)
+                    {
+                        ziel.Span1 = " Punkte in ";
+                        ziel.Span2 = " zu erreichen";
+                        ziel.ErforderlicheKLNote = 0;
+                        ziel.ErforderlicheLKNote = 0;
+                    }
+                    else
+                    {
+                        ziel.Span1 = " Punkte in ";
+                        ziel.Span2 = " zu erreichen";
+                    }
+                    await db.UpdateAsync(ziel);
+                }
+                else if (lks.Count > 0 && klausuren.Count == 0)
+                {
+                    ziel.ErforderlicheLKNote = (int)Math.Round(zielNote * (lks.Count + 1) - sumLk);
+                    ziel.ErforderlicheKLNote = (int)Math.Round(zielNote * 2 - duLk);
+                    if (ziel.ErforderlicheLKNote > 15 || ziel.ErforderlicheKLNote > 15)
+                    {
+                        ziel.Span1 = " Punkten in ";
+                        ziel.Span2 = " näher zu kommen";
+                        ziel.ErforderlicheKLNote = 15;
+                        ziel.ErforderlicheLKNote = 15;
+                    }
+                    else if (ziel.ErforderlicheLKNote < 0 || ziel.ErforderlicheKLNote < 0)
+                    {
+                        ziel.Span1 = " Punkte in ";
+                        ziel.Span2 = " zu erreichen";
+                        ziel.ErforderlicheKLNote = 0;
+                        ziel.ErforderlicheLKNote = 0;
+                    }
+                    else
+                    {
+                        ziel.Span1 = " Punkte in ";
+                        ziel.Span2 = " zu erreichen";
+                    }
+                    await db.UpdateAsync(ziel);
+                }
+                else
+                {
+                    ziel.ErforderlicheLKNote = (int)Math.Round((zielNote * 2 - duKl) * (lks.Count + 1) - sumLk, 0);
+                    ziel.ErforderlicheKLNote = (int)Math.Round((zielNote * 2 - duLk) * (klausuren.Count + 1) - sumKl, 0);
+                    float ndukl = (sumKl + ziel.ErforderlicheKLNote) / (klausuren.Count + 1);
+                    float nduLk = (sumLk + ziel.ErforderlicheLKNote) / (lks.Count + 1);
+                    if((ndukl + duLk) / 2 < zielNote)
+                    {
+                        ziel.ErforderlicheKLNote += 1;
+                    }
+                    if((nduLk + duKl) / 2 < zielNote)
+                    {
+                        ziel.ErforderlicheLKNote += 1;
+                    }
+                    if(ziel.ErforderlicheLKNote > 15 || ziel.ErforderlicheKLNote > 15)
+                    {
+                        ziel.Span1 = " Punkten in ";
+                        ziel.Span2 = " näher zu kommen";
+                        ziel.ErforderlicheKLNote = 15;
+                        ziel.ErforderlicheLKNote = 15;
+                    }
+                    else if (ziel.ErforderlicheLKNote < 0 || ziel.ErforderlicheKLNote < 0)
+                    {
+                        ziel.Span1 = " Punkte in ";
+                        ziel.Span2 = " zu erreichen";
+                        ziel.ErforderlicheKLNote = 0;
+                        ziel.ErforderlicheLKNote = 0;
+                    }
+                    else
+                    {
+                        ziel.Span1 = " Punkte in ";
+                        ziel.Span2 = " zu erreichen";
+                    }
+                    await db.UpdateAsync(ziel);
+                }
+
+            }
+            else
+            {
+                return;
+            }
+        }
         public static async Task<Ziel> GetFachZiel(HjFach fach)
         {
             await Init();
-            var query = db.Table<Ziel>().Where(z => z.FachId == fach.Id);
-            Ziel ziel = await query.FirstOrDefaultAsync();
+            Ziel ziel = await db.Table<Ziel>().Where(z => z.FachId == fach.Id).FirstOrDefaultAsync();
             return ziel;
         }
         

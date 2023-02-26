@@ -91,9 +91,23 @@ namespace NotenApp.Pages
         private void CustomSwitch_SwitchPanUpdate(object sender, Switch.Events.SwitchPanUpdatedEventArgs e)
         {
             Flex.TranslationX = -(e.TranslateX + e.XRef);
+            string colorCode = string.Empty;
+            switch (Settings.Theme)
+            {
+                case 0: //Rosa
+                    colorCode = "#ffc0be";
+                    break;
+                case 1: //Blau
+                    colorCode = "#B0E2FF";
+                    
+                    break;
+                case 2: //Grün
+                    colorCode = "#B3E6C9";
+                    break;
+            }
 
-            Color fromColorLight = _switch.IsToggled ? Color.FromHex("#ffc0be") : Color.FromHex("#ffc0be");
-            Color toColorLight = _switch.IsToggled ? Color.FromHex("#ffc0be") : Color.FromHex("#ffc0be");
+            Color fromColorLight = _switch.IsToggled ? Color.FromHex(colorCode) : Color.FromHex(colorCode);
+            Color toColorLight = _switch.IsToggled ? Color.FromHex(colorCode) : Color.FromHex(colorCode);
 
             double t = e.Percentage * 0.01;
 

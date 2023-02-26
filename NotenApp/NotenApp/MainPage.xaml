@@ -78,7 +78,7 @@
                     <DataTemplate>
                         <Frame
                             Padding="20"
-                            BackgroundColor="{DynamicResource Third}"
+                            BackgroundColor="{DynamicResource Fourth}"
                             CornerRadius="15"
                             HeightRequest="20">
                             <Label

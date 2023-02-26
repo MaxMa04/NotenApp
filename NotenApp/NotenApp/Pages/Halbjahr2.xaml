@@ -73,13 +73,13 @@
                                 <SwipeItems>
                                     <SwipeItem
                                         BackgroundColor="{DynamicResource Secondary}"
-                                        Invoked="SwipeItem_Invoked_1"
-                                        Text="Details" />
+                                        IconImageSource="details.png"
+                                        Invoked="SwipeItem_Invoked_1" />
                                     <SwipeItem
                                         BackgroundColor="Red"
                                         Command="{Binding Source={x:Reference hj2}, Path=BindingContext.RemoveCommand}"
                                         CommandParameter="{Binding .}"
-                                        Text="Delete" />
+                                        IconImageSource="delete.png" />
 
                                 </SwipeItems>
                             </SwipeView.RightItems>

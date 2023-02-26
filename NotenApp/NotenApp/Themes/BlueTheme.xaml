@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="NotenApp.Themes.BlueTheme"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="Primary">#3D3D3D</Color>
+    <Color x:Key="Secondary">#12e2fa</Color>
+    <Color x:Key="Third">#B0E2FF</Color>
+    <Color x:Key="Fourth">#D9F2FF</Color>
+    <Color x:Key="Fith">#FFFFFF</Color>
+</ResourceDictionary>

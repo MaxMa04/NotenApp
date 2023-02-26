@@ -446,6 +446,11 @@ namespace NotenApp.Services
                 {
                     ziel.ErforderlicheLKNote = (int)Math.Round(zielNote * 2 - duKl);
                     ziel.ErforderlicheKLNote = (int)Math.Round(zielNote * (klausuren.Count + 1) - sumKl);
+                    float ndukl = (sumKl + ziel.ErforderlicheKLNote) / (klausuren.Count + 1);
+                    if (ndukl < zielNote)
+                    {
+                        ziel.ErforderlicheKLNote += 1;
+                    }
                     if (ziel.ErforderlicheLKNote > 15 || ziel.ErforderlicheKLNote > 15)
                     {
                         ziel.Span1 = " Punkten in ";
@@ -465,12 +470,18 @@ namespace NotenApp.Services
                         ziel.Span1 = " Punkte in ";
                         ziel.Span2 = " zu erreichen";
                     }
+                    
                     await db.UpdateAsync(ziel);
                 }
                 else if (lks.Count > 0 && klausuren.Count == 0)
                 {
                     ziel.ErforderlicheLKNote = (int)Math.Round(zielNote * (lks.Count + 1) - sumLk);
                     ziel.ErforderlicheKLNote = (int)Math.Round(zielNote * 2 - duLk);
+                    float nduLk = (sumLk + ziel.ErforderlicheLKNote) / (lks.Count + 1);
+                    if(nduLk < zielNote)
+                    {
+                        ziel.ErforderlicheLKNote += 1;
+                    }
                     if (ziel.ErforderlicheLKNote > 15 || ziel.ErforderlicheKLNote > 15)
                     {
                         ziel.Span1 = " Punkten in ";
@@ -490,6 +501,8 @@ namespace NotenApp.Services
                         ziel.Span1 = " Punkte in ";
                         ziel.Span2 = " zu erreichen";
                     }
+                    
+                    
                     await db.UpdateAsync(ziel);
                 }
                 else

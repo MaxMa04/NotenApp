@@ -9,7 +9,7 @@
         <ViewModels:Block2ViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid Padding="10" BackgroundColor="{StaticResource PrimaryB}">
+        <Grid Padding="10" BackgroundColor="{DynamicResource Primary}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*" />
                 <RowDefinition Height="*" />
@@ -46,33 +46,33 @@
                         FontSize="35"
                         HorizontalOptions="Center"
                         Text="Block 2"
-                        TextColor="{StaticResource SecondaryB}"
+                        TextColor="{DynamicResource Secondary}"
                         VerticalOptions="Center" />
                     <Frame
                         Grid.Row="1"
                         Margin="20,0,0,0"
-                        BackgroundColor="{StaticResource FourthB}"
+                        BackgroundColor="{DynamicResource Fourth}"
                         CornerRadius="40">
                         <Label
                             Margin="-10"
                             FontSize="Large"
                             HorizontalOptions="Center"
                             Text="{Binding DurchschnittBlock2, TargetNullValue='-'}"
-                            TextColor="{StaticResource SecondaryB}"
+                            TextColor="{DynamicResource Secondary}"
                             VerticalOptions="Center" />
                     </Frame>
                     <Frame
                         Grid.Row="1"
                         Grid.Column="1"
                         Margin="0,0,20,0"
-                        BackgroundColor="{StaticResource FourthB}"
+                        BackgroundColor="{DynamicResource Fourth}"
                         CornerRadius="40">
                         <Label
                             Margin="-10"
                             FontSize="Large"
                             HorizontalOptions="Center"
                             Text="{Binding PunktzahlBlock2}"
-                            TextColor="{StaticResource SecondaryB}"
+                            TextColor="{DynamicResource Secondary}"
                             VerticalOptions="Center" />
                     </Frame>
                 </Grid>
@@ -80,31 +80,31 @@
 
             <!--  Block2  -->
             <!--  Erklärung  -->
-            <Frame Grid.Row="1" BackgroundColor="{StaticResource FourthB}">
+            <Frame Grid.Row="1" BackgroundColor="{DynamicResource Fourth}">
                 <Label
                     Margin="-10"
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Text="Nr."
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="Center" />
             </Frame>
             <Frame
                 Grid.Row="1"
                 Grid.Column="1"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Label
                     Margin="-10"
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Text="Fach"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="Center" />
             </Frame>
             <Frame
                 Grid.Row="1"
                 Grid.Column="2"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <lottie:AnimationView
                     Margin="-30"
                     Animation="schriftlich.json"
@@ -116,7 +116,7 @@
             <Frame
                 Grid.Row="1"
                 Grid.Column="3"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <lottie:AnimationView
                     Margin="-30"
                     Animation="muendlich.json"
@@ -126,19 +126,19 @@
                     VerticalOptions="FillAndExpand" />
             </Frame>
             <!--  P1  -->
-            <Frame Grid.Row="2" BackgroundColor="{StaticResource FourthB}">
+            <Frame Grid.Row="2" BackgroundColor="{DynamicResource Fourth}">
                 <Label
                     Margin="-10"
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Text="1"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="Center" />
             </Frame>
             <Frame
                 Grid.Row="2"
                 Grid.Column="1"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetPrFach1" />
                 </Frame.GestureRecognizers>
@@ -147,41 +147,41 @@
                     FontSize="18"
                     HorizontalOptions="StartAndExpand"
                     Text="{Binding P1.Name, FallbackValue='Leistungskurs'}"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="CenterAndExpand" />
             </Frame>
             <Frame
                 Grid.Row="2"
                 Grid.Column="2"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteSchriftlich1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P1.NoteSchriftlich}" TextColor="{StaticResource SecondaryB}" />
+                <Label Text="{Binding P1.NoteSchriftlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="2"
                 Grid.Column="3"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P1.NoteMündlich}" TextColor="{StaticResource SecondaryB}" />
+                <Label Text="{Binding P1.NoteMündlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
             <!--  P2  -->
-            <Frame Grid.Row="3" BackgroundColor="{StaticResource FourthB}">
+            <Frame Grid.Row="3" BackgroundColor="{DynamicResource Fourth}">
                 <Label
                     Margin="-10"
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Text="2"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="Center" />
             </Frame>
             <Frame
                 Grid.Row="3"
                 Grid.Column="1"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetPrFach2" />
                 </Frame.GestureRecognizers>
@@ -190,41 +190,41 @@
                     FontSize="18"
                     HorizontalOptions="StartAndExpand"
                     Text="{Binding P2.Name, FallbackValue='Leistungskurs'}"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="CenterAndExpand" />
             </Frame>
             <Frame
                 Grid.Row="3"
                 Grid.Column="2"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteSchriftlich2" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P2.NoteSchriftlich}" TextColor="{StaticResource SecondaryB}" />
+                <Label Text="{Binding P2.NoteSchriftlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="3"
                 Grid.Column="3"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich2" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P2.NoteMündlich}" TextColor="{StaticResource SecondaryB}" />
+                <Label Text="{Binding P2.NoteMündlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
             <!--  P3  -->
-            <Frame Grid.Row="4" BackgroundColor="{StaticResource FourthB}">
+            <Frame Grid.Row="4" BackgroundColor="{DynamicResource Fourth}">
                 <Label
                     Margin="-10"
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Text="3"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="Center" />
             </Frame>
             <Frame
                 Grid.Row="4"
                 Grid.Column="1"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetPrFach3" />
                 </Frame.GestureRecognizers>
@@ -233,41 +233,41 @@
                     FontSize="18"
                     HorizontalOptions="StartAndExpand"
                     Text="{Binding P3.Name, FallbackValue='Grundkurs'}"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="CenterAndExpand" />
             </Frame>
             <Frame
                 Grid.Row="4"
                 Grid.Column="2"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteSchriftlich3" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P3.NoteSchriftlich}" TextColor="{StaticResource SecondaryB}" />
+                <Label Text="{Binding P3.NoteSchriftlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="4"
                 Grid.Column="3"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich3" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P3.NoteMündlich}" TextColor="{StaticResource SecondaryB}" />
+                <Label Text="{Binding P3.NoteMündlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
             <!--  P4  -->
-            <Frame Grid.Row="5" BackgroundColor="{StaticResource FourthB}">
+            <Frame Grid.Row="5" BackgroundColor="{DynamicResource Fourth}">
                 <Label
                     Margin="-10"
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Text="4"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="Center" />
             </Frame>
             <Frame
                 Grid.Row="5"
                 Grid.Column="1"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetPrFach4" />
                 </Frame.GestureRecognizers>
@@ -276,32 +276,32 @@
                     FontSize="18"
                     HorizontalOptions="StartAndExpand"
                     Text="{Binding P4.Name, FallbackValue='Grundkurs'}"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="CenterAndExpand" />
             </Frame>
             <Frame
                 Grid.Row="5"
                 Grid.Column="3"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich4" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P4.NoteMündlich}" TextColor="{StaticResource SecondaryB}" />
+                <Label Text="{Binding P4.NoteMündlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
             <!--  P5  -->
-            <Frame Grid.Row="6" BackgroundColor="{StaticResource FourthB}">
+            <Frame Grid.Row="6" BackgroundColor="{DynamicResource Fourth}">
                 <Label
                     Margin="-10"
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Text="5"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="Center" />
             </Frame>
             <Frame
                 Grid.Row="6"
                 Grid.Column="1"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetPrFach5" />
                 </Frame.GestureRecognizers>
@@ -310,17 +310,17 @@
                     FontSize="18"
                     HorizontalOptions="StartAndExpand"
                     Text="{Binding P5.Name, FallbackValue='Grundkurs'}"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="CenterAndExpand" />
             </Frame>
             <Frame
                 Grid.Row="6"
                 Grid.Column="3"
-                BackgroundColor="{StaticResource FourthB}">
+                BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich5" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P5.NoteMündlich}" TextColor="{StaticResource SecondaryB}" />
+                <Label Text="{Binding P5.NoteMündlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
 
         </Grid>

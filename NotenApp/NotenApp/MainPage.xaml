@@ -16,7 +16,7 @@
         <ViewModels:MainPageViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid BackgroundColor="{StaticResource PrimaryB}">
+        <Grid BackgroundColor="{DynamicResource Primary}">
 
             <!--  Griddefinition  -->
 
@@ -48,7 +48,7 @@
                         FontSize="30"
                         HorizontalTextAlignment="Center"
                         Text="Ziele"
-                        TextColor="{StaticResource FithB}" />
+                        TextColor="{DynamicResource Fith}" />
                 </CollectionView.Header>
                 <CollectionView.EmptyView>
                     <ContentView>
@@ -60,13 +60,13 @@
                                 HorizontalOptions="Fill"
                                 HorizontalTextAlignment="Center"
                                 Text="Aktuell hast du dir noch keine Ziele gesetzt."
-                                TextColor="{StaticResource FithB}" />
+                                TextColor="{DynamicResource Fith}" />
                             <Label
                                 FontSize="13"
                                 HorizontalOptions="Fill"
                                 HorizontalTextAlignment="Center"
                                 Text="Füge ein Ziel auf der Detailseite eines Faches hinzu!"
-                                TextColor="{StaticResource FithB}" />
+                                TextColor="{DynamicResource Fith}" />
                         </StackLayout>
                     </ContentView>
                 </CollectionView.EmptyView>
@@ -78,7 +78,7 @@
                     <DataTemplate>
                         <Frame
                             Padding="20"
-                            BackgroundColor="{StaticResource ThirdB}"
+                            BackgroundColor="{DynamicResource Third}"
                             CornerRadius="15"
                             HeightRequest="20">
                             <Label
@@ -89,7 +89,7 @@
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="Um " TextColor="Black" />
-                                        <Span Text="{Binding ZielNote}" TextColor="{StaticResource SecondaryB}" />
+                                        <Span Text="{Binding ZielNote}" TextColor="{DynamicResource Secondary}" />
                                         <Span Text="{Binding Span1}" TextColor="Black" />
                                         <Span Text="{Binding FachName}" TextColor="Black" />
                                         <Span Text=" Halbjahr " TextColor="Black" />
@@ -115,7 +115,7 @@
                 Grid.ColumnSpan="2"
                 Margin="20,20,20,10"
                 Padding="-5"
-                BackgroundColor="{StaticResource FourthB}"
+                BackgroundColor="{DynamicResource Fourth}"
                 CornerRadius="20">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpenBlock1" />
@@ -130,7 +130,7 @@
                             TextColor="Black" />
                         <Frame
                             Margin="0,8,0,0"
-                            BackgroundColor="{StaticResource SecondaryB}"
+                            BackgroundColor="{DynamicResource Secondary}"
                             CornerRadius="20">
                             <Label
                                 Margin="-15"
@@ -144,7 +144,7 @@
                     <StackLayout Orientation="Horizontal" WidthRequest="280">
                         <Frame
                             Margin="0"
-                            BackgroundColor="{StaticResource ThirdB}"
+                            BackgroundColor="{DynamicResource Third}"
                             CornerRadius="15"
                             HeightRequest="18"
                             WidthRequest="18">
@@ -161,7 +161,7 @@
                         </Frame>
                         <Frame
                             Margin="10,0,0,0"
-                            BackgroundColor="{StaticResource ThirdB}"
+                            BackgroundColor="{DynamicResource Third}"
                             CornerRadius="15"
                             HeightRequest="18"
                             WidthRequest="18">
@@ -178,7 +178,7 @@
                         </Frame>
                         <Frame
                             Margin="10,0,0,0"
-                            BackgroundColor="{StaticResource ThirdB}"
+                            BackgroundColor="{DynamicResource Third}"
                             CornerRadius="15"
                             HeightRequest="18"
                             WidthRequest="18">
@@ -195,7 +195,7 @@
                         </Frame>
                         <Frame
                             Margin="10,0,0,0"
-                            BackgroundColor="{StaticResource ThirdB}"
+                            BackgroundColor="{DynamicResource Third}"
                             CornerRadius="15"
                             HeightRequest="18"
                             WidthRequest="18">
@@ -218,7 +218,7 @@
                 Grid.Row="2"
                 Margin="20,0,0,10"
                 Padding="0"
-                BackgroundColor="{StaticResource FourthB}"
+                BackgroundColor="{DynamicResource Fourth}"
                 CornerRadius="20">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpenBlock2" />
@@ -233,7 +233,7 @@
                             TextColor="Black" />
                         <Frame
                             Margin="0,8,0,0"
-                            BackgroundColor="{StaticResource SecondaryB}"
+                            BackgroundColor="{DynamicResource Secondary}"
                             CornerRadius="20">
                             <Label
                                 Margin="-15"
@@ -258,7 +258,7 @@
                 Grid.Column="1"
                 Margin="5,0,20,10"
                 Padding="0"
-                BackgroundColor="{StaticResource FourthB}"
+                BackgroundColor="{DynamicResource Fourth}"
                 CornerRadius="20">
                 <StackLayout HorizontalOptions="CenterAndExpand">
                     <Label

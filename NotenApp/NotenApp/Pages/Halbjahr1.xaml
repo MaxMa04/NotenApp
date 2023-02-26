@@ -10,7 +10,7 @@
         <ViewModels:HalbjahrViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid BackgroundColor="{StaticResource PrimaryB}">
+        <Grid BackgroundColor="{DynamicResource Primary}">
 
             <!--  Griddefinition  -->
 
@@ -27,7 +27,7 @@
                 <Frame
                     Margin="20"
                     Padding="0"
-                    BackgroundColor="{StaticResource SecondaryB}"
+                    BackgroundColor="{DynamicResource Secondary}"
                     CornerRadius="70"
                     HeightRequest="140"
                     HorizontalOptions="Center"
@@ -56,7 +56,7 @@
                         VerticalTextAlignment="Center" />
                     <ImageButton
                         Margin="10"
-                        BackgroundColor="{StaticResource FourthB}"
+                        BackgroundColor="{DynamicResource Fourth}"
                         Clicked="FachHinzufuegen"
                         CornerRadius="20"
                         HeightRequest="40"
@@ -85,7 +85,7 @@
                             <SwipeView.RightItems>
                                 <SwipeItems>
                                     <SwipeItem
-                                        BackgroundColor="Green"
+                                        BackgroundColor="{DynamicResource Secondary}"
                                         Invoked="SwipeItem_Invoked_1"
                                         Text="Details" />
                                     <SwipeItem

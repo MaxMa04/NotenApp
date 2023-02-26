@@ -5,14 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="PrimaryB">#3D3D3D</Color>
-            <Color x:Key="SecondaryB">#ff82a9</Color>
-            <Color x:Key="ThirdB">#ffc0be</Color>
-            <Color x:Key="FourthB">#ffebe7</Color>
-            <Color x:Key="FithB">#FFFFFF</Color>
+            <ResourceDictionary Source="Themes/RosaTheme.xaml" />
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource SecondaryB}" />
-                <Setter Property="BarTextColor" Value="{StaticResource FithB}" />
+                <Setter Property="BarBackgroundColor" Value="{DynamicResource Secondary}" />
+                <Setter Property="BarTextColor" Value="{DynamicResource Fith}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

@@ -11,13 +11,13 @@
         <Label
             FontSize="30"
             Text="{Binding FachName}"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
     </NavigationPage.TitleView>
     <ContentPage.BindingContext>
         <ViewModels:DetailViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid BackgroundColor="{StaticResource ThirdB}">
+        <Grid BackgroundColor="{DynamicResource Third}">
 
             <!--  Griddefinition  -->
 
@@ -28,7 +28,7 @@
             <Frame
                 Margin="20"
                 Padding="0"
-                BackgroundColor="{StaticResource FourthB}"
+                BackgroundColor="{DynamicResource Fourth}"
                 CornerRadius="70"
                 HeightRequest="140"
                 HorizontalOptions="Center"
@@ -40,12 +40,12 @@
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     Text="{Binding FachDurchschnitt, TargetNullValue='-'}"
-                    TextColor="{StaticResource SecondaryB}"
+                    TextColor="{DynamicResource Secondary}"
                     VerticalOptions="Center"
                     VerticalTextAlignment="Center" />
             </Frame>
 
-            <Frame Grid.Row="1" BackgroundColor="{StaticResource PrimaryB}">
+            <Frame Grid.Row="1" BackgroundColor="{DynamicResource Primary}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1.7*" />
@@ -68,7 +68,7 @@
                             VerticalOptions="Center">
                             <switch:CustomSwitch
                                 x:Name="_switch"
-                                BackgroundColor="{StaticResource FourthB}"
+                                BackgroundColor="{DynamicResource Fourth}"
                                 CornerRadius="5"
                                 HeightRequest="40"
                                 KnobHeight="40"
@@ -112,7 +112,7 @@
                                                 HorizontalOptions="FillAndExpand"
                                                 HorizontalTextAlignment="Center"
                                                 Text="GK"
-                                                TextColor="{StaticResource SecondaryB}"
+                                                TextColor="{DynamicResource Secondary}"
                                                 VerticalOptions="FillAndExpand"
                                                 VerticalTextAlignment="Center"
                                                 WidthRequest="60" />
@@ -121,7 +121,7 @@
                                                 HorizontalOptions="FillAndExpand"
                                                 HorizontalTextAlignment="Center"
                                                 Text="LK"
-                                                TextColor="{StaticResource SecondaryB}"
+                                                TextColor="{DynamicResource Secondary}"
                                                 VerticalOptions="FillAndExpand"
                                                 VerticalTextAlignment="Center"
                                                 WidthRequest="60" />
@@ -134,15 +134,15 @@
                                 Margin="10,0,10,0"
                                 HorizontalOptions="FillAndExpand"
                                 WidthRequest="4"
-                                Color="{StaticResource SecondaryB}" />
+                                Color="{DynamicResource Secondary}" />
                             <Label
                                 FontSize="25"
                                 HorizontalOptions="Center"
                                 Text="Ziel"
-                                TextColor="{StaticResource FithB}"
+                                TextColor="{DynamicResource Fith}"
                                 VerticalOptions="Center" />
                             <Frame
-                                BackgroundColor="{StaticResource ThirdB}"
+                                BackgroundColor="{DynamicResource Third}"
                                 CornerRadius="15"
                                 HeightRequest="15"
                                 WidthRequest="15">
@@ -158,7 +158,7 @@
                                     VerticalOptions="Center" />
                             </Frame>
                         </StackLayout>
-                        <BoxView HeightRequest="4" Color="{StaticResource SecondaryB}" />
+                        <BoxView HeightRequest="4" Color="{DynamicResource Secondary}" />
                     </StackLayout>
                     <Label
                         Grid.Row="1"
@@ -167,7 +167,7 @@
                         FontSize="25"
                         HorizontalOptions="Center"
                         Text="Noten"
-                        TextColor="{StaticResource FithB}" />
+                        TextColor="{DynamicResource Fith}" />
                     <Frame
                         Grid.Row="4"
                         Grid.ColumnSpan="2"
@@ -184,7 +184,7 @@
                                     <Span
                                         FontAttributes="Bold"
                                         Text="{Binding FachEinzubringendeHalbjahre}"
-                                        TextColor="{StaticResource SecondaryB}" />
+                                        TextColor="{DynamicResource Secondary}" />
                                     <Span Text=" Halbjahr(e) einbringen!" TextColor="Black" />
                                 </FormattedString>
                             </Label.FormattedText>
@@ -207,7 +207,7 @@
                                 HorizontalOptions="Fill"
                                 HorizontalTextAlignment="Center"
                                 Text="Noch keine Klausur eingetragen."
-                                TextColor="{StaticResource FithB}" />
+                                TextColor="{DynamicResource Fith}" />
                         </CollectionView.EmptyView>
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout
@@ -218,7 +218,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local:LabelFrame FrameColor="{StaticResource SecondaryB}" FrameText="{Binding Note}" />
+                                <local:LabelFrame FrameColor="{DynamicResource Secondary}" FrameText="{Binding Note}" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -238,7 +238,7 @@
                                     HorizontalOptions="Fill"
                                     HorizontalTextAlignment="Center"
                                     Text="Noch keine Lk eingetragen."
-                                    TextColor="{StaticResource FithB}" />
+                                    TextColor="{DynamicResource Fith}" />
                             </ContentView>
                         </CollectionView.EmptyView>
                         <CollectionView.ItemsLayout>
@@ -250,7 +250,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local:LabelFrame FrameColor="{StaticResource FourthB}" FrameText="{Binding Note}" />
+                                <local:LabelFrame FrameColor="{DynamicResource Fourth}" FrameText="{Binding Note}" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -258,7 +258,7 @@
                     <Frame
                         Grid.Row="4"
                         Grid.ColumnSpan="2"
-                        BackgroundColor="{StaticResource ThirdB}"
+                        BackgroundColor="{DynamicResource Third}"
                         CornerRadius="15">
                         <Label
                             Margin="-20"
@@ -273,7 +273,7 @@
                                     <Span
                                         FontAttributes="Bold"
                                         Text="{Binding FachEinzubringendeHalbjahre}"
-                                        TextColor="{StaticResource SecondaryB}" />
+                                        TextColor="{DynamicResource Secondary}" />
                                     <Span Text=" Halbjahr(e) einbringen!" TextColor="Black" />
                                 </FormattedString>
                             </Label.FormattedText>
@@ -284,7 +284,7 @@
                         Grid.Row="5"
                         Grid.ColumnSpan="2"
                         Margin="0,0,0,-15"
-                        BackgroundColor="{StaticResource SecondaryB}"
+                        BackgroundColor="{DynamicResource Secondary}"
                         CornerRadius="25"
                         HeightRequest="15"
                         HorizontalOptions="Center"

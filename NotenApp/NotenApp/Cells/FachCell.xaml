@@ -7,7 +7,7 @@
     xmlns:models="clr-namespace:NotenApp.Models"
     Padding="5"
     x:DataType="models:HjFach"
-    BackgroundColor="{StaticResource FourthB}">
+    BackgroundColor="{DynamicResource Fourth}">
     <Grid.RowDefinitions>
         <RowDefinition Height="*" />
         <RowDefinition Height="*" />
@@ -34,14 +34,14 @@
     <Frame
         Grid.RowSpan="2"
         Grid.Column="2"
-        BackgroundColor="{StaticResource ThirdB}"
+        BackgroundColor="{DynamicResource Third}"
         CornerRadius="35">
         <Label
             Margin="-40"
             FontSize="Large"
             HorizontalOptions="CenterAndExpand"
             Text="{Binding Durchschnitt, TargetNullValue='-'}"
-            TextColor="{StaticResource FithB}"
+            TextColor="{DynamicResource Fith}"
             VerticalOptions="CenterAndExpand" />
     </Frame>
 
@@ -77,5 +77,5 @@
         Margin="0,3,0,-3"
         HeightRequest="5"
         HorizontalOptions="FillAndExpand"
-        Color="{StaticResource SecondaryB}" />
+        Color="{DynamicResource Secondary}" />
 </Grid>

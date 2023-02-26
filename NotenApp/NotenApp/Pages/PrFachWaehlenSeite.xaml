@@ -8,16 +8,20 @@
         <ViewModels:HalbjahrViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Button Clicked="Button_Clicked" Text="Kein Fach" />
+        <StackLayout BackgroundColor="{DynamicResource Primary}">
+            <Button
+                BackgroundColor="Transparent"
+                Clicked="Button_Clicked"
+                Text="Kein Fach"
+                TextColor="{DynamicResource Fith}" />
             <CollectionView
                 ItemsSource="{Binding FaecherHJ1}"
                 SelectionChanged="CollectionView_SelectionChanged"
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BackgroundColor="{StaticResource ThirdB}">
-                            <Label Text="{Binding Name}" TextColor="Black" />
+                        <Frame BackgroundColor="{DynamicResource Third}">
+                            <Label Text="{Binding Name}" TextColor="{DynamicResource Fith}" />
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

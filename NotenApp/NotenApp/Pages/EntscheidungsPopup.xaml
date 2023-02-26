@@ -7,27 +7,27 @@
     HorizontalOptions="CenterAndExpand"
     Size="370,80"
     VerticalOptions="EndAndExpand">
-    <Grid Padding="10,15" BackgroundColor="{StaticResource PrimaryB}">
+    <Grid Padding="10,15" BackgroundColor="{DynamicResource Primary}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Button
             Grid.Column="0"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="LK_Button_Clicked"
             CornerRadius="20"
             FontSize="20"
             Text="Lk"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Column="1"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Klausur_Button_Clicked"
             CornerRadius="20"
             FontSize="20"
             Text="Klausur"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
     </Grid>
 </xctViews:Popup>
 

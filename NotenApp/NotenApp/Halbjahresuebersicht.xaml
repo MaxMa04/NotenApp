@@ -6,10 +6,10 @@
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
     xmlns:local="clr-namespace:NotenApp.Pages"
     android:TabbedPage.ToolbarPlacement="Bottom"
-    BarBackgroundColor="{StaticResource PrimaryB}"
+    BarBackgroundColor="{DynamicResource Primary}"
     NavigationPage.HasNavigationBar="True"
-    SelectedTabColor="{StaticResource SecondaryB}"
-    UnselectedTabColor="{StaticResource FithB}">
+    SelectedTabColor="{DynamicResource Secondary}"
+    UnselectedTabColor="{DynamicResource Fith}">
 
 
 

@@ -8,7 +8,7 @@
     Size="370,240"
     VerticalOptions="EndAndExpand">
 
-    <Grid Padding="10" BackgroundColor="{StaticResource PrimaryB}">
+    <Grid Padding="10" BackgroundColor="{DynamicResource Primary}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -28,141 +28,141 @@
         <Button
             Grid.Row="0"
             Grid.Column="2"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="0"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="1"
             Grid.Column="0"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="1"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="1"
             Grid.Column="1"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="2"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="1"
             Grid.Column="2"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="3"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="1"
             Grid.Column="3"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="4"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="1"
             Grid.Column="4"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="5"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="2"
             Grid.Column="0"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="6"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="2"
             Grid.Column="1"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="7"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="2"
             Grid.Column="2"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="8"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="2"
             Grid.Column="3"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="9"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="2"
             Grid.Column="4"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="10"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="3"
             Grid.Column="0"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="11"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="3"
             Grid.Column="1"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="12"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="3"
             Grid.Column="2"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="13"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="3"
             Grid.Column="3"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="14"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="3"
             Grid.Column="4"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked1"
             CornerRadius="15"
             Text="15"
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
         <Button
             x:Name="btn"
             Grid.Row="4"
             Grid.Column="2"
             Margin="-30,0"
-            BackgroundColor="{StaticResource SecondaryB}"
+            BackgroundColor="{DynamicResource Secondary}"
             Clicked="Button_Clicked"
             CornerRadius="15"
             Text=""
-            TextColor="{StaticResource FithB}" />
+            TextColor="{DynamicResource Fith}" />
     </Grid>
 
 </xctViews:Popup>

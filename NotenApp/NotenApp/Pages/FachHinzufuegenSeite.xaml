@@ -1,22 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
-             x:Class="NotenApp.Pages.FachHinzufuegenSeite">
+<ContentPage
+    x:Class="NotenApp.Pages.FachHinzufuegenSeite"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels">
     <ContentPage.BindingContext>
-        <ViewModels:FachHinzufuegenViewModel/>
+        <ViewModels:FachHinzufuegenViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <ListView x:Name="myListView"  ItemSelected="myListView_ItemSelected" ItemsSource="{Binding Faecher}" RowHeight="100">
-            <ListView.ItemTemplate >
-                <DataTemplate >
-                    <ViewCell >
+        <ListView
+            x:Name="myListView"
+            BackgroundColor="{DynamicResource Primary}"
+            ItemSelected="myListView_ItemSelected"
+            ItemsSource="{Binding Faecher}"
+            RowHeight="70">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
                         <StackLayout>
 
-                            <Frame BackgroundColor="#ABBF4E" CornerRadius="10" HeightRequest="20" Margin="5">
-                                <Label Text="{Binding Name}"/>
+                            <Frame
+                                Margin="2"
+                                BackgroundColor="{DynamicResource Third}"
+                                CornerRadius="10"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Label
+                                    Margin="-5"
+                                    FontAttributes="Bold"
+                                    FontSize="20"
+                                    Text="{Binding Name}"
+                                    TextColor="{DynamicResource Fith}" />
                             </Frame>
-                            
+
                         </StackLayout>
                     </ViewCell>
 

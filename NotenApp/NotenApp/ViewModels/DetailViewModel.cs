@@ -16,6 +16,8 @@ namespace NotenApp.ViewModels
     {
         public ObservableRangeCollection<HJNote> LKNoten { get; set; }
         public ObservableRangeCollection<HJNote> KlausurNoten { get; set; }
+        public CustomSwitch Switch { get; set; }
+        public HjFach Fach { get; set; }
 
 
         private string ziel;

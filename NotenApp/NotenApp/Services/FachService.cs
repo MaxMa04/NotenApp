@@ -21,10 +21,10 @@ namespace NotenApp.Services
         static SQLiteAsyncConnection db;
         static async Task Init()
         {
-            //if(db!= null)
-            //{
-            //    return;
-            //}
+            if(db!= null)
+            {
+                return;
+            }
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dateeeen");
 
             db = new SQLiteAsyncConnection(databasePath);
@@ -103,17 +103,8 @@ namespace NotenApp.Services
                 await EntscheideFremdsprache();
             }
 
-            List<HjFach> facher = await GetFaecher();
-            int einghj = 0;
-            foreach (var item in facher)
-            {
-                if(item.Name == fach.Name)
-                {
-                    einghj = item.EingebrachteHalbjahre;
-                    
-                }
-            }
-            return einghj;
+            HjFach fachh = await db.Table<HjFach>().Where(f => f.Id == fach.Id).FirstOrDefaultAsync();
+            return fach.EingebrachteHalbjahre;
             
         }
         public static async Task<List<HjFach>> GetFaecher()
@@ -125,16 +116,13 @@ namespace NotenApp.Services
         public static async Task<List<HJNote>> GetFachNoten(HjFach fach, NotenTyp notenTyp)
         {
             await Init();
-            var query = db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)notenTyp);
-            List<HJNote> Noten = await query.ToListAsync();
-            
+            List<HJNote> Noten = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)notenTyp).ToListAsync();
             return Noten;
         }
         public static async Task<List<HJNote>> GetFachNotenHjView(HjFach fach, NotenTyp notenTyp)
         {
             await Init();
-            var query = db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)notenTyp);
-            List<HJNote> Noten = await query.ToListAsync();
+            List<HJNote> Noten = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)notenTyp).ToListAsync();
             List<HJNote> retNoten = new List<HJNote>(); 
             if(Noten.Count > 6)
             {
@@ -191,9 +179,7 @@ namespace NotenApp.Services
         public static async Task<int> GetLKCount()
         {
             await Init();
-            var query = db.Table<HjFach>().Where(f => f.IsLK);
-            int count = await query.CountAsync();
-
+            int count = await db.Table<HjFach>().Where(f => f.IsLK).CountAsync();
             return count/4;            
         } 
         public static async Task RemoveSingleNote(HJNote note)
@@ -201,17 +187,10 @@ namespace NotenApp.Services
             await Init();
             
             await db.DeleteAsync<HJNote>(note.Id);
-            var Gesamtfacher = await db.Table<HjFach>().ToListAsync();
-            foreach (var fach in Gesamtfacher)
-            {
-                if(fach.Id == note.FachId)
-                {
-                    fach.Durchschnitt = await GetFachDurchschnitt(fach);
-                    await UpdateZielErforderlicheNoten(fach);
-                    await db.UpdateAsync(fach);
-                }
-            }
-            
+            HjFach fach = await db.Table<HjFach>().Where(f => f.Id == note.FachId).FirstOrDefaultAsync();
+            fach.Durchschnitt = await GetFachDurchschnitt(fach);
+            await UpdateZielErforderlicheNoten(fach);
+            await db.UpdateAsync(fach);
         }
         public static async Task RemoveFach(HjFach fach)
         {
@@ -240,117 +219,102 @@ namespace NotenApp.Services
         public static async Task RemoveAllNoten(HjFach fach)
         {
             await Init();
-            List<HJNote> noten = await db.Table<HJNote>().ToListAsync();
+            List<HJNote> noten = await db.Table<HJNote>().Where(n => n.FachId == fach.Id).ToListAsync();
             foreach (var note in noten)
             {
-                if (note.Id == fach.Id)
-                {
-                    await db.DeleteAsync<HJNote>(note.Id);
-                }
+                await db.DeleteAsync<HJNote>(note.Id); 
             }
         }
-        public static async Task<float?> GetFachDurchschnitt(HjFach fach)
+        public static async Task<float?> GetFachKlausurDurchschnitt(HjFach fach)
         {
-            float? durchschnitt;
-            float? durchschnittLk;
-            float? countLk = 0;
-            float? durchschnittKlausur;
-            float? countKlausur = 0;
-            List<float?> LKNoten = new List<float?>();
-            List<float?> KlausurNoten = new List<float?>();
-            bool hasLk = false;
-            bool hasKlausur = false;
-            List<HJNote> gesamtNoten = await db.Table<HJNote>().ToListAsync();
-            foreach (var item in gesamtNoten)
-            {
-                switch (item.Typ)
-                {
-                    case 1:
-                        if(item.FachId == fach.Id)
-                        {
-                            LKNoten.Add(item.Note);
-                        }
-                        break;
-                    case 2:
-                        if (item.FachId == fach.Id)
-                        {
-                            KlausurNoten.Add(item.Note);
-                        }
-                        break;
-                }
-   
-            }
-            for (int i = 0; i < LKNoten.Count; i++)
-            {
-                if (LKNoten[i] != null)
-                {
-                    countLk += LKNoten[i];
-                    hasLk = true;
-                }
-            }
-            durchschnittLk = countLk / LKNoten.Count;
-            for (int i = 0; i < KlausurNoten.Count; i++)
-            {
-                if (KlausurNoten[i] != null)
-                {
-                    countKlausur += KlausurNoten[i];
-                    hasKlausur = true;
-                }
-            }
-            durchschnittKlausur = countKlausur / KlausurNoten.Count;
-            
-            if(hasKlausur == false && hasLk == false)
+            List<HJNote> klNoten = await db.Table<HJNote>().Where(n => n.Typ == (int)NotenTyp.Klausur && n.FachId == fach.Id).ToListAsync();
+            float? sumKl = 0;
+            float? duKL = 0;
+            if(klNoten.Count == 0)
             {
                 return null;
             }
-            if(hasKlausur == false)
+            else
+            {
+                foreach (var note in klNoten)
+                {
+                    sumKl += note.Note;
+                }
+                duKL = sumKl / klNoten.Count;
+                return duKL;
+            }
+        } 
+        public static async Task<float?> GetFachLKDurchschnitt(HjFach fach)
+        {
+            List<HJNote> lkNoten = await db.Table<HJNote>().Where(n => n.Typ == (int)NotenTyp.LK && n.FachId == fach.Id).ToListAsync();
+            float? sumLK = 0;
+            float? duLK = 0;
+            if (lkNoten.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                foreach (var note in lkNoten)
+                {
+                    sumLK += note.Note;
+                }
+                duLK = sumLK / lkNoten.Count;
+                return duLK;
+            }
+        }
+
+        public static async Task<float?> GetFachDurchschnitt(HjFach fach)
+        {
+            float? durchschnittLk = await GetFachLKDurchschnitt(fach);
+            
+            float? durchschnittKlausur = await GetFachKlausurDurchschnitt(fach);
+
+            
+            if(durchschnittKlausur == null && durchschnittLk == null)
+            {
+                return null;
+            }
+            if(durchschnittKlausur == null)
             {
                 return (float?)Math.Round((decimal)durchschnittLk,1);
             }
-            else if(hasLk == false)
+            else if(durchschnittLk == null)
             {
                 return durchschnittKlausur;
             }
             else
             {
-                var y = durchschnittLk + durchschnittKlausur;
-                durchschnitt = y / 2;
+                float? durchschnitt = (durchschnittLk + durchschnittKlausur) / 2;
                 return (float?)Math.Round((decimal)durchschnitt,1);
             }
         }
         public static async Task<float?> GetHJGesamtDurchschnitt(int halbjahr)
         {
             await Init();
-            var Gesamtfacher = await db.Table<HjFach>().ToListAsync();
+            List<HjFach> faecher = await db.Table<HjFach>().Where(f => f.Durchschnitt != null && f.Halbjahr == halbjahr).ToListAsync();
             float gesamtDurchschnitt;
             float count = 0;
-            float count2 = 0;
                             
-            foreach (var item in Gesamtfacher)
+            foreach (var fach in faecher)
             {
-                if(item.Halbjahr == halbjahr && item.Durchschnitt != null)
-                {
-                    count += (float)item.Durchschnitt;
-                    count2++;
-                }
-                
+                count += (float)fach.Durchschnitt;
             }
-            if(count2 == 0)
+            if(faecher.Count == 0)
             {
                 return null;
             }
             else
             {
-                gesamtDurchschnitt = count / count2;
+                gesamtDurchschnitt = count / faecher.Count;
                 return (float)Math.Round(gesamtDurchschnitt, 1);
             }
         }
         public static async Task<HjFach> GetFach(HjFach fach)
         {
             await Init();
-            var query = db.Table<HjFach>().Where(f => f.Id == fach.Id);
-            HjFach fachd = await query.FirstOrDefaultAsync();
-            return fachd;
+            HjFach fachd = await db.Table<HjFach>().Where(f => f.Id == fach.Id).FirstOrDefaultAsync();
+            return fachd;   
         }
         //
         //

@@ -28,10 +28,11 @@ namespace NotenApp.Pages
            
             
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            Task.Run( async () => { await _model.Refresh(1); });
+            await _model.Refresh(1).ConfigureAwait(false);
+            await _model.ChangeHjDurchschnitt(1);
 
         }
 

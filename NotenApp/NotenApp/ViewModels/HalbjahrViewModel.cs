@@ -83,7 +83,7 @@ namespace NotenApp.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public async Task AddNote(HjFach fach, int note, NotenTyp notenTyp)
+        public async Task AddNote(HjFach fach, int note, NotenTyp notenTyp) 
         {
             await FachService.AddNote(fach, note, notenTyp);
 
@@ -199,7 +199,7 @@ namespace NotenApp.ViewModels
                     }
                     facher1 = Controller.SortList(facher1);
                     FaecherHJ1.AddRange(facher1);
-                    await ChangeHjDurchschnitt(1);
+                    
                     break;
                 case 2:
                     FaecherHJ2.Clear();
@@ -210,7 +210,7 @@ namespace NotenApp.ViewModels
                     }
                     facher2 = Controller.SortList(facher2);
                     FaecherHJ2.AddRange(facher2);
-                    await ChangeHjDurchschnitt(2);
+                    
 
                     break;
                 case 3:
@@ -222,12 +222,12 @@ namespace NotenApp.ViewModels
                     }
                     facher3 = Controller.SortList(facher3);
                     FaecherHJ3.AddRange(facher3);
-                    await ChangeHjDurchschnitt(3);
+                    
                     break;
                 case 4:
                     FaecherHJ4.Clear();
                     var facher4 = await FachService.GetFaecher(4);
-                    
+                     
 
                     foreach (var fach in facher4)
                     {
@@ -235,7 +235,7 @@ namespace NotenApp.ViewModels
                     }
                     facher4 = Controller.SortList(facher4);
                     FaecherHJ4.AddRange(facher4);
-                    await ChangeHjDurchschnitt(4);
+                   
                     break;
             }
         }

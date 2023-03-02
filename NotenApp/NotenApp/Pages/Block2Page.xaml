@@ -101,6 +101,8 @@
                     TextColor="{DynamicResource Secondary}"
                     VerticalOptions="Center" />
             </Frame>
+
+
             <Frame
                 Grid.Row="1"
                 Grid.Column="2"
@@ -108,11 +110,13 @@
                 <lottie:AnimationView
                     Margin="-30"
                     Animation="schriftlich.json"
+                    AnimationSource="AssetOrBundle"
                     AutoPlay="True"
                     HorizontalOptions="FillAndExpand"
                     RepeatMode="Infinite"
                     VerticalOptions="FillAndExpand" />
             </Frame>
+
             <Frame
                 Grid.Row="1"
                 Grid.Column="3"
@@ -120,11 +124,14 @@
                 <lottie:AnimationView
                     Margin="-30"
                     Animation="muendlich.json"
+                    AnimationSource="AssetOrBundle"
                     AutoPlay="True"
                     HorizontalOptions="FillAndExpand"
                     RepeatMode="Infinite"
                     VerticalOptions="FillAndExpand" />
             </Frame>
+
+
             <!--  P1  -->
             <Frame Grid.Row="2" BackgroundColor="{DynamicResource Fourth}">
                 <Label

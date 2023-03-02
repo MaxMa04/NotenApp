@@ -27,17 +27,13 @@ namespace NotenApp.Pages
             InitializeComponent();
             this.fach = fach;
             model = BindingContext as DetailViewModel;
-            
-        }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
             model.FachName = fach.Name;
             Task.Run(async () => { await model.DetermineSwitchStartBehavior(fach, _switch); });
-            Task.Run(async () => { await model.InitNoten(fach); });           
+            Task.Run(async () => { await model.InitNoten(fach); });
             Task.Run(async () => { await model.InitEinzHj(fach); });
             Task.Run(async () => { await model.InitFachDurchschnitt(fach); });
             Task.Run(async () => { await model.InitZiel(fach); });
+            
 
         }
 

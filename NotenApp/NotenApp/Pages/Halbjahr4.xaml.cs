@@ -22,10 +22,11 @@ namespace NotenApp.Pages
             InitializeComponent();
             _model = BindingContext as HalbjahrViewModel;
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            Task.Run(async () => { await _model.Refresh(4); });
+            await _model.Refresh(4);
+            await _model.ChangeHjDurchschnitt(4);
 
         }
 

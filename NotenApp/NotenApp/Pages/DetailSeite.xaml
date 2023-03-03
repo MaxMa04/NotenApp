@@ -3,10 +3,13 @@
     x:Class="NotenApp.Pages.DetailSeite"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Models="clr-namespace:NotenApp.Models"
     xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
     xmlns:local="clr-namespace:NotenApp.Controls"
     xmlns:switch="clr-namespace:Switch;assembly=Switch"
-    x:Name="detailseite">
+    x:Name="detailseite"
+    x:DataType="ViewModels:DetailViewModel"
+    BackgroundColor="{DynamicResource Third}">
     <NavigationPage.TitleView>
         <Label
             FontSize="30"
@@ -17,7 +20,10 @@
         <ViewModels:DetailViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid BackgroundColor="{DynamicResource Third}">
+        <Grid
+            x:Name="grd"
+            BackgroundColor="Transparent"
+            TranslationX="500">
 
             <!--  Griddefinition  -->
 
@@ -217,7 +223,7 @@
                                 VerticalItemSpacing="5" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
+                            <DataTemplate x:DataType="Models:HJNote">
                                 <local:LabelFrame FrameColor="{DynamicResource Secondary}" FrameText="{Binding Note}" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -249,7 +255,7 @@
                                 VerticalItemSpacing="5" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
+                            <DataTemplate x:DataType="Models:HJNote">
                                 <local:LabelFrame FrameColor="{DynamicResource Fourth}" FrameText="{Binding Note}" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

@@ -1,4 +1,5 @@
-﻿using NotenApp.Services;
+﻿
+using NotenApp.Services;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;

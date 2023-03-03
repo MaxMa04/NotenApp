@@ -131,10 +131,13 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\details.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\plus.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionNotenAppAndroidHideInfoBar="True" XamarinHotReloadGenericExceptionInfoBarNotenAppAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadGenericExceptionInfoBarNotenAppAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionNotenAppAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

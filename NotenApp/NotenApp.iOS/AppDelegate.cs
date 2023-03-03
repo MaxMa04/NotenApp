@@ -27,6 +27,7 @@ namespace NotenApp.iOS
             
 
             global::Xamarin.Forms.Forms.Init();
+
             LoadApplication(new App());
             CustomSwitchRenderer.Init();
             return base.FinishedLaunching(app, options);

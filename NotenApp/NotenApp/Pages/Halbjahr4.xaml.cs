@@ -16,21 +16,18 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Halbjahr4 : ContentPage
     {
-        HalbjahrViewModel _model;
+
         public Halbjahr4()
         {
             InitializeComponent();
-            _model = BindingContext as HalbjahrViewModel;
+            BindingContext = HalbjahrViewModel.Instance;
         }
-        protected async override void OnAppearing()
+
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            await _model.Refresh(4);
-            await _model.ChangeHjDurchschnitt(4);
-
+            grd.TranslateTo(0, 0, 300, Easing.SinInOut);
         }
-
-
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var fach = e.CurrentSelection.FirstOrDefault() as HjFach;
@@ -49,7 +46,7 @@ namespace NotenApp.Pages
 
             if (notenTyp != null && note != null)
             {
-                await _model.AddNote(fach, (int)note, (NotenTyp)notenTyp);
+                await HalbjahrViewModel.Instance.AddNote(fach, (int)note, (NotenTyp)notenTyp);
             }
 
             cv.SelectedItem = null;

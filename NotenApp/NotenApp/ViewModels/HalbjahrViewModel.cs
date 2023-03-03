@@ -14,22 +14,14 @@ namespace NotenApp.ViewModels
 {
     public class HalbjahrViewModel : INotifyPropertyChanged
     {
+        private static HalbjahrViewModel instance = new HalbjahrViewModel();
+        public static HalbjahrViewModel Instance { get { return instance; } }
         public ObservableRangeCollection<HjFach> FaecherHJ1{ get; set; }
         public ObservableRangeCollection<HjFach> FaecherHJ2 { get; set; }
         public ObservableRangeCollection<HjFach> FaecherHJ3 { get; set; }
         public ObservableRangeCollection<HjFach> FaecherHJ4 { get; set; }
         public AsyncCommand<HjFach> RemoveCommand { get; }
         public AsyncCommand<int> RefreshCommand { get; }
-        private float? bitte;
-        public float? Bitte
-        {
-            get => bitte;
-            set
-            {
-                bitte = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Bitte)));
-            }
-        }
         private float? gesamtDurchschnittHJ1;
         public float? GesamtDurchschnittHJ1
         {
@@ -171,18 +163,11 @@ namespace NotenApp.ViewModels
         }
         public async Task GetNoten(HjFach fach)
         {
-            await Task.Run (async () => { 
-                var lkn = await FachService.GetFachNotenHjView(fach, NotenTyp.LK);
-                fach.LKNoten.AddRange(lkn);
-            });
-            await Task.Run(async () => {
-                var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
+            var lkn = await FachService.GetFachNotenHjView(fach, NotenTyp.LK);
+            fach.LKNoten.AddRange(lkn);         
+            var kln = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
+            fach.KlausurNoten.AddRange(kln);
 
-                fach.KlausurNoten.AddRange(kln);
-            });
-       
-            
-            
         }
         public async Task Refresh(int halbjahr)
         {

@@ -1,4 +1,5 @@
-﻿using MvvmHelpers;
+﻿
+using MvvmHelpers;
 using NotenApp.Logic;
 using NotenApp.Models;
 using NotenApp.Services;
@@ -18,24 +19,26 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Halbjahr1 : ContentPage
     {
-        HalbjahrViewModel _model;
- 
+        
+
         public Halbjahr1()
         {
-            
             InitializeComponent();
-            _model = BindingContext as HalbjahrViewModel;
-           
+            BindingContext = HalbjahrViewModel.Instance;
+        }
+
+        protected override void OnAppearing()
+        {
+            
+                
+            grd.TranslateTo(0, 0, 300, Easing.SinInOut);
+            
+            
+            base.OnAppearing();
+            
+            
             
         }
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-            await _model.Refresh(1).ConfigureAwait(false);
-            await _model.ChangeHjDurchschnitt(1);
-
-        }
-
 
         private async void FachHinzufuegen(object sender, EventArgs e)
         {
@@ -61,7 +64,7 @@ namespace NotenApp.Pages
             
             if (notenTyp != null && note != null)
             {
-                await _model.AddNote(fach, (int)note, (NotenTyp)notenTyp);
+                await HalbjahrViewModel.Instance.AddNote(fach, (int)note, (NotenTyp)notenTyp);
             }
 
             cv.SelectedItem = null;
@@ -76,5 +79,7 @@ namespace NotenApp.Pages
             var selectedItem = swipeItem.BindingContext as HjFach;
             await Navigation.PushAsync(new DetailSeite(selectedItem));
         }
+
+
     }
 }

@@ -16,22 +16,21 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Halbjahr2 : ContentPage
     {
-        HalbjahrViewModel _model;
+  
         public Halbjahr2()
         {
 
             InitializeComponent();
-            _model = BindingContext as HalbjahrViewModel;
+            BindingContext = HalbjahrViewModel.Instance;
+          
             
         }
-        protected async override void OnAppearing()
+
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            await _model.Refresh(2);
-            await _model.ChangeHjDurchschnitt(2);
+            grd.TranslateTo(0, 0, 300, Easing.SinInOut);
         }
-
-
 
 
         private async void SwipeItem_Invoked_1(object sender, EventArgs e)
@@ -59,7 +58,7 @@ namespace NotenApp.Pages
 
             if (notenTyp != null && note != null)
             {
-                await _model.AddNote(fach, (int)note, (NotenTyp)notenTyp);
+                await HalbjahrViewModel.Instance.AddNote(fach, (int)note, (NotenTyp)notenTyp);
             }
 
             cv.SelectedItem = null;

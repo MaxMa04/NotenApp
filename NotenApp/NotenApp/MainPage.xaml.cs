@@ -15,7 +15,6 @@ namespace NotenApp
     public partial class MainPage : ContentPage
     {
         MainPageViewModel model;
-        public Halbjahr1 hj1;
         DetailSeite detailSeite;
         
 
@@ -24,14 +23,26 @@ namespace NotenApp
         {
             InitializeComponent();
             model = BindingContext as MainPageViewModel;
-            Task.Run(() => hj1 = new Halbjahr1());
+            
             
             Task.Run(() => 
             {
                 HjFach fach = new HjFach();
                 detailSeite = new DetailSeite(fach);
-            }); 
-            
+
+            });
+
+            Task.Run(async () =>
+            {
+                await HalbjahrViewModel.Instance.Refresh(1);
+                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(1);
+                await HalbjahrViewModel.Instance.Refresh(2);
+                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(2);
+                await HalbjahrViewModel.Instance.Refresh(3);
+                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(3);
+                await HalbjahrViewModel.Instance.Refresh(4);
+                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(4);
+            });
         }
         protected override void OnAppearing()
         {
@@ -60,7 +71,7 @@ namespace NotenApp
 
         private async void Tapped1(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(hj1);
+            await Navigation.PushAsync(new Halbjahr1());
         }
         private async void Tapped2(object sender, System.EventArgs e)
         {

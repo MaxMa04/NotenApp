@@ -91,6 +91,8 @@ namespace NotenApp.ViewModels
             LKNoten.Clear();
             var lKNoten = await FachService.GetFachNoten(fach, NotenTyp.LK);
             LKNoten.AddRange(lKNoten);
+            await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(fach.Halbjahr);
+            await HalbjahrViewModel.Instance.Refresh(fach.Halbjahr);
 
 
         }

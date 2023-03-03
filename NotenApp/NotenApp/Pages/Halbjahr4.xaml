@@ -3,19 +3,27 @@
     x:Class="NotenApp.Pages.Halbjahr4"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
     xmlns:cells="clr-namespace:NotenApp.Cells"
-    x:Name="hj4">
-    <ContentPage.BindingContext>
-        <ViewModels:HalbjahrViewModel />
-    </ContentPage.BindingContext>
+    xmlns:local="clr-namespace:NotenApp.ViewModels"
+    x:Name="hj4"
+    x:DataType="local:HalbjahrViewModel"
+    BackgroundColor="{DynamicResource Primary}">
+    <NavigationPage.TitleView>
+        <Label
+            FontSize="28"
+            Text="Halbjahr 4"
+            TextColor="{DynamicResource Fith}" />
+    </NavigationPage.TitleView>
     <ContentPage.Content>
-        <Grid BackgroundColor="{DynamicResource Primary}">
+        <Grid
+            x:Name="grd"
+            BackgroundColor="Transparent"
+            TranslationY="500">
 
             <!--  Griddefinition  -->
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="250" />
+                <RowDefinition Height="210" />
                 <RowDefinition Height="*" />
 
 
@@ -23,42 +31,26 @@
             </Grid.RowDefinitions>
 
             <!--  aktueller Schnitt  -->
-            <StackLayout Grid.Row="0">
-                <Frame
-                    Margin="20"
-                    Padding="0"
-                    BackgroundColor="{DynamicResource Secondary}"
-                    CornerRadius="70"
-                    HeightRequest="140"
+
+            <Frame
+                Grid.Row="0"
+                Margin="20"
+                Padding="0"
+                BackgroundColor="{DynamicResource Secondary}"
+                CornerRadius="70"
+                HeightRequest="140"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="140">
+                <Label
+                    FontSize="50"
                     HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding GesamtDurchschnittHJ4, TargetNullValue='-'}"
+                    TextColor="White"
                     VerticalOptions="Center"
-                    WidthRequest="140">
-                    <Label
-                        FontSize="50"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"
-                        Text="{Binding GesamtDurchschnittHJ4, TargetNullValue='-'}"
-                        TextColor="White"
-                        VerticalOptions="Center"
-                        VerticalTextAlignment="Center" />
-                </Frame>
-                <StackLayout
-                    HorizontalOptions="Center"
-                    Orientation="Horizontal"
-                    VerticalOptions="Center">
-                    <Label
-                        FontSize="30"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"
-                        Text="Halbjahr 4"
-                        TextColor="{DynamicResource Fith}"
-                        VerticalOptions="Center"
-                        VerticalTextAlignment="Center" />
-
-                </StackLayout>
-
-
-            </StackLayout>
+                    VerticalTextAlignment="Center" />
+            </Frame>
             <!--  Übersicht der Noten und Fächer  -->
 
             <CollectionView

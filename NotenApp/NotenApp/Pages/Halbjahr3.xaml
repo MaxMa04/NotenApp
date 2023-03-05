@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cells="clr-namespace:NotenApp.Cells"
     xmlns:local="clr-namespace:NotenApp.ViewModels"
+    xmlns:models="clr-namespace:NotenApp.Models"
     x:Name="hj3"
     x:DataType="local:HalbjahrViewModel"
     BackgroundColor="{DynamicResource Primary}">
@@ -15,10 +16,7 @@
             TextColor="{DynamicResource Fith}" />
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        <Grid
-            x:Name="grd"
-            BackgroundColor="Transparent"
-            TranslationY="500">
+        <Grid BackgroundColor="Transparent">
 
             <!--  Griddefinition  -->
 
@@ -61,7 +59,7 @@
                 SelectionChanged="CollectionView_SelectionChanged"
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:HjFach">
                         <SwipeView HeightRequest="75">
                             <SwipeView.RightItems>
                                 <SwipeItems>

@@ -23,11 +23,6 @@ namespace NotenApp.Pages
             BindingContext = HalbjahrViewModel.Instance;
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            grd.TranslateTo(0, 0, 300, Easing.SinInOut);
-        }
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var fach = e.CurrentSelection.FirstOrDefault() as HjFach;

@@ -24,7 +24,6 @@ namespace NotenApp
             InitializeComponent();
             model = BindingContext as MainPageViewModel;
             
-            
             Task.Run(() => 
             {
                 HjFach fach = new HjFach();
@@ -71,7 +70,7 @@ namespace NotenApp
 
         private async void Tapped1(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new Halbjahr1());
+            await Navigation.PushAsync(new Halbjahr1(), false);
         }
         private async void Tapped2(object sender, System.EventArgs e)
         {
@@ -83,11 +82,11 @@ namespace NotenApp
         }
         private async void Tapped4(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new Halbjahr4());
+            await Navigation.PushAsync(new Halbjahr4(), false);
         }
         private async void OpenBlock1(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Halbjahresuebersicht());
+            await Navigation.PushAsync(new Halbjahresuebersicht(), false);
         }
         private async void OpenSettings(object sender, EventArgs e)
         {

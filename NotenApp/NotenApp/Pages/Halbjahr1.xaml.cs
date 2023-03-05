@@ -6,6 +6,7 @@ using NotenApp.Services;
 using NotenApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -19,25 +20,10 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Halbjahr1 : ContentPage
     {
-        
-
         public Halbjahr1()
         {
             InitializeComponent();
             BindingContext = HalbjahrViewModel.Instance;
-        }
-
-        protected override void OnAppearing()
-        {
-            
-                
-            grd.TranslateTo(0, 0, 300, Easing.SinInOut);
-            
-            
-            base.OnAppearing();
-            
-            
-            
         }
 
         private async void FachHinzufuegen(object sender, EventArgs e)

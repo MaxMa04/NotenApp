@@ -20,10 +20,7 @@
         <ViewModels:DetailViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid
-            x:Name="grd"
-            BackgroundColor="Transparent"
-            TranslationX="500">
+        <Grid BackgroundColor="Transparent">
 
             <!--  Griddefinition  -->
 

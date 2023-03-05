@@ -24,11 +24,7 @@ namespace NotenApp.Pages
         }
 
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            grd.TranslateTo(0, 0, 300, Easing.SinInOut);
-        }
+
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

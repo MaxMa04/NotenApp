@@ -104,29 +104,7 @@ namespace NotenApp.ViewModels
         {
             FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
         }
-        public async Task DetermineSwitchStartBehavior(HjFach fach, CustomSwitch _switch)
-        {
-            
-            if (fach.IsLK)
-            {
-                Device.BeginInvokeOnMainThread(() => {
-                    _switch.IsToggled = true;
-                });
-                
-            }
-            else
-            {
-                int countLK = await FachService.GetLKCount();
-                if(countLK < 2)
-                {
-                    _switch.IsEnabled = true;
-                }
-                else
-                {
-                    _switch.IsEnabled = false;
-                }
-            }
-        }
+
         public async Task HandleSwitch(HjFach fach, bool isToggled)
         {
             

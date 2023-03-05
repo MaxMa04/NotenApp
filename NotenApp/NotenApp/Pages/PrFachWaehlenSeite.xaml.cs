@@ -17,18 +17,18 @@ namespace NotenApp.Pages
     {
         int prNummer;
         bool created;
-        HalbjahrViewModel vm;
+        
         public PrFachWaehlenSeite(int prNummer, bool isCreated)
         {
             InitializeComponent();
             this.prNummer = prNummer;
             created = isCreated;
-            vm = BindingContext as HalbjahrViewModel;
+            BindingContext = HalbjahrViewModel.Instance;
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await vm.Refresh(1);
+            await HalbjahrViewModel.Instance.Refresh(1);
         }
         private async void  CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -36,12 +36,22 @@ namespace NotenApp.Pages
             if (created == true)
             {
                 await FachService.UpdateName(fach.Name, prNummer);
+                
                 await Navigation.PopAsync();
+                await HalbjahrViewModel.Instance.Refresh(1);
+                await HalbjahrViewModel.Instance.Refresh(2);
+                await HalbjahrViewModel.Instance.Refresh(3);
+                await HalbjahrViewModel.Instance.Refresh(4);
             }
             else
             {
                 await FachService.AddPrFach(fach.Name, prNummer);
+                
                 await Navigation.PopAsync();
+                await HalbjahrViewModel.Instance.Refresh(1);
+                await HalbjahrViewModel.Instance.Refresh(2);
+                await HalbjahrViewModel.Instance.Refresh(3);
+                await HalbjahrViewModel.Instance.Refresh(4);
             }
             
         }
@@ -52,7 +62,11 @@ namespace NotenApp.Pages
             {
                 await FachService.UpdateName("-", prNummer);
                 await Navigation.PopAsync();
-                
+                await HalbjahrViewModel.Instance.Refresh(1);
+                await HalbjahrViewModel.Instance.Refresh(2);
+                await HalbjahrViewModel.Instance.Refresh(3);
+                await HalbjahrViewModel.Instance.Refresh(4);
+
             }
             else
             {

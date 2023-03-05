@@ -79,8 +79,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\muendlich.json" />
     <AndroidAsset Include="Assets\schriftlich.json" />
+    <AndroidAsset Include="Assets\muendlich.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -137,7 +137,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadGenericExceptionInfoBarNotenAppAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionNotenAppAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionNotenAppAndroidHideInfoBar="True" XamarinHotReloadGenericExceptionInfoBarNotenAppAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

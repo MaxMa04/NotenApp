@@ -26,11 +26,7 @@ namespace NotenApp.Pages
             
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            grd.TranslateTo(0, 0, 300, Easing.SinInOut);
-        }
+
 
 
         private async void SwipeItem_Invoked_1(object sender, EventArgs e)

@@ -81,9 +81,9 @@ namespace NotenApp.ViewModels
 
             await AdjustFacher(fach);
             
-            await Task.Run(async () => {
-                await ChangeHjDurchschnitt(fach.Halbjahr);
-            });
+            
+            await ChangeHjDurchschnitt(fach.Halbjahr);
+            
 
 
         }
@@ -134,10 +134,16 @@ namespace NotenApp.ViewModels
         public async Task Remove(HjFach fach)
         {
             await FachService.RemoveFach(fach);
-            await Task.Run( ()=> FaecherHJ1.Remove(fach));
+            await Refresh(1);
+            await Refresh(2);
+            await Refresh(3);
+            await Refresh(4);
             
-            await ChangeHjDurchschnitt(fach.Halbjahr);
-            
+            await ChangeHjDurchschnitt(1); 
+            await ChangeHjDurchschnitt(2);
+            await ChangeHjDurchschnitt(3);
+            await ChangeHjDurchschnitt(4);
+
         }
         public async Task ChangeHjDurchschnitt(int halbjahr)
         {

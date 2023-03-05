@@ -28,7 +28,6 @@ namespace NotenApp.Pages
             this.fach = fach;
             model = BindingContext as DetailViewModel;
             model.FachName = fach.Name;
-            Task.Run(async () => { await model.DetermineSwitchStartBehavior(fach, _switch); });
             Task.Run(async () => { await model.InitNoten(fach); });
             Task.Run(async () => { await model.InitEinzHj(fach); });
             Task.Run(async () => { await model.InitFachDurchschnitt(fach); });
@@ -36,10 +35,25 @@ namespace NotenApp.Pages
             
 
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            grd.TranslateTo(0, 0, 300, Easing.SinInOut);
+            if (fach.IsLK)
+            {
+                 _switch.IsToggled = true;
+            }
+            else
+            {
+                int countLK = await FachService.GetLKCount();
+                if (countLK < 2)
+                {
+                    _switch.IsEnabled = true;
+                }
+                else
+                {
+                    _switch.IsEnabled = false;
+                }
+            }
         }
 
         private async void DeleteNote(object sender, SelectionChangedEventArgs e)

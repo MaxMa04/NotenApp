@@ -158,18 +158,33 @@ namespace NotenApp.Services
 
             await db.InsertAsync(fach);
         }
-        public static async Task UpdateFachState(HjFach fach, string state)
+        public static async Task UpdateFachState(HjFach fachh, string state)
         {
             await Init();
+            List<HjFach> faecher = await db.Table<HjFach>().Where(f => f.Name == fachh.Name).ToListAsync();
             switch (state)
             {
                 case "LK":
-                    fach.IsLK = true;
-                    await db.UpdateAsync(fach);
+                    foreach (var fach in faecher)
+                    {
+                        fach.IsLK = true;
+                        await db.UpdateAsync(fach);
+                    }
+                    await HalbjahrViewModel.Instance.Refresh(1);
+                    await HalbjahrViewModel.Instance.Refresh(2);
+                    await HalbjahrViewModel.Instance.Refresh(3);
+                    await HalbjahrViewModel.Instance.Refresh(4);
                     break;
                 case "GK":
-                    fach.IsLK = false;
-                    await db.UpdateAsync(fach);
+                    foreach (var fach in faecher)
+                    {
+                        fach.IsLK = false;
+                        await db.UpdateAsync(fach);
+                    }
+                    await HalbjahrViewModel.Instance.Refresh(1);
+                    await HalbjahrViewModel.Instance.Refresh(2);
+                    await HalbjahrViewModel.Instance.Refresh(3);
+                    await HalbjahrViewModel.Instance.Refresh(4);
                     break;
                 default:
                     break;

@@ -94,40 +94,41 @@ namespace NotenApp.ViewModels
             switch (fach.Halbjahr)
             {
                 case 1:
-                    await Task.Run(() => {
+                    
                         FaecherHJ1.Remove(fach);
 
                         FaecherHJ1.Insert(0, fachh);
                         FaecherHJ1 = Controller.SortList(FaecherHJ1);
-                    }); 
+                    
+
                     break;
                 case 2:
 
-                    await Task.Run(() => {
+                    
                         FaecherHJ2.Remove(fach);
                                  
                         FaecherHJ2.Insert(0, fachh);
                         FaecherHJ2 = Controller.SortList(FaecherHJ2);
-                    });
+                    
 
                     break;
                 case 3:
 
-                    await Task.Run(() => {
+                    
                         FaecherHJ3.Remove(fach);
                                  
                         FaecherHJ3.Insert(0, fachh);
                         FaecherHJ3 = Controller.SortList(FaecherHJ3);
-                    });
+                    
                     break;
                 case 4:
 
-                    await Task.Run(() => {
+                   
                         FaecherHJ4.Remove(fach);
                                  
                         FaecherHJ4.Insert(0, fachh);
                         FaecherHJ4 = Controller.SortList(FaecherHJ4);
-                    });
+                    
                     break;
             }
         }

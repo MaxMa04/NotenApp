@@ -104,7 +104,7 @@ namespace NotenApp.Services
             }
 
             HjFach fachh = await db.Table<HjFach>().Where(f => f.Id == fach.Id).FirstOrDefaultAsync();
-            return fach.EingebrachteHalbjahre;
+            return fachh.EingebrachteHalbjahre;
             
         }
         public static async Task<List<HjFach>> GetFaecher()
@@ -1013,11 +1013,22 @@ namespace NotenApp.Services
             {
                 GeoFaecher = Controller.SortList(GeoFaecher);
                 GRWFaecher = Controller.SortList(GRWFaecher);
-                
 
-                double? sumGeo = (double?)(GeoFaecher[0].Durchschnitt + GeoFaecher[1].Durchschnitt) / 2;
+                double? sumGeo = GeoFaecher[0].Durchschnitt;
+
+
+                double? sumGRW = GRWFaecher[0].Durchschnitt;
+                if (GeoFaecher[1].Durchschnitt != null)
+                {
+                    sumGeo = (double?)(GeoFaecher[0].Durchschnitt + GeoFaecher[1].Durchschnitt) / 2;
+                }
+                if (GRWFaecher[1].Durchschnitt != null)
+                {
+                    sumGRW = (double?)(GRWFaecher[0].Durchschnitt + GRWFaecher[1].Durchschnitt) / 2;
+                }
+                    
                 
-                double? sumGRW = (double?)(GRWFaecher[0].Durchschnitt + GRWFaecher[1].Durchschnitt) / 2; ;
+                 
                 
                 if (sumGeo > sumGRW)
                 {

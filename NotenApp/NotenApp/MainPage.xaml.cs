@@ -24,12 +24,6 @@ namespace NotenApp
             InitializeComponent();
             model = BindingContext as MainPageViewModel;
             
-            Task.Run(() => 
-            {
-                HjFach fach = new HjFach();
-                detailSeite = new DetailSeite(fach);
-
-            });
 
             Task.Run(async () =>
             {

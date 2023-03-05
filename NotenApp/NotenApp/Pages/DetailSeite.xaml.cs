@@ -28,10 +28,8 @@ namespace NotenApp.Pages
             this.fach = fach;
             model = BindingContext as DetailViewModel;
             model.FachName = fach.Name;
-            Task.Run(async () => { await model.InitNoten(fach); });
-            Task.Run(async () => { await model.InitEinzHj(fach); });
-            Task.Run(async () => { await model.InitFachDurchschnitt(fach); });
-            Task.Run(async () => { await model.InitZiel(fach); });
+            Task[] task = new Task[] { model.InitNoten(fach), model.InitEinzHj(fach), model.InitFachDurchschnitt(fach), model.InitZiel(fach) };
+            Task.WhenAll(task);
             
 
         }
@@ -60,9 +58,8 @@ namespace NotenApp.Pages
         {
             var note = e.CurrentSelection.FirstOrDefault() as HJNote;
             await FachService.RemoveSingleNote(note);
-            await model.InitNoten(fach);
-            await model.InitEinzHj(fach);
-            await model.InitFachDurchschnitt(fach);
+            Task[] tasks = new Task[] {model.InitNoten(fach), model.InitEinzHj(fach), model.InitFachDurchschnitt(fach)};
+            await Task.WhenAll(tasks);
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -88,13 +85,10 @@ namespace NotenApp.Pages
             {
                 
                 await FachService.AddNote(fach, (int)note, (NotenTyp)notenTyp);
-                
-                await model.InitNoten(fach);
-                
             }
+            Task[] tasks = new Task[] { model.InitNoten(fach), model.InitFachDurchschnitt(fach), model.InitEinzHj(fach) };
+            await Task.WhenAll(tasks);
 
-            await model.InitFachDurchschnitt(fach);
-            await model.InitEinzHj(fach);
         }
 
 

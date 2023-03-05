@@ -3,41 +3,42 @@
     x:Class="NotenApp.Pages.FachHinzufuegenSeite"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels">
+    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
+    xmlns:models="clr-namespace:NotenApp.Models"
+    x:DataType="ViewModels:FachHinzufuegenViewModel">
     <ContentPage.BindingContext>
         <ViewModels:FachHinzufuegenViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <ListView
-            x:Name="myListView"
+        <CollectionView
             BackgroundColor="{DynamicResource Primary}"
-            ItemSelected="myListView_ItemSelected"
-            ItemsSource="{Binding Faecher}"
-            RowHeight="70">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-
-                            <Frame
-                                Margin="2"
-                                BackgroundColor="{DynamicResource Third}"
-                                CornerRadius="10"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand">
-                                <Label
-                                    Margin="-5"
-                                    FontAttributes="Bold"
-                                    FontSize="20"
-                                    Text="{Binding Name}"
-                                    TextColor="{DynamicResource Fith}" />
-                            </Frame>
-
-                        </StackLayout>
-                    </ViewCell>
-
+            ItemsSource="{Binding HjFaecher}"
+            SelectionChanged="CollectionView_SelectionChanged"
+            SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="2"
+                    Orientation="Vertical"
+                    Span="2"
+                    VerticalItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:HjFach">
+                    <Frame
+                        Margin="2"
+                        BackgroundColor="{DynamicResource Third}"
+                        CornerRadius="10"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Margin="-5"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            Text="{Binding Name}"
+                            TextColor="{DynamicResource Fith}" />
+                    </Frame>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </ContentPage.Content>
 </ContentPage>

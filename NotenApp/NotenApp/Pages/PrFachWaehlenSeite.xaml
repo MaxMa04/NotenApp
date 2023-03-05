@@ -3,9 +3,11 @@
     x:Class="NotenApp.Pages.PrFachWaehlenSeite"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels">
+    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
+    xmlns:models="clr-namespace:NotenApp.Models"
+    x:DataType="ViewModels:FachHinzufuegenViewModel">
     <ContentPage.BindingContext>
-        <ViewModels:HalbjahrViewModel />
+        <ViewModels:FachHinzufuegenViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource Primary}">
@@ -15,18 +17,35 @@
                 Text="Kein Fach"
                 TextColor="{DynamicResource Fith}" />
             <CollectionView
-                ItemsSource="{Binding FaecherHJ1}"
-                SelectionChanged="CollectionView_SelectionChanged"
+                BackgroundColor="{DynamicResource Primary}"
+                ItemsSource="{Binding PrFaecher}"
+                SelectionChanged="CollectionView_SelectionChanged_1"
                 SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="2"
+                        Orientation="Vertical"
+                        Span="2"
+                        VerticalItemSpacing="5" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame BackgroundColor="{DynamicResource Third}">
-                            <Label Text="{Binding Name}" TextColor="{DynamicResource Fith}" />
+                    <DataTemplate x:DataType="models:HjFach">
+                        <Frame
+                            Margin="2"
+                            BackgroundColor="{DynamicResource Third}"
+                            CornerRadius="10"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Margin="-5"
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                Text="{Binding Name}"
+                                TextColor="{DynamicResource Fith}" />
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </StackLayout>
-
     </ContentPage.Content>
 </ContentPage>

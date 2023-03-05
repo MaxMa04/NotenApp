@@ -17,43 +17,20 @@ namespace NotenApp.Pages
     {
         int prNummer;
         bool created;
+        FachHinzufuegenViewModel vm;
         
         public PrFachWaehlenSeite(int prNummer, bool isCreated)
         {
             InitializeComponent();
             this.prNummer = prNummer;
             created = isCreated;
-            BindingContext = HalbjahrViewModel.Instance;
+            vm = BindingContext as FachHinzufuegenViewModel;
+            
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await HalbjahrViewModel.Instance.Refresh(1);
-        }
-        private async void  CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var fach = e.CurrentSelection.FirstOrDefault() as HjFach;
-            if (created == true)
-            {
-                await FachService.UpdateName(fach.Name, prNummer);
-                
-                await Navigation.PopAsync();
-                await HalbjahrViewModel.Instance.Refresh(1);
-                await HalbjahrViewModel.Instance.Refresh(2);
-                await HalbjahrViewModel.Instance.Refresh(3);
-                await HalbjahrViewModel.Instance.Refresh(4);
-            }
-            else
-            {
-                await FachService.AddPrFach(fach.Name, prNummer);
-                
-                await Navigation.PopAsync();
-                await HalbjahrViewModel.Instance.Refresh(1);
-                await HalbjahrViewModel.Instance.Refresh(2);
-                await HalbjahrViewModel.Instance.Refresh(3);
-                await HalbjahrViewModel.Instance.Refresh(4);
-            }
-            
+            await vm.InitPrFaecher();
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
@@ -62,15 +39,50 @@ namespace NotenApp.Pages
             {
                 await FachService.UpdateName("-", prNummer);
                 await Navigation.PopAsync();
-                await HalbjahrViewModel.Instance.Refresh(1);
-                await HalbjahrViewModel.Instance.Refresh(2);
-                await HalbjahrViewModel.Instance.Refresh(3);
-                await HalbjahrViewModel.Instance.Refresh(4);
+                var _ = Task.Run(async () =>
+                {
+                    await HalbjahrViewModel.Instance.Refresh(1);
+                    await HalbjahrViewModel.Instance.Refresh(2);
+                    await HalbjahrViewModel.Instance.Refresh(3);
+                    await HalbjahrViewModel.Instance.Refresh(4);
+                });
 
             }
             else
             {
                 await Navigation.PopAsync();
+            }
+        }
+
+        private async void CollectionView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            var fach = e.CurrentSelection.FirstOrDefault() as HjFach;
+            if (created == true)
+            {
+                await FachService.UpdateName(fach.Name, prNummer);
+
+                await Navigation.PopAsync();
+                var _ = Task.Run(async () =>
+                {
+                    await HalbjahrViewModel.Instance.Refresh(1);
+                    await HalbjahrViewModel.Instance.Refresh(2);
+                    await HalbjahrViewModel.Instance.Refresh(3);
+                    await HalbjahrViewModel.Instance.Refresh(4);
+                });
+
+            }
+            else
+            {
+                await FachService.AddPrFach(fach.Name, prNummer);
+
+                await Navigation.PopAsync();
+                var _ = Task.Run(async () =>
+                {
+                    await HalbjahrViewModel.Instance.Refresh(1);
+                    await HalbjahrViewModel.Instance.Refresh(2);
+                    await HalbjahrViewModel.Instance.Refresh(3);
+                    await HalbjahrViewModel.Instance.Refresh(4);
+                });
             }
         }
     }

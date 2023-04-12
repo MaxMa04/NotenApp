@@ -14,7 +14,8 @@
         <Label
             FontSize="30"
             Text="{Binding FachName}"
-            TextColor="{DynamicResource Fith}" />
+            TextColor="{DynamicResource Fith}"
+            VerticalOptions="Center" />
     </NavigationPage.TitleView>
     <ContentPage.BindingContext>
         <ViewModels:DetailViewModel />
@@ -48,8 +49,20 @@
                     VerticalTextAlignment="Center" />
             </Frame>
 
-            <Frame Grid.Row="1" BackgroundColor="{DynamicResource Primary}">
+            <Frame
+                x:Name="frame"
+                Grid.Row="1"
+                Margin="0,0,0,-50"
+                BackgroundColor="{DynamicResource Primary}"
+                CornerRadius="40"
+                TranslationY="400">
                 <Grid>
+                    <Grid.Padding>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="0,0,0,70" />
+                            <On Platform="Android" Value="0,0,0,50" />
+                        </OnPlatform>
+                    </Grid.Padding>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1.7*" />
                         <RowDefinition Height="0.8*" />
@@ -296,7 +309,7 @@
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="AddNote" />
                         </Frame.GestureRecognizers>
-                        <Image Scale="2.5" Source="Plus1.png" />
+                        <Image Scale="2" Source="plus.png" />
                     </Frame>
                 </Grid>
             </Frame>

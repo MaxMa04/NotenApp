@@ -65,5 +65,23 @@ namespace NotenApp.Logic
             }
             return list;
         }
+        public static List<HjFach> SortListByHalbjahr(List<HjFach> list)
+        {
+            for (int i = 0; i < list.Count - 1; i++)
+            {
+                int minIndex = i;
+                for (int j = i + 1; j < list.Count; j++)
+                {
+                    
+                    if (list[j].Halbjahr < list[minIndex].Halbjahr)
+                    {
+                        minIndex = j;
+                    }
+                }
+                (list[minIndex], list[i]) = (list[i], list[minIndex]);
+            }
+            return list;
+        }
+
     }
 }

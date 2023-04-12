@@ -10,11 +10,11 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Abi : ContentPage
     {
-        HalbjahrViewModel _model;
+        
         public Abi()
         {
             InitializeComponent();
-            _model = BindingContext as HalbjahrViewModel;
+            
             
 
 
@@ -22,10 +22,7 @@ namespace NotenApp.Pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            _model.GesamtDurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
-            _model.GesamtDurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
-            _model.GesamtDurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
-            _model.GesamtDurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
+           
 
         }
 

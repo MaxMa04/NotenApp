@@ -2,23 +2,19 @@
 <ContentPage
     x:Class="NotenApp.Pages.Einstellungen"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Einstellungen"
+    BackgroundColor="{DynamicResource Primary}">
+
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Color x:Key="LightRadioButtonColor">#F3F2F1</Color>
-            <Color x:Key="DarkRadioButtonColor">#9B9A99</Color>
 
             <ControlTemplate x:Key="ThemeRadioTemplate">
                 <Frame
                     Padding="0"
-                    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkRadioButtonColor},
-                                                      Light={StaticResource LightRadioButtonColor}}"
-                    BorderColor="{AppThemeBinding Dark={StaticResource DarkRadioButtonColor},
-                                                  Light={StaticResource LightRadioButtonColor}}"
-                    CornerRadius="8"
-                    HasShadow="{OnPlatform iOS=false,
-                                           Android=true}"
+                    BackgroundColor="{DynamicResource Primary}"
+                    CornerRadius="20"
                     HeightRequest="80"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
@@ -90,68 +86,148 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView>
-        <Grid Padding="12" ColumnDefinitions=".05*,.9*,.05*">
-            <StackLayout Grid.Column="1">
-                <Label
-                    Margin="0,12,0,0"
-                    Style="{DynamicResource LabelMedium}"
-                    Text="THEME" />
-                <Frame>
-                    <Grid
-                        ColumnDefinitions="*,Auto,Auto,Auto,*"
-                        ColumnSpacing="10"
-                        RadioButtonGroup.GroupName="ThemeGroup"
-                        RowDefinitions="Auto,Auto"
-                        RowSpacing="10">
-                        <RadioButton
-                            x:Name="RadioButtonGreen"
-                            Grid.Column="1"
-                            CheckedChanged="RadioButton_CheckedChanged"
-                            Value="Green">
-                            <RadioButton.Content>
-                                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+    <StackLayout Padding="20" Background="{DynamicResource Primary}">
+        <StackLayout>
+            <Label
+                Margin="0,0,0,10"
+                FontAttributes="Bold"
+                FontSize="35"
+                HorizontalOptions="Center"
+                Text="Wähle dein Theme!"
+                TextColor="White" />
+            <FlexLayout
+                Margin="0,0,0,10"
+                Padding="10"
+                Background="{DynamicResource Secondary}"
+                JustifyContent="SpaceAround"
+                Wrap="Wrap">
 
-                                    <Label
-                                        FontSize="Small"
-                                        Text="Green"
-                                        TextColor="#323130" />
-                                </StackLayout>
-                            </RadioButton.Content>
-                        </RadioButton>
-                        <RadioButton
-                            x:Name="RadioButtonRosa"
-                            Grid.Column="2"
-                            CheckedChanged="RadioButton_CheckedChanged"
-                            Value="Rosa">
-                            <RadioButton.Content>
-                                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <RadioButton
+                    x:Name="RadioButtonGreen"
+                    CheckedChanged="RadioButton_CheckedChanged"
+                    Value="Green">
+                    <RadioButton.Content>
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 
-                                    <Label
-                                        FontSize="Small"
-                                        Text="Rosa"
-                                        TextColor="#323130" />
-                                </StackLayout>
-                            </RadioButton.Content>
-                        </RadioButton>
-                        <RadioButton
-                            x:Name="RadioButtonBlue"
-                            Grid.Column="3"
-                            CheckedChanged="RadioButton_CheckedChanged"
-                            Value="Blue">
-                            <RadioButton.Content>
-                                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label
+                                FontSize="15"
+                                Text="Grün"
+                                TextColor="{DynamicResource Fith}" />
+                        </StackLayout>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton
+                    x:Name="RadioButtonRosa"
+                    CheckedChanged="RadioButton_CheckedChanged"
+                    Value="Rosa">
+                    <RadioButton.Content>
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 
-                                    <Label
-                                        FontSize="Small"
-                                        Text="Blue"
-                                        TextColor="#323130" />
-                                </StackLayout>
-                            </RadioButton.Content>
-                        </RadioButton>
-                    </Grid>
-                </Frame>
-            </StackLayout>
-        </Grid>
-    </ScrollView>
+                            <Label
+                                FontSize="15"
+                                Text="Rosa"
+                                TextColor="{DynamicResource Fith}" />
+                        </StackLayout>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton
+                    x:Name="RadioButtonBlue"
+                    CheckedChanged="RadioButton_CheckedChanged"
+                    Value="Blue">
+                    <RadioButton.Content>
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
+                            <Label
+                                FontSize="15"
+                                Text="Blau"
+                                TextColor="{DynamicResource Fith}" />
+                        </StackLayout>
+                    </RadioButton.Content>
+                </RadioButton>
+
+            </FlexLayout>
+            <Frame
+                BackgroundColor="{DynamicResource Third}"
+                BorderColor="{DynamicResource Secondary}"
+                CornerRadius="20">
+                <StackLayout>
+                    <Label
+                        Margin="0,0,0,10"
+                        FontAttributes="Bold"
+                        FontSize="35"
+                        HorizontalOptions="Center"
+                        Text="Über mich"
+                        TextColor="{DynamicResource Primary}"
+                        TextDecorations="Underline" />
+                    <Label
+                        FontSize="17"
+                        Text="Mein Name ist Max Mannstein und ich bin aktuell Schüler des Carl-von-Bach-Gymnasiums. Diese App habe ich entwickelt, um Schülern aus Sachsen die Notenverwaltung in der Oberstufe zu erleichtern. Bei Fragen, Problemen oder Verbesserungsvorschlägen kontaktiert mich gern!"
+                        TextColor="{DynamicResource Primary}" />
+                </StackLayout>
+            </Frame>
+
+            <Frame
+                BackgroundColor="{DynamicResource Third}"
+                BorderColor="{DynamicResource Secondary}"
+                CornerRadius="20">
+                <StackLayout>
+                    <Label
+                        Margin="0,0,0,10"
+                        FontAttributes="Bold"
+                        FontSize="35"
+                        HorizontalOptions="Center"
+                        Text="Kontakt"
+                        TextColor="{DynamicResource Primary}"
+                        TextDecorations="Underline" />
+
+
+                    <FlexLayout
+                        HeightRequest="60"
+                        JustifyContent="SpaceEvenly"
+                        Wrap="NoWrap">
+                        <ImageButton
+                            Clicked="Email_Clicked"
+                            Scale=".7"
+                            Source="mail.png" />
+                        <ImageButton
+                            Clicked="Linkedin_Clicked"
+                            Scale=".7"
+                            Source="linkedin.png" />
+                        <ImageButton
+                            Clicked="Github_Clicked"
+                            Scale=".7"
+                            Source="github.png" />
+                        <ImageButton
+                            Clicked="Website_Clicked"
+                            Scale=".7"
+                            Source="website.png" />
+                    </FlexLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        <FlexLayout
+            AlignItems="Center"
+            Direction="ColumnReverse"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <Label Text="© 2023 - Developed by Max Mannstein" />
+
+        </FlexLayout>
+    </StackLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </ContentPage>

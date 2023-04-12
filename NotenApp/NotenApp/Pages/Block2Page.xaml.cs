@@ -19,7 +19,7 @@ namespace NotenApp.Pages
         Block2ViewModel model;
 		public Block2Page ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
             model= BindingContext as Block2ViewModel;
 			
 		}
@@ -96,7 +96,7 @@ namespace NotenApp.Pages
             {
                 return;
             }
-            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Schriftlich, model.P1.Name));
             await FachService.UpdateNote(note, 1, NotenTyp.Schriftlich);
             await model.InitBlock2();
 
@@ -107,7 +107,8 @@ namespace NotenApp.Pages
             {
                 return;
             }
-            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Schriftlich, model.P2.Name));
             await FachService.UpdateNote(note, 2, NotenTyp.Schriftlich);
             await model.InitBlock2();
         }
@@ -117,7 +118,7 @@ namespace NotenApp.Pages
             {
                 return;
             }
-            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Schriftlich, model.P3.Name));
             await FachService.UpdateNote(note, 3, NotenTyp.Schriftlich);
             await model.InitBlock2();
         }
@@ -129,7 +130,7 @@ namespace NotenApp.Pages
             {
                 return;
             }
-            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P1.Name));
             await FachService.UpdateNote(note, 1, NotenTyp.Mündlich);
             await model.InitBlock2();
         }
@@ -140,7 +141,7 @@ namespace NotenApp.Pages
             {
                 return;
             }
-            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P2.Name));
             await FachService.UpdateNote(note, 2, NotenTyp.Mündlich);
             await model.InitBlock2();
         }
@@ -151,7 +152,7 @@ namespace NotenApp.Pages
             {
                 return;
             }
-            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P3.Name));
             await FachService.UpdateNote(note, 3, NotenTyp.Mündlich);
             await model.InitBlock2();
         }
@@ -162,7 +163,7 @@ namespace NotenApp.Pages
             {
                 return;
             }
-            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P4.Name));
             await FachService.UpdateNote(note, 4, NotenTyp.Mündlich);
             await model.InitBlock2();
         }
@@ -173,7 +174,7 @@ namespace NotenApp.Pages
             {
                 return;
             }
-            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2));
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P5.Name));
             await FachService.UpdateNote(note, 5, NotenTyp.Mündlich);
             await model.InitBlock2();
         }

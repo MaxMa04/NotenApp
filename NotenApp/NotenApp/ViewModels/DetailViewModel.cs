@@ -92,12 +92,7 @@ namespace NotenApp.ViewModels
             var lKNoten = await FachService.GetFachNoten(fach, NotenTyp.LK);
             LKNoten.AddRange(lKNoten);
             
-            
-            var _ = Task.Run( async () => 
-            { 
-                await HalbjahrViewModel.Instance.Refresh(fach.Halbjahr);
-                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(fach.Halbjahr);
-            });
+
 
 
         }
@@ -139,13 +134,9 @@ namespace NotenApp.ViewModels
                     Console.WriteLine("Fehler");
                 }
                 await InitEinzHj(fach);
-                var _ = Task.Run(async () => {
-                    await HalbjahrViewModel.Instance.Refresh(1);
-                    await HalbjahrViewModel.Instance.Refresh(2);
-                    await HalbjahrViewModel.Instance.Refresh(3);
-                    await HalbjahrViewModel.Instance.Refresh(4);
-                });
-                
+
+
+
             }
             else
             {
@@ -163,12 +154,7 @@ namespace NotenApp.ViewModels
                     Console.WriteLine("Fehler");
                 }
                 await InitEinzHj(fach);
-                var _ = Task.Run(async () => {
-                    await HalbjahrViewModel.Instance.Refresh(1);
-                    await HalbjahrViewModel.Instance.Refresh(2);
-                    await HalbjahrViewModel.Instance.Refresh(3);
-                    await HalbjahrViewModel.Instance.Refresh(4);
-                });
+
 
             }
 

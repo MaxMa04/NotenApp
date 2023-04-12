@@ -7,18 +7,21 @@
     xmlns:local="clr-namespace:NotenApp.ViewModels"
     xmlns:models="clr-namespace:NotenApp.Models"
     x:Name="hj1"
-    x:DataType="local:HalbjahrViewModel"
     BackgroundColor="{DynamicResource Primary}">
+    <ContentPage.BindingContext>
+        <local:HalbjahrViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Clicked="FachHinzufuegen"
-            IconImageSource="plus.png"
+            IconImageSource="add.png"
             Order="Primary"
             Priority="0" />
     </ContentPage.ToolbarItems>
     <NavigationPage.TitleView>
         <Label
             FontSize="28"
+            VerticalOptions="Center"
             Text="Halbjahr 1"
             TextColor="{DynamicResource Fith}" />
     </NavigationPage.TitleView>
@@ -65,7 +68,26 @@
                 ItemsSource="{Binding FaecherHJ1}"
                 SelectionChanged="CollectionView_SelectionChanged"
                 SelectionMode="Single">
-
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+                            <Label
+                                Margin="0,30,0,10"
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                HorizontalOptions="Fill"
+                                HorizontalTextAlignment="Center"
+                                Text="Keine Fächer vorhanden!"
+                                TextColor="{DynamicResource Fith}" />
+                            <Label
+                                FontSize="15"
+                                HorizontalOptions="Fill"
+                                HorizontalTextAlignment="Center"
+                                Text="Klicke oben auf +, um Fächer hinzuzufügen."
+                                TextColor="{DynamicResource Fith}" />
+                        </StackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:HjFach">
                         <SwipeView HeightRequest="75">
@@ -77,7 +99,7 @@
                                         Invoked="SwipeItem_Invoked_1" />
                                     <SwipeItem
                                         BackgroundColor="Red"
-                                        Command="{Binding Source={x:Reference hj1}, Path=BindingContext.RemoveCommand}"
+                                        Command="{Binding Source={x:Reference hj1}, Path=BindingContext.DeleteFachCommand}"
                                         CommandParameter="{Binding .}"
                                         IconImageSource="delete.png" />
 

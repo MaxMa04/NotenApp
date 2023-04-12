@@ -10,14 +10,10 @@
         <ViewModels:FachHinzufuegenViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{DynamicResource Primary}">
-            <Button
-                BackgroundColor="Transparent"
-                Clicked="Button_Clicked"
-                Text="Kein Fach"
-                TextColor="{DynamicResource Fith}" />
+        <StackLayout Padding="20" BackgroundColor="{DynamicResource Primary}">
+
             <CollectionView
-                BackgroundColor="{DynamicResource Primary}"
+                BackgroundColor="Transparent"
                 ItemsSource="{Binding PrFaecher}"
                 SelectionChanged="CollectionView_SelectionChanged_1"
                 SelectionMode="Single">
@@ -34,6 +30,7 @@
                             Margin="2"
                             BackgroundColor="{DynamicResource Third}"
                             CornerRadius="10"
+                            HasShadow="False"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
                             <Label
@@ -46,6 +43,16 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Button
+                Margin="10,20"
+                BackgroundColor="{DynamicResource Secondary}"
+                Clicked="Button_Clicked"
+                CornerRadius="10"
+                FontSize="30"
+                HorizontalOptions="End"
+                Text="Kein Fach"
+                TextColor="{DynamicResource Fith}"
+                WidthRequest="180" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

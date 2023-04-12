@@ -38,14 +38,9 @@ namespace NotenApp.Pages
             if (created == true)
             {
                 await FachService.UpdateName("-", prNummer);
+                
                 await Navigation.PopAsync();
-                var _ = Task.Run(async () =>
-                {
-                    await HalbjahrViewModel.Instance.Refresh(1);
-                    await HalbjahrViewModel.Instance.Refresh(2);
-                    await HalbjahrViewModel.Instance.Refresh(3);
-                    await HalbjahrViewModel.Instance.Refresh(4);
-                });
+
 
             }
             else
@@ -60,15 +55,10 @@ namespace NotenApp.Pages
             if (created == true)
             {
                 await FachService.UpdateName(fach.Name, prNummer);
+                
 
                 await Navigation.PopAsync();
-                var _ = Task.Run(async () =>
-                {
-                    await HalbjahrViewModel.Instance.Refresh(1);
-                    await HalbjahrViewModel.Instance.Refresh(2);
-                    await HalbjahrViewModel.Instance.Refresh(3);
-                    await HalbjahrViewModel.Instance.Refresh(4);
-                });
+
 
             }
             else
@@ -76,13 +66,6 @@ namespace NotenApp.Pages
                 await FachService.AddPrFach(fach.Name, prNummer);
 
                 await Navigation.PopAsync();
-                var _ = Task.Run(async () =>
-                {
-                    await HalbjahrViewModel.Instance.Refresh(1);
-                    await HalbjahrViewModel.Instance.Refresh(2);
-                    await HalbjahrViewModel.Instance.Refresh(3);
-                    await HalbjahrViewModel.Instance.Refresh(4);
-                });
             }
         }
     }

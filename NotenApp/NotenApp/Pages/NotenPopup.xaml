@@ -5,16 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xctViews="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
     HorizontalOptions="CenterAndExpand"
-    Size="370,240"
+    Size="370,280"
     VerticalOptions="EndAndExpand">
-
     <Grid Padding="10" BackgroundColor="{DynamicResource Primary}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+
 
 
         </Grid.RowDefinitions>
@@ -25,143 +25,185 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button
+        <StackLayout
             Grid.Row="0"
-            Grid.Column="2"
-            BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
-            CornerRadius="15"
-            Text="0"
-            TextColor="{DynamicResource Fith}" />
+            Grid.ColumnSpan="5"
+            HorizontalOptions="Center"
+            Orientation="Horizontal">
+            <Label
+                x:Name="fachname"
+                FontAttributes="Bold"
+                FontSize="28"
+                HorizontalOptions="Center"
+                TextColor="{DynamicResource Fith}"
+                VerticalOptions="Center" />
+            <BoxView
+                Margin="0,2,0,2"
+                BackgroundColor="{DynamicResource Third}"
+                WidthRequest="2" />
+            <Label
+                x:Name="notentyp"
+                FontAttributes="Bold"
+                FontSize="28"
+                HorizontalOptions="Center"
+                TextColor="{DynamicResource Fith}"
+                VerticalOptions="Center" />
+        </StackLayout>
+
+
         <Button
             Grid.Row="1"
             Grid.Column="0"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="1"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="1"
             Grid.Column="1"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="2"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="1"
             Grid.Column="2"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="3"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="1"
             Grid.Column="3"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="4"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="1"
             Grid.Column="4"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="5"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="2"
             Grid.Column="0"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="6"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="2"
             Grid.Column="1"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="7"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="2"
             Grid.Column="2"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="8"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="2"
             Grid.Column="3"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="9"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="2"
             Grid.Column="4"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="10"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="3"
             Grid.Column="0"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="11"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="3"
             Grid.Column="1"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="12"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="3"
             Grid.Column="2"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="13"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="3"
             Grid.Column="3"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="14"
             TextColor="{DynamicResource Fith}" />
         <Button
             Grid.Row="3"
             Grid.Column="4"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked1"
+            Clicked="NotenButton_Clicked"
             CornerRadius="15"
+            FontSize="25"
             Text="15"
+            TextColor="{DynamicResource Fith}" />
+        <Button
+            Grid.Row="4"
+            Grid.Column="1"
+            BackgroundColor="{DynamicResource Secondary}"
+            Clicked="NotenButton_Clicked"
+            CornerRadius="15"
+            FontSize="25"
+            Text="0"
             TextColor="{DynamicResource Fith}" />
         <Button
             x:Name="btn"
             Grid.Row="4"
             Grid.Column="2"
-            Margin="-30,0"
+            Grid.ColumnSpan="2"
             BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked"
+            Clicked="DismissButton_Clicked"
             CornerRadius="15"
-            Text=""
+            FontSize="22"
             TextColor="{DynamicResource Fith}" />
     </Grid>
 

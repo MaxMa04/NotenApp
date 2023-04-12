@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -49,6 +49,28 @@ namespace NotenApp.Pages
             }
             
 
+        }
+
+        private async void Email_Clicked(object sender, EventArgs e)
+        {
+            var address = "max.mannstein@gmail.com";
+            await Launcher.TryOpenAsync(new Uri($"mailto:{address}"));
+            
+        }
+
+        private async void Linkedin_Clicked(object sender, EventArgs e)
+        {
+            await Browser.OpenAsync("https://www.linkedin.com/in/max-mannstein-04437025a/");
+        }
+
+        private async void Github_Clicked(object sender, EventArgs e)
+        {
+            await Browser.OpenAsync("https://github.com/MaxMa04");
+        }
+
+        private async void Website_Clicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("Information", "Meine Website befindet sich aktuell noch in Arbeit!", "OK");
         }
     }
 }

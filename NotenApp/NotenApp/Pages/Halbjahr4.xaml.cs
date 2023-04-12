@@ -31,12 +31,12 @@ namespace NotenApp.Pages
                 return;
             }
 
-            NotenTyp? notenTyp = (NotenTyp?)await Navigation.ShowPopupAsync(new EntscheidungsPopup());
+            NotenTyp? notenTyp = (NotenTyp?)await Navigation.ShowPopupAsync(new EntscheidungsPopup(fach.Name));
             int? note = null;
 
             if (notenTyp != null)
             {
-                note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1));
+                note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1, (NotenTyp)notenTyp, fach.Name));
             }
 
             if (notenTyp != null && note != null)

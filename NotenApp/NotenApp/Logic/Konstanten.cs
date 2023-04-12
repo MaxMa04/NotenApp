@@ -9,9 +9,11 @@ namespace NotenApp.Logic
         //Block1
         LK = 1,
         Klausur = 2,
+        Ziel = 5,
         //Block2
         Schriftlich = 3,
         Mündlich = 4
+        
     };
     public enum FachAufgabenfeld
     {
@@ -19,6 +21,14 @@ namespace NotenApp.Logic
         Gesellschaftlich = 2,
         Naturwissenschaftlich = 3,
         Kein = 4
+
+    };
+    public enum SetFach
+    {
+        LK,
+        GK,
+        PrFach,
+        NoPrFach
 
     };
     public enum WhichNote

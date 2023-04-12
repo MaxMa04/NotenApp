@@ -34,8 +34,13 @@
     <Frame
         Grid.RowSpan="2"
         Grid.Column="2"
-        BackgroundColor="{DynamicResource Third}"
-        CornerRadius="35">
+        BackgroundColor="{DynamicResource Third}">
+        <Frame.CornerRadius>
+            <OnPlatform x:TypeArguments="x:Single">
+                <On Platform="iOS" Value="28" />
+                <On Platform="Android" Value="35" />
+            </OnPlatform>
+        </Frame.CornerRadius>
         <Label
             Margin="-40"
             FontSize="Large"

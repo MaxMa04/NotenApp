@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
     xmlns:local="clr-namespace:NotenApp.Pages"
+    Title="Halbjahresübersicht"
     android:TabbedPage.ToolbarPlacement="Bottom"
     BarBackgroundColor="{DynamicResource Primary}"
     NavigationPage.HasNavigationBar="True"

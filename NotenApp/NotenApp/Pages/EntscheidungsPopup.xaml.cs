@@ -15,16 +15,15 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EntscheidungsPopup : Popup
     {
-        
-
-        public EntscheidungsPopup()
+        public EntscheidungsPopup(string fachName)
         {
             InitializeComponent();
-            
+            fachname.Text = fachName;
+
         }
         private void LK_Button_Clicked(object sender, EventArgs e)
         {
-            
+
             //var result = await Navigation.ShowPopupAsync(new NotenSeite(fach, NotenTyp.LK, 2));
             NotenTyp notenTyp = NotenTyp.LK;
             Dismiss(notenTyp);
@@ -34,7 +33,7 @@ namespace NotenApp.Pages
         {
             NotenTyp notenTyp = NotenTyp.Klausur;
             Dismiss(notenTyp);
-            
+
         }
     }
 }

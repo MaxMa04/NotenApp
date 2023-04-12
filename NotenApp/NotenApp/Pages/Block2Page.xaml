@@ -3,22 +3,35 @@
     x:Class="NotenApp.Pages.Block2Page"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
-    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
+    xmlns:ViewModels="clr-namespace:NotenApp.ViewModels">
     <ContentPage.BindingContext>
         <ViewModels:Block2ViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+    <NavigationPage.TitleView>
+        <Label
+            FontSize="28"
+            HorizontalOptions="Start"
+            Text="Block 2"
+            TextColor="{DynamicResource Fith}" />
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <Grid Padding="10" BackgroundColor="{DynamicResource Primary}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*" />
+                <RowDefinition Height="2*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="3*" />
+                <RowDefinition Height="4*" />
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -31,63 +44,62 @@
             <Frame
                 Grid.Row="0"
                 Grid.ColumnSpan="4"
+                Padding="10"
                 BackgroundColor="Transparent">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label
-                        Grid.ColumnSpan="2"
-                        FontSize="35"
-                        HorizontalOptions="Center"
-                        Text="Block 2"
-                        TextColor="{DynamicResource Secondary}"
-                        VerticalOptions="Center" />
+                <StackLayout
+                    HorizontalOptions="Fill"
+                    Orientation="Horizontal"
+                    VerticalOptions="Fill">
+
                     <Frame
-                        Grid.Row="1"
-                        Margin="20,0,0,0"
                         BackgroundColor="{DynamicResource Fourth}"
-                        CornerRadius="40">
+                        CornerRadius="20"
+                        HeightRequest="35"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="150">
                         <Label
                             Margin="-10"
-                            FontSize="Large"
+                            FontSize="30"
                             HorizontalOptions="Center"
                             Text="{Binding DurchschnittBlock2, TargetNullValue='-'}"
                             TextColor="{DynamicResource Secondary}"
                             VerticalOptions="Center" />
                     </Frame>
                     <Frame
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="0,0,20,0"
                         BackgroundColor="{DynamicResource Fourth}"
-                        CornerRadius="40">
+                        CornerRadius="20"
+                        HeightRequest="35"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="150">
                         <Label
                             Margin="-10"
-                            FontSize="Large"
+                            FontSize="30"
                             HorizontalOptions="Center"
                             Text="{Binding PunktzahlBlock2}"
                             TextColor="{DynamicResource Secondary}"
                             VerticalOptions="Center" />
                     </Frame>
-                </Grid>
-            </Frame>
+                </StackLayout>
 
+
+            </Frame>
+            <Label
+                Grid.Row="7"
+                Grid.ColumnSpan="4"
+                Margin="0,0,0,10"
+                FontSize="18"
+                Text="© 2023 - Developed by Max Mannstein"
+                VerticalOptions="End" />
             <!--  Block2  -->
             <!--  Erklärung  -->
             <Frame Grid.Row="1" BackgroundColor="{DynamicResource Fourth}">
                 <Label
                     Margin="-10"
                     FontSize="Large"
-                    HorizontalOptions="Center"
                     Text="Nr."
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="Center" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="1"
@@ -96,10 +108,8 @@
                 <Label
                     Margin="-10"
                     FontSize="Large"
-                    HorizontalOptions="Center"
                     Text="Fach"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="Center" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
 
 
@@ -107,28 +117,20 @@
                 Grid.Row="1"
                 Grid.Column="2"
                 BackgroundColor="{DynamicResource Fourth}">
-                <lottie:AnimationView
-                    Margin="-30"
-                    Animation="schriftlich.json"
-                    AnimationSource="AssetOrBundle"
-                    AutoPlay="True"
-                    HorizontalOptions="FillAndExpand"
-                    RepeatMode="Infinite"
-                    VerticalOptions="FillAndExpand" />
+                <Image
+                    IsAnimationPlaying="true"
+                    Scale="2"
+                    Source="schriftlich.gif" />
             </Frame>
 
             <Frame
                 Grid.Row="1"
                 Grid.Column="3"
                 BackgroundColor="{DynamicResource Fourth}">
-                <lottie:AnimationView
-                    Margin="-30"
-                    Animation="muendlich.json"
-                    AnimationSource="AssetOrBundle"
-                    AutoPlay="True"
-                    HorizontalOptions="FillAndExpand"
-                    RepeatMode="Infinite"
-                    VerticalOptions="FillAndExpand" />
+                <Image
+                    IsAnimationPlaying="true"
+                    Scale="2"
+                    Source="muendlich.gif" />
             </Frame>
 
 
@@ -137,10 +139,8 @@
                 <Label
                     Margin="-10"
                     FontSize="Large"
-                    HorizontalOptions="Center"
                     Text="1"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="Center" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="2"
@@ -151,11 +151,9 @@
                 </Frame.GestureRecognizers>
                 <Label
                     Margin="-10"
-                    FontSize="18"
                     HorizontalOptions="StartAndExpand"
                     Text="{Binding P1.Name, FallbackValue='Leistungskurs'}"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="CenterAndExpand" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="2"
@@ -180,10 +178,8 @@
                 <Label
                     Margin="-10"
                     FontSize="Large"
-                    HorizontalOptions="Center"
                     Text="2"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="Center" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="3"
@@ -194,11 +190,9 @@
                 </Frame.GestureRecognizers>
                 <Label
                     Margin="-10"
-                    FontSize="18"
                     HorizontalOptions="StartAndExpand"
                     Text="{Binding P2.Name, FallbackValue='Leistungskurs'}"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="CenterAndExpand" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="3"
@@ -223,10 +217,8 @@
                 <Label
                     Margin="-10"
                     FontSize="Large"
-                    HorizontalOptions="Center"
                     Text="3"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="Center" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="4"
@@ -237,11 +229,9 @@
                 </Frame.GestureRecognizers>
                 <Label
                     Margin="-10"
-                    FontSize="18"
                     HorizontalOptions="StartAndExpand"
                     Text="{Binding P3.Name, FallbackValue='Grundkurs'}"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="CenterAndExpand" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="4"
@@ -266,10 +256,8 @@
                 <Label
                     Margin="-10"
                     FontSize="Large"
-                    HorizontalOptions="Center"
                     Text="4"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="Center" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="5"
@@ -280,11 +268,9 @@
                 </Frame.GestureRecognizers>
                 <Label
                     Margin="-10"
-                    FontSize="18"
                     HorizontalOptions="StartAndExpand"
                     Text="{Binding P4.Name, FallbackValue='Grundkurs'}"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="CenterAndExpand" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="5"
@@ -300,10 +286,8 @@
                 <Label
                     Margin="-10"
                     FontSize="Large"
-                    HorizontalOptions="Center"
                     Text="5"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="Center" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="6"
@@ -314,11 +298,9 @@
                 </Frame.GestureRecognizers>
                 <Label
                     Margin="-10"
-                    FontSize="18"
                     HorizontalOptions="StartAndExpand"
                     Text="{Binding P5.Name, FallbackValue='Grundkurs'}"
-                    TextColor="{DynamicResource Secondary}"
-                    VerticalOptions="CenterAndExpand" />
+                    TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
                 Grid.Row="6"

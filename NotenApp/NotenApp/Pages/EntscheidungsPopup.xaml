@@ -5,32 +5,43 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xctViews="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
     HorizontalOptions="CenterAndExpand"
-    Size="370,80"
+    Size="370,120"
     VerticalOptions="EndAndExpand">
-    <Grid Padding="10,15" BackgroundColor="{DynamicResource Primary}">
+    <Grid Padding="10" BackgroundColor="{DynamicResource Primary}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Label
+            x:Name="fachname"
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            FontAttributes="Bold"
+            FontSize="28"
+            HorizontalOptions="Center"
+            TextColor="{DynamicResource Fith}"
+            VerticalOptions="Center" />
         <Button
+            Grid.Row="1"
             Grid.Column="0"
             BackgroundColor="{DynamicResource Secondary}"
             Clicked="LK_Button_Clicked"
             CornerRadius="20"
-            FontSize="20"
+            FontSize="25"
             Text="Lk"
             TextColor="{DynamicResource Fith}" />
         <Button
+            Grid.Row="1"
             Grid.Column="1"
             BackgroundColor="{DynamicResource Secondary}"
             Clicked="Klausur_Button_Clicked"
             CornerRadius="20"
-            FontSize="20"
+            FontSize="25"
             Text="Klausur"
             TextColor="{DynamicResource Fith}" />
     </Grid>
 </xctViews:Popup>
-
-
-
-

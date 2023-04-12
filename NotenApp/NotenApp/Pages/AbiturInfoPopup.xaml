@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xctViews:Popup
+    x:Class="NotenApp.Pages.AbiturInfoPopup"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xctViews="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+    HorizontalOptions="CenterAndExpand"
+    Opacity=".7"
+    Size="370,390"
+    VerticalOptions="CenterAndExpand">
+
+    <StackLayout Padding="30,20" BackgroundColor="{DynamicResource Primary}">
+        <Label
+            FontAttributes="Bold"
+            FontSize="20"
+            Text="Der Abischnitt wird (genau) berechnet, sobald folgende Bedingungen erfüllt sind!"
+            TextColor="{DynamicResource Fith}" />
+        <BoxView
+            Margin="0,0,0,15"
+            BackgroundColor="{DynamicResource Secondary}"
+            HeightRequest="2" />
+        <StackLayout Orientation="Horizontal">
+            <CheckBox x:Name="mehrFaecher" IsEnabled="False" />
+            <Label
+                FontSize="18"
+                Text="Es sind mindestens 40 Halbjahre vorhanden."
+                TextColor="{DynamicResource Fith}"
+                VerticalOptions="Center" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <CheckBox x:Name="notenHalbjahr1" IsEnabled="False" />
+            <Label
+                FontSize="18"
+                Text="Jedes Fach in Halbjahr 1 hat eine Note."
+                TextColor="{DynamicResource Fith}"
+                VerticalOptions="Center" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <CheckBox x:Name="leistunkskurs" IsEnabled="False" />
+            <Label
+                FontSize="18"
+                Text="Du hast deine 2 Leistungskurse gesetzt."
+                TextColor="{DynamicResource Fith}"
+                VerticalOptions="Center" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <CheckBox x:Name="prfaecher" IsEnabled="False" />
+            <Label
+                FontSize="18"
+                Text="Du hast deine 5 Prüfungsfächer eingetragen."
+                TextColor="{DynamicResource Fith}"
+                VerticalOptions="Center" />
+        </StackLayout>
+
+
+
+
+
+        <Button
+            x:Name="btn"
+            BackgroundColor="{DynamicResource Secondary}"
+            Clicked="btn_Clicked"
+            CornerRadius="15"
+            FontSize="18"
+            HeightRequest="50"
+            HorizontalOptions="End"
+            Text="OK"
+            TextColor="{DynamicResource Fith}"
+            WidthRequest="50" />
+    </StackLayout>
+
+
+
+</xctViews:Popup>

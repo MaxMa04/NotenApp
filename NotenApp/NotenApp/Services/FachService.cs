@@ -21,11 +21,11 @@ namespace NotenApp.Services
         static SQLiteAsyncConnection db;
         static async Task Init()
         {
-            if(db!= null)
-            {
-                return;
-            }
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dateeeen");
+            //if(db!= null)
+            //{
+            //    return;
+            //}
+            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DatenduHs6");
 
             db = new SQLiteAsyncConnection(databasePath);
 
@@ -33,8 +33,135 @@ namespace NotenApp.Services
             await db.CreateTableAsync<PrFach>();
             await db.CreateTableAsync<HJNote>();
             await db.CreateTableAsync<Ziel>();
+            await db.CreateTableAsync<UserModel>();
+        }
+        //
+        //
+        //
+        //
+        //
+        //
+        //User
+        //
+        //
+        //
+        //
+        //
+        //
+        public static async Task CreateUserIfNotExists()
+        {
+            await Init();
+            if (await db.Table<UserModel>().CountAsync() == 0)
+            {
+                UserModel user = new UserModel()
+                {
+                    Abischnitt = null,
+                    PunktzahlBlock1 = null,
+                    PunktzahlBlock2 = null
+                };
+                await db.InsertAsync(user);
+            }
+            else return;
+        }
+        public static async Task<UserModel> GetUserData()
+        {
+            await Init();
+            return await db.Table<UserModel>().FirstOrDefaultAsync();
+        }
+        public static async Task UpdateUserB1()
+        {
+            await Init();
+            if(await db.Table<UserModel>().CountAsync() > 1)
+            {
+                throw new Exception("Zu viele Nutzer");
+            }
+            else
+            {
+                var user = await db.Table<UserModel>().FirstOrDefaultAsync();
+                user.PunktzahlBlock1 = await HalbjahrViewModel.Instance.GetPunktzahlBlock1();
+                user.Abischnitt = await GetAbiturNote(user);
+                await db.UpdateAsync(user);
+            }
+        }
+        public static async Task UpdateUserB2()
+        {
+            await Init();
+            if (await db.Table<UserModel>().CountAsync() > 1)
+            {
+                throw new Exception("Zu viele Nutzer");
+            }
+            else
+            {
+                var user = await db.Table<UserModel>().FirstOrDefaultAsync();
+                user.PunktzahlBlock2 = await GetPunktzahlBlock2();
+                user.Abischnitt = await GetAbiturNote(user);
+                await db.UpdateAsync(user);
+            }
+        }
+        public static async Task<float?> GetAbiturNote(UserModel user)
+        {
+            await Init();
+            int? abipunktzahl = (int?)await GetAbiturPunktzahl(user);
+            if(abipunktzahl == null)
+            {
+                return null;
+            }
+            List<int> punktzahlen = new List<int> { 300,301,319,337,355,373,391,409,427,445,463,481,499,517,535,553,571,
+                589,607,625,643,661,679,697,715,733,751,769,787,805,823};
+            int stelle = 0;
+            float abiturNote;
+            if (abipunktzahl < 5)
+            {
+                return -1;
+            }
+            for (int i = 0; i < punktzahlen.Count; i++)
+            {
+                if (abipunktzahl >= punktzahlen[i])
+                {
+                    stelle = i;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            abiturNote = 4.0f - 0.1f * stelle;
+
+            return abiturNote;
+        }
+        public static async Task<float?> GetAbiturPunktzahl(UserModel user)
+        {
+            await Init();
+
+            float? punktzahlBlock2 = user.PunktzahlBlock2;
+            float? punktzahlBlock1 = user.PunktzahlBlock1;
+            float? abipunktzahl;
+
+            if (punktzahlBlock2 != null && punktzahlBlock1 != null)
+            {
+                abipunktzahl = punktzahlBlock2 + punktzahlBlock1;
+                
+            }
+            else if (punktzahlBlock2 == null && punktzahlBlock1 != null) //Durchschnitt Block 1 wird als Schätzung für Block 2 genommen
+            {
+                float? schBlock2 = punktzahlBlock1 / 600 * 300;
+                abipunktzahl = (float?)Math.Round((double)schBlock2, 0) + punktzahlBlock1;
+                
+            }
+            else
+            {
+                abipunktzahl = null;
+            }
+            return abipunktzahl;
+
         }
 
+
+
+
+        //
+        //
         //
         //
         //
@@ -79,7 +206,30 @@ namespace NotenApp.Services
 
 
         }
-
+        public static async Task<List<HjFach>> GetFaecherToUpdate(HjFach fach)
+        {
+            await Init();
+            var facher =  await db.Table<HjFach>().Where(f => f.Name == fach.Name).ToListAsync();
+            if (facher.Count != 4)
+            {
+                throw new Exception("FachService Zeile 211 die Anzahl der Fächer stimmt nicht");
+            }
+            else
+            {
+                facher = Controller.SortListByHalbjahr(facher);
+                return facher;
+            }
+        }
+        public static async Task<List<HjFach>> GetFaecherWhenAdded(string name)
+        {
+            await Init();
+            List<HjFach> facher = new List<HjFach>();
+            for (int i = 1; i <= 4; i++)
+            {
+                facher.Add(await db.Table<HjFach>().Where(f => f.Name == name && f.Halbjahr == i).FirstOrDefaultAsync());
+            }
+            return facher;
+        }
         public static async Task<List<HjFach>> GetFaecher(int halbjahr)
         {
             await Init();
@@ -170,10 +320,7 @@ namespace NotenApp.Services
                         fach.IsLK = true;
                         await db.UpdateAsync(fach);
                     }
-                    await HalbjahrViewModel.Instance.Refresh(1);
-                    await HalbjahrViewModel.Instance.Refresh(2);
-                    await HalbjahrViewModel.Instance.Refresh(3);
-                    await HalbjahrViewModel.Instance.Refresh(4);
+
                     break;
                 case "GK":
                     foreach (var fach in faecher)
@@ -181,10 +328,7 @@ namespace NotenApp.Services
                         fach.IsLK = false;
                         await db.UpdateAsync(fach);
                     }
-                    await HalbjahrViewModel.Instance.Refresh(1);
-                    await HalbjahrViewModel.Instance.Refresh(2);
-                    await HalbjahrViewModel.Instance.Refresh(3);
-                    await HalbjahrViewModel.Instance.Refresh(4);
+
                     break;
                 default:
                     break;
@@ -211,8 +355,7 @@ namespace NotenApp.Services
         {
             await Init();
             List<HjFach> list = await db.Table<HjFach>().Where(f => f.Name == fach.Name).ToListAsync();
-            
-            Ziel ziel = await db.Table<Ziel>().Where(z => z.FachId == fach.Id).FirstOrDefaultAsync();
+
             foreach (var item in list)
             {
                 await db.DeleteAsync<HjFach>(item.Id);
@@ -223,13 +366,6 @@ namespace NotenApp.Services
                 PrFach prFach = await db.Table<PrFach>().Where(f => f.Name == fach.Name).FirstOrDefaultAsync();
                 await UpdateName("-", prFach.PrNummer);
             }
-            
-            if(ziel != null)
-            {
-                await DeleteZiel(ziel);
-            }
-            
-            
         }
         public static async Task RemoveAllNoten(HjFach fach)
         {
@@ -256,7 +392,7 @@ namespace NotenApp.Services
                     sumKl += note.Note;
                 }
                 duKL = sumKl / klNoten.Count;
-                return duKL;
+                return (float?)Math.Round((decimal)duKL,1);
             }
         } 
         public static async Task<float?> GetFachLKDurchschnitt(HjFach fach)
@@ -331,6 +467,12 @@ namespace NotenApp.Services
             HjFach fachd = await db.Table<HjFach>().Where(f => f.Id == fach.Id).FirstOrDefaultAsync();
             return fachd;   
         }
+        public static async Task<HjFach> GetFach(string fachName, int halbjahr)
+        {
+            await Init();
+            return await db.Table<HjFach>().Where(f => f.Name == fachName && f.Halbjahr == halbjahr).FirstOrDefaultAsync();
+            
+        }
         //
         //
         //
@@ -377,7 +519,7 @@ namespace NotenApp.Services
                 }
                 else
                 {
-                    await DeleteZiel(ziel);
+                    return;
                 }
                 
             }
@@ -390,6 +532,22 @@ namespace NotenApp.Services
         {
             await Init();
             await db.DeleteAsync(ziel);
+        }
+        public static async Task DeleteZiele(HjFach fach)
+        {
+            await Init();
+            var ziele = await db.Table<Ziel>().Where(z => z.FachName == fach.Name).ToListAsync();
+            if(ziele.Count > 0)
+            {
+                foreach (var ziel in ziele)
+                {
+                    await db.DeleteAsync(ziel);
+                }
+            }
+            else
+            {
+                return;
+            }
         }
         public static async Task UpdateZielErforderlicheNoten(HjFach fach)
         {
@@ -413,22 +571,26 @@ namespace NotenApp.Services
                 float sumLk = 0;
                 foreach (var item in lks)
                 {
-                    sumLk += (float)item.Note;
+                    sumLk += item.Note;
                 }
                 foreach (var item in klausuren)
                 {
-                    sumKl += (float)item.Note;
+                    sumKl += item.Note;
                 }
                 float duKl = sumKl / klausuren.Count;
                 float duLk = sumLk / lks.Count;
                 if(lks.Count == 0 && klausuren.Count > 0)
                 {
-                    ziel.ErforderlicheLKNote = (int)Math.Round(zielNote * 2 - duKl);
-                    ziel.ErforderlicheKLNote = (int)Math.Round(zielNote * (klausuren.Count + 1) - sumKl);
+                    ziel.ErforderlicheLKNote = (int)Math.Round(zielNote * 2 - duKl, 0);
+                    ziel.ErforderlicheKLNote = (int)Math.Round(zielNote * (klausuren.Count + 1) - sumKl, 0);
                     float ndukl = (sumKl + ziel.ErforderlicheKLNote) / (klausuren.Count + 1);
                     if (ndukl < zielNote)
                     {
                         ziel.ErforderlicheKLNote += 1;
+                    }
+                    if((ziel.ErforderlicheLKNote + duKl)/2 < zielNote)
+                    {
+                        ziel.ErforderlicheLKNote += 1;
                     }
                     if (ziel.ErforderlicheLKNote > 15 || ziel.ErforderlicheKLNote > 15)
                     {
@@ -454,12 +616,16 @@ namespace NotenApp.Services
                 }
                 else if (lks.Count > 0 && klausuren.Count == 0)
                 {
-                    ziel.ErforderlicheLKNote = (int)Math.Round(zielNote * (lks.Count + 1) - sumLk);
-                    ziel.ErforderlicheKLNote = (int)Math.Round(zielNote * 2 - duLk);
+                    ziel.ErforderlicheLKNote = (int)Math.Round(zielNote * (lks.Count + 1) - sumLk, 0);
+                    ziel.ErforderlicheKLNote = (int)Math.Round(zielNote * 2 - duLk, 0);
                     float nduLk = (sumLk + ziel.ErforderlicheLKNote) / (lks.Count + 1);
                     if(nduLk < zielNote)
                     {
                         ziel.ErforderlicheLKNote += 1;
+                    }
+                    if ((ziel.ErforderlicheKLNote + duLk) / 2 < zielNote)
+                    {
+                        ziel.ErforderlicheKLNote += 1;
                     }
                     if (ziel.ErforderlicheLKNote > 15 || ziel.ErforderlicheKLNote > 15)
                     {
@@ -555,26 +721,28 @@ namespace NotenApp.Services
         public static async Task AddPrFach(string name, int prNummer)
         {
             await Init();
-            List<HjFach> HjFaecher = await db.Table<HjFach>().ToListAsync();
+            List<HjFach> HjFaecher = await db.Table<HjFach>().Where(f => f.Name == name).ToListAsync();
+           
             foreach (var item in HjFaecher)
             {
-                if (item.Name == name)
+                
+                if(prNummer == 1 || prNummer == 2)
                 {
-                    if(prNummer == 1 || prNummer == 2)
-                    {
-                        item.EingebrachteHalbjahre = 4;
-                        item.IsPrFach = true;
-                        item.IsLK = true;
-                        await db.UpdateAsync(item);
-                    }
-                    else
-                    {
-                        item.EingebrachteHalbjahre = 4;
-                        item.IsPrFach = true;
-                        await db.UpdateAsync(item);
-                    }
+                    item.EingebrachteHalbjahre = 4;
+                    item.IsPrFach = true;
+                    item.IsLK = true;
                     
+                    await db.UpdateAsync(item);
                 }
+                else
+                {
+                    item.EingebrachteHalbjahre = 4;
+                    item.IsPrFach = true;
+                   
+                    await db.UpdateAsync(item);
+                }
+                    
+                
             }
             PrFach fach = new PrFach()
             {
@@ -583,6 +751,7 @@ namespace NotenApp.Services
             };
         
             await db.InsertAsync(fach);
+            await HalbjahrViewModel.Instance.UpdateFachState(HjFaecher[0]);
         }
         
         public static async Task UpdateName(string name, int prNummer)
@@ -590,6 +759,8 @@ namespace NotenApp.Services
             await Init();
             PrFach prFach = await db.Table<PrFach>().Where(pf => pf.PrNummer == prNummer).FirstOrDefaultAsync();
             List<HjFach> HjFaecher = await db.Table<HjFach>().Where(hf => hf.Name == prFach.Name || hf.Name == name).ToListAsync();
+            var altesFach = new HjFach();
+            var neuesFach = new HjFach();
             foreach (var hjFach in HjFaecher) //einzubringende Halbjahre werden angepasst für altes Fach
             { 
                 if(hjFach.Name == prFach.Name)
@@ -597,9 +768,16 @@ namespace NotenApp.Services
                     hjFach.EingebrachteHalbjahre = hjFach.MinHalbjahre;
                     hjFach.IsPrFach = false;
                     hjFach.IsLK = false;
+                    altesFach = hjFach;
                     await db.UpdateAsync(hjFach);
                 }             
             }
+            if(altesFach.Name != null)
+            {
+                await HalbjahrViewModel.Instance.UpdateFachState(altesFach);
+            }
+            
+            
             prFach.Name = name;
             prFach.NoteMündlich = null;
             prFach.NoteSchriftlich = null;
@@ -615,58 +793,81 @@ namespace NotenApp.Services
                         hjFach.EingebrachteHalbjahre = 4;
                         hjFach.IsPrFach = true;
                         hjFach.IsLK=true;
-
+                        neuesFach = hjFach;
                         await db.UpdateAsync(hjFach);
                     }
                     else
                     {
                         hjFach.EingebrachteHalbjahre = 4;
                         hjFach.IsPrFach = true;
+                        neuesFach = hjFach;
                         await db.UpdateAsync(hjFach);
                     }
                     
                 } 
+            }
+            if (neuesFach.Name != null)
+            {
+                await HalbjahrViewModel.Instance.UpdateFachState(neuesFach);
             }
             
         }
         public static async Task UpdateNote(int? note, int prNummer, NotenTyp notenTyp)
         {
             await Init();
-            List<PrFach> PrFaecher = await db.Table<PrFach>().ToListAsync();
-            foreach (var item in PrFaecher)
+            if (note == null) return;
+            var prFach = await db.Table<PrFach>().Where(p => p.PrNummer == prNummer).FirstOrDefaultAsync();
+            
+            switch (notenTyp)
             {
-                if (item.PrNummer == prNummer)
-                {
-                    switch (notenTyp)
+                case NotenTyp.Schriftlich:
+                    if(note == -1)
                     {
-                        case NotenTyp.Schriftlich:
-                            item.NoteSchriftlich = note;
-                            break;
-                        case NotenTyp.Mündlich:
-                            item.NoteMündlich = note;
-                            break;
-                    }
-                    if(item.NoteSchriftlich != null && item.NoteMündlich != null)
-                    {
-                        item.Durchschnitt = (item.NoteSchriftlich + item.NoteMündlich) / 2;
-                    }
-                    else if(item.NoteSchriftlich == null && item.NoteMündlich == null)
-                    {
-                        item.Durchschnitt = null;
-                    }
-                    else if(item.NoteSchriftlich == null && item.NoteMündlich != null)
-                    {
-                        item.Durchschnitt = item.NoteMündlich;
+                        prFach.NoteSchriftlich = null;
                     }
                     else
                     {
-                        item.Durchschnitt = item.NoteSchriftlich;
+                        prFach.NoteSchriftlich = note;
                     }
-                    await db.UpdateAsync(item);
                     
-                }
+                    break;
+                case NotenTyp.Mündlich:
+                    if (note == -1)
+                    {
+                        prFach.NoteMündlich = null;
+                    }
+                    else
+                    {
+                        prFach.NoteMündlich = note;
+                    }
+                    break;
             }
+            if(prFach.NoteSchriftlich != null && prFach.NoteMündlich != null)
+            {
+                prFach.Durchschnitt = (float)Math.Round((((decimal)prFach.NoteSchriftlich * 2) + (decimal)prFach.NoteMündlich) / 3, 2);
+            }
+            else if(prFach.NoteSchriftlich == null && prFach.NoteMündlich == null)
+            {
+                prFach.Durchschnitt = null;
+            }
+            else if(prFach.NoteSchriftlich == null && prFach.NoteMündlich != null)
+            {
+                prFach.Durchschnitt = prFach.NoteMündlich;
+            }
+            else
+            {
+                prFach.Durchschnitt = prFach.NoteSchriftlich;
+            }
+            await db.UpdateAsync(prFach);
+                    
+                
+            
 
+        }
+        public static async Task<int> CountPrFaecher()
+        {
+            var list =  await db.Table<PrFach>().Where(p => p.Name != "-").ToListAsync();
+            return list.Count;
         }
         public static async Task<PrFach> GetPrFach(int prNummer)
         {
@@ -711,7 +912,7 @@ namespace NotenApp.Services
             durchschnittBlock2 = durchschnittsSumme / anzahlFaecher;
             return durchschnittBlock2;
         }
-        public static async Task<int> GetPunktzahlBlock2()
+        public static async Task<int?> GetPunktzahlBlock2()
         {
             await Init();
             float? durchschnitt = await GetDurchschnittBlock2();
@@ -723,67 +924,12 @@ namespace NotenApp.Services
             }
             else
             {
-                return 0;
+                return null;
             }
 
         }
         //Abitur
-        public static async Task<float?> GetAbiturNote()
-        {
-            await Init();
-            int abipunktzahl = (int)await GetAbiturPunktzahl();
-            List<int> punktzahlen = new List<int> { 300,301,319,337,355,373,391,409,427,445,463,481,499,517,535,553,571,
-                589,607,625,643,661,679,697,715,733,751,769,787,805,823};
-            int stelle = 0;
-            float abiturNote;
-            if (abipunktzahl < 5)
-            {
-                return -1;
-            }
-            for (int i = 0; i < punktzahlen.Count; i++)
-            {
-                if(abipunktzahl >= punktzahlen[i])
-                {
-                    stelle = i;
-                }
-                else
-                {
-                    break;
-                }
-            }
 
-            abiturNote = 4.0f - 0.1f * stelle;
-
-            return abiturNote;
-        }
-        
-        
-        public static async Task<float> GetAbiturPunktzahl()
-        {
-            await Init();
-            HalbjahrViewModel model = new HalbjahrViewModel();
-            float? durchschnittBlock2 = await GetDurchschnittBlock2();
-            float punktzahlBlock1 = (int)await model.GetPunktzahlBlock1();
-            
-            
-            if(durchschnittBlock2 != null && punktzahlBlock1 > 4)
-            {
-                float punktzahlBlock2 = (float)Math.Round((double)durchschnittBlock2, 1) * 20;
-                float abipunktzahl = punktzahlBlock2 + punktzahlBlock1;
-                return abipunktzahl;
-            }
-            else if(durchschnittBlock2== null && punktzahlBlock1 > 4)
-            {
-                float schBlock2 = punktzahlBlock1 / 600 * 300;
-                float abipunktzahl = (float)Math.Round((double)schBlock2,0) + punktzahlBlock1;
-                return abipunktzahl;
-            }
-            else
-            {
-                return punktzahlBlock1;
-            }
- 
-        }
         public static async Task EntscheideFremdsprache()
         {
             await Init();

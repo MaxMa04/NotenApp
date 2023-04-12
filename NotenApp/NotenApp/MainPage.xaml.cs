@@ -8,58 +8,31 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 
 namespace NotenApp
 {
     public partial class MainPage : ContentPage
     {
-        MainPageViewModel model;
-        DetailSeite detailSeite;
+        Block2ViewModel vm = new Block2ViewModel();
         
 
 
         public MainPage()
         {
             InitializeComponent();
-            model = BindingContext as MainPageViewModel;
-            
+            BindingContext = UserViewModel.Instance;
+            Task.Run(async () => { await vm.InitBlock2(); });
+            Task.Run(async () => await UserViewModel.Instance.InitZiele());
+            Task.Run(async () => await Task.WhenAll(HalbjahrViewModel.Instance.LoadInitialFaecher(), HalbjahrViewModel.Instance.ChangeHjDurchschnitt(null)));
 
-            Task.Run(async () =>
-            {
-                await HalbjahrViewModel.Instance.Refresh(1);
-                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(1);
-                await HalbjahrViewModel.Instance.Refresh(2);
-                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(2);
-                await HalbjahrViewModel.Instance.Refresh(3);
-                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(3);
-                await HalbjahrViewModel.Instance.Refresh(4);
-                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(4);
-            });
+            
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            Task.Run(async () =>
-            {
-                model.DurchschnittHJ1 = await FachService.GetHJGesamtDurchschnitt(1);
-                model.DurchschnittHJ2 = await FachService.GetHJGesamtDurchschnitt(2);
-                model.DurchschnittHJ3 = await FachService.GetHJGesamtDurchschnitt(3);
-                model.DurchschnittHJ4 = await FachService.GetHJGesamtDurchschnitt(4);
-            });
-            Task.Run(async () =>
-            {
-                await model.InitializeZiele();
-            });
-            Task.Run(async () =>
-            {
-                await model.GetPunktzahlen();
-            });
-            Task.Run(async () =>
-            {
-                model.AbiturNote = await FachService.GetAbiturNote();
-            });
-
+            await UserViewModel.Instance.InitUser();
         }
 
         private async void Tapped1(object sender, System.EventArgs e)
@@ -92,15 +65,25 @@ namespace NotenApp
             await Navigation.PushAsync(new Block2Page());
         }
 
-        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void GoToDetailsPage(object sender, SelectionChangedEventArgs e)
         {
+           
             var ziel = e.CurrentSelection.FirstOrDefault() as Ziel;
-            await FachService.DeleteZiel(ziel);
-            await Task.Run(async () =>
+            if (ziel != null)
             {
-                await model.InitializeZiele();
-            });
+                var fach = await FachService.GetFach(ziel.FachName, ziel.Halbjahr);
+                await Navigation.PushAsync(new DetailSeite(fach));
+            }
+            else
+            {
+                return;
+            }
+            cv.SelectedItem = null;
+        }
 
+        private void OpenAbiturInfoPopup(object sender, EventArgs e)
+        {
+            Navigation.ShowPopup(new AbiturInfoPopup()); 
         }
     }
 }

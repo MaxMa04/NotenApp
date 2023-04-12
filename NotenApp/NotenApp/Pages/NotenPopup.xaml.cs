@@ -16,44 +16,57 @@ namespace NotenApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotenPopup : Popup
     {
-        
-
-        public NotenPopup(WhichNote note)
+        private int? returnWhenDismissed;
+        public NotenPopup(WhichNote note, NotenTyp notenTyp, string fachName)
         {
             InitializeComponent();
             switch (note)
             {
                 case WhichNote.Block1:
                     btn.Text = "Zurück";
+                    returnWhenDismissed = null;
                     break;
                 case WhichNote.Block2:
-                    btn.Text = "Keine Note";
+                    btn.Text = "Note löschen";
+                    returnWhenDismissed = -1;
                     break;
                 case WhichNote.Ziel:
-                    btn.Text = "Kein Ziel";
+                    btn.Text = "Ziel löschen";
+                    returnWhenDismissed = -1;
                     break;
             }
+            switch (notenTyp)
+            {
+                case NotenTyp.LK:
+                    notentyp.Text = "Lk";
+                    break;
+                case NotenTyp.Klausur:
+                    notentyp.Text = "Klausur";
+                    break;
+                case NotenTyp.Schriftlich:
+                    notentyp.Text = "Schriftlich";
+                    break;
+                case NotenTyp.Mündlich:
+                    notentyp.Text = "Mündlich";
+                    break;
+                default:
+                    notentyp.Text = "Ziel";
+                    break;
+            }
+            fachname.Text = fachName;
             
+
         }
-        private void Button_Clicked1(object sender, EventArgs e)
+        private void NotenButton_Clicked(object sender, EventArgs e)
         {
             var button = (Button)sender;
             int note = Convert.ToInt32(button.Text);
             Dismiss(note);
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void DismissButton_Clicked(object sender, EventArgs e)
         {
-            Dismiss(null);
-        }
-
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            var frame = (Frame)sender;
-            Label label = (Label)frame.GetChildren().FirstOrDefault();
-            int text = Convert.ToInt16(label.Text);
-            Dismiss(text);
-            
+            Dismiss(returnWhenDismissed);
         }
     }
 }

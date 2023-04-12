@@ -70,6 +70,7 @@ namespace NotenApp.ViewModels
             set
             {
                 durchschnittBlock2 = value;
+                UserViewModel.Instance.DurchschnittBlock2 = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DurchschnittBlock2)));
             }
         }
@@ -90,9 +91,10 @@ namespace NotenApp.ViewModels
             P3 = await FachService.GetPrFach(3);
             P4 = await FachService.GetPrFach(4);
             P5 = await FachService.GetPrFach(5);
-            int punktzahlBlock2 = await FachService.GetPunktzahlBlock2();
+            int? punktzahlBlock2 = await FachService.GetPunktzahlBlock2();
             DurchschnittBlock2 = await FachService.GetDurchschnittBlock2();
-            if (punktzahlBlock2 == 0)
+
+            if (punktzahlBlock2 == null)
             {
                 PunktzahlBlock2 = "-/300";
             }
@@ -100,6 +102,7 @@ namespace NotenApp.ViewModels
             {
                 PunktzahlBlock2 = punktzahlBlock2.ToString() + "/300";
             }
+            await FachService.UpdateUserB2();
         }
         
     }

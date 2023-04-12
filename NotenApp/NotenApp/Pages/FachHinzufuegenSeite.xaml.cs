@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,23 +24,29 @@ namespace NotenApp.Pages
         {
             base.OnAppearing();
             await vm.InitHjFaecher();
+            
         }
 
 
-
-        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void AddFaecher(object sender, EventArgs e)
         {
-            var fach = e.CurrentSelection.FirstOrDefault() as HjFach;
-
-            await FachService.AddFach(fach.Name, fach.Aufgabenfeld, 1, fach.MinHalbjahre, fach.IsLK, fach.IsPrFach, fach.IsFremdsprache);
-            await FachService.AddFach(fach.Name, fach.Aufgabenfeld, 2, fach.MinHalbjahre, fach.IsLK, fach.IsPrFach, fach.IsFremdsprache);
-            await FachService.AddFach(fach.Name, fach.Aufgabenfeld, 3, fach.MinHalbjahre, fach.IsLK, fach.IsPrFach, fach.IsFremdsprache);
-            await FachService.AddFach(fach.Name, fach.Aufgabenfeld, 4, fach.MinHalbjahre, fach.IsLK, fach.IsPrFach, fach.IsFremdsprache);
-            
-            
-            Task[] tasks = new Task[] { HalbjahrViewModel.Instance.Refresh(1), HalbjahrViewModel.Instance.Refresh(2), HalbjahrViewModel.Instance.Refresh(3), HalbjahrViewModel.Instance.Refresh(4) };
-            await Task.WhenAll(tasks);
+            foreach (var item in cv.SelectedItems)
+            {
+                var fach = item as HjFach;
+                if (fach != null)
+                {
+                    await Task.WhenAll(FachService.AddFach(fach.Name, fach.Aufgabenfeld, 1, fach.MinHalbjahre, fach.IsLK, fach.IsPrFach, fach.IsFremdsprache),
+                        FachService.AddFach(fach.Name, fach.Aufgabenfeld, 2, fach.MinHalbjahre, fach.IsLK, fach.IsPrFach, fach.IsFremdsprache),
+                        FachService.AddFach(fach.Name, fach.Aufgabenfeld, 3, fach.MinHalbjahre, fach.IsLK, fach.IsPrFach, fach.IsFremdsprache),
+                        FachService.AddFach(fach.Name, fach.Aufgabenfeld, 4, fach.MinHalbjahre, fach.IsLK, fach.IsPrFach, fach.IsFremdsprache));
+                    var faecherToAdd = await FachService.GetFaecherWhenAdded(fach.Name);
+                    HalbjahrViewModel.Instance.FaecherHJ1.Add(faecherToAdd[0]);
+                    HalbjahrViewModel.Instance.FaecherHJ2.Add(faecherToAdd[1]);
+                    HalbjahrViewModel.Instance.FaecherHJ3.Add(faecherToAdd[2]);
+                    HalbjahrViewModel.Instance.FaecherHJ4.Add(faecherToAdd[3]);
+                }
+            }
             await Navigation.PopAsync();
-        }                              
+        }
     }                                  
 }

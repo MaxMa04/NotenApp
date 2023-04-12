@@ -7,12 +7,15 @@
     xmlns:local="clr-namespace:NotenApp.ViewModels"
     xmlns:models="clr-namespace:NotenApp.Models"
     x:Name="hj4"
-    x:DataType="local:HalbjahrViewModel"
     BackgroundColor="{DynamicResource Primary}">
+    <ContentPage.BindingContext>
+        <local:HalbjahrViewModel />
+    </ContentPage.BindingContext>
     <NavigationPage.TitleView>
         <Label
             FontSize="28"
             Text="Halbjahr 4"
+            VerticalOptions="Center"
             TextColor="{DynamicResource Fith}" />
     </NavigationPage.TitleView>
     <ContentPage.Content>
@@ -68,7 +71,7 @@
                                         Invoked="SwipeItem_Invoked_1" />
                                     <SwipeItem
                                         BackgroundColor="Red"
-                                        Command="{Binding Source={x:Reference hj4}, Path=BindingContext.RemoveCommand}"
+                                        Command="{Binding Source={x:Reference hj4}, Path=BindingContext.DeleteFachCommand}"
                                         CommandParameter="{Binding .}"
                                         IconImageSource="delete.png" />
 

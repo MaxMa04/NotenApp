@@ -18,8 +18,6 @@ namespace NotenApp.ViewModels
         public ObservableRangeCollection<HJNote> KlausurNoten { get; set; }
         public CustomSwitch Switch { get; set; }
         public HjFach Fach { get; set; }
-
-
         private string ziel;
         public string Ziel
         {
@@ -91,10 +89,6 @@ namespace NotenApp.ViewModels
             LKNoten.Clear();
             var lKNoten = await FachService.GetFachNoten(fach, NotenTyp.LK);
             LKNoten.AddRange(lKNoten);
-            
-
-
-
         }
         public async Task InitFachDurchschnitt(HjFach fach)
         {

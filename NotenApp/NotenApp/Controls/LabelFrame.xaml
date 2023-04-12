@@ -12,7 +12,7 @@
         <Label
             x:Name="innerLabel"
             Margin="-5"
-            FontSize="Medium"
+            FontSize="20"
             HorizontalOptions="CenterAndExpand"
             TextColor="Black"
             VerticalOptions="CenterAndExpand" />

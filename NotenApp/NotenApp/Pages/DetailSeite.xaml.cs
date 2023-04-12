@@ -161,6 +161,10 @@ namespace NotenApp.Pages
             _switch.KnobCornerRadius = _switch.IsToggled ? new CornerRadius(0, 5, 0, 5) : new CornerRadius(5, 0, 5, 0);
             _switch.KnobColor = ColorAnimationUtil.ColorAnimation(fromColorLight, toColorLight, t);
         }
-    
+
+        private void SetEndnote(object sender, EventArgs e)
+        {
+            Console.WriteLine("Endnote wurde festgelegt");
+        }
     }
 }

@@ -15,6 +15,8 @@ namespace NotenApp.Models
         public int EingebrachteHalbjahre { get; set; } //Anzahl an Halbjahren, die die Aufgrund von Einbringungsregeln eingebracht werden
         public int Aufgabenfeld { get; set; } 
         public bool IsLK { get; set; } //Ist das Fach dein Leistungskurs?
+        public bool WirdEingebracht { get; set; }
+        public int? Endnote { get; set; }
         public bool IsPrFach { get; set; }
         public bool IsFremdsprache { get; set; }
         [Ignore]

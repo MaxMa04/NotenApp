@@ -25,7 +25,7 @@ namespace NotenApp.Services
             //{
             //    return;
             //}
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DatenduHs6");
+            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DatenduHs7");
 
             db = new SQLiteAsyncConnection(databasePath);
 
@@ -417,6 +417,10 @@ namespace NotenApp.Services
 
         public static async Task<float?> GetFachDurchschnitt(HjFach fach)
         {
+            if(fach.Endnote != null)
+            {
+                return fach.Endnote;
+            }
             float? durchschnittLk = await GetFachLKDurchschnitt(fach);
             
             float? durchschnittKlausur = await GetFachKlausurDurchschnitt(fach);

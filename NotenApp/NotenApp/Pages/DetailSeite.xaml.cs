@@ -29,7 +29,7 @@ namespace NotenApp.Pages
             this.fach = fach;
             model = BindingContext as DetailViewModel;
             model.FachName = fach.Name;
-            Task[] task = new Task[] { model.InitNoten(fach), model.InitEinzHj(fach), model.InitFachDurchschnitt(fach), model.InitZiel(fach) };
+            Task[] task = new Task[] { model.InitNoten(fach), model.InitEinzHj(fach), model.InitFachDurchschnitt(fach), model.InitZiel(fach), model.InitEndnote(fach) };
             Task.WhenAll(task);
             
 
@@ -162,9 +162,28 @@ namespace NotenApp.Pages
             _switch.KnobColor = ColorAnimationUtil.ColorAnimation(fromColorLight, toColorLight, t);
         }
 
-        private void SetEndnote(object sender, EventArgs e)
+        private async void SetEndnote(object sender, EventArgs e)
         {
-            Console.WriteLine("Endnote wurde festgelegt");
+            
+            int? note = null;
+
+            
+            note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Endnote, NotenTyp.Endnote, fach.Name));
+            
+
+            
+            if(note != null)
+            {
+                await FachService.SetFachEndnote(fach, (int)note);
+            }
+            else
+            {
+                return;
+            }
+            Task[] tasks = new Task[] { model.InitEndnote(fach), model.InitFachDurchschnitt(fach), model.InitEinzHj(fach) };
+            await Task.WhenAll(tasks);
+            await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(fach.Halbjahr);
+            await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
         }
     }
 }

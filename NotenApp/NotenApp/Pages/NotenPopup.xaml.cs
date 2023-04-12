@@ -26,12 +26,8 @@ namespace NotenApp.Pages
                     btn.Text = "Zurück";
                     returnWhenDismissed = null;
                     break;
-                case WhichNote.Block2:
-                    btn.Text = "Note löschen";
-                    returnWhenDismissed = -1;
-                    break;
-                case WhichNote.Ziel:
-                    btn.Text = "Ziel löschen";
+                default:
+                    btn.Text = "Löschen";
                     returnWhenDismissed = -1;
                     break;
             }
@@ -49,8 +45,11 @@ namespace NotenApp.Pages
                 case NotenTyp.Mündlich:
                     notentyp.Text = "Mündlich";
                     break;
-                default:
+                case NotenTyp.Ziel:
                     notentyp.Text = "Ziel";
+                    break;
+                case NotenTyp.Endnote:
+                    notentyp.Text = "Endnote";
                     break;
             }
             fachname.Text = fachName;

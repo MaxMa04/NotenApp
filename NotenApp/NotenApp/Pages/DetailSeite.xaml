@@ -306,7 +306,7 @@
                                 Margin="-10"
                                 FontSize="25"
                                 HorizontalOptions="Center"
-                                Text="{Binding Fach.Endnote, TargetNullValue='-'}"
+                                Text="{Binding FachEndnote, TargetNullValue='-'}"
                                 TextColor="White"
                                 VerticalOptions="Center" />
 

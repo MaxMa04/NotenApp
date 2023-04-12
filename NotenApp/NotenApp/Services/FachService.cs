@@ -414,7 +414,27 @@ namespace NotenApp.Services
                 return duLK;
             }
         }
-
+        public static async Task SetFachEndnote(HjFach fach, int endnote)
+        {
+            await Init();
+            if(endnote == -1)
+            {
+                fach.Endnote = null;
+            }
+            else
+            {
+                fach.Endnote = endnote;
+            }
+            
+            fach.Durchschnitt = await GetFachDurchschnitt(fach);
+            await db.UpdateAsync(fach);
+        }
+        public static async Task<int?> GetFachEndnote(HjFach fach)
+        {
+            await Init();
+            var ffach= await db.Table<HjFach>().Where(f => f.Id  == fach.Id).FirstOrDefaultAsync();
+            return fach.Endnote;
+        }
         public static async Task<float?> GetFachDurchschnitt(HjFach fach)
         {
             if(fach.Endnote != null)

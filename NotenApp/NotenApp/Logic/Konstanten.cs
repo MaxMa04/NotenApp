@@ -10,6 +10,7 @@ namespace NotenApp.Logic
         LK = 1,
         Klausur = 2,
         Ziel = 5,
+        Endnote = 6,
         //Block2
         Schriftlich = 3,
         Mündlich = 4
@@ -35,7 +36,8 @@ namespace NotenApp.Logic
     {
         Block1 = 1,
         Block2 = 2,
-        Ziel = 3
+        Ziel = 3,
+        Endnote = 4
     };
     
 }

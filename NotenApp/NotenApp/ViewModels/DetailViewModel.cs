@@ -28,7 +28,16 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Ziel)));
             }
         }
-
+        private int? fachEndnote;
+        public int? FachEndnote
+        {
+            get => fachEndnote;
+            set
+            {
+                fachEndnote = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FachEndnote)));
+            }
+        }
         private string fachName;
         public string FachName
         {
@@ -93,6 +102,10 @@ namespace NotenApp.ViewModels
         public async Task InitFachDurchschnitt(HjFach fach)
         {
             FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
+        }
+        public async Task InitEndnote(HjFach fach)
+        {
+            FachEndnote = await FachService.GetFachEndnote(fach);
         }
         public async Task InitEinzHj(HjFach fach)
         {

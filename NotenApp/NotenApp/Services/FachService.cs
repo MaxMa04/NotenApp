@@ -75,6 +75,7 @@ namespace NotenApp.Services
             await Init();
             var user = await db.Table<UserModel>().FirstOrDefaultAsync();
             user.ShowPopupWhenDeletingNote = show; 
+            
             await db.UpdateAsync(user);
         }
         public static async Task UpdateUserB1()

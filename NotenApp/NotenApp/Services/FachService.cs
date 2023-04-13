@@ -25,7 +25,7 @@ namespace NotenApp.Services
             //{
             //    return;
             //}
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DatenduHs7");
+            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DatenduHs8");
 
             db = new SQLiteAsyncConnection(databasePath);
 
@@ -57,16 +57,25 @@ namespace NotenApp.Services
                 {
                     Abischnitt = null,
                     PunktzahlBlock1 = null,
-                    PunktzahlBlock2 = null
+                    PunktzahlBlock2 = null,
+                    ShowPopupWhenDeletingNote = true
                 };
                 await db.InsertAsync(user);
             }
             else return;
         }
+
         public static async Task<UserModel> GetUserData()
         {
             await Init();
             return await db.Table<UserModel>().FirstOrDefaultAsync();
+        }
+        public static async Task UpdateUserShowPopupWhenDeletingNote(bool show)
+        {
+            await Init();
+            var user = await db.Table<UserModel>().FirstOrDefaultAsync();
+            user.ShowPopupWhenDeletingNote = show; 
+            await db.UpdateAsync(user);
         }
         public static async Task UpdateUserB1()
         {
@@ -110,10 +119,7 @@ namespace NotenApp.Services
                 589,607,625,643,661,679,697,715,733,751,769,787,805,823};
             int stelle = 0;
             float abiturNote;
-            if (abipunktzahl < 5)
-            {
-                return -1;
-            }
+
             for (int i = 0; i < punktzahlen.Count; i++)
             {
                 if (abipunktzahl >= punktzahlen[i])

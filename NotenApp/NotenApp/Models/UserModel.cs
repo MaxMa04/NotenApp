@@ -40,7 +40,7 @@ namespace NotenApp.Models
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PunktzahlBlock2)));
             }
         }
-
+        public bool ShowPopupWhenDeletingNote { get; set; } 
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -5,7 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Einstellungen"
     BackgroundColor="{DynamicResource Primary}">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ToolbarItem_Clicked" Text="Erweitert" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
 
@@ -146,6 +148,7 @@
                 </RadioButton>
 
             </FlexLayout>
+
             <Frame
                 BackgroundColor="{DynamicResource Third}"
                 BorderColor="{DynamicResource Secondary}"
@@ -210,7 +213,9 @@
             Direction="ColumnReverse"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
-            <Label Text="© 2023 - Developed by Max Mannstein" />
+            <Label FontSize="18"
+                TextColor="{DynamicResource Fith}"
+                Text="© 2023 - Developed by Max Mannstein"/>
 
         </FlexLayout>
     </StackLayout>

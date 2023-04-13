@@ -15,8 +15,8 @@
         <Label
             FontSize="28"
             Text="Halbjahr 4"
-            VerticalOptions="Center"
-            TextColor="{DynamicResource Fith}" />
+            TextColor="{DynamicResource Fith}"
+            VerticalOptions="Center" />
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <Grid BackgroundColor="Transparent">
@@ -38,13 +38,21 @@
                 Margin="20"
                 Padding="0"
                 BackgroundColor="{DynamicResource Secondary}"
-                CornerRadius="70"
-                HeightRequest="140"
+                CornerRadius="40"
+                HeightRequest="130"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                WidthRequest="140">
+                WidthRequest="130">
+                <Frame.Background>
+                    <!--  StartPoint defaults to (0,0)  -->
+                    <LinearGradientBrush EndPoint="1,1">
+                        <GradientStop Offset="0.1" Color="{DynamicResource Fourth}" />
+                        <GradientStop Offset="0.4" Color="{DynamicResource Secondary}" />
+                        <GradientStop Offset="0.9" Color="{DynamicResource Third}" />
+                    </LinearGradientBrush>
+                </Frame.Background>
                 <Label
-                    FontSize="50"
+                    FontSize="60"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     Text="{Binding GesamtDurchschnittHJ4, TargetNullValue='-'}"

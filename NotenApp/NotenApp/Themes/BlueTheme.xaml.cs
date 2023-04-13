@@ -15,6 +15,8 @@ namespace NotenApp.Themes
         public BlueTheme()
         {
             InitializeComponent();
+     
         }
+        
     }
 }

@@ -27,23 +27,19 @@
         FontSize="Medium"
         HorizontalOptions="Start"
         Text="{Binding Name}"
-        TextColor="Black"
+        TextColor="{DynamicResource Primary}"
         VerticalOptions="Start" />
 
     <!--  Durchschnitt  -->
     <Frame
         Grid.RowSpan="2"
         Grid.Column="2"
-        BackgroundColor="{DynamicResource Third}">
-        <Frame.CornerRadius>
-            <OnPlatform x:TypeArguments="x:Single">
-                <On Platform="iOS" Value="28" />
-                <On Platform="Android" Value="35" />
-            </OnPlatform>
-        </Frame.CornerRadius>
+        BackgroundColor="{DynamicResource Third}"
+        CornerRadius="20">
+
         <Label
             Margin="-40"
-            FontSize="Large"
+            FontSize="25"
             HorizontalOptions="CenterAndExpand"
             Text="{Binding Durchschnitt, TargetNullValue='-'}"
             TextColor="{DynamicResource Fith}"
@@ -79,8 +75,8 @@
     <BoxView
         Grid.Row="2"
         Grid.ColumnSpan="3"
-        Margin="0,3,0,-3"
-        HeightRequest="5"
+        Margin="0,4,0,-4"
+        HeightRequest="2"
         HorizontalOptions="FillAndExpand"
         Color="{DynamicResource Secondary}" />
 </Grid>

@@ -72,5 +72,11 @@ namespace NotenApp.Pages
         {
             await DisplayAlert("Information", "Meine Website befindet sich aktuell noch in Arbeit!", "OK");
         }
+
+
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ErweiterteEinstellungen());
+        }
     }
 }

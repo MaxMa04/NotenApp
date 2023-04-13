@@ -64,12 +64,32 @@ namespace NotenApp.Pages
         }
         private async void DeleteNote(object sender, SelectionChangedEventArgs e)
         {
+            
             var note = e.CurrentSelection.FirstOrDefault() as HJNote;
-            await FachService.RemoveSingleNote(note);
-            Task[] tasks = new Task[] {model.InitNoten(fach), model.InitEinzHj(fach), model.InitFachDurchschnitt(fach)};
-            await Task.WhenAll(tasks);
-            await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(fach.Halbjahr);
-            await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
+            if (note is null) return;
+            var user = await FachService.GetUserData();
+            bool delete = true;
+            if (user.ShowPopupWhenDeletingNote)
+            {
+               delete = (bool)await Navigation.ShowPopupAsync(new DeleteNotePopup());
+            }
+            
+            if (delete)
+            {
+                await FachService.RemoveSingleNote(note);
+                Task[] tasks = new Task[] { model.InitNoten(fach), model.InitEinzHj(fach), model.InitFachDurchschnitt(fach) };
+                await Task.WhenAll(tasks);
+                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(fach.Halbjahr);
+                await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
+            }
+            else
+            {
+                lkn.SelectedItem = null;
+                kln.SelectedItem = null;
+                return;
+
+            }
+
             
         }
 

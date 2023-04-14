@@ -31,6 +31,6 @@
 	<key>CFBundleName</key>
 	<string>NotenApp</string>
 	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/IOSAppIcon.appiconset</string>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
 </dict>
 </plist>

@@ -21,11 +21,11 @@ namespace NotenApp.Services
         static SQLiteAsyncConnection db;
         static async Task Init()
         {
-            //if(db!= null)
-            //{
-            //    return;
-            //}
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DatenduHs8");
+            if(db!= null)
+            {
+                return;
+            }
+            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DataAbiSax01.db3");
 
             db = new SQLiteAsyncConnection(databasePath);
 
@@ -593,8 +593,6 @@ namespace NotenApp.Services
                 {
                     ziel.ErforderlicheKLNote = (int)ziel.ZielNote;
                     ziel.ErforderlicheLKNote = (int)ziel.ZielNote;
-                    ziel.Span1 = " Punkte in ";
-                    ziel.Span2 = " zu erreichen";
                     await db.UpdateAsync(ziel);
                     return;
                 }
@@ -614,7 +612,7 @@ namespace NotenApp.Services
                 {
                     ziel.ErforderlicheLKNote = (int)Math.Round(zielNote * 2 - duKl, 0);
                     ziel.ErforderlicheKLNote = (int)Math.Round(zielNote * (klausuren.Count + 1) - sumKl, 0);
-                    float ndukl = (sumKl + ziel.ErforderlicheKLNote) / (klausuren.Count + 1);
+                    float? ndukl = (sumKl + ziel.ErforderlicheKLNote) / (klausuren.Count + 1);
                     if (ndukl < zielNote)
                     {
                         ziel.ErforderlicheKLNote += 1;
@@ -623,25 +621,27 @@ namespace NotenApp.Services
                     {
                         ziel.ErforderlicheLKNote += 1;
                     }
-                    if (ziel.ErforderlicheLKNote > 15 || ziel.ErforderlicheKLNote > 15)
+                    if (ziel.ErforderlicheLKNote > 15)
                     {
-                        ziel.Span1 = " Punkten in ";
-                        ziel.Span2 = " näher zu kommen";
-                        ziel.ErforderlicheKLNote = 15;
-                        ziel.ErforderlicheLKNote = 15;
+                       
+                        ziel.ErforderlicheLKNote = null;
+                        
                     }
-                    else if(ziel.ErforderlicheLKNote < 0 || ziel.ErforderlicheKLNote < 0)
+                    if ( ziel.ErforderlicheKLNote > 15)
                     {
-                        ziel.Span1 = " Punkte in ";
-                        ziel.Span2 = " zu erreichen";
-                        ziel.ErforderlicheKLNote = 0;
+                        ziel.ErforderlicheKLNote = null;
+                    }
+                    if(ziel.ErforderlicheLKNote < 0)
+                    {
+                        
+                        
                         ziel.ErforderlicheLKNote = 0;
                     }
-                    else
+                    if(ziel.ErforderlicheKLNote < 0)
                     {
-                        ziel.Span1 = " Punkte in ";
-                        ziel.Span2 = " zu erreichen";
+                        ziel.ErforderlicheKLNote = 0;
                     }
+               
                     
                     await db.UpdateAsync(ziel);
                 }
@@ -649,7 +649,7 @@ namespace NotenApp.Services
                 {
                     ziel.ErforderlicheLKNote = (int)Math.Round(zielNote * (lks.Count + 1) - sumLk, 0);
                     ziel.ErforderlicheKLNote = (int)Math.Round(zielNote * 2 - duLk, 0);
-                    float nduLk = (sumLk + ziel.ErforderlicheLKNote) / (lks.Count + 1);
+                    float? nduLk = (sumLk + ziel.ErforderlicheLKNote) / (lks.Count + 1);
                     if(nduLk < zielNote)
                     {
                         ziel.ErforderlicheLKNote += 1;
@@ -658,35 +658,37 @@ namespace NotenApp.Services
                     {
                         ziel.ErforderlicheKLNote += 1;
                     }
-                    if (ziel.ErforderlicheLKNote > 15 || ziel.ErforderlicheKLNote > 15)
+                    if (ziel.ErforderlicheLKNote > 15)
                     {
-                        ziel.Span1 = " Punkten in ";
-                        ziel.Span2 = " näher zu kommen";
-                        ziel.ErforderlicheKLNote = 15;
-                        ziel.ErforderlicheLKNote = 15;
+
+                        ziel.ErforderlicheLKNote = null;
+
                     }
-                    else if (ziel.ErforderlicheLKNote < 0 || ziel.ErforderlicheKLNote < 0)
+                    if (ziel.ErforderlicheKLNote > 15)
                     {
-                        ziel.Span1 = " Punkte in ";
-                        ziel.Span2 = " zu erreichen";
-                        ziel.ErforderlicheKLNote = 0;
+                        ziel.ErforderlicheKLNote = null;
+                    }
+                    if (ziel.ErforderlicheLKNote < 0)
+                    {
+
+
                         ziel.ErforderlicheLKNote = 0;
                     }
-                    else
+                    if (ziel.ErforderlicheKLNote < 0)
                     {
-                        ziel.Span1 = " Punkte in ";
-                        ziel.Span2 = " zu erreichen";
+                        ziel.ErforderlicheKLNote = 0;
                     }
-                    
-                    
+
+
+
                     await db.UpdateAsync(ziel);
                 }
                 else
                 {
                     ziel.ErforderlicheLKNote = (int)Math.Round((zielNote * 2 - duKl) * (lks.Count + 1) - sumLk, 0);
                     ziel.ErforderlicheKLNote = (int)Math.Round((zielNote * 2 - duLk) * (klausuren.Count + 1) - sumKl, 0);
-                    float ndukl = (sumKl + ziel.ErforderlicheKLNote) / (klausuren.Count + 1);
-                    float nduLk = (sumLk + ziel.ErforderlicheLKNote) / (lks.Count + 1);
+                    float? ndukl = (sumKl + ziel.ErforderlicheKLNote) / (klausuren.Count + 1);
+                    float? nduLk = (sumLk + ziel.ErforderlicheLKNote) / (lks.Count + 1);
                     if((ndukl + duLk) / 2 < zielNote)
                     {
                         ziel.ErforderlicheKLNote += 1;
@@ -695,24 +697,25 @@ namespace NotenApp.Services
                     {
                         ziel.ErforderlicheLKNote += 1;
                     }
-                    if(ziel.ErforderlicheLKNote > 15 || ziel.ErforderlicheKLNote > 15)
+                    if (ziel.ErforderlicheLKNote > 15)
                     {
-                        ziel.Span1 = " Punkten in ";
-                        ziel.Span2 = " näher zu kommen";
-                        ziel.ErforderlicheKLNote = 15;
-                        ziel.ErforderlicheLKNote = 15;
+
+                        ziel.ErforderlicheLKNote = null;
+
                     }
-                    else if (ziel.ErforderlicheLKNote < 0 || ziel.ErforderlicheKLNote < 0)
+                    if (ziel.ErforderlicheKLNote > 15)
                     {
-                        ziel.Span1 = " Punkte in ";
-                        ziel.Span2 = " zu erreichen";
-                        ziel.ErforderlicheKLNote = 0;
+                        ziel.ErforderlicheKLNote = null;
+                    }
+                    if (ziel.ErforderlicheLKNote < 0)
+                    {
+
+
                         ziel.ErforderlicheLKNote = 0;
                     }
-                    else
+                    if (ziel.ErforderlicheKLNote < 0)
                     {
-                        ziel.Span1 = " Punkte in ";
-                        ziel.Span2 = " zu erreichen";
+                        ziel.ErforderlicheKLNote = 0;
                     }
                     await db.UpdateAsync(ziel);
                 }

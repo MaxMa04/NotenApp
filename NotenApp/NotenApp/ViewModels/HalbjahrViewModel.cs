@@ -292,6 +292,7 @@ namespace NotenApp.ViewModels
                         if (fachhh.Durchschnitt == null)
                         {
                             fachhh.Durchschnitt = summeDurchschnitte / anzahlDurchschnitte;
+                           
                         }
                     }
 
@@ -336,11 +337,11 @@ namespace NotenApp.ViewModels
             {
                 if (fach.IsLK == true)
                 {
-                    summeDurchschnitteAllerHalbjahre += (int)Math.Round((float)fach.Durchschnitt, 0) * 2;
+                    summeDurchschnitteAllerHalbjahre += (int)Math.Round((float)fach.Durchschnitt, 0, MidpointRounding.AwayFromZero) * 2;
                 }
                 else
                 {
-                    summeDurchschnitteAllerHalbjahre += (int)Math.Round((float)fach.Durchschnitt, 0);
+                    summeDurchschnitteAllerHalbjahre += (int)Math.Round((float)fach.Durchschnitt, 0, MidpointRounding.AwayFromZero);
                 }
             }
             punktzahlBlock1 = (summeDurchschnitteAllerHalbjahre / 48) * 40;
@@ -350,7 +351,7 @@ namespace NotenApp.ViewModels
             }
             else
             {
-                return (int)Math.Round(punktzahlBlock1, 0);
+                return (int)punktzahlBlock1;
             }
 
         }

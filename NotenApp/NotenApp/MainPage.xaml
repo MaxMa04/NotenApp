@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
+    xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
     xmlns:models="clr-namespace:NotenApp.Models"
     NavigationPage.HasNavigationBar="True">
     <ContentPage.BindingContext>
@@ -89,36 +90,42 @@
                             BackgroundColor="{DynamicResource Fourth}"
                             CornerRadius="15"
                             HasShadow="False"
-                            HeightRequest="20">
-                            <Label
-                                Margin="-5,-20,-5,-20"
-                                FontSize="13"
+                            HeightRequest="15">
+                            <StackLayout
+                                Margin="-15"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Um " TextColor="{DynamicResource Primary}" />
-                                        <Span Text="{Binding ZielNote}" TextColor="{DynamicResource Secondary}" />
-                                        <Span Text="{Binding Span1}" TextColor="{DynamicResource Primary}" />
-                                        <Span Text="{Binding FachName}" TextColor="{DynamicResource Primary}" />
-                                        <Span Text=" Halbjahr " TextColor="{DynamicResource Primary}" />
-                                        <Span Text="{Binding Halbjahr}" TextColor="{DynamicResource Primary}" />
-                                        <Span Text="{Binding Span2}" TextColor="{DynamicResource Primary}" />
-                                        <Span Text=", schreibe mindestens " TextColor="{DynamicResource Primary}" />
-                                        <Span Text="{Binding ErforderlicheLKNote}" TextColor="{DynamicResource Primary}" />
-                                        <Span Text=" (LK) bzw. " TextColor="{DynamicResource Primary}" />
-                                        <Span Text="{Binding ErforderlicheKLNote}" TextColor="{DynamicResource Primary}" />
-                                        <Span Text=" (Klausur) Punkte!" TextColor="{DynamicResource Primary}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                                <Label FontSize="13">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Ziel: " TextColor="{DynamicResource Primary}" />
+                                            <Span Text="{Binding ZielNote}" TextColor="{DynamicResource Secondary}" />
+                                            <Span Text=" Punkte in " TextColor="{DynamicResource Primary}" />
+                                            <Span Text="{Binding FachName}" TextColor="{DynamicResource Primary}" />
+                                            <Span Text=" Halbjahr " TextColor="{DynamicResource Primary}" />
+                                            <Span Text="{Binding Halbjahr}" TextColor="{DynamicResource Primary}" />
 
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Margin="0,-5,0,0" FontSize="13">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+
+                                            <Span Text="Erforderliche Noten: " TextColor="{DynamicResource Primary}" />
+                                            <Span Text="{Binding ErforderlicheLKNote, TargetNullValue='-'}" TextColor="{DynamicResource Secondary}" />
+                                            <Span Text=" (LK) bzw. " TextColor="{DynamicResource Primary}" />
+                                            <Span Text="{Binding ErforderlicheKLNote, TargetNullValue='-'}" TextColor="{DynamicResource Secondary}" />
+                                            <Span Text=" (Klausur)" TextColor="{DynamicResource Primary}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
 
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
 
             <!--  aktueller Schnitt Block 1  -->
             <Frame
@@ -169,7 +176,6 @@
                             </Frame.GestureRecognizers>
                             <Label
                                 Margin="-15"
-        
                                 FontSize="Medium"
                                 HorizontalTextAlignment="Center"
                                 Text="{Binding GesamtDurchschnittHJ1, TargetNullValue='-'}"
@@ -187,7 +193,6 @@
                             </Frame.GestureRecognizers>
                             <Label
                                 Margin="-15"
-                        
                                 FontSize="Medium"
                                 HorizontalTextAlignment="Center"
                                 Text="{Binding GesamtDurchschnittHJ2, TargetNullValue='-'}"
@@ -205,7 +210,6 @@
                             </Frame.GestureRecognizers>
                             <Label
                                 Margin="-15"
-                         
                                 FontSize="Medium"
                                 HorizontalTextAlignment="Center"
                                 Text="{Binding GesamtDurchschnittHJ3, TargetNullValue='-'}"
@@ -223,7 +227,6 @@
                             </Frame.GestureRecognizers>
                             <Label
                                 Margin="-15"
-                       
                                 FontSize="Medium"
                                 HorizontalTextAlignment="Center"
                                 Text="{Binding GesamtDurchschnittHJ4, TargetNullValue='-'}"
@@ -256,8 +259,7 @@
                             Margin="0,8,0,-3"
                             BackgroundColor="{DynamicResource Secondary}"
                             CornerRadius="12"
-                            WidthRequest="10"
-                            >
+                            WidthRequest="10">
                             <Label
                                 Margin="-15"
                                 FontSize="Small"
@@ -268,7 +270,6 @@
                         </Frame>
                     </StackLayout>
                     <Label
-                       
                         FontSize="Large"
                         HorizontalOptions="Center"
                         Text="{Binding DurchschnittBlock2, TargetNullValue='-'}"
@@ -295,7 +296,6 @@
                         Text="Abischnitt"
                         TextColor="{DynamicResource Primary}" />
                     <Label
-                     
                         FontSize="Large"
                         HorizontalOptions="Center"
                         Text="{Binding User.Abischnitt, TargetNullValue='-'}"

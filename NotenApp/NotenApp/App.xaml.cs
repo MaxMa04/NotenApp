@@ -15,12 +15,14 @@ namespace NotenApp
         {
             
             InitializeComponent();
+            Xamarin.Forms.DataGrid.DataGridComponent.Init();
             Settings.SetTheme(Settings.Theme);
             MainPage = new NavigationPage(new MainPage());
         }
         public App(string dB_Path)
         {
             InitializeComponent();
+            Xamarin.Forms.DataGrid.DataGridComponent.Init();
             Settings.SetTheme(Settings.Theme);
             DB_Path = dB_Path;
             MainPage = new NavigationPage(new MainPage());

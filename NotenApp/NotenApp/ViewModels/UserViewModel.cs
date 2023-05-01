@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using MvvmHelpers.Commands;
 using NotenApp.Models;
 using NotenApp.Services;
 using System;
@@ -75,12 +76,14 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DurchschnittBlock2)));
             }
         }
+      
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public UserViewModel()
         {
             Ziele = new ObservableRangeCollection<Ziel>();
+            
         }
         public async Task InitUser()
         {

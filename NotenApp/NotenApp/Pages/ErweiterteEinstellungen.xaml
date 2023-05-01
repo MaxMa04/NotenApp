@@ -21,6 +21,21 @@
 
                 </StackLayout>
             </Frame>
+            <Frame BackgroundColor="{DynamicResource Third}" CornerRadius="20">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="17"
+                    HorizontalOptions="Center"
+                    Text="Info: Bei 0,5 wird bei der Berechnung der Punktzahl für Block 1 automatisch aufgerundet!"
+                    TextColor="{DynamicResource Primary}"
+                    VerticalOptions="Center" />
+
+
+
+
+
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

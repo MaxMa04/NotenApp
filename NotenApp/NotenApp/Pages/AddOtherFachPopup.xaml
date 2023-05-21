@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xct:Popup
+    x:Class="NotenApp.Pages.AddOtherFachPopup"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    HorizontalOptions="CenterAndExpand"
+    Size="330,170"
+    VerticalOptions="CenterAndExpand">
+    <StackLayout Padding="20" BackgroundColor="{StaticResource Primary}">
+        <Label
+            x:Name="heading"
+            FontAttributes="Bold"
+            FontSize="20"
+            HorizontalOptions="Center"
+            Text="Neues Fach hinzufügen"
+            TextColor="{StaticResource Secondary}"
+            VerticalOptions="Center" />
+        <Entry
+            x:Name="fach"
+            Placeholder="Name"
+            PlaceholderColor="{StaticResource Secondary}"
+            TextColor="{StaticResource Fith}" />
+        <Button
+            BackgroundColor="{StaticResource Secondary}"
+            Clicked="Button_Clicked"
+            CornerRadius="15"
+            HorizontalOptions="End"
+            Text="Hinzufügen"
+            TextColor="{StaticResource Fith}"
+            VerticalOptions="Center" />
+    </StackLayout>
+</xct:Popup>

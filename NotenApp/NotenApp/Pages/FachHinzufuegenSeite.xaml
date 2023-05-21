@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ViewModels="clr-namespace:NotenApp.ViewModels"
     xmlns:models="clr-namespace:NotenApp.Models"
-    x:DataType="ViewModels:FachHinzufuegenViewModel">
+    x:DataType="ViewModels:FachHinzufuegenViewModel"
+    BackgroundColor="{DynamicResource Primary}">
     <ContentPage.BindingContext>
         <ViewModels:FachHinzufuegenViewModel />
     </ContentPage.BindingContext>
@@ -33,37 +34,51 @@
         </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
+        <StackLayout Padding="10">
 
-        <CollectionView
-            x:Name="cv"
-            BackgroundColor="{DynamicResource Primary}"
-            ItemsSource="{Binding HjFaecher}"
-            SelectionMode="Multiple">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout
-                    HorizontalItemSpacing="2"
-                    Orientation="Vertical"
-                    Span="2"
-                    VerticalItemSpacing="5" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:HjFach">
-                    <Frame
-                        Margin="2"
-                        BackgroundColor="{DynamicResource Third}"
-                        CornerRadius="10"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <Label
-                            Margin="-5"
-                            FontAttributes="Bold"
-                            FontSize="20"
-                            Text="{Binding Name}"
-                            TextColor="{DynamicResource Fith}" />
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <CollectionView
+                x:Name="cv"
+                ItemsSource="{Binding HjFaecher}"
+                SelectionMode="Multiple">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="2"
+                        Orientation="Vertical"
+                        Span="2"
+                        VerticalItemSpacing="5" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:HjFach">
+                        <Frame
+                            Margin="2"
+                            BackgroundColor="{DynamicResource Third}"
+                            CornerRadius="10"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Margin="-5"
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                Text="{Binding Name}"
+                                TextColor="{DynamicResource Fith}" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button
+                BackgroundColor="{StaticResource Secondary}"
+                Clicked="AddOtherFremdsprache"
+                CornerRadius="15"
+                Text="Andere Fremdsprache hinzufügen"
+                TextColor="{StaticResource Fith}" />
+            <Button
+                BackgroundColor="{StaticResource Secondary}"
+                Clicked="AddOtherGK"
+                CornerRadius="15"
+                Text="Fächerverbindenden Grundkurs hinzufügen"
+                TextColor="{StaticResource Fith}" />
+        </StackLayout>
+
 
 
     </ContentPage.Content>

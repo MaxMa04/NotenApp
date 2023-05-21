@@ -12,7 +12,7 @@ namespace NotenApp.ViewModels
     public class FachHinzufuegenViewModel
     {
         public ObservableRangeCollection<HjFach> AllFaecher { get; set; }
-            
+        
         public ObservableRangeCollection<HjFach> HjFaecher { get; set; }
         public ObservableRangeCollection<HjFach> PrFaecher { get; set; }
 
@@ -36,10 +36,12 @@ namespace NotenApp.ViewModels
                 new HjFach { Name = "Sport", MinHalbjahre = 1, Aufgabenfeld = (int)FachAufgabenfeld.Kein, IsLK = false, IsPrFach = false, IsFremdsprache = false },
                 new HjFach { Name = "Musik", MinHalbjahre = 2, Aufgabenfeld = (int)FachAufgabenfeld.Sprachlich, IsLK = false, IsPrFach = false, IsFremdsprache = false },
                 new HjFach { Name = "Kunst", MinHalbjahre = 2, Aufgabenfeld = (int)FachAufgabenfeld.Sprachlich, IsLK = false, IsPrFach = false, IsFremdsprache = false },
+                new HjFach { Name = "Philosophie", MinHalbjahre = 1, Aufgabenfeld = (int)FachAufgabenfeld.Gesellschaftlich, IsLK = false, IsPrFach = false, IsFremdsprache = false },
+                new HjFach { Name = "Geschichte", MinHalbjahre = 4, Aufgabenfeld = (int)FachAufgabenfeld.Gesellschaftlich, IsLK = false, IsPrFach = false, IsFremdsprache = false },
                 new HjFach { Name = "Französich", MinHalbjahre = 1, Aufgabenfeld = (int)FachAufgabenfeld.Sprachlich, IsLK = false, IsPrFach = false, IsFremdsprache = true },
                 new HjFach { Name = "Russisch", MinHalbjahre = 1, Aufgabenfeld = (int)FachAufgabenfeld.Sprachlich, IsLK = false, IsPrFach = false, IsFremdsprache = true },
                 new HjFach { Name = "Latein", MinHalbjahre = 1, Aufgabenfeld = (int)FachAufgabenfeld.Sprachlich, IsLK = false, IsPrFach = false, IsFremdsprache = true },
-                new HjFach { Name = "Geschichte", MinHalbjahre = 4, Aufgabenfeld = (int)FachAufgabenfeld.Gesellschaftlich, IsLK = false, IsPrFach = false, IsFremdsprache = false },
+                new HjFach { Name = "Sorbisch", MinHalbjahre = 1, Aufgabenfeld = (int)FachAufgabenfeld.Sprachlich, IsLK = false, IsPrFach = false, IsFremdsprache = true },
                 new HjFach { Name = "Spanisch", MinHalbjahre = 1, Aufgabenfeld = (int)FachAufgabenfeld.Sprachlich, IsLK = false, IsPrFach = false, IsFremdsprache = true }
             };
             HjFaecher = new ObservableRangeCollection<HjFach>();
@@ -72,7 +74,7 @@ namespace NotenApp.ViewModels
             List<HjFach> prFaecher = new List<HjFach>();
             foreach (var fach in list)
             {
-                if(fach.IsPrFach != true)
+                if(fach.IsPrFach == false)
                 {
                     prFaecher.Add(fach);
                 }

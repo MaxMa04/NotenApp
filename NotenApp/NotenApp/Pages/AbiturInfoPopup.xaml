@@ -5,10 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xctViews="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
     HorizontalOptions="CenterAndExpand"
-    Size="370,390"
+    Size="370,400"
     VerticalOptions="CenterAndExpand">
 
-    <StackLayout Padding="30,20" BackgroundColor="{DynamicResource Primary}">
+    <StackLayout
+        Padding="30,20"
+        BackgroundColor="{DynamicResource Primary}"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand">
         <Label
             FontAttributes="Bold"
             FontSize="20"
@@ -19,7 +23,10 @@
             BackgroundColor="{DynamicResource Secondary}"
             HeightRequest="2" />
         <StackLayout Orientation="Horizontal">
-            <CheckBox x:Name="mehrFaecher" IsEnabled="False" />
+            <CheckBox
+                x:Name="mehrFaecher"
+                IsEnabled="False"
+                Color="{DynamicResource Secondary}" />
             <Label
                 FontSize="18"
                 Text="Es sind mindestens 40 Halbjahre vorhanden."
@@ -27,7 +34,10 @@
                 VerticalOptions="Center" />
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-            <CheckBox x:Name="notenHalbjahr1" IsEnabled="False" />
+            <CheckBox
+                x:Name="notenHalbjahr1"
+                IsEnabled="False"
+                Color="{DynamicResource Secondary}" />
             <Label
                 FontSize="18"
                 Text="Jedes Fach in Halbjahr 1 hat eine Note."
@@ -35,7 +45,10 @@
                 VerticalOptions="Center" />
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-            <CheckBox x:Name="leistunkskurs" IsEnabled="False" />
+            <CheckBox
+                x:Name="leistunkskurs"
+                IsEnabled="False"
+                Color="{DynamicResource Secondary}" />
             <Label
                 FontSize="18"
                 Text="Du hast deine 2 Leistungskurse gesetzt."
@@ -43,7 +56,10 @@
                 VerticalOptions="Center" />
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-            <CheckBox x:Name="prfaecher" IsEnabled="False" />
+            <CheckBox
+                x:Name="prfaecher"
+                IsEnabled="False"
+                Color="{DynamicResource Secondary}" />
             <Label
                 FontSize="18"
                 Text="Du hast deine 5 Prüfungsfächer eingetragen."

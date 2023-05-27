@@ -5,37 +5,96 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Erweiterte Einstellungen">
     <ContentPage.Content>
-        <StackLayout Padding="10" Background="{DynamicResource Primary}">
-            <Frame BackgroundColor="{DynamicResource Third}" CornerRadius="20">
-                <StackLayout Orientation="Horizontal">
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="17"
-                        HorizontalOptions="Center"
-                        Text="Popup vor dem Löschen einer Note"
-                        TextColor="{DynamicResource Primary}"
-                        VerticalOptions="Center" />
-
-                    <Switch x:Name="_switch" Toggled="Switch_Toggled" />
-
-
-                </StackLayout>
-            </Frame>
-            <Frame BackgroundColor="{DynamicResource Third}" CornerRadius="20">
-
+        <Grid Padding="10" Background="{DynamicResource Primary}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Frame
+                Grid.ColumnSpan="2"
+                BackgroundColor="{DynamicResource Third}"
+                CornerRadius="20">
                 <Label
                     FontAttributes="Bold"
-                    FontSize="17"
-                    HorizontalOptions="Center"
+                    FontSize="15"
+                    HorizontalOptions="Start"
                     Text="Info: Bei 0,5 wird bei der Berechnung der Punktzahl für Block 1 automatisch aufgerundet!"
                     TextColor="{DynamicResource Primary}"
                     VerticalOptions="Center" />
-
-
-
-
-
             </Frame>
-        </StackLayout>
+            <Frame
+                Grid.Row="1"
+                BackgroundColor="{DynamicResource Third}"
+                CornerRadius="20">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="15"
+                    HorizontalOptions="Start"
+                    Text="Popup vor dem Löschen einer Note"
+                    TextColor="{DynamicResource Primary}"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="{DynamicResource Third}"
+                CornerRadius="20">
+                <Switch
+                    x:Name="_switch1"
+                    Margin="-12"
+                    Toggled="Switch1_Toggled" />
+            </Frame>
+            <Frame
+                Grid.Row="2"
+                BackgroundColor="{DynamicResource Third}"
+                CornerRadius="20">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="15"
+                    HorizontalOptions="Start"
+                    Text="Erklärung zum Benutzen der Fächer"
+                    TextColor="{DynamicResource Primary}"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="2"
+                Grid.Column="1"
+                BackgroundColor="{DynamicResource Third}"
+                CornerRadius="20">
+                <Switch
+                    x:Name="_switch2"
+                    Margin="-12"
+                    Toggled="Switch2_Toggled" />
+            </Frame>
+            <Frame
+                Grid.Row="3"
+                BackgroundColor="{DynamicResource Third}"
+                CornerRadius="20">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="15"
+                    HorizontalOptions="Start"
+                    Text="Erklärung für die Detailseite"
+                    TextColor="{DynamicResource Primary}"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Frame
+                Grid.Row="3"
+                Grid.Column="1"
+                BackgroundColor="{DynamicResource Third}"
+                CornerRadius="20">
+                <Switch
+                    x:Name="_switch3"
+                    Margin="-12"
+                    Toggled="Switch3_Toggled" />
+            </Frame>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

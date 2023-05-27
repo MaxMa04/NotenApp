@@ -37,7 +37,13 @@ namespace NotenApp.Pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+
             await frame.TranslateTo(0, 0, 400, Easing.CubicOut);
+            var user = await FachService.GetUserData();
+            if(user.ShowDetailHelpPopup)
+            {
+                Navigation.ShowPopup(new DetailHelpPopup());
+            }
             if (fach.IsLK)
             {
                 wasLkbefore = true;
@@ -55,11 +61,13 @@ namespace NotenApp.Pages
                     _switch.IsEnabled = false;
                 }
             }
+            
         }
         protected override async void OnDisappearing()
         {
             base.OnDisappearing();
             await HalbjahrViewModel.Instance.UpdateFachState(fach);
+            
             
         }
         private async void DeleteNote(object sender, SelectionChangedEventArgs e)

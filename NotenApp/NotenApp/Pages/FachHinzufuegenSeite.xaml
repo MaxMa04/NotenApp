@@ -15,7 +15,7 @@
             Clicked="AddFaecher"
             Order="Primary"
             Priority="0"
-            Text="Add" />
+            Text="Hinzufügen" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Style TargetType="Frame">

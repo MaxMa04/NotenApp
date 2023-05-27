@@ -21,11 +21,11 @@ namespace NotenApp.Services
         static SQLiteAsyncConnection db;
         static async Task Init()
         {
-            if(db!= null)
-            {
-                return;
-            }
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DataAbiSax01.db3");
+            //if(db!= null)
+            //{
+            //    return;
+            //}
+            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "xxx.db3");
 
             db = new SQLiteAsyncConnection(databasePath);
 
@@ -58,7 +58,10 @@ namespace NotenApp.Services
                     Abischnitt = null,
                     PunktzahlBlock1 = null,
                     PunktzahlBlock2 = null,
-                    ShowPopupWhenDeletingNote = true
+                    ShowPopupWhenDeletingNote = true,
+                    ShowFachHelpPopup = true,
+                    ShowDetailHelpPopup = true
+                    
                 };
                 await db.InsertAsync(user);
             }
@@ -70,12 +73,28 @@ namespace NotenApp.Services
             await Init();
             return await db.Table<UserModel>().FirstOrDefaultAsync();
         }
+        public static async Task UpdateUserShowFachHelpPopup(bool show)
+        {
+            await Init();
+            var user = await db.Table<UserModel>().FirstOrDefaultAsync();
+            user.ShowFachHelpPopup = show; 
+            
+            await db.UpdateAsync(user);
+        }
+        public static async Task UpdateUserShowDetailHelpPopup(bool show)
+        {
+            await Init();
+            var user = await db.Table<UserModel>().FirstOrDefaultAsync();
+            user.ShowDetailHelpPopup = show;
+
+            await db.UpdateAsync(user);
+        }
         public static async Task UpdateUserShowPopupWhenDeletingNote(bool show)
         {
             await Init();
             var user = await db.Table<UserModel>().FirstOrDefaultAsync();
-            user.ShowPopupWhenDeletingNote = show; 
-            
+            user.ShowPopupWhenDeletingNote = show;
+
             await db.UpdateAsync(user);
         }
         public static async Task UpdateUserB1()

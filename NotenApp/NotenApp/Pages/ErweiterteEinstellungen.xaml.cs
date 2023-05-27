@@ -24,12 +24,28 @@ namespace NotenApp.Pages
 			var user = await FachService.GetUserData();
 			if (user.ShowPopupWhenDeletingNote)
 			{
-				_switch.IsToggled = true;
+				_switch1.IsToggled = true;
 			}
+            if (user.ShowFachHelpPopup)
+            {
+                _switch2.IsToggled = true;
+            }
+            if (user.ShowDetailHelpPopup)
+            {
+                _switch3.IsToggled = true;
+            }
         }
-        private async void Switch_Toggled(object sender, ToggledEventArgs e)
+        private async void Switch1_Toggled(object sender, ToggledEventArgs e)
         {
-			await FachService.UpdateUserShowPopupWhenDeletingNote(true);
+			await FachService.UpdateUserShowPopupWhenDeletingNote(_switch1.IsToggled);
+        }
+        private async void Switch2_Toggled(object sender, ToggledEventArgs e)
+        {
+            await FachService.UpdateUserShowFachHelpPopup(_switch2.IsToggled);
+        }
+        private async void Switch3_Toggled(object sender, ToggledEventArgs e)
+        {
+            await FachService.UpdateUserShowDetailHelpPopup(_switch3.IsToggled);
         }
     }
 }

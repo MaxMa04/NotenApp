@@ -24,14 +24,22 @@ namespace NotenApp.Pages
         {
             InitializeComponent();
             BindingContext = HalbjahrViewModel.Instance;
+            
         }
-
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            var user = await FachService.GetUserData();
+            if (HalbjahrViewModel.Instance.FaecherHJ1.Any() && user.ShowFachHelpPopup)
+            {
+                Navigation.ShowPopup(new FachHelpPopup());
+            }
+        }
         private async void FachHinzufuegen(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new FachHinzufuegenSeite());
+            
         }
-
-
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var fach = e.CurrentSelection.FirstOrDefault() as HjFach;
@@ -56,16 +64,11 @@ namespace NotenApp.Pages
             cv.SelectedItem = null;
             
         }
-
-
-
         private async void SwipeItem_Invoked_1(object sender, EventArgs e)
         {
             SwipeItem swipeItem = sender as SwipeItem;
             var selectedItem = swipeItem.BindingContext as HjFach;
             await Navigation.PushAsync(new DetailSeite(selectedItem));
         }
-
-
     }
 }

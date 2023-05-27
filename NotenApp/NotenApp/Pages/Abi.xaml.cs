@@ -14,16 +14,6 @@ namespace NotenApp.Pages
         public Abi()
         {
             InitializeComponent();
-            
-            
-
-
-        }
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-           
-
         }
 
         private async void Tapped1(object sender, System.EventArgs e)

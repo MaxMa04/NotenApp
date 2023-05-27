@@ -21,11 +21,11 @@ namespace NotenApp.Services
         static SQLiteAsyncConnection db;
         static async Task Init()
         {
-            //if(db!= null)
-            //{
-            //    return;
-            //}
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "xxx.db3");
+            if(db!= null)
+            {
+                return;
+            }
+            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AbiSaxData001.db3");
 
             db = new SQLiteAsyncConnection(databasePath);
 

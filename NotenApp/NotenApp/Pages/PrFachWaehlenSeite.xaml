@@ -48,11 +48,12 @@
                 BackgroundColor="{DynamicResource Secondary}"
                 Clicked="Button_Clicked"
                 CornerRadius="10"
-                FontSize="30"
+                FontSize="25"
                 HorizontalOptions="End"
                 Text="Kein Fach"
                 TextColor="{DynamicResource Fith}"
-                WidthRequest="180" />
+                WidthRequest="180" 
+                HeightRequest="70"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

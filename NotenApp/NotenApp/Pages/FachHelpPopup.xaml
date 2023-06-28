@@ -6,55 +6,62 @@
     xmlns:xctViews="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
     HorizontalOptions="Center"
     IsLightDismissEnabled="False"
-    Size="370,310"
+    Size="370,330"
     VerticalOptions="Center">
-    <StackLayout
-        Padding="10"
-        BackgroundColor="{DynamicResource Primary}"
-        Spacing="10">
-        <Label
-            FontAttributes="Bold"
-            FontSize="30"
-            HorizontalOptions="Center"
-            Text="Erklärung"
-            TextColor="{DynamicResource Secondary}"
-            TextDecorations="Underline"
-            VerticalOptions="Center" />
-        <Label
-            FontSize="20"
-            HorizontalOptions="Center"
-            Text="Drücke auf die Fächer, um deine Noten einzutragen."
-            TextColor="{DynamicResource Fith}"
-            VerticalOptions="Center" />
-        <Label
-            FontSize="20"
-            HorizontalOptions="Center"
-            Text="Wische Fächer nach links, um sie zu löschen oder auf die Detailseite zu gelangen."
-            TextColor="{DynamicResource Fith}"
-            VerticalOptions="Center" />
-
-        <StackLayout Orientation="Horizontal" Spacing="5">
-            <CheckBox
-                x:Name="check"
-                VerticalOptions="Center"
-                Color="{DynamicResource Secondary}" />
+    <ScrollView>
+        <StackLayout
+            Padding="15"
+            BackgroundColor="{DynamicResource Primary}"
+            Spacing="15">
             <Label
-                FontSize="20"
+                FontAttributes="Bold"
+                FontSize="30"
                 HorizontalOptions="Center"
-                Text="Verstanden - Nicht mehr anzeigen!"
+                Text="Erklärung"
+                TextColor="{DynamicResource Secondary}"
+                TextDecorations="Underline"
+                VerticalOptions="Center" />
+            <Label
+                FontSize="16"
+                HorizontalOptions="Center"
+                Text="Drücke auf die Fächer, um deine Noten einzutragen."
+                TextColor="{DynamicResource Fith}"
+                VerticalOptions="Center" />
+            <Label
+                Margin="0,0,0,10"
+                FontSize="16"
+                HorizontalOptions="Center"
+                Text="Wische Fächer nach links, um sie zu löschen oder auf die Detailseite zu gelangen."
                 TextColor="{DynamicResource Fith}"
                 VerticalOptions="Center" />
 
-        </StackLayout>
-        <Button
-            BackgroundColor="{DynamicResource Secondary}"
-            Clicked="Button_Clicked"
-            CornerRadius="15"
-            FontSize="20"
-            HorizontalOptions="End"
-            Text="OK"
-            TextColor="{DynamicResource Fith}"
-            WidthRequest="60" />
+            <StackLayout
+                HorizontalOptions="Center"
+                Orientation="Horizontal"
+                Spacing="5">
+                <CheckBox
+                    x:Name="check"
+                    VerticalOptions="Center"
+                    Color="{DynamicResource Secondary}" />
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="Verstanden - Nicht mehr anzeigen!"
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Center" />
 
-    </StackLayout>
+            </StackLayout>
+            <Button
+                BackgroundColor="{DynamicResource Secondary}"
+                Clicked="Button_Clicked"
+                CornerRadius="15"
+                FontSize="20"
+                HorizontalOptions="End"
+                Text="OK"
+                TextColor="{DynamicResource Fith}"
+                WidthRequest="55" />
+
+        </StackLayout>
+    </ScrollView>
+
 </xctViews:Popup>

@@ -1,4 +1,5 @@
-﻿using NotenApp.Models;
+﻿using MvvmHelpers.Commands;
+using NotenApp.Models;
 using NotenApp.Services;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace NotenApp.ViewModels
     public class Block2ViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        
 
         private PrFach p1;
         public PrFach P1
@@ -84,6 +86,7 @@ namespace NotenApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PunktzahlBlock2)));
             }
         }
+        
         public async Task InitBlock2()
         {
             P1 = await FachService.GetPrFach(1);

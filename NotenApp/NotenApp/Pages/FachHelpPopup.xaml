@@ -8,11 +8,11 @@
     IsLightDismissEnabled="False"
     Size="370,330"
     VerticalOptions="Center">
-    <ScrollView>
+    <ScrollView BackgroundColor="{DynamicResource Primary}">
         <StackLayout
             Padding="15"
-            BackgroundColor="{DynamicResource Primary}"
-            Spacing="15">
+            Spacing="15"
+            VerticalOptions="Center">
             <Label
                 FontAttributes="Bold"
                 FontSize="30"
@@ -21,24 +21,43 @@
                 TextColor="{DynamicResource Secondary}"
                 TextDecorations="Underline"
                 VerticalOptions="Center" />
-            <Label
-                FontSize="16"
-                HorizontalOptions="Center"
-                Text="Drücke auf die Fächer, um deine Noten einzutragen."
-                TextColor="{DynamicResource Fith}"
-                VerticalOptions="Center" />
-            <Label
-                Margin="0,0,0,10"
-                FontSize="16"
-                HorizontalOptions="Center"
-                Text="Wische Fächer nach links, um sie zu löschen oder auf die Detailseite zu gelangen."
-                TextColor="{DynamicResource Fith}"
-                VerticalOptions="Center" />
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="&#9673;"
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Start"
+                    WidthRequest="20" />
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="Drücke auf die Fächer, um deine Noten einzutragen."
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="&#9673;"
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Start"
+                    WidthRequest="20" />
+                <Label
+                    Margin="0,0,0,10"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="Wische Fächer nach links, um sie zu löschen oder auf die Detailseite zu gelangen."
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+
 
             <StackLayout
                 HorizontalOptions="Center"
                 Orientation="Horizontal"
-                Spacing="5">
+                Spacing="3">
                 <CheckBox
                     x:Name="check"
                     VerticalOptions="Center"
@@ -56,6 +75,7 @@
                 Clicked="Button_Clicked"
                 CornerRadius="15"
                 FontSize="20"
+                HeightRequest="50"
                 HorizontalOptions="End"
                 Text="OK"
                 TextColor="{DynamicResource Fith}"

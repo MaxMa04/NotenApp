@@ -13,7 +13,8 @@ namespace NotenApp.Logic
         Endnote = 6,
         //Block2
         Schriftlich = 3,
-        Mündlich = 4
+        Mündlich = 4,
+        NachNoteMündlich = 7
         
     };
     public enum FachAufgabenfeld

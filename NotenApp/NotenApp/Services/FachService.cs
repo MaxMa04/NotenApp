@@ -877,6 +877,7 @@ namespace NotenApp.Services
                     if(note == -1)
                     {
                         prFach.NoteSchriftlich = null;
+                        prFach.NachNoteMündlich = null;
                     }
                     else
                     {
@@ -888,33 +889,61 @@ namespace NotenApp.Services
                     if (note == -1)
                     {
                         prFach.NoteMündlich = null;
+                        prFach.NachNoteMündlich = null;
                     }
                     else
                     {
                         prFach.NoteMündlich = note;
                     }
                     break;
+                case NotenTyp.NachNoteMündlich:
+                    if (note == -1)
+                    {
+                        prFach.NachNoteMündlich = null;
+                    }
+                    else
+                    {
+                        prFach.NachNoteMündlich = note;
+                    }
+                    break;
             }
-            if(prFach.NoteSchriftlich != null && prFach.NoteMündlich != null)
+            await UpdateFachDurchschnittBlock2(prFach);
+        }
+        public static async Task UpdateFachDurchschnittBlock2(PrFach prFach)
+        {
+            await Init();
+            if(prFach.PrNummer < 4)
             {
-                prFach.Durchschnitt = (float)Math.Round((((decimal)prFach.NoteSchriftlich * 2) + (decimal)prFach.NoteMündlich) / 3, 2);
-            }
-            else if(prFach.NoteSchriftlich == null && prFach.NoteMündlich == null)
-            {
-                prFach.Durchschnitt = null;
-            }
-            else if(prFach.NoteSchriftlich == null && prFach.NoteMündlich != null)
-            {
-                prFach.Durchschnitt = prFach.NoteMündlich;
+                if (prFach.NoteSchriftlich != null && prFach.NachNoteMündlich != null)
+                {
+                    prFach.Durchschnitt = (float)Math.Round((((decimal)prFach.NoteSchriftlich * 2) + (decimal)prFach.NachNoteMündlich) / 3, 2);
+                }
+                else if (prFach.NoteSchriftlich == null && prFach.NachNoteMündlich == null)
+                {
+                    prFach.Durchschnitt = null;
+                }
+                else
+                {
+                    prFach.Durchschnitt = prFach.NoteSchriftlich;
+                }
             }
             else
             {
-                prFach.Durchschnitt = prFach.NoteSchriftlich;
+                if (prFach.NoteMündlich != null && prFach.NachNoteMündlich != null)
+                {
+                    prFach.Durchschnitt = (float)Math.Round((((decimal)prFach.NoteMündlich * 2) + (decimal)prFach.NachNoteMündlich) / 3, 2);
+                }
+                else if (prFach.NoteMündlich == null && prFach.NachNoteMündlich == null)
+                {
+                    prFach.Durchschnitt = null;
+                }
+                else
+                {
+                    prFach.Durchschnitt = prFach.NoteMündlich;
+                }
             }
-            await db.UpdateAsync(prFach);
-                    
-                
             
+            await db.UpdateAsync(prFach);
 
         }
         public static async Task<int> CountPrFaecher()

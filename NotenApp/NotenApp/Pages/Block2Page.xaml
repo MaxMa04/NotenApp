@@ -12,12 +12,14 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="HorizontalOptions" Value="Center" />
             <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Margin" Value="-10" />
         </Style>
     </ContentPage.Resources>
     <NavigationPage.TitleView>
         <Label
             FontSize="28"
             HorizontalOptions="Start"
+            Margin="0"
             Text="Block 2"
             TextColor="{DynamicResource Fith}" />
     </NavigationPage.TitleView>
@@ -31,7 +33,8 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="4*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -86,12 +89,12 @@
 
             </Frame>
             <Label
-                Grid.Row="7"
+                Grid.Row="8"
                 Grid.ColumnSpan="4"
                 Margin="0,0,0,10"
                 FontSize="18"
-                TextColor="{DynamicResource Fith}"
                 Text="© 2023 - Developed by Max Mannstein"
+                TextColor="{DynamicResource Fith}"
                 VerticalOptions="End" />
             <!--  Block2  -->
             <!--  Erklärung  -->
@@ -117,6 +120,7 @@
             <Frame
                 Grid.Row="1"
                 Grid.Column="2"
+                Grid.ColumnSpan="2"
                 BackgroundColor="{DynamicResource Fourth}">
                 <Image
                     IsAnimationPlaying="true"
@@ -124,15 +128,7 @@
                     Source="schriftlich.gif" />
             </Frame>
 
-            <Frame
-                Grid.Row="1"
-                Grid.Column="3"
-                BackgroundColor="{DynamicResource Fourth}">
-                <Image
-                    IsAnimationPlaying="true"
-                    Scale="2"
-                    Source="muendlich.gif" />
-            </Frame>
+
 
 
             <!--  P1  -->
@@ -170,9 +166,9 @@
                 Grid.Column="3"
                 BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich1" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNachNoteMündlich1" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P1.NoteMündlich}" TextColor="{DynamicResource Secondary}" />
+                <Label Text="{Binding P1.NachNoteMündlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
             <!--  P2  -->
             <Frame Grid.Row="3" BackgroundColor="{DynamicResource Fourth}">
@@ -209,9 +205,9 @@
                 Grid.Column="3"
                 BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich2" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNachNoteMündlich2" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P2.NoteMündlich}" TextColor="{DynamicResource Secondary}" />
+                <Label Text="{Binding P2.NachNoteMündlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
             <!--  P3  -->
             <Frame Grid.Row="4" BackgroundColor="{DynamicResource Fourth}">
@@ -248,12 +244,37 @@
                 Grid.Column="3"
                 BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich3" />
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNachNoteMündlich3" />
                 </Frame.GestureRecognizers>
-                <Label Text="{Binding P3.NoteMündlich}" TextColor="{DynamicResource Secondary}" />
+                <Label Text="{Binding P3.NachNoteMündlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
+            <Frame
+                Grid.Row="5"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                BackgroundColor="{DynamicResource Fourth}">
+                <Image
+                    IsAnimationPlaying="true"
+                    Scale="2"
+                    Source="muendlich.gif" />
+
+            </Frame>
+            <BoxView
+                Grid.Row="5"
+                Grid.ColumnSpan="2"
+                HeightRequest="5"
+                HorizontalOptions="Fill"
+                VerticalOptions="Center">
+                <BoxView.Background>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                        <GradientStop Offset="0.1" Color="{DynamicResource Fourth}" />
+                        <GradientStop Offset="0.4" Color="{DynamicResource Secondary}" />
+                        <GradientStop Offset="0.9" Color="{DynamicResource Third}" />
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
             <!--  P4  -->
-            <Frame Grid.Row="5" BackgroundColor="{DynamicResource Fourth}">
+            <Frame Grid.Row="6" BackgroundColor="{DynamicResource Fourth}">
                 <Label
                     Margin="-10"
                     FontSize="Large"
@@ -261,7 +282,7 @@
                     TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.Column="1"
                 BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
@@ -274,16 +295,25 @@
                     TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
-                Grid.Row="5"
-                Grid.Column="3"
+                Grid.Row="6"
+                Grid.Column="2"
                 BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich4" />
                 </Frame.GestureRecognizers>
                 <Label Text="{Binding P4.NoteMündlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
+            <Frame
+                Grid.Row="6"
+                Grid.Column="3"
+                BackgroundColor="{DynamicResource Fourth}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNachNoteMündlich4" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P4.NachNoteMündlich}" TextColor="{DynamicResource Secondary}" />
+            </Frame>
             <!--  P5  -->
-            <Frame Grid.Row="6" BackgroundColor="{DynamicResource Fourth}">
+            <Frame Grid.Row="7" BackgroundColor="{DynamicResource Fourth}">
                 <Label
                     Margin="-10"
                     FontSize="Large"
@@ -291,7 +321,7 @@
                     TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
-                Grid.Row="6"
+                Grid.Row="7"
                 Grid.Column="1"
                 BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
@@ -304,13 +334,22 @@
                     TextColor="{DynamicResource Secondary}" />
             </Frame>
             <Frame
-                Grid.Row="6"
-                Grid.Column="3"
+                Grid.Row="7"
+                Grid.Column="2"
                 BackgroundColor="{DynamicResource Fourth}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNoteMündlich5" />
                 </Frame.GestureRecognizers>
                 <Label Text="{Binding P5.NoteMündlich}" TextColor="{DynamicResource Secondary}" />
+            </Frame>
+            <Frame
+                Grid.Row="7"
+                Grid.Column="3"
+                BackgroundColor="{DynamicResource Fourth}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UpdateNachNoteMündlich5" />
+                </Frame.GestureRecognizers>
+                <Label Text="{Binding P5.NachNoteMündlich}" TextColor="{DynamicResource Secondary}" />
             </Frame>
 
         </Grid>

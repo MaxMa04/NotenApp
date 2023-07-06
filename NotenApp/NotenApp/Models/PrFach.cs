@@ -9,6 +9,7 @@ namespace NotenApp.Models
     {
         public int PrNummer { get; set; }
         public int? NoteMündlich { get; set; }
+        public int? NachNoteMündlich { get; set; }
         public int? NoteSchriftlich { get; set; }
     }
 }

@@ -7,10 +7,9 @@
     HorizontalOptions="CenterAndExpand"
     Size="370,400"
     VerticalOptions="CenterAndExpand">
-    <ScrollView>
+    <ScrollView BackgroundColor="{DynamicResource Primary}">
         <StackLayout
             Padding="30,20"
-            BackgroundColor="{DynamicResource Primary}"
             HorizontalOptions="CenterAndExpand"
             Spacing="5"
             VerticalOptions="CenterAndExpand">

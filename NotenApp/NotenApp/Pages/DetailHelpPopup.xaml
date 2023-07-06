@@ -8,11 +8,11 @@
     IsLightDismissEnabled="False"
     Size="370,420"
     VerticalOptions="Center">
-    <ScrollView>
+    <ScrollView BackgroundColor="{DynamicResource Primary}">
         <StackLayout
             Padding="10"
-            BackgroundColor="{DynamicResource Primary}"
-            Spacing="10">
+            Spacing="10"
+            VerticalOptions="Center">
             <Label
                 FontAttributes="Bold"
                 FontSize="30"
@@ -27,36 +27,74 @@
                 Text="Auf der Detailseite eines Faches kannst du viele Einstellungen vornehmen."
                 TextColor="{DynamicResource Fith}"
                 VerticalOptions="Center" />
-            <Label
-                FontSize="16"
-                HorizontalOptions="Center"
-                Text="1. Du kannst das Fach zu deinem Leistungskurs machen."
-                TextColor="{DynamicResource Fith}"
-                VerticalOptions="Center" />
-            <Label
-                FontSize="16"
-                HorizontalOptions="Center"
-                Text="2. Du kannst dir ein Ziel für dieses Halbjahr setzen."
-                TextColor="{DynamicResource Fith}"
-                VerticalOptions="Center" />
-            <Label
-                FontSize="16"
-                HorizontalOptions="Center"
-                Text="3. Du kannst Noten über das ✚ hinzufügen oder eine Note löschen, indem du sie anklickst."
-                TextColor="{DynamicResource Fith}"
-                VerticalOptions="Center" />
-            <Label
-                FontSize="16"
-                HorizontalOptions="Center"
-                Text="4. Wenn du alle Noten in diesem Halbjahr erhalten hast, kannst du deine Endnote festlegen."
-                TextColor="{DynamicResource Fith}"
-                VerticalOptions="Center" />
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="&#9673;"
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Start"
+                    WidthRequest="20" />
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="Du kannst das Fach zu deinem Leistungskurs machen."
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Start" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="&#9673;"
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Start"
+                    WidthRequest="20" />
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="Du kannst dir ein Ziel für dieses Halbjahr setzen."
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Start" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="&#9673;"
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Start"
+                    WidthRequest="20" />
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="Du kannst Noten über das ✚ hinzufügen oder eine Note löschen, indem du sie anklickst."
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Start" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="&#9673;"
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Start"
+                    WidthRequest="20" />
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="Wenn du alle Noten in diesem Halbjahr erhalten hast, kannst du deine Endnote festlegen."
+                    TextColor="{DynamicResource Fith}"
+                    VerticalOptions="Start" />
+            </StackLayout>
+
 
 
             <StackLayout
                 HorizontalOptions="Center"
                 Orientation="Horizontal"
-                Spacing="5">
+                Spacing="3"
+                VerticalOptions="Center">
                 <CheckBox
                     x:Name="check"
                     VerticalOptions="Center"
@@ -74,6 +112,7 @@
                 Clicked="Button_Clicked"
                 CornerRadius="15"
                 FontSize="20"
+                HeightRequest="50"
                 HorizontalOptions="End"
                 Text="OK"
                 TextColor="{DynamicResource Fith}"

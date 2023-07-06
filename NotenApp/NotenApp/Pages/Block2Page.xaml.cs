@@ -123,40 +123,62 @@ namespace NotenApp.Pages
             await model.InitBlock2();
         }
         //Mündliche Note
-        private async void UpdateNoteMündlich1(object sender, EventArgs e)
+        private async void UpdateNachNoteMündlich1(object sender, EventArgs e)
         {
 
-            if (model.P1 == null || model.P1.Name == "-")
+            if (model.P1 == null || model.P1.Name == "-" || model.P1.NoteSchriftlich is null)
             {
                 return;
             }
             int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P1.Name));
-            await FachService.UpdateNote(note, 1, NotenTyp.Mündlich);
+            await FachService.UpdateNote(note, 1, NotenTyp.NachNoteMündlich);
             await model.InitBlock2();
         }
-        private async void UpdateNoteMündlich2(object sender, EventArgs e)
+        private async void UpdateNachNoteMündlich2(object sender, EventArgs e)
         {
 
-            if (model.P2 == null || model.P2.Name == "-")
+            if (model.P2 == null || model.P2.Name == "-" || model.P2.NoteSchriftlich is null)
             {
                 return;
             }
             int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P2.Name));
-            await FachService.UpdateNote(note, 2, NotenTyp.Mündlich);
+            await FachService.UpdateNote(note, 2, NotenTyp.NachNoteMündlich);
             await model.InitBlock2();
         }
-        private async void UpdateNoteMündlich3(object sender, EventArgs e)
+        private async void UpdateNachNoteMündlich3(object sender, EventArgs e)
         {
 
-            if (model.P3 == null || model.P3.Name == "-")
+            if (model.P3 == null || model.P3.Name == "-" || model.P3.NoteSchriftlich is null)
             {
                 return;
             }
             int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P3.Name));
-            await FachService.UpdateNote(note, 3, NotenTyp.Mündlich);
+            await FachService.UpdateNote(note, 3, NotenTyp.NachNoteMündlich);
             await model.InitBlock2();
         }
-        private  async void UpdateNoteMündlich4(object sender, EventArgs e)
+        private  async void UpdateNachNoteMündlich4(object sender, EventArgs e)
+        {
+
+            if (model.P4 == null || model.P4.Name == "-"|| model.P4.NoteMündlich is null)
+            {
+                return;
+            }
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P4.Name));
+            await FachService.UpdateNote(note, 4, NotenTyp.NachNoteMündlich);
+            await model.InitBlock2();
+        }
+        private async void UpdateNachNoteMündlich5(object sender, EventArgs e)
+        {
+
+            if (model.P5 == null || model.P5.Name == "-" || model.P5.NoteMündlich is null)
+            {
+                return;
+            }
+            int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P5.Name));
+            await FachService.UpdateNote(note, 5, NotenTyp.NachNoteMündlich);
+            await model.InitBlock2();
+        }
+        private async void UpdateNoteMündlich4(object sender, EventArgs e)
         {
 
             if (model.P4 == null || model.P4.Name == "-")
@@ -178,6 +200,5 @@ namespace NotenApp.Pages
             await FachService.UpdateNote(note, 5, NotenTyp.Mündlich);
             await model.InitBlock2();
         }
-
     }
 }

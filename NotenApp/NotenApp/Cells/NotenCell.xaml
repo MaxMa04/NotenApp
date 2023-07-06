@@ -7,8 +7,9 @@
     x:DataType="models:HJNote">
 
     <Label
-        FontSize="Medium"
-        Text="{Binding Note}"
+        FontSize="{OnPlatform iOS=20,
+                              Android=18}"
+        Text="{Binding Note, StringFormat='{0};'}"
         TextColor="{DynamicResource Primary}" />
 
 </ContentView>

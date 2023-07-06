@@ -351,7 +351,7 @@ namespace NotenApp.ViewModels
             }
             else
             {
-                return (int)punktzahlBlock1;
+                return (int)Math.Round(punktzahlBlock1, 0, MidpointRounding.AwayFromZero);
             }
 
         }

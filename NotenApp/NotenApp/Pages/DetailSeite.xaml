@@ -190,7 +190,7 @@
                         CornerRadius="15">
                         <Label
                             Margin="-20"
-                            FontSize="15"
+                            FontSize="13"
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
                             <Label.FormattedText>

@@ -16,7 +16,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -111,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NotenApp\NotenApp.csproj">
-      <Project>{38979887-E053-49F7-82A4-659B06AFB954}</Project>
+      <Project>{4A7AA737-61DC-4C7A-87E9-31156ED1A707}</Project>
       <Name>NotenApp</Name>
     </ProjectReference>
   </ItemGroup>

@@ -32,5 +32,7 @@
 	<string>NotenApp</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1.0</string>
 </dict>
 </plist>

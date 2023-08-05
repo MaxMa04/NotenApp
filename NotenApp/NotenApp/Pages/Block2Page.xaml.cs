@@ -11,6 +11,7 @@ using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
+using System.Security.Cryptography;
 
 namespace NotenApp.Pages
 {
@@ -27,15 +28,7 @@ namespace NotenApp.Pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
-            if (mainDisplayInfo.Width / mainDisplayInfo.Density <= 375 && mainDisplayInfo.Height / mainDisplayInfo.Density <= 670)
-            {
-                Image[] imgs = { img1, img2 };
-                foreach (var im in imgs)
-                {
-                    im.Scale = 4;
-                }
-            }
+            ScreenSizing();
             await model.InitBlock2();
         }
         //FachName
@@ -209,6 +202,26 @@ namespace NotenApp.Pages
             int? note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block2, NotenTyp.Mündlich, model.P5.Name));
             await FachService.UpdateNote(note, 5, NotenTyp.Mündlich);
             await model.InitBlock2();
+        }
+        private void ScreenSizing()
+        {
+            var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            if (mainDisplayInfo.Width / mainDisplayInfo.Density <= 375 && mainDisplayInfo.Height / mainDisplayInfo.Density <= 670)
+            {
+                Image[] imgs = { img1, img2 };
+                foreach (var im in imgs)
+                {
+                    im.Scale = 4;
+                }
+            }
+            if ((mainDisplayInfo.Width / mainDisplayInfo.Density) >= 800 && (mainDisplayInfo.Height / mainDisplayInfo.Density >= 1050))
+            {
+                Image[] imgs = { img1, img2 };
+                foreach (var im in imgs)
+                {
+                    im.Scale = 1;
+                }
+            }
         }
     }
 }

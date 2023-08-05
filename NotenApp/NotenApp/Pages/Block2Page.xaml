@@ -50,7 +50,7 @@
                 Padding="10"
                 BackgroundColor="Transparent">
                 <StackLayout
-                    HorizontalOptions="Fill"
+                    HorizontalOptions="Center"
                     Orientation="Horizontal"
                     VerticalOptions="Fill">
 

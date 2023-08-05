@@ -12,7 +12,7 @@ namespace NotenApp.Controls
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LabelFrame : ContentView
 	{
-		public static readonly BindableProperty FrameTextProperty = BindableProperty.Create("FrameText", typeof(string), typeof(LabelFrame), default(string));
+        public static readonly BindableProperty FrameTextProperty = BindableProperty.Create("FrameText", typeof(string), typeof(LabelFrame), default(string));
         public static readonly BindableProperty FrameColorProperty = BindableProperty.Create("FrameColor", typeof(Color), typeof(LabelFrame));
         public string FrameText
 		{

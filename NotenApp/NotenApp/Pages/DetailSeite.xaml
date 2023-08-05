@@ -186,6 +186,7 @@
                         BackgroundColor="{DynamicResource Fourth}"
                         CornerRadius="15">
                         <Label
+                            x:Name="l2"
                             Margin="-20"
                             FontSize="13"
                             HorizontalOptions="Center"
@@ -196,7 +197,9 @@
                                     <Span Text="{Binding FachName}" TextColor="{DynamicResource Primary}" />
                                     <Span Text=" musst du " TextColor="{DynamicResource Primary}" />
                                     <Span
+                                        x:Name="spa1"
                                         FontAttributes="Bold"
+                                        FontSize="13"
                                         Text="{Binding FachEinzubringendeHalbjahre}"
                                         TextColor="{DynamicResource Secondary}" />
                                     <Span Text=" Halbjahr(e) einbringen!" TextColor="{DynamicResource Primary}" />
@@ -294,6 +297,7 @@
 
 
                         <Label
+                            x:Name="l5"
                             FontSize="25"
                             HorizontalOptions="End"
                             Text="Endnote"
@@ -310,6 +314,7 @@
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetEndnote" />
                             </Frame.GestureRecognizers>
                             <Label
+                                x:Name="l3"
                                 Margin="-10"
                                 FontSize="25"
                                 HorizontalOptions="Center"
@@ -325,7 +330,10 @@
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="AddNote" />
                             </Frame.GestureRecognizers>
-                            <Image Scale="2" Source="plus.png" />
+                            <Image
+                                x:Name="imgp"
+                                Scale="2"
+                                Source="plus.png" />
 
                         </Frame>
 

@@ -70,7 +70,7 @@ namespace NotenApp.Pages
 
         private async void Website_Clicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Information", "Meine Website befindet sich aktuell noch in Arbeit!", "OK");
+            await Browser.OpenAsync("https://max-mannstein.com/");
         }
 
 

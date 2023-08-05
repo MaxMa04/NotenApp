@@ -9,9 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.Extensions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -37,7 +39,35 @@ namespace NotenApp.Pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            if (mainDisplayInfo.Width / mainDisplayInfo.Density <= 375 && mainDisplayInfo.Height / mainDisplayInfo.Density <= 670)
+            {
+                var padding = new OnPlatform<Thickness>
+                {
+                    iOS = new Thickness(0, 0, 0, 40),
+                    Android = new Thickness(0, 0, 0, 35)
+                };
 
+                rg1.Height = new GridLength(4, GridUnitType.Star);
+                l1.FontSize = 50;
+                
+                rg21.Height = new GridLength(1.9, GridUnitType.Star);
+                rg22.Height = new GridLength(1.9, GridUnitType.Star);
+                rg23.Height = new GridLength(5.2, GridUnitType.Star);
+                rg24.Height = new GridLength(1.7, GridUnitType.Star);
+                f1.WidthRequest = 20;
+                grd.Padding = padding;
+                
+            }
+            else
+            {
+                var padding = new OnPlatform<Thickness>
+                {
+                    iOS = new Thickness(0, 0, 0, 70),
+                    Android = new Thickness(0, 0, 0, 35)
+                };
+                grd.Padding = padding;
+            }
             await frame.TranslateTo(0, 0, 400, Easing.CubicOut);
             var user = await FachService.GetUserData();
             if(user.ShowDetailHelpPopup)

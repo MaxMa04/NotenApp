@@ -88,73 +88,74 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout Padding="20" Background="{DynamicResource Primary}">
-        <StackLayout>
-            <Label
+    <ScrollView>
+        <StackLayout Padding="20" Background="{DynamicResource Primary}">
+            <StackLayout>
+                <Label
                 Margin="0,0,0,10"
                 FontAttributes="Bold"
                 FontSize="35"
                 HorizontalOptions="Center"
                 Text="Wähle dein Theme!"
                 TextColor="White" />
-            <FlexLayout
+                <FlexLayout
                 Margin="0,0,0,10"
                 Padding="10"
                 Background="{DynamicResource Secondary}"
                 JustifyContent="SpaceAround"
                 Wrap="Wrap">
 
-                <RadioButton
+                    <RadioButton
                     x:Name="RadioButtonGreen"
                     CheckedChanged="RadioButton_CheckedChanged"
                     Value="Green">
-                    <RadioButton.Content>
-                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                        <RadioButton.Content>
+                            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 
-                            <Label
+                                <Label
                                 FontSize="15"
                                 Text="Grün"
                                 TextColor="{DynamicResource Fith}" />
-                        </StackLayout>
-                    </RadioButton.Content>
-                </RadioButton>
-                <RadioButton
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton
                     x:Name="RadioButtonRosa"
                     CheckedChanged="RadioButton_CheckedChanged"
                     Value="Rosa">
-                    <RadioButton.Content>
-                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                        <RadioButton.Content>
+                            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 
-                            <Label
+                                <Label
                                 FontSize="15"
                                 Text="Rosa"
                                 TextColor="{DynamicResource Fith}" />
-                        </StackLayout>
-                    </RadioButton.Content>
-                </RadioButton>
-                <RadioButton
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton
                     x:Name="RadioButtonBlue"
                     CheckedChanged="RadioButton_CheckedChanged"
                     Value="Blue">
-                    <RadioButton.Content>
-                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                        <RadioButton.Content>
+                            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 
-                            <Label
+                                <Label
                                 FontSize="15"
                                 Text="Blau"
                                 TextColor="{DynamicResource Fith}" />
-                        </StackLayout>
-                    </RadioButton.Content>
-                </RadioButton>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
 
-            </FlexLayout>
+                </FlexLayout>
 
-            <Frame
+                <Frame
                 BackgroundColor="{DynamicResource Third}"
                 BorderColor="{DynamicResource Secondary}"
                 CornerRadius="20">
-                <StackLayout>
-                    <Label
+                    <StackLayout>
+                        <Label
                         Margin="0,0,0,10"
                         FontAttributes="Bold"
                         FontSize="35"
@@ -162,19 +163,19 @@
                         Text="Über mich"
                         TextColor="{DynamicResource Primary}"
                         TextDecorations="Underline" />
-                    <Label
+                        <Label
                         FontSize="17"
                         Text="Mein Name ist Max Mannstein und ich bin aktuell Schüler des Carl-von-Bach-Gymnasiums. Diese App habe ich entwickelt, um Schülern aus Sachsen die Notenverwaltung in der Oberstufe zu erleichtern. Bei Fragen, Problemen oder Verbesserungsvorschlägen kontaktiert mich gern!"
                         TextColor="{DynamicResource Primary}" />
-                </StackLayout>
-            </Frame>
+                    </StackLayout>
+                </Frame>
 
-            <Frame
+                <Frame
                 BackgroundColor="{DynamicResource Third}"
                 BorderColor="{DynamicResource Secondary}"
                 CornerRadius="20">
-                <StackLayout>
-                    <Label
+                    <StackLayout>
+                        <Label
                         Margin="0,0,0,10"
                         FontAttributes="Bold"
                         FontSize="35"
@@ -184,42 +185,44 @@
                         TextDecorations="Underline" />
 
 
-                    <FlexLayout
+                        <FlexLayout
                         HeightRequest="60"
                         JustifyContent="SpaceEvenly"
                         Wrap="NoWrap">
-                        <ImageButton
+                            <ImageButton
                             Clicked="Email_Clicked"
                             Scale=".7"
                             Source="mail.png" />
-                        <ImageButton
+                            <ImageButton
                             Clicked="Linkedin_Clicked"
                             Scale=".7"
                             Source="linkedin.png" />
-                        <ImageButton
+                            <ImageButton
                             Clicked="Github_Clicked"
                             Scale=".7"
                             Source="github.png" />
-                        <ImageButton
+                            <ImageButton
                             Clicked="Website_Clicked"
                             Scale=".7"
                             Source="website.png" />
-                    </FlexLayout>
-                </StackLayout>
-            </Frame>
-        </StackLayout>
-        <FlexLayout
+                        </FlexLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            <FlexLayout
             AlignItems="Center"
             Direction="ColumnReverse"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
-            <Label FontSize="18"
+                <Label FontSize="18"
                 TextColor="{DynamicResource Fith}"
                 Text="© 2023 - Developed by Max Mannstein"/>
 
-        </FlexLayout>
-    </StackLayout>
+            </FlexLayout>
+        </StackLayout>
 
+    </ScrollView>
+    
 
 
 

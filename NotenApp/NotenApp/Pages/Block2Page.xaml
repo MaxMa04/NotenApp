@@ -17,9 +17,9 @@
     </ContentPage.Resources>
     <NavigationPage.TitleView>
         <Label
+            Margin="0"
             FontSize="28"
             HorizontalOptions="Start"
-            Margin="0"
             Text="Block 2"
             TextColor="{DynamicResource Fith}" />
     </NavigationPage.TitleView>
@@ -123,6 +123,7 @@
                 Grid.ColumnSpan="2"
                 BackgroundColor="{DynamicResource Fourth}">
                 <Image
+                    x:Name="img1"
                     IsAnimationPlaying="true"
                     Scale="2"
                     Source="schriftlich.gif" />
@@ -254,6 +255,7 @@
                 Grid.ColumnSpan="2"
                 BackgroundColor="{DynamicResource Fourth}">
                 <Image
+                    x:Name="img2"
                     IsAnimationPlaying="true"
                     Scale="2"
                     Source="muendlich.gif" />

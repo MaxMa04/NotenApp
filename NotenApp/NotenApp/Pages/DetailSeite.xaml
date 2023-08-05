@@ -21,6 +21,7 @@
         <ViewModels:DetailViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
+
         <Grid>
             <Grid.Background>
                 <!--  StartPoint defaults to (0,0)  -->
@@ -34,7 +35,7 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="3*" />
+                <RowDefinition x:Name="rg1" Height="3*" />
             </Grid.RowDefinitions>
             <Frame
                 Margin="20"
@@ -47,6 +48,7 @@
                 VerticalOptions="Center"
                 WidthRequest="130">
                 <Label
+                    x:Name="l1"
                     FontSize="60"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
@@ -63,21 +65,16 @@
                 BackgroundColor="{DynamicResource Primary}"
                 CornerRadius="40"
                 TranslationY="400">
-                <Grid>
-                    <Grid.Padding>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <On Platform="iOS" Value="0,0,0,70" />
-                            <On Platform="Android" Value="0,0,0,35" />
-                        </OnPlatform>
-                    </Grid.Padding>
+                <Grid x:Name="grd">
+
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1.7*" />
+                        <RowDefinition x:Name="rg21" Height="1.7*" />
                         <RowDefinition Height="1.2*" />
                         <RowDefinition Height="0.8*" />
-                        <RowDefinition Height="1.7*" />
-                        <RowDefinition Height="5.5*" />
+                        <RowDefinition x:Name="rg22" Height="1.7*" />
+                        <RowDefinition x:Name="rg23" Height="5.5*" />
                         <RowDefinition Height=".1*" />
-                        <RowDefinition Height="1.3*" />
+                        <RowDefinition x:Name="rg24" Height="1.3*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -304,6 +301,7 @@
                             VerticalOptions="Center" />
 
                         <Frame
+                            x:Name="f1"
                             BackgroundColor="{DynamicResource Third}"
                             CornerRadius="15"
                             HorizontalOptions="Center"

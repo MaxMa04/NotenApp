@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
 
 namespace NotenApp.Pages
@@ -25,7 +26,16 @@ namespace NotenApp.Pages
 		}
         protected async override void OnAppearing()
         {
-            base.OnAppearing(); 
+            base.OnAppearing();
+            var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            if (mainDisplayInfo.Width / mainDisplayInfo.Density <= 375 && mainDisplayInfo.Height / mainDisplayInfo.Density <= 670)
+            {
+                Image[] imgs = { img1, img2 };
+                foreach (var im in imgs)
+                {
+                    im.Scale = 4;
+                }
+            }
             await model.InitBlock2();
         }
         //FachName

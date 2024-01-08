@@ -25,6 +25,9 @@ namespace NotenApp.Pages
                 case WhichNote.Block1:
                     btn.Text = "Zurück";
                     returnWhenDismissed = null;
+                    break;case WhichNote.Endnote:
+                    btn.Text = "Löschen";
+                    returnWhenDismissed = null;
                     break;
                 default:
                     btn.Text = "Löschen";

@@ -30,78 +30,81 @@ namespace NotenApp.Pages
             InitializeComponent();
             this.fach = fach;
             model = BindingContext as DetailViewModel;
-            model.FachName = fach.Name;
-            Task[] task = new Task[] { model.InitNoten(fach), model.InitEinzHj(fach), model.InitFachDurchschnitt(fach), model.InitZiel(fach), model.InitEndnote(fach) };
-            Task.WhenAll(task);
+          
+            //model.FachName = fach.Name;
+            //Task[] task = new Task[] { model.InitNoten(fach), model.InitEinzHj(fach), model.InitFachDurchschnitt(fach), model.InitZiel(fach), model.InitEndnote(fach) };
+            //Task.WhenAll(task);
             
 
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            Task[] task = new Task[] { frame.TranslateTo(0, 0, 400, Easing.CubicOut), model.InitDetails(fach)};
+            await Task.WhenAll(task);
             ScreenSizing();
-            await frame.TranslateTo(0, 0, 400, Easing.CubicOut);
             var user = await FachService.GetUserData();
             if(user.ShowDetailHelpPopup)
             {
                 Navigation.ShowPopup(new DetailHelpPopup());
             }
-            if (fach.IsLK)
-            {
-                wasLkbefore = true;
-                 _switch.IsToggled = true;
-            }
-            else
-            {
-                int countLK = await FachService.GetLKCount();
-                if (countLK < 2)
-                {
-                    _switch.IsEnabled = true;
-                }
-                else
-                {
-                    _switch.IsEnabled = false;
-                }
-            }
+            //if (fach.IsLK)
+            //{
+            //    wasLkbefore = true;
+            //     _switch.IsToggled = true;
+            //}
+            //else
+            //{
+            //    int countLK = await FachService.GetLKCount();
+            //    if (countLK < 2)
+            //    {
+            //        _switch.IsEnabled = true;
+            //    }
+            //    else
+            //    {
+            //        _switch.IsEnabled = false;
+            //    }
+            //}
             
         }
         protected override async void OnDisappearing()
         {
             base.OnDisappearing();
-            await HalbjahrViewModel.Instance.UpdateFachState(fach);
+            //await HalbjahrViewModel.Instance.UpdateFachState(fach);
             
             
         }
-        private async void DeleteNote(object sender, SelectionChangedEventArgs e)
-        {
-            
-            var note = e.CurrentSelection.FirstOrDefault() as HJNote;
-            if (note is null) return;
-            var user = await FachService.GetUserData();
-            bool delete = true;
-            if (user.ShowPopupWhenDeletingNote)
-            {
-               delete = (bool)await Navigation.ShowPopupAsync(new DeleteNotePopup());
-            }
-            
-            if (delete)
-            {
-                await FachService.RemoveSingleNote(note);
-                Task[] tasks = new Task[] { model.InitNoten(fach), model.InitEinzHj(fach), model.InitFachDurchschnitt(fach) };
-                await Task.WhenAll(tasks);
-                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(fach.Halbjahr);
-                await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
-            }
-            else
-            {
-                lkn.SelectedItem = null;
-                kln.SelectedItem = null;
-                return;
-
-            }
-
-            
-        }
+        //private async void DeleteNote(object sender, SelectionChangedEventArgs e)
+        //{
+        //    
+        //    var note = e.CurrentSelection.FirstOrDefault() as HJNote;
+        //    if (note is null) return;
+        //    var user = await FachService.GetUserData();
+        //    bool delete = true;
+        //    if (user.ShowPopupWhenDeletingNote)
+        //    {
+        //       delete = (bool)await Navigation.ShowPopupAsync(new DeleteNotePopup());
+        //    }
+        //    
+        //    if (delete)
+        //    {
+        //        await FachService.RemoveSingleNote(note);
+        //        model.Fach.LKNoten.Remove(note);
+        //        //Task[] tasks = new Task[] { model.InitNoten(fach), model.InitEinzHj(fach), model.InitFachDurchschnitt(fach) };
+        //        //await Task.WhenAll(tasks);
+        //        await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(fach.Halbjahr);
+        //        await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
+        //    }
+        //    else
+        //    {
+        //        lkn.SelectedItem = null;
+        //        kln.SelectedItem = null;
+        //        return;
+        //
+        //    }
+        //
+        //    
+        //}
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
@@ -121,36 +124,36 @@ namespace NotenApp.Pages
                 await FachService.AddZiel(fach, note);
             }
 
-            await model.InitZiel(fach);
+            //await model.InitZiel(fach);
             await UserViewModel.Instance.InitZiele();   
           
         }
 
-        private async void AddNote(object sender, EventArgs e)
-        {
-            NotenTyp? notenTyp = (NotenTyp?)await Navigation.ShowPopupAsync(new EntscheidungsPopup(fach.Name));
-            int? note = null;
-
-            if (notenTyp != null)
-            {
-                note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1, (NotenTyp)notenTyp, fach.Name));
-            }
-            
-            if (notenTyp != null && note != null)
-            {
-                
-                await FachService.AddNote(fach, (int)note, (NotenTyp)notenTyp);
-                
-            }
-            else
-            {
-                return;
-            }
-            Task[] tasks = new Task[] { model.InitNoten(fach), model.InitFachDurchschnitt(fach), model.InitEinzHj(fach)};
-            await Task.WhenAll(tasks);
-            await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(fach.Halbjahr);
-            await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
-        }
+        //private async void AddNote(object sender, EventArgs e)
+        //{
+        //    NotenTyp? notenTyp = (NotenTyp?)await Navigation.ShowPopupAsync(new EntscheidungsPopup(fach.Name));
+        //    int? note = null;
+        //
+        //    if (notenTyp != null)
+        //    {
+        //        note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1, (NotenTyp)notenTyp, fach.Name));
+        //    }
+        //    
+        //    if (notenTyp != null && note != null)
+        //    {
+        //        
+        //        //await FachService.AddNote(fach, (int)note, (NotenTyp)notenTyp);
+        //        
+        //    }
+        //    else
+        //    {
+        //        return;
+        //    }
+        //    //Task[] tasks = new Task[] { model.InitNoten(fach), model.InitFachDurchschnitt(fach), model.InitEinzHj(fach)};
+        //   // await Task.WhenAll(tasks);
+        //    await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(fach.Halbjahr);
+        //    await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
+        //}
 
 
         private async void CustomSwitch_Toggled(object sender, ToggledEventArgs e)
@@ -192,29 +195,6 @@ namespace NotenApp.Pages
             _switch.KnobColor = ColorAnimationUtil.ColorAnimation(fromColorLight, toColorLight, t);
         }
 
-        private async void SetEndnote(object sender, EventArgs e)
-        {
-            
-            int? note = null;
-
-            
-            note = (int?)await Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Endnote, NotenTyp.Endnote, fach.Name));
-            
-
-            
-            if(note != null)
-            {
-                await FachService.SetFachEndnote(fach, (int)note);
-            }
-            else
-            {
-                return;
-            }
-            Task[] tasks = new Task[] { model.InitEndnote(fach), model.InitFachDurchschnitt(fach), model.InitEinzHj(fach) };
-            await Task.WhenAll(tasks);
-            await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(fach.Halbjahr);
-            await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
-        }
         private void ScreenSizing()
         {
             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;

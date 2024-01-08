@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,33 +7,13 @@ using System.Text;
 
 namespace NotenApp.Models
 {
-    public class BaseFach : INotifyPropertyChanged
+    public partial class BaseFach : ObservableObject
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        [ObservableProperty]
         private string name;
-        public string Name
-        {
-            get => name;
-            set
-            {
-                name = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
-            }
-        }
+        [ObservableProperty]
         private float? durchschnitt;
-        public float? Durchschnitt
-        {
-            get => durchschnitt;
-            
-            set
-            {
-                durchschnitt = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Durchschnitt)));
-            }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

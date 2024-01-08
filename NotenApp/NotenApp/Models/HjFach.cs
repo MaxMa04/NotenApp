@@ -1,4 +1,5 @@
-﻿using MvvmHelpers;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MvvmHelpers;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -8,17 +9,25 @@ using System.Text;
 namespace NotenApp.Models
 {
     //Halbjahresfächer
-    public class HjFach : BaseFach
+    public partial class HjFach : BaseFach
     {
         public int Halbjahr { get; set; }
-        public int MinHalbjahre { get; set; } //Mindestanzahl an Halbjahren, die eingebracht werden müssen
-        public int EingebrachteHalbjahre { get; set; } //Anzahl an Halbjahren, die die Aufgrund von Einbringungsregeln eingebracht werden
-        public int Aufgabenfeld { get; set; } 
-        public bool IsLK { get; set; } //Ist das Fach dein Leistungskurs?
-        public bool WirdEingebracht { get; set; }
-        public int? Endnote { get; set; }
-        public bool IsPrFach { get; set; }
-        public bool IsFremdsprache { get; set; }
+        [ObservableProperty]
+        private int minHalbjahre; //Mindestanzahl an Halbjahren, die eingebracht werden müssen
+        [ObservableProperty]
+        private int eingebrachteHalbjahre;//Anzahl an Halbjahren, die die Aufgrund von Einbringungsregeln eingebracht werden
+        [ObservableProperty] private int aufgabenfeld;
+        [ObservableProperty] private bool isLK; //Ist das Fach dein Leistungskurs?
+        [ObservableProperty]private bool wirdEingebracht;
+        [ObservableProperty]
+
+        private int? endnote;
+        [ObservableProperty]
+
+        bool isPrFach;
+        [ObservableProperty]
+
+         bool isFremdsprache;
         [Ignore]
         public ObservableRangeCollection<HJNote> LKNoten { get; set; }
         [Ignore]

@@ -13,7 +13,7 @@
     <NavigationPage.TitleView>
         <Label
             FontSize="30"
-            Text="{Binding FachName}"
+            Text="{Binding Fach.Name}"
             TextColor="{DynamicResource Fith}"
             VerticalOptions="Center" />
     </NavigationPage.TitleView>
@@ -52,7 +52,7 @@
                     FontSize="60"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
-                    Text="{Binding FachDurchschnitt, TargetNullValue='-'}"
+                    Text="{Binding Fach.Durchschnitt, TargetNullValue='-'}"
                     TextColor="{DynamicResource Secondary}"
                     VerticalOptions="Center"
                     VerticalTextAlignment="Center" />
@@ -91,6 +91,7 @@
                                 BackgroundColor="{DynamicResource Fourth}"
                                 CornerRadius="5"
                                 HeightRequest="40"
+                                IsToggled="{Binding Fach.IsLK}"
                                 KnobHeight="40"
                                 KnobLimit="Boundary"
                                 KnobWidth="60"
@@ -167,13 +168,13 @@
                                 HeightRequest="15"
                                 WidthRequest="15">
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />
+                                    <TapGestureRecognizer Command="{Binding ManageZielCommand}" NumberOfTapsRequired="1" />
                                 </Frame.GestureRecognizers>
                                 <Label
                                     Margin="-10"
                                     FontSize="25"
                                     HorizontalOptions="Center"
-                                    Text="{Binding Ziel}"
+                                    Text="{Binding Ziel.ZielNote, TargetNullValue='-', FallbackValue='-'}"
                                     TextColor="White"
                                     VerticalOptions="Center" />
                             </Frame>
@@ -194,13 +195,13 @@
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="In " TextColor="{DynamicResource Primary}" />
-                                    <Span Text="{Binding FachName}" TextColor="{DynamicResource Primary}" />
+                                    <Span Text="{Binding Fach.Name}" TextColor="{DynamicResource Primary}" />
                                     <Span Text=" musst du " TextColor="{DynamicResource Primary}" />
                                     <Span
                                         x:Name="spa1"
                                         FontAttributes="Bold"
                                         FontSize="13"
-                                        Text="{Binding FachEinzubringendeHalbjahre}"
+                                        Text="{Binding Fach.MinHalbjahre}"
                                         TextColor="{DynamicResource Secondary}" />
                                     <Span Text=" Halbjahr(e) einbringen!" TextColor="{DynamicResource Primary}" />
                                 </FormattedString>
@@ -220,9 +221,8 @@
                         Grid.Row="3"
                         Grid.ColumnSpan="2"
                         BackgroundColor="Transparent"
-                        ItemsSource="{Binding KlausurNoten}"
-                        SelectionChanged="DeleteNote"
-                        SelectionMode="Single">
+                        ItemsSource="{Binding Fach.KlausurNoten}"
+                        SelectionMode="None">
 
 
                         <CollectionView.EmptyView>
@@ -244,7 +244,21 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="Models:HJNote">
-                                <local:LabelFrame FrameColor="{DynamicResource Secondary}" FrameText="{Binding Note}" />
+                                <Frame
+                                    BackgroundColor="{StaticResource Secondary}"
+                                    CornerRadius="20"
+                                    HasShadow="False">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=DeleteNoteCommand, Source={RelativeSource AncestorType={x:Type ViewModels:DetailViewModel}}}" CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                    <Label
+                                        x:Name="innerLabel"
+                                        Margin="-5"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Text="{Binding Note}"
+                                        TextColor="{StaticResource Primary}"
+                                        VerticalOptions="CenterAndExpand" />
+                                </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -253,9 +267,8 @@
                         Grid.Row="4"
                         Grid.ColumnSpan="2"
                         BackgroundColor="Transparent"
-                        ItemsSource="{Binding LKNoten}"
-                        SelectionChanged="DeleteNote"
-                        SelectionMode="Single">
+                        ItemsSource="{Binding Fach.LKNoten}"
+                        SelectionMode="None">
                         <CollectionView.EmptyView>
                             <ContentView>
                                 <Label
@@ -277,7 +290,21 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="Models:HJNote">
-                                <local:LabelFrame FrameColor="{DynamicResource Fourth}" FrameText="{Binding Note}" />
+                                <Frame
+                                    BackgroundColor="{StaticResource Third}"
+                                    CornerRadius="20"
+                                    HasShadow="False">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=DeleteNoteCommand, Source={RelativeSource AncestorType={x:Type ViewModels:DetailViewModel}}}" CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                    <Label
+                                        x:Name="innerLabel"
+                                        Margin="-5"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Text="{Binding Note}"
+                                        TextColor="{StaticResource Primary}"
+                                        VerticalOptions="CenterAndExpand" />
+                                </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -311,14 +338,14 @@
                             HorizontalOptions="Center"
                             WidthRequest="14">
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SetEndnote" />
+                                <TapGestureRecognizer Command="{Binding SetEndnoteCommand}" NumberOfTapsRequired="1" />
                             </Frame.GestureRecognizers>
                             <Label
                                 x:Name="l3"
                                 Margin="-10"
                                 FontSize="25"
                                 HorizontalOptions="Center"
-                                Text="{Binding FachEndnote, TargetNullValue='-'}"
+                                Text="{Binding Fach.Endnote, TargetNullValue='-'}"
                                 TextColor="White"
                                 VerticalOptions="Center" />
 
@@ -328,7 +355,8 @@
                         <BoxView BackgroundColor="{DynamicResource Secondary}" WidthRequest="4" />
                         <Frame BackgroundColor="{DynamicResource Third}" CornerRadius="25">
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="AddNote" />
+                                <TapGestureRecognizer Command="{Binding AddNoteCommand}" />
+
                             </Frame.GestureRecognizers>
                             <Image
                                 x:Name="imgp"

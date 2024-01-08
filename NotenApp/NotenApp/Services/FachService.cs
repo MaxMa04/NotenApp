@@ -203,34 +203,33 @@ namespace NotenApp.Services
         //
         //
         //
-        public static async Task AddNote(HjFach fach, int note, NotenTyp notenTyp)
+        public static async Task AddNote(HJNote note)
         {
             await Init();
 
-            HJNote newNote = new HJNote
-            {
-                Note = note,
-                Typ = (int)notenTyp,
-                FachId = fach.Id
-            };
-            await db.InsertAsync(newNote);
-            fach.Durchschnitt = await GetFachDurchschnitt(fach);
-            await UpdateZielErforderlicheNoten(fach);
+            await db.InsertAsync(note);
+            //fach.Durchschnitt = await GetFachDurchschnitt(fach);
+            //await UpdateZielErforderlicheNoten(fach);
+            //await db.UpdateAsync(fach);
+            //if(fach.Name == "Informatik" || fach.Name == "Biologie" || fach.Name=="Physik"|| fach.Name == "Chemie")
+            //{
+            //    await EntscheideBioInfoPhysikChemie();
+            //}
+            //if (fach.Name == "G/R/W" || fach.Name == "Geografie")
+            //{
+            //    await EntscheideGeoGRW();
+            //}
+            //if (fach.IsFremdsprache == true)
+            //{
+            //    await EntscheideFremdsprache();
+            //}
+
+
+        }
+        public static async Task UpdateFach(HjFach fach)
+        {
+            await Init();
             await db.UpdateAsync(fach);
-            if(fach.Name == "Informatik" || fach.Name == "Biologie" || fach.Name=="Physik"|| fach.Name == "Chemie")
-            {
-                await EntscheideBioInfoPhysikChemie();
-            }
-            if (fach.Name == "G/R/W" || fach.Name == "Geografie")
-            {
-                await EntscheideGeoGRW();
-            }
-            if (fach.IsFremdsprache == true)
-            {
-                await EntscheideFremdsprache();
-            }
-
-
         }
         public static async Task<List<HjFach>> GetFaecherToUpdate(HjFach fach)
         {
@@ -292,13 +291,13 @@ namespace NotenApp.Services
         public static async Task<List<HJNote>> GetFachNoten(HjFach fach, NotenTyp notenTyp)
         {
             await Init();
-            List<HJNote> Noten = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)notenTyp).ToListAsync();
+            List<HJNote> Noten = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == notenTyp).ToListAsync();
             return Noten;
         }
         public static async Task<List<HJNote>> GetFachNotenHjView(HjFach fach, NotenTyp notenTyp)
         {
             await Init();
-            List<HJNote> Noten = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)notenTyp).ToListAsync();
+            List<HJNote> Noten = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == notenTyp).ToListAsync();
             List<HJNote> retNoten = new List<HJNote>(); 
             if(Noten.Count > 6)
             {
@@ -370,12 +369,8 @@ namespace NotenApp.Services
         public static async Task RemoveSingleNote(HJNote note)
         {
             await Init();
-            
-            await db.DeleteAsync<HJNote>(note.Id);
-            HjFach fach = await db.Table<HjFach>().Where(f => f.Id == note.FachId).FirstOrDefaultAsync();
-            fach.Durchschnitt = await GetFachDurchschnitt(fach);
-            await UpdateZielErforderlicheNoten(fach);
-            await db.UpdateAsync(fach);
+
+            await db.DeleteAsync(note);
         }
         public static async Task RemoveFach(HjFach fach)
         {
@@ -404,7 +399,7 @@ namespace NotenApp.Services
         }
         public static async Task<float?> GetFachKlausurDurchschnitt(HjFach fach)
         {
-            List<HJNote> klNoten = await db.Table<HJNote>().Where(n => n.Typ == (int)NotenTyp.Klausur && n.FachId == fach.Id).ToListAsync();
+            List<HJNote> klNoten = await db.Table<HJNote>().Where(n => n.Typ == NotenTyp.Klausur && n.FachId == fach.Id).ToListAsync();
             float? sumKl = 0;
             float? duKL = 0;
             if(klNoten.Count == 0)
@@ -423,7 +418,7 @@ namespace NotenApp.Services
         } 
         public static async Task<float?> GetFachLKDurchschnitt(HjFach fach)
         {
-            List<HJNote> lkNoten = await db.Table<HJNote>().Where(n => n.Typ == (int)NotenTyp.LK && n.FachId == fach.Id).ToListAsync();
+            List<HJNote> lkNoten = await db.Table<HJNote>().Where(n => n.Typ == NotenTyp.LK && n.FachId == fach.Id).ToListAsync();
             float? sumLK = 0;
             float? duLK = 0;
             if (lkNoten.Count == 0)
@@ -538,13 +533,13 @@ namespace NotenApp.Services
         //
         //
         //
-        public static async Task AddZiel(HjFach fach, int? zielNote)
+        public static async Task<Ziel> AddZiel(HjFach fach, int? zielNote)
         {
             await Init();
             Ziel ziel = await GetFachZiel(fach);
             if (ziel == null && zielNote == null)
             {
-                return;
+                return null;
             }
             else if(ziel == null && zielNote != null)
             {
@@ -557,6 +552,7 @@ namespace NotenApp.Services
                 };
                 await db.InsertAsync(nziel);
                 await UpdateZielErforderlicheNoten(fach);
+                return nziel;
             }
             else
             {
@@ -566,10 +562,11 @@ namespace NotenApp.Services
                     ziel.ZielNote = zielNote;
                     await db.UpdateAsync(ziel);
                     await UpdateZielErforderlicheNoten(fach);
+                    return ziel;
                 }
                 else
                 {
-                    return;
+                    return null;
                 }
                 
             }
@@ -606,8 +603,8 @@ namespace NotenApp.Services
             if (ziel != null)
             {
                 float zielNote = (float)ziel.ZielNote - 0.5f;
-                List<HJNote> lks = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)NotenTyp.LK).ToListAsync();
-                List<HJNote> klausuren = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == (int)NotenTyp.Klausur).ToListAsync();
+                List<HJNote> lks = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == NotenTyp.LK).ToListAsync();
+                List<HJNote> klausuren = await db.Table<HJNote>().Where(n => n.FachId == fach.Id && n.Typ == NotenTyp.Klausur).ToListAsync();
                 if (klausuren.Count == 0 && lks.Count == 0)
                 {
                     ziel.ErforderlicheKLNote = (int)ziel.ZielNote;

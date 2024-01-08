@@ -124,7 +124,7 @@ namespace NotenApp.ViewModels
 
         public async Task AddNote(HjFach fach, int note, NotenTyp notenTyp)
         {
-            await FachService.AddNote(fach, note, notenTyp);
+            //await FachService.AddNote(fach, note, notenTyp);
             await Task.WhenAll(UpdateFachWhenNoteAdded(fach), ChangeHjDurchschnitt(fach.Halbjahr));
             await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
 

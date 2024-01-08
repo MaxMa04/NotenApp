@@ -1,6 +1,9 @@
-﻿using MvvmHelpers;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using MvvmHelpers;
 using NotenApp.Logic;
 using NotenApp.Models;
+using NotenApp.Pages;
 using NotenApp.Services;
 using Switch;
 using System;
@@ -8,110 +11,140 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 
 namespace NotenApp.ViewModels
 {
-    public  class DetailViewModel : INotifyPropertyChanged
+    public  partial class DetailViewModel : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
     {
-        public ObservableRangeCollection<HJNote> LKNoten { get; set; }
-        public ObservableRangeCollection<HJNote> KlausurNoten { get; set; }
         public CustomSwitch Switch { get; set; }
-        public HjFach Fach { get; set; }
-        private string ziel;
-        public string Ziel
-        {
-            get => ziel;
-            set
-            {
-                ziel = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Ziel)));
-            }
-        }
-        private int? fachEndnote;
-        public int? FachEndnote
-        {
-            get => fachEndnote;
-            set
-            {
-                fachEndnote = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FachEndnote)));
-            }
-        }
-        private string fachName;
-        public string FachName
-        {
-            get => fachName;
-            set
-            {
-                fachName = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FachName)));
-            }
-        }
-    
-        private float? fachDurchschnitt;
-        public float? FachDurchschnitt
-        {
-            get => fachDurchschnitt;
-            set
-            {
-                fachDurchschnitt = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FachDurchschnitt)));
-            }
-        }
-        private int fachEinzubringendeHalbjahre;
-        public int FachEinzubringendeHalbjahre
-        {
-            get => fachEinzubringendeHalbjahre;
-            set
-            {
-                fachEinzubringendeHalbjahre = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FachEinzubringendeHalbjahre)));
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
+        [ObservableProperty]
+        HjFach fach;
+        [ObservableProperty]
+        Ziel ziel;
         public DetailViewModel()
         {
-            LKNoten = new ObservableRangeCollection<HJNote>();
-            KlausurNoten = new ObservableRangeCollection<HJNote>();
+           
         }
-        public async Task InitZiel(HjFach fach)
+        public async Task InitDetails(HjFach fach)
         {
-            Ziel ziel = await FachService.GetFachZiel(fach);
+            Fach = fach;
+            Ziel = await FachService.GetFachZiel(Fach);
+        }
+        [RelayCommand]
+        async Task AddNote()
+        {
+            NotenTyp? notenTyp = (NotenTyp?)await Application.Current.MainPage.Navigation.ShowPopupAsync(new EntscheidungsPopup(Fach.Name));
+            int? note = null;
 
-
-            if (ziel != null)
+            if (notenTyp != null)
             {
-                Ziel = ziel.ZielNote.ToString();
+                note = (int?)await Application.Current.MainPage.Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Block1, (NotenTyp)notenTyp, Fach.Name));
+            }
+
+            if (notenTyp != null && note != null)
+            {
+                HJNote note2 = new HJNote { FachId = Fach.Id, Note = (int)note, Typ = (NotenTyp)notenTyp };
+                await FachService.AddNote(note2);
+                switch (note2.Typ)
+                {
+                    case NotenTyp.LK:
+                        Fach.LKNoten.Add(note2);
+                        break;
+                    case NotenTyp.Klausur:
+                        Fach.KlausurNoten.Add(note2);
+                        break;
+                    default:
+                        break;
+                }
+                Fach.Durchschnitt = (float?)BerechneDurchschnitt();
+          
+                await FachService.UpdateFach(Fach);
 
             }
             else
             {
-                Ziel = "-";
+                return;
             }
+            
+            //Task[] tasks = new Task[] { model.InitNoten(fach), model.InitFachDurchschnitt(fach), model.InitEinzHj(fach)};
+            // await Task.WhenAll(tasks);
+            await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(Fach.Halbjahr);
+            await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
         }
-        public async Task InitNoten(HjFach fach)
+        [RelayCommand]
+        async Task DeleteNote(HJNote note)
         {
-            KlausurNoten.Clear();
-            var klausurNoten = await FachService.GetFachNoten(fach, NotenTyp.Klausur);
-            KlausurNoten.AddRange(klausurNoten);
-            LKNoten.Clear();
-            var lKNoten = await FachService.GetFachNoten(fach, NotenTyp.LK);
-            LKNoten.AddRange(lKNoten);
-        }
-        public async Task InitFachDurchschnitt(HjFach fach)
-        {
-            FachDurchschnitt = await FachService.GetFachDurchschnitt(fach);
-        }
-        public async Task InitEndnote(HjFach fach)
-        {
-            FachEndnote = await FachService.GetFachEndnote(fach);
-        }
-        public async Task InitEinzHj(HjFach fach)
-        {
-            FachEinzubringendeHalbjahre = await FachService.GetEinzubringendeHalbjahre(fach);
-        }
+            
+            var user = await FachService.GetUserData();
+            bool delete = true;
+            if (user.ShowPopupWhenDeletingNote)
+            {
+                delete = (bool)await Application.Current.MainPage.Navigation.ShowPopupAsync(new DeleteNotePopup());
+            }
 
+            if (delete)
+            {
+                switch (note.Typ)
+                {
+                    case NotenTyp.LK:
+                        Fach.LKNoten.Remove(note);
+                        break;
+                    case NotenTyp.Klausur:
+                        Fach.KlausurNoten.Remove(note);
+                        break;
+                    default:
+                        break;
+                }
+                Fach.Durchschnitt = (float?)BerechneDurchschnitt();
+                await FachService.RemoveSingleNote(note);
+                await FachService.UpdateFach(Fach);
+                await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(Fach.Halbjahr);
+                await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
+            }
+           
+        }
+        [RelayCommand]
+        async Task ManageZiel()
+        {
+            int? note = (int?)await Application.Current.MainPage.Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Ziel, NotenTyp.Ziel, Fach.Name));
+            switch (note)
+            {
+                case null:
+                    return;
+                  
+                case -1:
+                    if(Ziel == null) return;
+                    await FachService.DeleteZiel(Ziel);
+                    Ziel = null;
+                    break;
+                default:
+                    Ziel = await FachService.AddZiel(Fach, note);
+                    break;
+            }
+
+            //await model.InitZiel(fach);
+            await UserViewModel.Instance.InitZiele();
+        }
+        [RelayCommand]
+        async Task SetEndnote()
+        {
+            Fach.Endnote = (int?)await Application.Current.MainPage.Navigation.ShowPopupAsync(new NotenPopup(WhichNote.Endnote, NotenTyp.Endnote, Fach.Name));
+            if (Fach.Endnote != null)
+            {
+                Fach.Durchschnitt = Fach.Endnote;
+                
+            }
+            else
+            {
+                Fach.Durchschnitt = (float?)BerechneDurchschnitt();
+       
+            }
+            await FachService.UpdateFach(Fach);
+            await HalbjahrViewModel.Instance.ChangeHjDurchschnitt(Fach.Halbjahr);
+            await Task.WhenAll(FachService.UpdateUserB1(), UserViewModel.Instance.InitZiele());
+        }
         public async Task HandleSwitch(HjFach fach, bool isToggled)
         {
             
@@ -140,7 +173,7 @@ namespace NotenApp.ViewModels
                 {
                     Console.WriteLine("Fehler");
                 }
-                await InitEinzHj(fach);
+                //await InitEinzHj(fach);
 
 
 
@@ -160,12 +193,49 @@ namespace NotenApp.ViewModels
                 {
                     Console.WriteLine("Fehler");
                 }
-                await InitEinzHj(fach);
+                //await InitEinzHj(fach);
 
 
             }
 
 
         }
+        public double? BerechneDurchschnitt()
+        {
+            // Überprüfen, ob beide Sammlungen null sind oder keine Elemente enthalten
+            if ((Fach.LKNoten == null || Fach.LKNoten.Count == 0) && (Fach.KlausurNoten == null || Fach.KlausurNoten.Count == 0))
+            {
+                return null;
+            }
+
+            double lkDurchschnitt = BerechneDurchschnittFürSammlung(Fach.LKNoten);
+            double klausurDurchschnitt = BerechneDurchschnittFürSammlung(Fach.KlausurNoten);
+
+            int anzahlSammlungen = 0;
+            if (Fach.LKNoten != null && Fach.LKNoten.Count > 0) anzahlSammlungen++;
+            if (Fach.KlausurNoten != null && Fach.KlausurNoten.Count > 0) anzahlSammlungen++;
+
+            // Vermeidet Division durch Null, falls anzahlSammlungen 0 ist
+            if (anzahlSammlungen == 0)
+            {
+                return null;
+            }
+
+            return (lkDurchschnitt + klausurDurchschnitt) / anzahlSammlungen;
+        }
+
+        private double BerechneDurchschnittFürSammlung(ObservableRangeCollection<HJNote> noten)
+        {
+            if (noten == null || noten.Count == 0)
+                return 0;
+
+            double summe = 0;
+            foreach (var note in noten)
+            {
+                summe += note.Note; // Angenommen, HJNote hat eine Eigenschaft 'Wert'
+            }
+            return summe / noten.Count;
+        }
+
     }
 }
